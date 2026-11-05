@@ -1,0 +1,146 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+enum FinancialStatus {
+  NOT_FETCHED
+  FETCHING
+  READY
+  FAILED
+}
+
+model Company {
+  id String @id @default(cuid())
+  cik String @unique @db.VarChar(10)
+  ticker String
+  name String?
+  industry String?
+  isFavorite Boolean @default(false)
+  financialStatus FinancialStatus @default(NOT_FETCHED)
+  lastFetchedAt DateTime?
+  updatedAt DateTime @updatedAt
+  fetchToken String?
+  fetchStartedAt DateTime?
+  lastError String?
+  annualFinancials AnnualFinancial[]
+  quarterlyFinancials QuarterlyFinancial[]
+  @@index([isFavorite])
+  @@map("companies")
+}
+
+model AnnualFinancial {
+  id String @id @default(cuid())
+  companyCik String @db.VarChar(10)
+  company Company @relation(fields: [companyCik], references: [cik], onDelete: Restrict, onUpdate: Cascade)
+  fiscalYear Int?
+  fiscalQuarter Int?
+  periodStart DateTime @db.Date
+  periodEnd DateTime @db.Date
+  currency String?
+  sources Json
+  revenue Decimal? @db.Decimal(32, 8)
+  grossProfit Decimal? @db.Decimal(32, 8)
+  operatingIncome Decimal? @db.Decimal(32, 8)
+  netIncome Decimal? @db.Decimal(32, 8)
+  eps Decimal? @db.Decimal(32, 8)
+  cash Decimal? @db.Decimal(32, 8)
+  marketableSecurities Decimal? @db.Decimal(32, 8)
+  currentAssets Decimal? @db.Decimal(32, 8)
+  currentLiabilities Decimal? @db.Decimal(32, 8)
+  assets Decimal? @db.Decimal(32, 8)
+  liabilities Decimal? @db.Decimal(32, 8)
+  equity Decimal? @db.Decimal(32, 8)
+  shortTermDebt Decimal? @db.Decimal(32, 8)
+  longTermDebt Decimal? @db.Decimal(32, 8)
+  totalDebt Decimal? @db.Decimal(32, 8)
+  operatingCashFlow Decimal? @db.Decimal(32, 8)
+  capex Decimal? @db.Decimal(32, 8)
+  fcf Decimal? @db.Decimal(32, 8)
+  stockRepurchases Decimal? @db.Decimal(32, 8)
+  dividendsPaid Decimal? @db.Decimal(32, 8)
+  sharesOutstanding Decimal? @db.Decimal(32, 8)
+  revenueGrowth Decimal? @db.Decimal(32, 8)
+  epsGrowth Decimal? @db.Decimal(32, 8)
+  fcfGrowth Decimal? @db.Decimal(32, 8)
+  netIncomeGrowth Decimal? @db.Decimal(32, 8)
+  grossMargin Decimal? @db.Decimal(32, 8)
+  operatingMargin Decimal? @db.Decimal(32, 8)
+  netMargin Decimal? @db.Decimal(32, 8)
+  roe Decimal? @db.Decimal(32, 8)
+  roa Decimal? @db.Decimal(32, 8)
+  fcfMargin Decimal? @db.Decimal(32, 8)
+  netDebt Decimal? @db.Decimal(32, 8)
+  debtToEquity Decimal? @db.Decimal(32, 8)
+  currentRatio Decimal? @db.Decimal(32, 8)
+  sharesChange Decimal? @db.Decimal(32, 8)
+  bookValuePerShare Decimal? @db.Decimal(32, 8)
+  revenueCagr3y Decimal? @db.Decimal(32, 8)
+  revenueCagr5y Decimal? @db.Decimal(32, 8)
+  epsCagr3y Decimal? @db.Decimal(32, 8)
+  epsCagr5y Decimal? @db.Decimal(32, 8)
+  fcfCagr3y Decimal? @db.Decimal(32, 8)
+  fcfCagr5y Decimal? @db.Decimal(32, 8)
+  @@unique([companyCik, periodEnd])
+  @@map("annual_financials")
+}
+
+model QuarterlyFinancial {
+  id String @id @default(cuid())
+  companyCik String @db.VarChar(10)
+  company Company @relation(fields: [companyCik], references: [cik], onDelete: Restrict, onUpdate: Cascade)
+  fiscalYear Int?
+  fiscalQuarter Int?
+  periodStart DateTime @db.Date
+  periodEnd DateTime @db.Date
+  currency String?
+  sources Json
+  revenue Decimal? @db.Decimal(32, 8)
+  grossProfit Decimal? @db.Decimal(32, 8)
+  operatingIncome Decimal? @db.Decimal(32, 8)
+  netIncome Decimal? @db.Decimal(32, 8)
+  eps Decimal? @db.Decimal(32, 8)
+  cash Decimal? @db.Decimal(32, 8)
+  marketableSecurities Decimal? @db.Decimal(32, 8)
+  currentAssets Decimal? @db.Decimal(32, 8)
+  currentLiabilities Decimal? @db.Decimal(32, 8)
+  assets Decimal? @db.Decimal(32, 8)
+  liabilities Decimal? @db.Decimal(32, 8)
+  equity Decimal? @db.Decimal(32, 8)
+  shortTermDebt Decimal? @db.Decimal(32, 8)
+  longTermDebt Decimal? @db.Decimal(32, 8)
+  totalDebt Decimal? @db.Decimal(32, 8)
+  operatingCashFlow Decimal? @db.Decimal(32, 8)
+  capex Decimal? @db.Decimal(32, 8)
+  fcf Decimal? @db.Decimal(32, 8)
+  stockRepurchases Decimal? @db.Decimal(32, 8)
+  dividendsPaid Decimal? @db.Decimal(32, 8)
+  sharesOutstanding Decimal? @db.Decimal(32, 8)
+  revenueGrowth Decimal? @db.Decimal(32, 8)
+  epsGrowth Decimal? @db.Decimal(32, 8)
+  fcfGrowth Decimal? @db.Decimal(32, 8)
+  netIncomeGrowth Decimal? @db.Decimal(32, 8)
+  grossMargin Decimal? @db.Decimal(32, 8)
+  operatingMargin Decimal? @db.Decimal(32, 8)
+  netMargin Decimal? @db.Decimal(32, 8)
+  roe Decimal? @db.Decimal(32, 8)
+  roa Decimal? @db.Decimal(32, 8)
+  fcfMargin Decimal? @db.Decimal(32, 8)
+  netDebt Decimal? @db.Decimal(32, 8)
+  debtToEquity Decimal? @db.Decimal(32, 8)
+  currentRatio Decimal? @db.Decimal(32, 8)
+  sharesChange Decimal? @db.Decimal(32, 8)
+  bookValuePerShare Decimal? @db.Decimal(32, 8)
+  revenueCagr3y Decimal? @db.Decimal(32, 8)
+  revenueCagr5y Decimal? @db.Decimal(32, 8)
+  epsCagr3y Decimal? @db.Decimal(32, 8)
+  epsCagr5y Decimal? @db.Decimal(32, 8)
+  fcfCagr3y Decimal? @db.Decimal(32, 8)
+  fcfCagr5y Decimal? @db.Decimal(32, 8)
+  @@unique([companyCik, periodEnd])
+  @@map("quarterly_financials")
+}

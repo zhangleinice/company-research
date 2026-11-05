@@ -1,0 +1,100 @@
+body {
+  margin: 0;
+}
+.app-layout {
+  min-height: 100vh;
+}
+.app-header {
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0 32px;
+}
+.header-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.app-title.ant-typography {
+  margin: 0;
+}
+.app-content {
+  width: 100%;
+  max-width: 1344px;
+  margin: 0 auto;
+  padding: 24px 32px;
+}
+.full-width {
+  width: 100%;
+}
+.query-form {
+  row-gap: 16px;
+}
+.ticker-input {
+  width: 260px;
+}
+.query-help.ant-typography {
+  margin: 16px 0 0;
+}
+.query-result,
+.query-help + .ant-alert {
+  margin-top: 20px;
+}
+.list-alert {
+  margin-bottom: 20px;
+}
+.app-footer {
+  text-align: center;
+  color: #8c8c8c;
+  font-size: 12px;
+  padding: 16px 24px 24px;
+}
+@media (max-width: 600px) {
+  .app-header {
+    padding: 0 16px;
+  }
+  .header-content {
+    gap: 8px;
+  }
+  .app-title.ant-typography {
+    font-size: 16px;
+  }
+  .app-content {
+    padding: 16px;
+  }
+  .query-form.ant-form-inline {
+    flex-direction: column;
+  }
+  .query-form .ant-form-item {
+    margin-inline-end: 0;
+  }
+  .ticker-input {
+    width: 100%;
+  }
+}
+.list-mode {
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.detail-title.ant-typography {
+  margin: 0;
+}
+.chart-wrap {
+  width: 100%;
+  overflow-x: auto;
+  padding-top: 20px;
+}
+.chart-wrap svg {
+  width: 100%;
+  min-width: 550px;
+  display: block;
+}
+.metric-details {
+  margin-top: 24px;
+}
+.period-select {
+  min-width: 240px;
+  margin-bottom: 16px;
+}

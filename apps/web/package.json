@@ -1,0 +1,30 @@
+{
+  "name": "@company-research/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "predev": "npm run build --workspace=@company-research/shared",
+    "dev": "vite",
+    "prebuild": "npm run build --workspace=@company-research/shared",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "pretest": "npm run build --workspace=@company-research/shared",
+    "test": "tsc -p tsconfig.test.json && node --test .test-dist/tests/*.test.js"
+  },
+  "dependencies": {
+    "@company-research/shared": "0.1.0",
+    "antd": "^6.3.7",
+    "react": "19.2.6",
+    "react-dom": "19.2.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "4.7.0",
+    "typescript": "~5.9.3",
+    "vite": "6.4.2"
+  }
+}

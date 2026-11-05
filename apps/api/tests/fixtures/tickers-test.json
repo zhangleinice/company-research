@@ -1,0 +1,14 @@
+{
+  "0": {
+    "ticker": "GOOG",
+    "cik_str": 1652044
+  },
+  "1": {
+    "ticker": "GOOGL",
+    "cik_str": 1652044
+  },
+  "2": {
+    "ticker": "TEST",
+    "cik_str": 2
+  }
+}

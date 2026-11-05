@@ -1,5 +1,42 @@
 {
-  "name": "stock-research",
+  "name": "company-research",
   "version": "0.1.0",
-  "private": true
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run start:dev --workspace=@company-research/api",
+    "dev:web": "npm run dev --workspace=@company-research/web",
+    "build:shared": "npm run build --workspace=@company-research/shared",
+    "build:api": "npm run build --workspace=@company-research/api",
+    "build:web": "npm run build --workspace=@company-research/web",
+    "build": "npm run build:api && npm run build:web",
+    "start": "npm start --workspace=@company-research/api",
+    "start:dev": "npm run dev:api",
+    "test:api": "npm test --workspace=@company-research/api --",
+    "test:web": "npm test --workspace=@company-research/web",
+    "test:live": "npm run test:live --workspace=@company-research/api",
+    "test": "npm run test:api && npm run test:web",
+    "typecheck": "npm run build:shared && npm run typecheck --workspaces --if-present",
+    "lint": "eslint apps/api/src apps/api/tests apps/web/src apps/web/tests packages/shared/src",
+    "format": "prettier --write \"apps/**/*.{ts,tsx,json,css,html}\" \"packages/**/*.{ts,json}\" *.json *.mjs",
+    "test:proxy": "npm run build:api && node --test scripts/proxy.test.mjs",
+    "db:generate": "npm run db:generate --workspace=@company-research/api --",
+    "db:migrate": "npm run db:migrate --workspace=@company-research/api --",
+    "db:migrate:dev": "npm run db:migrate:dev --workspace=@company-research/api --",
+    "db:status": "npm run db:status --workspace=@company-research/api --",
+    "test:db": "npm run build:api && node --test scripts/database-cache.test.cjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.0.0"
+  }
 }

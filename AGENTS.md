@@ -1,25 +1,29 @@
 # Repository Guidelines
 
-## Project Structure & Module Organization
+## Project Structure
 
-This repository is currently an empty workspace. It has no source code, tests, assets, dependency manifests, or build configuration. When adding the initial implementation, organize application code under `src/`, automated tests under `tests/`, and supporting documentation under `docs/`. Create these directories only when needed, and update this guide to reflect the actual layout.
+This repository uses npm workspaces. `apps/api/` contains the NestJS backend, SEC integration, and Jest tests. `apps/web/` contains the React, TypeScript, and Vite client. `packages/shared/` holds framework-independent API contracts. Preserve the requirements and technical design in `docs/v1/`.
 
-## Build, Test, and Development Commands
+## Architecture Boundaries
 
-No build, test, or local development commands are configured yet. When introducing a toolchain, document its installation prerequisites and exact commands in `README.md`. Provide reproducible commands for running locally, testing, and any required build step. Do not assume that commands such as `npm test` or `make build` are available until their configuration is committed.
+Keep the full SEC basic directory. List pagination, search, and favorites may read the directory and database caches only; they must never fetch Company Facts. Acquire single-company financial data only when a user opens its detail, and reuse PostgreSQL data on later visits. Favorites are independent of acquisition and keyed by CIK, so aliases share financial records and favorite state.
 
-## Coding Style & Naming Conventions
+Use Prisma Migration for the companies, annual_financials, and quarterly_financials tables. Preserve user data; never reset a database or delete financial rows when unfavoriting. Use unique constraints, acquisition leases, and transactions to prevent duplicate or partially completed imports. Failed acquisitions must remain retryable.
 
-Follow the idioms of the language selected for the project. Use consistent indentation within each file, descriptive names, and small modules with clear responsibilities. Prefer lowercase, hyphen-separated names for documentation files where practical. Add a formatter and linter appropriate to the chosen language, commit their configuration, and document how to run them.
+Keep SEC retrieval, normalization, and deterministic financial calculations in the backend. Do not download companyfacts.zip or batch-fetch all companies. Annual and independent quarterly periods must be distinct; never treat YTD cash flow as a quarter or subtract cumulative diluted EPS. Keep missing values null and retain provenance. AI, Agent, business-segment, 8-K, and market-wide financial ranking features are outside this phase.
 
-## Testing Guidelines
+Shared contracts contain no NestJS, database access, or credentials. Check frontend callers and tests whenever API contracts change. Preserve the original V1 documents.
 
-No testing framework or coverage threshold is established. Introduce automated tests alongside the first executable functionality. Use descriptive test names that explain the behavior being checked, and cover normal operation, invalid inputs, and relevant boundary cases. Keep tests deterministic and document the complete test command.
+## Development Commands
 
-## Commit & Pull Request Guidelines
+Run `npm install` from the repository root and maintain only the root `package-lock.json`. Use `npm run dev:api` for port 3000 and `npm run dev:web` for port 5173. Vite proxies `/api` to the backend. `npm run build:api` and `npm run build:web` build each application independently and build shared contracts first.
 
-No Git history is available to establish existing commit conventions. Use concise, imperative commit subjects, such as `Add research data loader`, and keep each commit focused. Pull requests should describe the purpose, summarize changes, list validation performed, and link relevant issues. Include screenshots when changes affect a user interface.
+Use `npm run typecheck`, `npm run lint`, and `npm test` before delivery. Run `npm run db:generate` and `npm run db:migrate` after configuring PostgreSQL. `npm run test:db` uses an isolated disposable schema. Backend tests use Jest; frontend API-client tests use Node's test runner. `npm run test:live` explicitly opts into real SEC requests. HTTP integration tests require permission to listen on local ports.
 
-## Security & Configuration
+## Style and Contributions
 
-Never commit credentials, API keys, or private datasets. Keep local configuration outside version control and provide placeholder values in an example configuration file when configuration becomes necessary.
+Use strict TypeScript, two-space indentation, descriptive names, and small modules. Use Ant Design consistently for frontend forms, tables, pagination, feedback, and layout; keep custom CSS limited to page spacing and responsive adjustments. Follow ESLint and Prettier configuration. Name tests `*.spec.ts` in the API and `*.test.ts` in the web package. Keep commits focused with imperative subjects. Pull requests should explain behavior changes and validation; include screenshots for visible UI changes.
+
+## Configuration and Scope
+
+Keep backend secrets in ignored `apps/api/.env`; provide placeholders in `.env.example`. Never expose SEC contact configuration or proxy credentials through Vite environment variables. Keep applications independently buildable and deployable. Implement only the requested scope.
