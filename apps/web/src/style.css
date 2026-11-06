@@ -35,13 +35,6 @@ body {
 .ticker-input {
   width: 260px;
 }
-.query-help.ant-typography {
-  margin: 16px 0 0;
-}
-.query-result,
-.query-help + .ant-alert {
-  margin-top: 20px;
-}
 .list-alert {
   margin-bottom: 20px;
 }
@@ -81,20 +74,90 @@ body {
 .detail-title.ant-typography {
   margin: 0;
 }
-.chart-wrap {
-  width: 100%;
-  overflow-x: auto;
-  padding-top: 20px;
-}
-.chart-wrap svg {
-  width: 100%;
-  min-width: 550px;
+
+.company-name-link.ant-typography {
   display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.metric-details {
+
+/* Detail analysis modules: no wide tables or horizontally scrolling charts. */
+.analysis-module .ant-card-head-title {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.analysis-mode-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+.analysis-period {
+  font-size: 12px;
+  color: #8c8c8c;
+  margin-bottom: 20px;
+}
+.analysis-metric-card {
+  height: 100%;
+  background: #fafcff;
+  border-color: #eaf0f7;
+}
+.analysis-metric-title {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  overflow-wrap: anywhere;
+}
+.metric-help {
+  font-size: 12px;
+  color: #8c8c8c;
+  cursor: help;
+}
+.metric-unit {
+  font-size: 11px;
+}
+.analysis-metric-card .ant-statistic-content {
+  font-size: clamp(20px, 2vw, 26px);
+  overflow-wrap: anywhere;
+}
+.analysis-auxiliary {
+  margin: 22px 0;
+}
+.analysis-chart-panel {
+  min-width: 0;
   margin-top: 24px;
 }
-.period-select {
-  min-width: 240px;
-  margin-bottom: 16px;
+.analysis-chart {
+  min-width: 0;
+  width: 100%;
+}
+.analysis-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 12px;
+}
+.analysis-module .ant-col {
+  min-width: 0;
+}
+.analysis-note {
+  margin: 16px 0;
+}
+.cash-flow-formula {
+  margin-top: 20px;
+}
+.analysis-placeholder {
+  background: #fafafa;
+}
+@media (max-width: 600px) {
+  .analysis-module .ant-card-body {
+    padding: 16px;
+  }
+  .analysis-mode-controls {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }

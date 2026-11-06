@@ -234,3 +234,49 @@ describe('Company Facts annual and independent-quarter normalization', () => {
     expect(row.fiscalYear).toBe(2025);
   });
 });
+
+describe('CapEx and FCF missing-data safeguards', () => {
+  it('does not substitute older CapEx for the latest annual period', () => {
+    const data = fixture();
+    data.facts['us-gaap'].PaymentsToAcquirePropertyPlantAndEquipment.units.USD =
+      data.facts[
+        'us-gaap'
+      ].PaymentsToAcquirePropertyPlantAndEquipment.units.USD.filter(
+        (value: unknown) =>
+          !(
+            typeof value === 'object' &&
+            value !== null &&
+            'start' in value &&
+            value.start === '2025-01-01' &&
+            'end' in value &&
+            value.end === '2025-12-31'
+          ),
+      );
+    const row = normalizeCompanyFacts(data).annual[0];
+    expect(row.operatingCashFlow).toBe(160);
+    expect(row.capex).toBeNull();
+    expect(row.fcf).toBeNull();
+    expect(row.fcfMargin).toBeNull();
+  });
+  it('does not use six-month YTD CapEx as Q2 when the Q1 endpoint is unavailable', () => {
+    const data = fixture();
+    data.facts['us-gaap'].PaymentsToAcquirePropertyPlantAndEquipment.units.USD =
+      data.facts[
+        'us-gaap'
+      ].PaymentsToAcquirePropertyPlantAndEquipment.units.USD.filter(
+        (value: unknown) =>
+          !(
+            typeof value === 'object' &&
+            value !== null &&
+            'end' in value &&
+            value.end === '2025-03-31'
+          ),
+      );
+    const row = normalizeCompanyFacts(data).quarterly.find(
+      (row) => row.periodEnd === '2025-06-30',
+    )!;
+    expect(row.operatingCashFlow).toBe(40);
+    expect(row.capex).toBeNull();
+    expect(row.fcf).toBeNull();
+  });
+});

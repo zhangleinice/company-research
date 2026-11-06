@@ -1,31 +1,8 @@
 import { useEffect, useState } from 'react';
-import {
-  Alert,
-  Button,
-  Card,
-  Descriptions,
-  Collapse,
-  Select,
-  Segmented,
-  Space,
-  Spin,
-  Table,
-  Typography,
-} from 'antd';
-import {
-  FINANCIAL_METRICS,
-  type CompanyDetail,
-  type FinancialMode,
-} from '@company-research/shared';
+import { Alert, Button, Card, Space, Spin, Typography } from 'antd';
+import type { CompanyDetail, FinancialMode } from '@company-research/shared';
 import { fetchCompanyDetail, setCompanyFavorite } from './api';
-import {
-  amount,
-  number,
-  percent,
-  financialColumns,
-  periodLabel,
-} from './financial-columns';
-import { GrowthChart } from './GrowthChart';
+import { CompanyResearchSections } from './analysis/CompanyResearchSections';
 
 export function CompanyDetails({
   identifier,
@@ -40,7 +17,6 @@ export function CompanyDetails({
   const [revision, setRevision] = useState(0);
   const [mode, setMode] = useState<FinancialMode>('annual');
   const [saving, setSaving] = useState(false);
-  const [selectedPeriod, setSelectedPeriod] = useState('');
   useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
@@ -59,29 +35,6 @@ export function CompanyDetails({
       });
     return () => controller.abort();
   }, [identifier, revision]);
-  const rows = detail
-    ? mode === 'annual'
-      ? detail.annual
-      : detail.quarterly
-    : [];
-  const selectedRow =
-    rows.find((row) => row.periodEnd === selectedPeriod) ?? rows[0];
-  const formatMetric = (
-    key: (typeof FINANCIAL_METRICS)[number],
-    value: number | null,
-  ) =>
-    /growth|margin|cagr|^roe$|^roa$|sharesChange/i.test(key)
-      ? percent(value)
-      : [
-            'eps',
-            'sharesOutstanding',
-            'bookValuePerShare',
-            'debtToEquity',
-            'currentRatio',
-          ].includes(key)
-        ? number(value)
-        : amount(value);
-
   async function favorite() {
     if (!detail) return;
     setSaving(true);
@@ -124,111 +77,14 @@ export function CompanyDetails({
         </Card>
       )}
       {detail && (
-        <>
-          <Card
-            title="公司基本信息"
-            extra={
-              <Button loading={saving} onClick={favorite}>
-                {detail.isFavorite ? '取消收藏' : '收藏公司'}
-              </Button>
-            }
-          >
-            <Descriptions
-              column={{ xs: 1, sm: 2, lg: 3 }}
-              items={[
-                { key: 'ticker', label: 'Ticker', children: detail.ticker },
-                { key: 'cik', label: 'CIK', children: detail.cik },
-                {
-                  key: 'industry',
-                  label: '行业',
-                  children: detail.industry ?? '—',
-                },
-                {
-                  key: 'updated',
-                  label: '财务数据更新时间',
-                  children: detail.lastFetchedAt
-                    ? new Date(detail.lastFetchedAt).toLocaleString('zh-CN')
-                    : '—',
-                },
-              ]}
-            />
-            {detail.financialStatus === 'FETCHING' && (
-              <Alert
-                type="info"
-                title="该公司数据正在获取中"
-                description="另一个请求正在获取数据，请稍后重新加载。"
-                action={
-                  <Button onClick={() => setRevision((x) => x + 1)}>
-                    重新加载
-                  </Button>
-                }
-              />
-            )}
-          </Card>
-          <Card
-            title="财务数据"
-            extra={
-              <Segmented
-                value={mode}
-                options={[
-                  { label: 'Annual', value: 'annual' },
-                  { label: 'Quarterly', value: 'quarterly' },
-                ]}
-                onChange={(value) => setMode(value as FinancialMode)}
-              />
-            }
-          >
-            <Typography.Paragraph type="secondary">
-              最近 {mode === 'annual' ? '10 个完整财年' : '10 个独立季度'}
-              ；金额单位为百万美元，EPS 与每股指标为美元。缺失字段显示 —。
-            </Typography.Paragraph>
-            <Table
-              rowKey="periodEnd"
-              columns={financialColumns(mode)}
-              dataSource={rows}
-              pagination={false}
-              scroll={{ x: mode === 'annual' ? 2200 : 1500 }}
-            />
-            {selectedRow && (
-              <Collapse
-                className="metric-details"
-                items={[
-                  {
-                    key: 'metrics',
-                    label: '查看选定期间的全部原始指标与计算指标',
-                    children: (
-                      <>
-                        <Select
-                          aria-label="选择指标明细期间"
-                          className="period-select"
-                          value={selectedRow.periodEnd}
-                          onChange={setSelectedPeriod}
-                          options={rows.map((row) => ({
-                            value: row.periodEnd,
-                            label: `${periodLabel(row, mode)} · ${row.periodEnd}`,
-                          }))}
-                        />
-                        <Descriptions
-                          bordered
-                          size="small"
-                          column={{ xs: 1, sm: 2, lg: 3 }}
-                          items={FINANCIAL_METRICS.map((key) => ({
-                            key,
-                            label: key,
-                            children: formatMetric(key, selectedRow[key]),
-                          }))}
-                        />
-                      </>
-                    ),
-                  },
-                ]}
-              />
-            )}
-          </Card>
-          <Card title="财务增长趋势">
-            <GrowthChart rows={rows} mode={mode} />
-          </Card>
-        </>
+        <CompanyResearchSections
+          detail={detail}
+          mode={mode}
+          saving={saving}
+          onFavorite={favorite}
+          onModeChange={setMode}
+          onReload={() => setRevision((value) => value + 1)}
+        />
       )}
     </Space>
   );

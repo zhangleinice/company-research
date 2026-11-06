@@ -163,3 +163,16 @@ npm run test:live
 ## 旧全量方案
 
 `sync:sec` npm 入口已移除，旧 `src/sync-sec.ts` 即使直接执行也只报停用提示，不下载 ZIP。历史纯解析工具、本地 ZIP / JSON、测试 fixture 保留，但不再被生产模块或列表接口调用。不会将历史全市场财务摘要自动导入 PostgreSQL。`docs/v1` 原文保留；本次数据架构以这里和当前任务为准。
+
+
+## 模块化公司详情页
+
+详情采用单页纵向滚动：公司基本信息 → Business 占位 → Growth → Profitability → Cash Flow → Financial Health → Management & Risks 占位 → Valuation 占位。没有宽财务表、全字段展开表或新的路由；首页展示、数据库缓存、收藏和搜索沿用原流程。
+
+顶部一个 Annual / Quarterly 开关同步控制四个模块。每个模块包含最新报告期的核心卡片、可悬停查看公式的指标说明、响应式 SVG 历史图和少量辅助数据。图表复用原 GrowthChart 的实现方式，日期升序排列，缺失值不连线，金额单位为百万美元，EPS 为美元/股，比例统一为百分数。
+
+Growth 展示 Revenue、EPS、同比和年度 CAGR；季度 CAGR 保留缺失，不借用年度值。Profitability 展示利润率和利润变化，季度不显示未经验证的 ROE/ROA。Cash Flow 展示 OCF、CapEx、FCF、利润质量对比以及回购/分红；Financial Health 展示报告期末现金、债务、仅扣现金的净债务及流动性。
+
+本次检查了 CapEx 的标准 PP&E 字段映射、起止期间匹配、YTD 差分和空值保护，没有用宽泛的投资现金流或旧年数补齐缺失。新增回归测试覆盖缺少最新年 CapEx、缺少 Q1 累计端点时 Q2 CapEx/FCF 必须为 null。后端生产解析、Prisma Schema 和已有缓存均未改动；具体公司缓存中缺失值的原始来源仍需在能连接本机数据库的环境核对。
+
+GOOG、NVDA、AAPL 的模块顺序与展示回归使用明确标记的合成数据，不代表真实 SEC 数值已被重新获取或核验。可在本机运行 `npm run test:live` 验证真实缓存；该测试保留已有数据库记录。

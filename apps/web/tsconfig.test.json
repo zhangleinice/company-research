@@ -8,7 +8,8 @@
     "outDir": ".test-dist",
     "rootDir": ".",
     "types": ["node"],
-    "lib": ["ES2022", "DOM"]
+    "lib": ["ES2022", "DOM"],
+    "jsx": "react-jsx"
   },
   "include": ["tests/**/*.ts", "src/api.ts"]
 }

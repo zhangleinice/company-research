@@ -205,6 +205,66 @@ describe('company directory and on-demand cache boundaries', () => {
       ).toBe(120);
     },
   );
+  it('returns all eight homepage metrics from the selected annual or independent-quarter cache without SEC acquisition', async () => {
+    const { service, sec, rows } = setup();
+    await service.getCompany('GOOG');
+    const stored = rows.get('0001652044')!;
+    const annual = {
+      ...stored.annualFinancials[0],
+      revenueGrowth: 12,
+      epsGrowth: 9,
+      operatingMargin: 25,
+      netMargin: 20,
+      operatingCashFlow: 100,
+      fcf: 80,
+      cash: 300,
+      totalDebt: 50,
+    };
+    const quarterly = {
+      ...annual,
+      periodStart: new Date('2026-04-01'),
+      periodEnd: new Date('2026-06-30'),
+      fiscalYear: 2026,
+      fiscalQuarter: 2,
+      revenueGrowth: 8,
+      epsGrowth: null,
+      operatingMargin: 22,
+      netMargin: 18,
+      operatingCashFlow: 20,
+      fcf: 0,
+      cash: 310,
+      totalDebt: 45,
+    };
+    stored.annualFinancials = [annual];
+    stored.quarterlyFinancials = [quarterly];
+    sec.getCompanyFacts.mockClear();
+    const annualList = await service.getCompanies(1, 10, '', 'annual');
+    const quarterList = await service.getCompanies(1, 10, '', 'quarterly');
+    expect(annualList.data[0].financial).toMatchObject({
+      periodEnd: '2025-12-31',
+      revenueGrowth: 12,
+      epsGrowth: 9,
+      operatingMargin: 25,
+      netMargin: 20,
+      operatingCashFlow: 100,
+      fcf: 80,
+      cash: 300,
+      totalDebt: 50,
+    });
+    expect(quarterList.data[0].financial).toMatchObject({
+      periodStart: '2026-04-01',
+      periodEnd: '2026-06-30',
+      revenueGrowth: 8,
+      epsGrowth: null,
+      operatingMargin: 22,
+      netMargin: 18,
+      operatingCashFlow: 20,
+      fcf: 0,
+      cash: 310,
+      totalDebt: 45,
+    });
+    expect(sec.getCompanyFacts).not.toHaveBeenCalled();
+  });
   it('shares cache across CIK aliases and simultaneous detail requests', async () => {
     const { service, sec, rows } = setup();
     await Promise.all([

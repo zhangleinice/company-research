@@ -20,15 +20,9 @@ import type {
   ResearchListResponse,
 } from '@company-research/shared';
 import { fetchResearchList, setCompanyFavorite } from './api';
-import { amount, number, percent } from './financial-columns';
+import { amount, percent } from './financial-columns';
 import { CompanyDetails } from './CompanyDetails';
 
-const statusLabels = {
-  NOT_FETCHED: '未获取',
-  FETCHING: '获取中',
-  READY: '已获取',
-  FAILED: '获取失败，可重试',
-};
 const selectedCompany = () =>
   new URLSearchParams(window.location.search).get('company');
 
@@ -131,78 +125,39 @@ export function App() {
     {
       title: '公司',
       key: 'company',
+      ellipsis: { showTitle: false },
       fixed: 'left',
-      width: 250,
+      width: 125,
       render: (_value, row) => (
         <>
-          <Typography.Link onClick={() => navigate(row.ticker)}>
+          <Typography.Link
+            className="company-name-link"
+            title={row.name ?? row.ticker}
+            onClick={() => navigate(row.ticker)}
+          >
             {row.name ?? row.ticker}
           </Typography.Link>
-          <br />
-          <Space>
-            <Tag>{row.ticker}</Tag>
-            <Typography.Text type="secondary">{row.cik}</Typography.Text>
-          </Space>
+          <Tag>{row.ticker}</Tag>
         </>
       ),
     },
-    {
-      title: '行业',
-      dataIndex: 'industry',
-      key: 'industry',
-      width: 200,
-      render: (value: string | null) => value ?? '—',
-    },
-    {
-      title: '数据状态',
-      key: 'status',
-      width: 160,
-      render: (_value, row) => (
-        <Tag
-          color={
-            row.financialStatus === 'READY'
-              ? 'success'
-              : row.financialStatus === 'FAILED'
-                ? 'error'
-                : row.financialStatus === 'FETCHING'
-                  ? 'processing'
-                  : 'default'
-          }
-        >
-          {statusLabels[row.financialStatus]}
-        </Tag>
-      ),
-    },
+    metric('Revenue YoY', 'revenueGrowth', percent),
+    metric('EPS YoY', 'epsGrowth', percent),
+    metric('Operating Margin', 'operatingMargin', percent),
+    metric('Net Margin', 'netMargin', percent),
+    { ...metric('OCF', 'operatingCashFlow'), width: 175 },
+    { ...metric('FCF', 'fcf'), width: 165 },
+    metric('Cash', 'cash'),
+    metric('Total Debt', 'totalDebt'),
     {
       title: '财务期间',
       key: 'period',
       width: 140,
       render: (_value, row) => row.financial?.periodEnd ?? '—',
     },
-    metric('Revenue', 'revenue'),
-    metric(
-      mode === 'annual' ? 'Revenue Growth' : 'Revenue YoY',
-      'revenueGrowth',
-      percent,
-    ),
-    metric('Diluted EPS', 'eps', number),
-    metric(mode === 'annual' ? 'EPS Growth' : 'EPS YoY', 'epsGrowth', percent),
-    ...(mode === 'annual'
-      ? [
-          metric('FCF', 'fcf'),
-          metric('ROE', 'roe', percent),
-          metric('Net Margin', 'netMargin', percent),
-        ]
-      : [
-          metric('Net Income', 'netIncome'),
-          metric('Operating Margin', 'operatingMargin', percent),
-          metric('Cash', 'cash'),
-        ]),
-    metric('Total Debt', 'totalDebt'),
     {
       title: '收藏',
       key: 'favorite',
-      fixed: 'right',
       width: 100,
       render: (_value, row) => (
         <Button
@@ -268,9 +223,6 @@ export function App() {
                   </Space>
                 </Form.Item>
               </Form>
-              <Typography.Paragraph type="secondary" className="query-help">
-                搜索和翻页只读取基础目录与已缓存指标。首次进入详情才获取财务数据；收藏不会触发获取。
-              </Typography.Paragraph>
             </Card>
             <Card
               title={view === 'favorites' ? '收藏列表' : 'SEC 公司目录'}
@@ -307,7 +259,9 @@ export function App() {
                   }}
                 />
                 <Typography.Text type="secondary">
-                  金额：百万美元 · 尚未获取或缺失的数据为 —
+                  {mode === 'annual' ? '最新完整财年' : '最新独立季度'} ·
+                  增长率：YoY · 金额：百万美元；Cash / Total Debt 为期末余额 ·
+                  缺失为 —
                 </Typography.Text>
               </Space>
               {error && (
@@ -329,7 +283,7 @@ export function App() {
                 columns={columns}
                 dataSource={list?.data ?? []}
                 loading={loading}
-                scroll={{ x: 1900 }}
+                scroll={{ x: 1575 }}
                 locale={{
                   emptyText:
                     view === 'favorites'
@@ -351,10 +305,7 @@ export function App() {
           </Space>
         )}
       </Layout.Content>
-      <Layout.Footer className="app-footer">
-        数据来源：SEC EDGAR · 财务缓存按 CIK 关联，同一公司的多个 Ticker
-        共享缓存和收藏状态
-      </Layout.Footer>
+      <Layout.Footer className="app-footer">数据来源：SEC EDGAR</Layout.Footer>
     </Layout>
   );
 }

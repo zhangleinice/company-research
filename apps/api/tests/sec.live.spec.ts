@@ -35,6 +35,7 @@ live('SEC + PostgreSQL live acceptance (preserves existing user data)', () => {
   }, 40000);
   it.each([
     ['GOOG', '0001652044'],
+    ['NVDA', '0001045810'],
     ['AAPL', '0000320193'],
     ['KO', '0000021344'],
   ])(
