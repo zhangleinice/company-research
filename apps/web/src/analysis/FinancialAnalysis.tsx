@@ -1,3 +1,6 @@
+import { FinancialHealthChart } from './FinancialHealthChart.js';
+import { CashFlowCharts } from './CashFlowCharts.js';
+import { ProfitabilityCharts } from './ProfitabilityCharts.js';
 import { GrowthChart } from '../GrowthChart.js';
 import {
   Alert,
@@ -30,10 +33,7 @@ import {
   type TrendSeries,
 } from './FinancialTrendChart.js';
 
-const BLUE = '#1677ff',
-  GREEN = '#389e6f',
-  PURPLE = '#9254de',
-  ORANGE = '#d89614';
+const BLUE = '#1677ff';
 const series = (
   key: TrendSeries['key'],
   label: string,
@@ -133,12 +133,16 @@ function Chart({
   mode,
   series,
   unit = 'money',
+  moneyDivisor,
+  moneyUnit,
 }: {
   title: string;
   rows: FinancialPeriod[];
   mode: FinancialMode;
   series: TrendSeries[];
   unit?: 'money' | 'percent';
+  moneyDivisor?: number;
+  moneyUnit?: string;
 }) {
   return (
     <section className="analysis-chart-panel">
@@ -149,6 +153,8 @@ function Chart({
         mode={mode}
         series={series}
         unit={unit}
+        moneyDivisor={moneyDivisor}
+        moneyUnit={moneyUnit}
       />
     </section>
   );
@@ -233,7 +239,9 @@ export function FinancialAnalysis({
                     <Row gutter={[24, 24]}>
                       <Col xs={24} xl={12}>
                         <Chart
-                          title="Revenue 历史趋势"
+                          title="Revenue 历史趋势（亿美元）"
+                          moneyDivisor={100000000}
+                          moneyUnit="亿美元"
                           rows={rows}
                           mode={mode}
                           series={[series('revenue', 'Revenue', BLUE)]}
@@ -283,41 +291,7 @@ export function FinancialAnalysis({
                         ROA，也不以年度值替代。
                       </Typography.Paragraph>
                     )}
-                    <Row gutter={[24, 24]}>
-                      <Col xs={24} xl={12}>
-                        <Chart
-                          title="利润率历史趋势"
-                          rows={rows}
-                          mode={mode}
-                          unit="percent"
-                          series={[
-                            series('grossMargin', 'Gross Margin', BLUE),
-                            series(
-                              'operatingMargin',
-                              'Operating Margin',
-                              GREEN,
-                            ),
-                            series('netMargin', 'Net Margin', PURPLE),
-                          ]}
-                        />
-                      </Col>
-                      <Col xs={24} xl={12}>
-                        <Chart
-                          title="利润历史变化"
-                          rows={rows}
-                          mode={mode}
-                          series={[
-                            series('grossProfit', 'Gross Profit', BLUE),
-                            series(
-                              'operatingIncome',
-                              'Operating Income',
-                              GREEN,
-                            ),
-                            series('netIncome', 'Net Income', PURPLE),
-                          ]}
-                        />
-                      </Col>
-                    </Row>
+                    <ProfitabilityCharts rows={rows} mode={mode} />
                   </>
                 )}
                 {module.key === 'cash-flow' && (
@@ -351,31 +325,7 @@ export function FinancialAnalysis({
                       CapEx
                       当前采用购建物业、厂房及设备的现金支出；不把并购、净投资现金流或无形资产购置混入该口径。
                     </Typography.Paragraph>
-                    <Row gutter={[24, 24]}>
-                      <Col xs={24} xl={12}>
-                        <Chart
-                          title="OCF / CapEx / FCF 历史趋势"
-                          rows={rows}
-                          mode={mode}
-                          series={[
-                            series('operatingCashFlow', 'OCF', BLUE),
-                            series('capex', 'CapEx', ORANGE),
-                            series('fcf', 'FCF', GREEN),
-                          ]}
-                        />
-                      </Col>
-                      <Col xs={24} xl={12}>
-                        <Chart
-                          title="利润与经营现金流对比"
-                          rows={rows}
-                          mode={mode}
-                          series={[
-                            series('netIncome', 'Net Income', PURPLE),
-                            series('operatingCashFlow', 'OCF', BLUE),
-                          ]}
-                        />
-                      </Col>
-                    </Row>
+                    <CashFlowCharts rows={rows} mode={mode} />
                     <Typography.Title level={5}>
                       辅助信息 · 增长与股东现金回报
                     </Typography.Title>
@@ -384,6 +334,7 @@ export function FinancialAnalysis({
                       mode={mode}
                       metrics={[
                         METRICS.fcfGrowth,
+                        METRICS.capexToOcf,
                         METRICS.netIncome,
                         METRICS.stockRepurchases,
                         METRICS.dividendsPaid,
@@ -408,15 +359,7 @@ export function FinancialAnalysis({
                       Cash，仅扣现金及现金等价物，不扣短期投资；Total Debt
                       是有息债务，不是 Total Liabilities。
                     </Typography.Paragraph>
-                    <Chart
-                      title="现金储备与债务历史趋势"
-                      rows={rows}
-                      mode={mode}
-                      series={[
-                        series('cash', 'Cash', BLUE),
-                        series('totalDebt', 'Total Debt', ORANGE),
-                      ]}
-                    />
+                    <FinancialHealthChart rows={rows} mode={mode} />
                     <Auxiliary
                       row={latest}
                       mode={mode}
@@ -425,6 +368,8 @@ export function FinancialAnalysis({
                         METRICS.currentAssets,
                         METRICS.currentLiabilities,
                         METRICS.debtToEquity,
+                        METRICS.cashAndShortTermSecurities,
+                        METRICS.netDebtAfterLiquidAssets,
                       ]}
                     />
                   </>

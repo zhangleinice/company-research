@@ -1,3 +1,5 @@
+import { normalizeFinancialHealth } from './financial-health';
+import { capexToOperatingCashFlow } from './cash-flow-calculations';
 import {
   FINANCIAL_METRICS,
   type FinancialMetric,
@@ -256,6 +258,72 @@ export function normalizeCompanyFacts(raw: unknown): {
         items: [source(current), source(previous)],
       };
     }
+    // Company Facts is entity-wide (no segment dimensions). Only pair total revenue
+    // with total cost of revenue from the very same filing, currency and duration.
+    // Do not substitute operating expenses, service-only costs or a different filing.
+    if (result.grossProfit === null && result.revenue !== null) {
+      const revenueSource = result.sources.revenue;
+      const revenueItems =
+        isObject(revenueSource) && Array.isArray(revenueSource.items)
+          ? revenueSource.items
+          : [];
+      const pairs = revenueItems.map((item) => {
+        if (
+          !isObject(item) ||
+          item.unit !== 'USD' ||
+          ![
+            'us-gaap:Revenues',
+            'us-gaap:SalesRevenueNet',
+            'us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax',
+          ].includes(String(item.concept))
+        )
+          return null;
+        const cost = ['CostOfRevenue', 'CostOfGoodsAndServicesSold']
+          .map((tag) =>
+            latest(
+              readTag(tag).filter(
+                (value) =>
+                  value.fact.start === item.start &&
+                  value.fact.end === item.end &&
+                  value.fact.accn === item.accn &&
+                  value.fact.filed === item.filed &&
+                  value.fact.form === item.form &&
+                  value.fact.val >= 0,
+              ),
+            ),
+          )
+          .find(Boolean);
+        return cost ? { revenue: item, cost } : null;
+      });
+      const reported =
+        isObject(revenueSource) &&
+        revenueSource.method === 'reported' &&
+        pairs.length === 1;
+      const differenced =
+        isObject(revenueSource) &&
+        revenueSource.method === 'ytd_difference' &&
+        pairs.length === 2;
+      if ((reported || differenced) && pairs.every((pair) => pair !== null)) {
+        const current = pairs[0]!;
+        const prior = differenced ? pairs[1]! : null;
+        // Cumulative subtraction must retain the same cost definition at both endpoints.
+        const cost =
+          prior && current.cost.concept !== prior.cost.concept
+            ? null
+            : prior
+              ? current.cost.fact.val - prior.cost.fact.val
+              : current.cost.fact.val;
+        if (cost !== null && cost >= 0) {
+          result.grossProfit = difference(result.revenue, cost);
+          result.sources.grossProfit = {
+            method: 'calculated',
+            formula: 'revenue-costOfRevenue',
+            costMethod: differenced ? 'ytd_difference' : 'reported',
+            inputs: [revenueSource, ...pairs.map((pair) => source(pair!.cost))],
+          };
+        }
+      }
+    }
     for (const metric of Object.keys(INSTANT_TAGS) as FinancialMetric[]) {
       const selected = pick(
         metric,
@@ -269,34 +337,17 @@ export function normalizeCompanyFacts(raw: unknown): {
         };
       }
     }
-    if (result.shortTermDebt === null) {
-      const borrowings = [
-        'ShortTermBorrowings',
-        'ShortTermDebt',
-        'CommercialPaper',
-      ]
-        .map((tag) =>
-          latest(
-            readTag(tag).filter(
-              (x) => !x.fact.start && x.fact.end === anchor.end,
-            ),
-          ),
-        )
-        .find(Boolean);
-      const currentLongTerm = latest(
-        readTag('LongTermDebtCurrent').filter(
-          (x) => !x.fact.start && x.fact.end === anchor.end,
-        ),
-      );
-      if (borrowings && currentLongTerm) {
-        result.shortTermDebt = borrowings.fact.val + currentLongTerm.fact.val;
-        result.sources.shortTermDebt = {
-          method: 'sum_current_borrowings',
-          items: [source(borrowings), source(currentLongTerm)],
-        };
-      }
-    }
     if (result.capex !== null && result.capex < 0) result.capex = null;
+    result.capexToOcf = capexToOperatingCashFlow(
+      result.capex,
+      result.operatingCashFlow,
+    );
+    if (result.capexToOcf !== null)
+      result.sources.capexToOcf = {
+        method: 'calculated',
+        formula: 'capex/operatingCashFlow*100',
+        inputs: [result.sources.capex, result.sources.operatingCashFlow],
+      };
     result.fcf = difference(result.operatingCashFlow, result.capex);
     if (result.fcf !== null)
       result.sources.fcf = {
@@ -304,16 +355,10 @@ export function normalizeCompanyFacts(raw: unknown): {
         formula: 'operatingCashFlow-capex',
         inputs: [result.sources.operatingCashFlow, result.sources.capex],
       };
-    result.totalDebt =
-      result.shortTermDebt !== null && result.longTermDebt !== null
-        ? result.shortTermDebt + result.longTermDebt
-        : null;
-    result.netDebt = difference(result.totalDebt, result.cash);
-    result.debtToEquity = divide(result.totalDebt, result.equity);
-    result.currentRatio = divide(
-      result.currentAssets,
-      result.currentLiabilities,
-    );
+    const health = normalizeFinancialHealth(readTag, anchor.end);
+    const { sources: healthSources, ...balances } = health;
+    Object.assign(result, balances);
+    Object.assign(result.sources, healthSources);
     result.bookValuePerShare = divide(result.equity, result.sharesOutstanding);
     result.grossMargin = divide(result.grossProfit, result.revenue, 100);
     result.operatingMargin = divide(
@@ -324,23 +369,88 @@ export function normalizeCompanyFacts(raw: unknown): {
     result.netMargin = divide(result.netIncome, result.revenue, 100);
     result.fcfMargin = divide(result.fcf, result.revenue, 100);
     if (!quarterly) {
-      const beginning = (metric: FinancialMetric) =>
-        pick(
-          metric,
-          (x) => !x.fact.start && x.fact.end === shift(anchor.start, -1),
-        );
-      const equity = beginning('equity');
-      const assets = beginning('assets');
+      const income = pick(
+        'netIncome',
+        (x) => x.fact.start === anchor.start && x.fact.end === anchor.end,
+      );
+      const balance = (tags: string[], end: string) => {
+        for (const tag of tags) {
+          const candidates = readTag(tag).filter(
+            (x) =>
+              !x.fact.start &&
+              x.fact.end === end &&
+              income &&
+              x.fact.filed <= income.fact.filed,
+          );
+          const selected =
+            latest(
+              candidates.filter((x) => x.fact.accn === income?.fact.accn),
+            ) ?? latest(candidates);
+          if (selected) return selected;
+        }
+      };
+      const equityTag =
+        income?.concept === 'us-gaap:ProfitLoss'
+          ? 'StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest'
+          : 'StockholdersEquity';
+      const equity = balance([equityTag], shift(anchor.start, -1));
+      const endingEquity = balance([equityTag], anchor.end);
+      const assets = balance(['Assets'], shift(anchor.start, -1));
+      const endingAssets = balance(['Assets'], anchor.end);
+      // Prefer consolidated profit for total assets when reported in the same filing.
+      const totalIncome =
+        latest(
+          readTag('ProfitLoss').filter(
+            (x) =>
+              x.fact.start === anchor.start &&
+              x.fact.end === anchor.end &&
+              x.fact.accn === income?.fact.accn,
+          ),
+        ) ?? income;
       result.roe =
-        equity && result.equity !== null
-          ? divide(result.netIncome, (equity.fact.val + result.equity) / 2, 100)
+        equity &&
+        endingEquity &&
+        equity.fact.val > 0 &&
+        endingEquity.fact.val > 0
+          ? divide(
+              result.netIncome,
+              (equity.fact.val + endingEquity.fact.val) / 2,
+              100,
+            )
           : null;
       result.roa =
-        assets && result.assets !== null
-          ? divide(result.netIncome, (assets.fact.val + result.assets) / 2, 100)
+        assets &&
+        endingAssets &&
+        assets.fact.val > 0 &&
+        endingAssets.fact.val > 0
+          ? divide(
+              totalIncome?.fact.val ?? null,
+              (assets.fact.val + endingAssets.fact.val) / 2,
+              100,
+            )
           : null;
       if (equity) result.sources.beginningEquity = source(equity);
       if (assets) result.sources.beginningAssets = source(assets);
+      if (result.roe !== null)
+        result.sources.roe = {
+          method: 'calculated',
+          formula: 'annualNetIncome/averageEquity*100',
+          inputs: [
+            income && source(income),
+            source(equity!),
+            source(endingEquity!),
+          ],
+        };
+      if (result.roa !== null)
+        result.sources.roa = {
+          method: 'calculated',
+          formula: 'annualNetIncome/averageAssets*100',
+          inputs: [
+            totalIncome && source(totalIncome),
+            source(assets!),
+            source(endingAssets!),
+          ],
+        };
     }
     result.sources.calculationPolicy = {
       version: 1,
@@ -443,6 +553,68 @@ export function normalizeCompanyFacts(raw: unknown): {
       ),
     ].sort();
   }
+  // Bridge only revenue definitions reconciled by at least two identical, latest-filed overlapping periods.
+  // Including assessed taxes is deliberately excluded from automatic bridging.
+  const revenueBridges = new Map<string, Set<string>>();
+  const bridgeTags = [
+    'Revenues',
+    'SalesRevenueNet',
+    'RevenueFromContractWithCustomerExcludingAssessedTax',
+  ];
+  for (const a of bridgeTags)
+    for (const b of bridgeTags) {
+      if (a >= b) continue;
+      const left = readTag(a),
+        right = readTag(b);
+      const periods = [
+        ...new Set(
+          left
+            .filter((x) => x.fact.start)
+            .map((x) => `${x.fact.start}/${x.fact.end}`),
+        ),
+      ];
+      let matches = 0,
+        conflict = false;
+      for (const period of periods) {
+        const x = latest(
+          left.filter((x) => `${x.fact.start}/${x.fact.end}` === period),
+        );
+        const y = latest(
+          right.filter((x) => `${x.fact.start}/${x.fact.end}` === period),
+        );
+        if (!x || !y) continue;
+        if (
+          Math.abs(x.fact.val - y.fact.val) >
+          Math.max(1, Math.abs(x.fact.val) * 1e-10)
+        ) {
+          conflict = true;
+          break;
+        }
+        matches++;
+      }
+      if (!conflict && matches >= 2) {
+        const x = `us-gaap:${a}:USD`,
+          y = `us-gaap:${b}:USD`;
+        (revenueBridges.get(x) ?? revenueBridges.set(x, new Set()).get(x)!).add(
+          y,
+        );
+        (revenueBridges.get(y) ?? revenueBridges.set(y, new Set()).get(y)!).add(
+          x,
+        );
+      }
+    }
+  function bridged(a: string, b: string) {
+    const visited = new Set<string>();
+    const queue = [a];
+    while (queue.length) {
+      const node = queue.pop()!;
+      if (node === b) return true;
+      if (visited.has(node)) continue;
+      visited.add(node);
+      queue.push(...(revenueBridges.get(node) ?? []));
+    }
+    return false;
+  }
   function comparable(
     a: NormalizedPeriod,
     b: NormalizedPeriod,
@@ -450,6 +622,14 @@ export function normalizeCompanyFacts(raw: unknown): {
   ) {
     const left = concepts(a.sources[metric]);
     const right = concepts(b.sources[metric]);
+    if (
+      metric === 'revenue' &&
+      left.length &&
+      right.length &&
+      left.every((x) => right.some((y) => bridged(x, y))) &&
+      right.every((y) => left.some((x) => bridged(x, y)))
+    )
+      return true;
     return (
       left.length > 0 &&
       JSON.stringify([...new Set(left)]) === JSON.stringify([...new Set(right)])
@@ -473,14 +653,24 @@ export function normalizeCompanyFacts(raw: unknown): {
           ['netIncomeGrowth', 'netIncome'],
           ['sharesChange', 'sharesOutstanding'],
         ] as [FinancialMetric, FinancialMetric][])
-          current[out] = comparable(current, prior, metric)
-            ? growth(current[metric], prior[metric])
-            : null;
+          current[out] =
+            comparable(current, prior, metric) &&
+            (metric !== 'eps' || (current.eps !== null && current.eps > 0))
+              ? growth(current[metric], prior[metric])
+              : null;
         current.sources.growthComparisonPeriodEnd = prior.periodEnd;
+        current.sources.revenueComparisonPolicy =
+          'same concept or reconciled revenue concepts with >=2 matching overlapping periods, no conflicts, USD only';
       }
       if (!quarterly) {
         for (const years of [3, 5]) {
-          const previous = rows[index - years];
+          const previous = rows.find(
+            (candidate) =>
+              candidate !== current &&
+              Math.abs(
+                days(candidate.periodEnd, current.periodEnd) - years * 365,
+              ) <= 20,
+          );
           if (
             !previous ||
             Math.abs(
@@ -492,6 +682,7 @@ export function normalizeCompanyFacts(raw: unknown): {
             const a = current[metric];
             const b = previous[metric];
             const value =
+              (metric !== 'fcf' || rows[index - years] === previous) &&
               comparable(current, previous, metric) &&
               a !== null &&
               b !== null &&

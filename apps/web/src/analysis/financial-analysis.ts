@@ -5,15 +5,20 @@ import type {
   FinancialPeriod,
 } from '@company-research/shared';
 
+type DisplayMetric =
+  | FinancialMetric
+  | 'capexToOcf'
+  | 'cashAndShortTermSecurities'
+  | 'netDebtAfterLiquidAssets';
 export type MetricUnit = 'money' | 'percent' | 'perShare' | 'ratio';
 export interface MetricDefinition {
-  key: FinancialMetric;
+  key: DisplayMetric;
   label: string;
   description: string;
   unit: MetricUnit;
 }
 const metric = (
-  key: FinancialMetric,
+  key: DisplayMetric,
   label: string,
   description: string,
   unit: MetricUnit = 'money',
@@ -65,7 +70,7 @@ export const METRICS = {
   grossProfit: metric(
     'grossProfit',
     'Gross Profit',
-    '毛利润：对应报告期间收入扣除营业成本后的披露值。',
+    '毛利润：优先使用直接披露值；否则由后端使用同申报、同期间和币种的收入减销售成本计算，缺失时不补零。',
   ),
   operatingIncome: metric(
     'operatingIncome',
@@ -98,13 +103,13 @@ export const METRICS = {
   roe: metric(
     'roe',
     'ROE',
-    '年度净资产收益率 = 年度净利润 ÷ 期初与期末股东权益的平均值 × 100%；缺少期初值不计算。',
+    '年度净资产收益率 = 年度净利润 ÷ 期初与期末股东权益的平均值 × 100%；净利润与权益归属口径须一致，缺失或权益非正时不计算。',
     'percent',
   ),
   roa: metric(
     'roa',
     'ROA',
-    '年度资产收益率 = 年度净利润 ÷ 期初与期末总资产的平均值 × 100%；缺少期初值不计算。',
+    '年度资产收益率 = 年度净利润 ÷ 期初与期末总资产的平均值 × 100%；总资产优先匹配同申报的合并净利润，缺少可靠余额时不计算。',
     'percent',
   ),
   operatingCashFlow: metric(
@@ -116,6 +121,12 @@ export const METRICS = {
     'capex',
     'CapEx',
     '资本支出：目前采用购建物业、厂房及设备的现金支出；不将并购、净投资现金流或缺失字段当作资本支出。',
+  ),
+  capexToOcf: metric(
+    'capexToOcf',
+    'CapEx / OCF',
+    '经营现金流中有多少比例用于当前定义的资本开支：CapEx ÷ OCF × 100%；OCF 须大于 0。此比例不是越低越好，需要结合企业成长阶段判断。',
+    'percent',
   ),
   fcf: metric(
     'fcf',
@@ -147,22 +158,32 @@ export const METRICS = {
   cash: metric(
     'cash',
     'Cash',
-    '对应报告期末的现金及现金等价物，不包含可交易证券或其他短期投资。',
+    '对应报告期末的现金及现金等价物；Cash 不等于全部流动性资产，不包含单独列报的短期可交易证券。',
   ),
   marketableSecurities: metric(
     'marketableSecurities',
     'Marketable Securities',
-    '后端可靠映射的流动可交易证券或短期投资；未披露或未映射时保留缺失。',
+    '资产负债表流动资产项下、与现金分列的可交易证券或短期投资；不代表全部证券均在一年内到期，不含非流动投资。',
   ),
   totalDebt: metric(
     'totalDebt',
     'Total Debt',
-    '对应期末的有息债务：可靠的短期债务 + 长期债务；不是总负债，不将缺失组成当零。',
+    '同期账面有息借款：流动债务（含一年内到期部分）+ 非流动债务；不重复计入商业票据，明确披露的融资租赁剔除。不使用面值或总负债替代，缺失组成不当作零。',
   ),
   netDebt: metric(
     'netDebt',
     'Net Debt（仅扣现金）',
-    '净债务 = Total Debt − Cash；这里只扣除现金及现金等价物，不扣除可交易证券或短期投资，可为负值。',
+    '总有息债务减去现金及现金等价物，未扣除短期投资或其他金融资产；可为负值。',
+  ),
+  cashAndShortTermSecurities: metric(
+    'cashAndShortTermSecurities',
+    'Cash & Short-term Marketable Securities',
+    '现金及现金等价物 + 单独列报的流动可交易证券。仅在与 SEC 同期披露的合计核对一致后展示；不含非流动或不可交易投资。',
+  ),
+  netDebtAfterLiquidAssets: metric(
+    'netDebtAfterLiquidAssets',
+    'Net Debt after Liquid Assets',
+    '调整后净债务 = Total Debt −（Cash + 经核验的流动可交易证券）；只扣上述资产，不扣长期或不可交易投资，可为负值。',
   ),
   currentAssets: metric(
     'currentAssets',
@@ -186,7 +207,7 @@ export const METRICS = {
     '债务权益比 = 有息总债务 ÷ 股东权益；权益需大于零。',
     'ratio',
   ),
-} satisfies Partial<Record<FinancialMetric, MetricDefinition>>;
+} satisfies Partial<Record<DisplayMetric, MetricDefinition>>;
 
 export const ANALYSIS_MODULES = [
   {
@@ -221,7 +242,7 @@ export function analysisPeriods(
 }
 export function analysisValue(
   row: FinancialPeriod | undefined,
-  key: FinancialMetric,
+  key: DisplayMetric,
   mode: FinancialMode,
 ): number | null {
   if (

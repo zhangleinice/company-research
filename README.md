@@ -176,3 +176,66 @@ Growth 展示 Revenue、EPS、同比和年度 CAGR；季度 CAGR 保留缺失，
 本次检查了 CapEx 的标准 PP&E 字段映射、起止期间匹配、YTD 差分和空值保护，没有用宽泛的投资现金流或旧年数补齐缺失。新增回归测试覆盖缺少最新年 CapEx、缺少 Q1 累计端点时 Q2 CapEx/FCF 必须为 null。后端生产解析、Prisma Schema 和已有缓存均未改动；具体公司缓存中缺失值的原始来源仍需在能连接本机数据库的环境核对。
 
 GOOG、NVDA、AAPL 的模块顺序与展示回归使用明确标记的合成数据，不代表真实 SEC 数值已被重新获取或核验。可在本机运行 `npm run test:live` 验证真实缓存；该测试保留已有数据库记录。
+
+
+## Growth 口径衔接与单公司缓存更新
+
+增长计算原先要求两期来源的 Concept 字符串完全相同，因而标签切换可能让 Revenue 仍有数值、YoY/CAGR 却为空。现在只对 `Revenues`、`SalesRevenueNet`、`RevenueFromContractWithCustomerExcludingAssessedTax` 做有证据的桥接：原始 Facts 至少有两个同单位、相同起止期间的重叠观测，最新披露值一致且没有冲突，才允许衔接；含税收入不会自动混接。未经证实或有差异的标签仍不计算。
+
+Revenue/EPS CAGR 使用实际相隔 3/5 年的报告期端点，不依赖数组位置；EPS YoY 的非正终值保留缺失。图表与顶部卡片始终读取同一行后端指标，前端不补算增长率。Revenue 图采用亿美元，数据点 Tooltip 同时显示美元原值；同比图可选择 Revenue、EPS 或两者对比，不发起新网络请求。
+
+修复不会偷偷刷新 READY 缓存。需要更新单家公司时，在本机执行：
+
+```bash
+curl -X POST http://localhost:3000/api/companies/GOOGL/refresh
+```
+
+该入口复用 CIK 租约和事务，仅重新获取这一家公司，不删除数据库或收藏。刷新失败保留旧指标和更新时间；普通详情 GET 继续优先读取缓存。成功后重新加载详情或返回列表，即可读取同一份更新结果。
+
+已核对 Alphabet 10-K：2025/2024 营收分别为 402836/350018 百万美元，稀释 EPS 为 10.81/8.04；2022 营收 282836、EPS 4.56；2020 营收 182527、拆股调整后 EPS 2.93。对应计算结果为 Revenue YoY 15.09%、Revenue CAGR 3Y 12.51% / 5Y 17.15%、EPS YoY 34.45%、EPS CAGR 3Y 33.34% / 5Y 29.83%。这些是披露数值的公式校验，并非本机缓存已刷新成功的证明。
+
+来源：[2025 10-K](https://d18rn0p25nwr6d.cloudfront.net/CIK-0001652044/e6a3f2b6-bb98-4f54-900f-2a8794a582cf.html)、[2024 10-K 财务报表](https://www.sec.gov/Archives/edgar/data/1652044/000165204425000014/R5.htm)、[2022 10-K 财务报表](https://www.sec.gov/Archives/edgar/data/1652044/000165204423000016/R5.htm)。当前工具环境无法读取本机 PostgreSQL 或取得 Alphabet 原始 Company Facts，具体缓存的标签组合及刷新后的最终结果仍需通过上述单公司刷新和本机真实联调确认。
+
+## Profitability 解析与验证
+
+盈利模块保留四张卡片和两张历史图；利润率、利润图分别支持全部对比或单指标切换，切换只改变本地展示。利润图使用亿美元，Tooltip 保留报告起止日期及美元原值，负值和缺失区间沿用现有图表处理。
+
+`GrossProfit` 优先使用直接披露。缺失时，仅将同申报 accession、申报日期、币种和起止期间的总收入与 `CostOfRevenue` / `CostOfGoodsAndServicesSold` 配对计算。不会使用 `CostsAndExpenses`、单独商品或服务成本、含税收入来补齐。独立季度沿用可靠的 YTD 端点差分，两个成本端点须采用同一 Concept；没有完整端点时保留 null。计算输入保存在 `sources.grossProfit`，无需新增数据库字段。
+
+年度 ROE 使用与净利润归属口径对应的期初、期末平均权益，ROA 使用平均资产。余额优先取净利润所在申报，且不使用晚于净利润的申报版本；缺少可靠余额时留空。季度不展示 ROE/ROA。
+
+对照 [Alphabet 2025 SEC 收入报表及 XBRL 定义](https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/R5.htm)，Revenue 402836、Cost of revenues 162535（百万美元），计算 Gross Profit 240301、Gross Margin 59.65%；Operating Income 129039、Net Income 132170，利润率分别为 32.03% / 32.81%。净利润高于营业利润有财报支持：其他收益净额 29787 减所得税 26656，净增 3131。根据 [2025 10-K 资产负债表](https://d18rn0p25nwr6d.cloudfront.net/CIK-0001652044/e6a3f2b6-bb98-4f54-900f-2a8794a582cf.html)，平均权益 (325084+415265)/2、平均资产 (450256+595281)/2，对应 ROE 35.70%、ROA 25.28%。
+
+本地更新和核验（先确保后端已加载新代码）：
+
+```bash
+node scripts/diagnose-googl-profitability.cjs --refresh 2>&1 | tee /tmp/company-research-googl-profitability.log
+```
+
+该脚本只通过现有 POST 接口刷新 GOOGL，检查 PostgreSQL、API 和 2025 披露计算值，并输出计算来源；普通详情 GET 仍读取缓存。单元测试使用披露数值构造的 fixtures，不等于真实 SEC / 数据库联调。若执行工具受本机网络权限限制，必须以本机命令的 PASS 日志确认真实更新。
+
+## Cash Flow 检查与展示
+
+现金流模块保留 OCF、CapEx、FCF、FCF Margin 四张卡片及公式说明。两张趋势图分别支持 OCF/CapEx/FCF 和 Net Income/OCF 的对比或单项切换，金额使用亿美元，Tooltip 保留美元原值及报告期间，切换不发起网络请求。辅助区新增 `capexToOcf`（百分数）：仅当同期间的 CapEx 有效且 OCF > 0 时计算；该比例需结合企业成长阶段理解，不是越低越好。
+
+新增比例由后端读取已缓存的原始字段后确定性计算，共享契约将其作为可选字段，因此旧缓存可直接使用、无需数据库迁移。前端不计算比例；解析结果也保留比例计算来源。现有 SEC 映射与季度机制保持：OCF 使用 `NetCashProvidedByUsedInOperatingActivities`，CapEx 使用 `PaymentsToAcquirePropertyPlantAndEquipment`，不包括收购、净投资现金流或未支付的资本开支；优先独立季度，其次可靠的 YTD 差分，Q4 为全年减前九个月。缺少端点时保留 null，FCF YoY 比较去年同期。
+
+[Alphabet 2025 SEC 现金流表及 XBRL 定义](https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/R10.htm)披露：OCF 164713、PP&E 现金支出 91447、Net Income 132170、回购现金支出 45709、分红现金支出 10049（百万美元）。据此 FCF 73266、FCF Margin 18.19%、CapEx/OCF 55.52%；2024 年 OCF 125299 减 CapEx 52535 得到 FCF 72764，对应 2025 FCF YoY 0.69%。这些是披露核算值，真实缓存更新须以本地诊断日志为准。
+
+```bash
+node scripts/diagnose-googl-cash-flow.cjs --refresh 2>&1 | tee /tmp/company-research-googl-cash-flow.log
+```
+
+先确保后端已加载最新代码。脚本仅刷新 GOOGL，通过 Prisma 读取年度与季度数据，比较缓存/API、2025 披露值与 Q4 原始累计端点，检查收藏状态保留；不验证浏览器画面。测试覆盖缺少 Q3 端点、独立季度优先、非自然财年、无效分母、负现金流与图表缺失区间。AAPL/NVDA 标签的测试为合成回归，不代表实时公司数据已核验。
+
+## Financial Health 口径与已验证结果
+
+财务健康模块仍保留四张核心卡片；趋势图增加全部对比/Cash/Total Debt 切换，使用亿美元。辅助区增加经 SEC 披露合计核验的现金及流动可交易证券合计、扣除此合计的调整后净债务。前端不计算或猜测流动性资产；旧缓存没有核验来源时，新字段为空，不需要数据库迁移。
+
+余额使用同一期末、同一申报的 USD 时点数据，不做 YTD 差分。Current Ratio 要求流动负债为正，Debt/Equity 要求股东权益为正。Net Debt（仅扣现金）允许负值。债务采用账面值，不使用本金面值、公允价值或总负债替代；商业票据已包括在短期借款合计时不重复相加。历史非流动债务与融资租赁合计，只有存在同申报的融资租赁总额及流动部分，才明确剔除非流动租赁，接到不含租赁的债务口径上。若后续比较申报漏报某个组成，仅在所有重叠余额及债务输入核对一致后，复用较早完整快照；缺失永不当零。来源与政策保留在财务记录 `sources`。
+
+Alphabet [2025 资产负债表](https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/R3.htm)和[债务附注](https://d18rn0p25nwr6d.cloudfront.net/CIK-0001652044/e6a3f2b6-bb98-4f54-900f-2a8794a582cf.html)已核对：Cash 30708、流动可交易证券 96135、合计 126843、Total Debt 48543、仅扣现金净债务 17835、流动资产 206038、流动负债 102745、权益 415265（百万美元）。Current Ratio 2.0053、Debt/Equity 0.1169；扣除经核验流动性资产的净债务为 -78300。流动证券与现金分列，不含非流动/不可交易投资；流动分类不代表证券全部在一年内到期。2025 年新增美元及欧元票据，债务上升是真实变化。
+
+实际获取 GOOGL 单公司 Company Facts 并通过现有 POST 接口刷新成功，缓存时间 `2026-11-07T08:15:10.141Z`。已检查所有返回年度/季度财务健康数据与 PostgreSQL 一致、首页指标同步、重复 GET 不更新获取时间、收藏状态保留。历史债务 2020/2021/2022 年恢复为 13831/12844/12857 百万美元；2018 年仍缺可靠流动债务组成，保持 null。2021 年最新比较申报缺当前到期部分，采用核对重叠余额后一致的较早快照。
+
+已使用真实 AAPL/NVDA Company Facts 做解析与计算回归（未写入这两家公司数据库），并确认 GOOGL 原有 Growth/Profitability/Cash Flow 年度指标未改变。完整测试含 HTTP 集成测试通过；真实 API 的年度/季度前端服务端渲染也通过。浏览器连接服务不可用，实际屏幕展示未直接验证。

@@ -198,3 +198,151 @@ test('trend chart orders dates, preserves null gaps, and renders data-point repo
   assert.ok(html.indexOf('>2023</text>') < html.indexOf('>2025</text>'));
   assert.match(html, /2025-01-01 至 2025-12-31/);
 });
+
+test('Growth series selection changes only plotted metrics and defaults to comparison', async () => {
+  const { growthSeries } = await import('../src/GrowthChart.js');
+  assert.deepEqual(
+    growthSeries('both').map((x) => x.key),
+    ['revenueGrowth', 'epsGrowth'],
+  );
+  assert.deepEqual(
+    growthSeries('revenue').map((x) => x.key),
+    ['revenueGrowth'],
+  );
+  assert.deepEqual(
+    growthSeries('eps').map((x) => x.key),
+    ['epsGrowth'],
+  );
+});
+
+test('Profitability selectors preserve comparison default and independently select each metric', async () => {
+  const { profitabilitySeries } =
+    await import('../src/analysis/ProfitabilityCharts.js');
+  for (const kind of ['margin', 'profit'] as const) {
+    const all = profitabilitySeries(kind, 'all');
+    assert.equal(all.length, 3);
+    for (const [index, selected] of (
+      ['gross', 'operating', 'net'] as const
+    ).entries()) {
+      assert.deepEqual(profitabilitySeries(kind, selected), [all[index]]);
+    }
+  }
+});
+
+test('Profitability charts display negative profits in hundred-million USD and preserve gaps', () => {
+  const html = renderToStaticMarkup(
+    createElement(FinancialTrendChart, {
+      rows: [
+        period('2023-12-31', { grossProfit: -123456789 }),
+        period('2024-12-31'),
+        period('2025-12-31', { grossProfit: 2e8 }),
+      ],
+      mode: 'annual',
+      unit: 'money',
+      title: '利润',
+      moneyDivisor: 1e8,
+      moneyUnit: '亿美元',
+      series: [{ key: 'grossProfit', label: 'Gross Profit', color: '#1677ff' }],
+    }),
+  );
+  assert.match(html, /亿美元/);
+  assert.match(html, /-123,456,789 USD/);
+  assert.match(html, /2023-01-01 至 2023-12-31/);
+  assert.doesNotMatch(html, /NaN|Infinity|stroke-width="2"/);
+});
+
+test('cash flow chart selectors independently show the selected series without fetching', async () => {
+  const { cashFlowSeries } = await import('../src/analysis/CashFlowCharts.js');
+  assert.deepEqual(
+    cashFlowSeries('cash', 'all').map((x) => x.key),
+    ['operatingCashFlow', 'capex', 'fcf'],
+  );
+  assert.deepEqual(
+    cashFlowSeries('quality', 'all').map((x) => x.key),
+    ['netIncome', 'operatingCashFlow'],
+  );
+  for (const selected of ['operatingCashFlow', 'capex', 'fcf'] as const) {
+    assert.deepEqual(
+      cashFlowSeries('cash', selected).map((x) => x.key),
+      [selected],
+    );
+  }
+  for (const selected of ['netIncome', 'operatingCashFlow'] as const) {
+    assert.deepEqual(
+      cashFlowSeries('quality', selected).map((x) => x.key),
+      [selected],
+    );
+  }
+});
+
+test('CapEx / OCF is an auxiliary backend value with null-safe formatting in both modes', () => {
+  const source = detail('GOOG', '0001652044');
+  source.annual[0].capexToOcf = 55.519;
+  source.quarterly[0].capexToOcf = 0;
+  const annual = renderToStaticMarkup(
+    createElement(FinancialAnalysis, { detail: source, mode: 'annual' }),
+  );
+  const quarterly = renderToStaticMarkup(
+    createElement(FinancialAnalysis, { detail: source, mode: 'quarterly' }),
+  );
+  assert.match(annual, /data-metric="capexToOcf">55.52%/);
+  assert.match(quarterly, /data-metric="capexToOcf">0.00%/);
+  delete source.annual[0].capexToOcf;
+  const missing = renderToStaticMarkup(
+    createElement(FinancialAnalysis, { detail: source, mode: 'annual' }),
+  );
+  assert.match(missing, /data-metric="capexToOcf">—/);
+  // Frontend must not invent a ratio even though this fixture still has CapEx and OCF.
+  assert.equal(analysisValue(source.annual[0], 'capexToOcf', 'annual'), null);
+});
+
+test('cash flow charts show negative values, exact USD tooltips and null gaps', () => {
+  const html = renderToStaticMarkup(
+    createElement(FinancialTrendChart, {
+      rows: [
+        period('2023-12-31', { operatingCashFlow: -2e8 }),
+        period('2024-12-31'),
+        period('2025-12-31', { operatingCashFlow: 3e8 }),
+      ],
+      mode: 'annual',
+      unit: 'money',
+      title: 'OCF',
+      moneyDivisor: 1e8,
+      moneyUnit: '亿美元',
+      series: [{ key: 'operatingCashFlow', label: 'OCF', color: '#1677ff' }],
+    }),
+  );
+  assert.match(html, /-200,000,000 USD/);
+  assert.match(html, /2023-01-01 至 2023-12-31/);
+  assert.match(html, /亿美元/);
+  assert.doesNotMatch(html, /NaN|Infinity|stroke-width="2"/);
+});
+
+test('health chart selects cash/debt independently and defaults to comparison', async () => {
+  const { healthSeries } =
+    await import('../src/analysis/FinancialHealthChart.js');
+  assert.deepEqual(
+    healthSeries('all').map((x) => x.key),
+    ['cash', 'totalDebt'],
+  );
+  for (const key of ['cash', 'totalDebt'] as const)
+    assert.deepEqual(
+      healthSeries(key).map((x) => x.key),
+      [key],
+    );
+});
+test('health auxiliary metrics display only API evidence, preserve negative adjusted debt and suppress absent evidence', () => {
+  const source = detail('GOOG', '0001652044');
+  source.annual[0].cashAndShortTermSecurities = 126843e6;
+  source.annual[0].netDebtAfterLiquidAssets = -78300e6;
+  const html = renderToStaticMarkup(
+    createElement(FinancialAnalysis, { detail: source, mode: 'annual' }),
+  );
+  assert.match(html, /data-metric="cashAndShortTermSecurities">126,843/);
+  assert.match(html, /data-metric="netDebtAfterLiquidAssets">-78,300/);
+  assert.match(html, /Net Debt（仅扣现金）/);
+  const quarter = renderToStaticMarkup(
+    createElement(FinancialAnalysis, { detail: source, mode: 'quarterly' }),
+  );
+  assert.match(quarter, /data-metric="cashAndShortTermSecurities">—/);
+});

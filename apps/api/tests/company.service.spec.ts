@@ -98,7 +98,12 @@ function setup() {
         return { count: 0 };
       if (
         where.OR &&
-        (row.financialStatus === 'READY' || row.financialStatus === 'FETCHING')
+        ((row.financialStatus === 'READY' &&
+          !where.OR.some(
+            (condition: { financialStatus: unknown }) =>
+              condition.financialStatus === 'READY',
+          )) ||
+          row.financialStatus === 'FETCHING')
       )
         return { count: 0 };
       Object.assign(row, data);
@@ -313,6 +318,46 @@ describe('company directory and on-demand cache boundaries', () => {
     });
     expect((await service.getCompany('GOOG')).financialStatus).toBe('FETCHING');
     expect(sec.getCompanyFacts).not.toHaveBeenCalled();
+  });
+  it('explicitly refreshes one cached company and retains its old cache if the refresh fails', async () => {
+    const { service, sec, rows } = setup();
+    await service.getCompany('GOOG');
+    await service.getCompany('GOOG', true);
+    expect(sec.getCompanyFacts).toHaveBeenCalledTimes(2);
+    const before = rows.get('0001652044')!.lastFetchedAt;
+    sec.getCompanyFacts.mockRejectedValueOnce(new Error('refresh unavailable'));
+    await expect(service.getCompany('GOOG', true)).rejects.toThrow(
+      'refresh unavailable',
+    );
+    expect(rows.get('0001652044')).toMatchObject({
+      financialStatus: 'READY',
+      lastFetchedAt: before,
+    });
+    await service.getCompany('GOOG');
+    expect(sec.getCompanyFacts).toHaveBeenCalledTimes(3);
+  });
+  it('derives CapEx / OCF from annual and quarterly cache without SEC calls or a new DB field', async () => {
+    const { service, sec, rows } = setup();
+    await service.getCompany('GOOG');
+    const stored = rows.get('0001652044')!;
+    const base = stored.annualFinancials[0];
+    Object.assign(base, { capex: 91447, operatingCashFlow: 164713 });
+    stored.quarterlyFinancials = [
+      {
+        ...base,
+        periodStart: new Date('2025-10-01'),
+        periodEnd: new Date('2025-12-31'),
+        fiscalQuarter: 4,
+        capex: 15,
+        operatingCashFlow: 30,
+      },
+    ];
+    const cached = await service.getCompany('GOOG');
+    expect(cached.annual[0].capexToOcf).toBeCloseTo((91447 / 164713) * 100);
+    expect(cached.quarterly[0].capexToOcf).toBe(50);
+    Object.assign(base, { operatingCashFlow: 0 });
+    expect((await service.getCompany('GOOG')).annual[0].capexToOcf).toBeNull();
+    expect(sec.getCompanyFacts).toHaveBeenCalledTimes(1);
   });
   it('validates pagination, mode and favorite payloads', async () => {
     const { service } = setup();

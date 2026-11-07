@@ -105,6 +105,11 @@ export type FinancialMetric = (typeof FINANCIAL_METRICS)[number];
 export type FinancialMode = 'annual' | 'quarterly';
 export type FinancialStatus = 'NOT_FETCHED' | 'FETCHING' | 'READY' | 'FAILED';
 export type FinancialPeriod = Record<FinancialMetric, number | null> & {
+  /** Derived by the API from cached same-period inputs; not a separate database column. */
+  capexToOcf?: number | null;
+  /** Only present as reliable values when SEC combined-current-liquidity provenance reconciles. */
+  cashAndShortTermSecurities?: number | null;
+  netDebtAfterLiquidAssets?: number | null;
   fiscalYear: number | null;
   fiscalQuarter: number | null;
   periodStart: string;

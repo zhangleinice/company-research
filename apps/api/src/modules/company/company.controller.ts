@@ -7,6 +7,7 @@ import {
   Param,
   ParseIntPipe,
   Patch,
+  Post,
   Query,
 } from '@nestjs/common';
 import { CompanyService } from './company.service';
@@ -45,6 +46,11 @@ export class CompanyController {
     if (typeof body !== 'object' || body === null || !('isFavorite' in body))
       throw new BadRequestException('isFavorite is required');
     return this.companies.setFavorite(identifier, body.isFavorite);
+  }
+
+  @Post(':identifier/refresh')
+  refresh(@Param('identifier') identifier: string) {
+    return this.companies.getCompany(identifier, true);
   }
 
   @Get(':identifier/annual')

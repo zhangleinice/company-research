@@ -1,3 +1,5 @@
+import { verifiedLiquidity } from '../financials/financial-health';
+import { capexToOperatingCashFlow } from '../financials/cash-flow-calculations';
 import {
   BadGatewayException,
   BadRequestException,
@@ -39,6 +41,18 @@ function period(row: StoredPeriod): FinancialPeriod {
         key,
         row[key] === null ? null : Number(row[key]),
       ]),
+    ),
+    ...verifiedLiquidity(
+      row.cash === null ? null : Number(row.cash),
+      row.marketableSecurities === null
+        ? null
+        : Number(row.marketableSecurities),
+      row.totalDebt === null ? null : Number(row.totalDebt),
+      row.sources,
+    ),
+    capexToOcf: capexToOperatingCashFlow(
+      row.capex === null ? null : Number(row.capex),
+      row.operatingCashFlow === null ? null : Number(row.operatingCashFlow),
     ),
     fiscalYear: row.fiscalYear,
     fiscalQuarter: row.fiscalQuarter,
@@ -198,7 +212,7 @@ export class CompanyService {
       return { ticker: stored.ticker, cik: stored.cik, name: stored.name };
     return this.sec.resolveCompany(identifier);
   }
-  async getCompany(input: string): Promise<CompanyDetail> {
+  async getCompany(input: string, refresh = false): Promise<CompanyDetail> {
     const company = await this.resolve(input);
     // INSERT ... ON CONFLICT DO NOTHING is safe even for the first simultaneous alias requests.
     await this.prisma.company.createMany({
@@ -209,12 +223,15 @@ export class CompanyService {
       where: { cik: company.cik },
       include: financialRelations,
     });
-    if (stored.financialStatus === 'READY') return this.detail(stored);
+    if (stored.financialStatus === 'READY' && !refresh)
+      return this.detail(stored);
     const existing = this.pending.get(company.cik);
     if (existing) return existing;
-    const request = this.fetchFinancials(company).finally(() =>
-      this.pending.delete(company.cik),
-    );
+    const request = this.fetchFinancials(
+      company,
+      refresh,
+      stored.lastFetchedAt !== null,
+    ).finally(() => this.pending.delete(company.cik));
     this.pending.set(company.cik, request);
     return request;
   }
@@ -228,12 +245,15 @@ export class CompanyService {
   }
   private async fetchFinancials(
     company: CompanyListItem,
+    refresh = false,
+    preserveCache = false,
   ): Promise<CompanyDetail> {
     const token = randomUUID();
     const claimed = await this.prisma.company.updateMany({
       where: {
         cik: company.cik,
         OR: [
+          ...(refresh ? [{ financialStatus: 'READY' as const }] : []),
           { financialStatus: { in: ['NOT_FETCHED', 'FAILED'] } },
           {
             financialStatus: 'FETCHING',
@@ -324,7 +344,7 @@ export class CompanyService {
       await this.prisma.company.updateMany({
         where: { cik: company.cik, fetchToken: token },
         data: {
-          financialStatus: 'FAILED',
+          financialStatus: preserveCache ? 'READY' : 'FAILED',
           fetchToken: null,
           fetchStartedAt: null,
           lastError: '财务数据获取失败，请重试；详情见服务端安全错误日志',

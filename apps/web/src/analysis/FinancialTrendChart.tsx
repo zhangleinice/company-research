@@ -23,12 +23,16 @@ export function FinancialTrendChart({
   series,
   unit,
   title,
+  moneyDivisor = 1000000,
+  moneyUnit = '百万美元',
 }: {
   rows: FinancialPeriod[];
   mode: FinancialMode;
   series: TrendSeries[];
   unit: MetricUnit;
   title: string;
+  moneyDivisor?: number;
+  moneyUnit?: string;
 }) {
   const id = useId();
   const points = [...rows].sort((a, b) =>
@@ -78,7 +82,7 @@ export function FinancialTrendChart({
       : `${row.fiscalYear ?? row.periodEnd.slice(0, 4)} Q${row.fiscalQuarter ?? '—'}`;
   const tick = (value: number) => {
     if (unit === 'percent') return `${value.toFixed(1)}%`;
-    const displayed = value / (unit === 'money' ? 1000000 : 1);
+    const displayed = value / (unit === 'money' ? moneyDivisor : 1);
     return new Intl.NumberFormat('zh-CN', {
       maximumFractionDigits: 1,
       notation: Math.abs(displayed) >= 100000 ? 'compact' : 'standard',
@@ -102,7 +106,7 @@ export function FinancialTrendChart({
         <desc id={`${id}-description`}>
           {mode === 'annual' ? '年度' : '独立季度'}；
           {unit === 'money'
-            ? '百万美元'
+            ? moneyUnit
             : unit === 'percent'
               ? '百分数'
               : unit === 'ratio'
@@ -171,7 +175,7 @@ export function FinancialTrendChart({
                       />
                     )}
                   <circle cx={x(index)} cy={y(value)} r="3.5" fill={item.color}>
-                    <title>{`${row.periodStart} 至 ${row.periodEnd} · ${item.label}: ${formatAnalysisValue(value, unit)}${unit === 'money' ? ' 百万美元' : ''}`}</title>
+                    <title>{`${row.periodStart} 至 ${row.periodEnd} · ${item.label}: ${unit === 'money' ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 6 }).format(value / moneyDivisor) : formatAnalysisValue(value, unit)}${unit === 'money' ? ` ${moneyUnit}（${value.toLocaleString('en-US')} USD）` : ''}`}</title>
                   </circle>
                 </g>
               );
