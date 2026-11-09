@@ -1,3 +1,4 @@
+import { AiResearchModule } from './modules/ai-research/ai-research.module';
 import { join } from 'node:path';
 import { Module } from '@nestjs/common';
 import { AppController, RootController } from './app.controller';
@@ -12,6 +13,7 @@ import { CompanyModule } from './modules/company/company.module';
       envFilePath: join(__dirname, '..', '.env'),
     }),
     CompanyModule,
+    AiResearchModule,
   ],
 })
 export class AppModule {}

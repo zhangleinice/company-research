@@ -132,3 +132,51 @@ export interface CompanyDetail extends ResearchCompany {
   quarterly: FinancialPeriod[];
   lastError: string | null;
 }
+
+export type AiResearchKind = 'business' | 'management';
+export interface AiResearchSummary {
+  fiscalYear: number;
+  filingDate: string;
+  accessionNumber: string;
+  section: string;
+  model: string;
+  promptVersion: string;
+  sourceUrl: string;
+  createdAt: string;
+  updatedAt: string;
+  summaryJson: {
+    groups: {
+      topic: string;
+      findings: {
+        kind: '公司披露的事实' | '管理层观点' | 'AI 推断';
+        text: string;
+        evidence: { paragraphId: string; quote: string }[];
+      }[];
+    }[];
+  };
+}
+export interface AiResearchState {
+  status: 'NOT_GENERATED' | 'GENERATING' | 'READY' | 'FAILED';
+  error: string | null;
+  summary: AiResearchSummary | null;
+  cached?: boolean;
+}
+
+export type UpdateStage = 'financials' | 'filing' | 'business' | 'management';
+export interface CompanyUpdateProgress {
+  mode: 'FULL' | 'INITIAL';
+  stages: Record<
+    UpdateStage,
+    {
+      status: 'PENDING' | 'RUNNING' | 'SUCCESS' | 'FAILED' | 'SKIPPED';
+      error?: string;
+      updatedAt?: string;
+    }
+  >;
+}
+export interface CompanyUpdateState {
+  status: 'IDLE' | 'QUEUED' | 'GENERATING' | 'READY' | 'PARTIAL' | 'FAILED';
+  updatedAt: string | null;
+  error: string | null;
+  progress: CompanyUpdateProgress | null;
+}

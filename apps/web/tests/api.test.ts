@@ -104,3 +104,31 @@ test('propagates retryable SEC failures and invalid backend JSON', async () => {
     /无效 JSON/,
   );
 });
+
+test('AI reads are passive and unified updates use short POSTs', async () => {
+  const { fetchAiResearch, companyUpdate } = await import('../src/api.js');
+  const fetchMock = mock.method(
+    globalThis,
+    'fetch',
+    async () => new Response(JSON.stringify({ status: 'IDLE' })),
+  );
+  await fetchAiResearch('0001652044', 'business');
+  assert.equal(
+    fetchMock.mock.calls[0].arguments[0],
+    '/api/companies/0001652044/ai/business',
+  );
+  await companyUpdate('0001652044', 'initialize');
+  assert.equal(
+    fetchMock.mock.calls[1].arguments[0],
+    '/api/companies/0001652044/updates/initialize',
+  );
+  assert.equal(fetchMock.mock.calls[1].arguments[1]?.method, 'POST');
+  await companyUpdate('0001652044', 'start');
+  assert.equal(
+    fetchMock.mock.calls[2].arguments[0],
+    '/api/companies/0001652044/updates',
+  );
+  assert.equal(fetchMock.mock.calls[2].arguments[1]?.method, 'POST');
+  await companyUpdate('0001652044', 'status');
+  assert.equal(fetchMock.mock.calls[3].arguments[1]?.method, 'GET');
+});

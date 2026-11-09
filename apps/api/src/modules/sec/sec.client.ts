@@ -71,6 +71,12 @@ export class SecClient implements OnModuleDestroy {
     return this.enqueue(() => this.request(url));
   }
 
+  getText(url: string): Promise<string> {
+    return this.enqueue(() =>
+      this.request(url, undefined, undefined, true),
+    ) as Promise<string>;
+  }
+
   async downloadFile(
     url: string,
     destination: string,
@@ -97,6 +103,7 @@ export class SecClient implements OnModuleDestroy {
     url: string,
     destination?: string,
     downloadTimeout = 1800000,
+    asText = false,
   ): Promise<unknown> {
     if (Date.now() < this.cooldownUntil)
       throw new ServiceUnavailableException(
@@ -112,7 +119,11 @@ export class SecClient implements OnModuleDestroy {
       const options: RequestInit & { dispatcher?: ProxyAgent } = {
         headers: {
           'User-Agent': this.userAgent,
-          Accept: destination ? 'application/zip' : 'application/json',
+          Accept: asText
+            ? 'text/html'
+            : destination
+              ? 'application/zip'
+              : 'application/json',
         },
         signal,
         redirect: 'error',
@@ -156,6 +167,23 @@ export class SecClient implements OnModuleDestroy {
           { signal },
         );
         return;
+      }
+      if (asText) {
+        const reader = response.body?.getReader();
+        if (!reader) throw new BadGatewayException('SEC returned empty HTML');
+        const parts: Uint8Array[] = [];
+        let size = 0;
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          size += value.length;
+          if (size > 20_000_000) {
+            await reader.cancel();
+            throw new BadGatewayException('SEC HTML exceeds 20 MB limit');
+          }
+          parts.push(value);
+        }
+        return Buffer.concat(parts).toString('utf8');
       }
       return await response.json();
     } catch (error) {

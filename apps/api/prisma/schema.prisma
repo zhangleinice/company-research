@@ -27,6 +27,9 @@ model Company {
   fetchToken String?
   fetchStartedAt DateTime?
   lastError String?
+  aiFilings AiFiling[]
+  aiSummaries AiSummary[]
+  aiTasks AiTask[]
   annualFinancials AnnualFinancial[]
   quarterlyFinancials QuarterlyFinancial[]
   @@index([isFavorite])
@@ -143,4 +146,54 @@ model QuarterlyFinancial {
   fcfCagr5y Decimal? @db.Decimal(32, 8)
   @@unique([companyCik, periodEnd])
   @@map("quarterly_financials")
+}
+
+model AiFiling {
+  id String @id @default(cuid())
+  companyCik String @db.VarChar(10)
+  company Company @relation(fields: [companyCik], references: [cik], onDelete: Restrict)
+  accessionNumber String
+  fiscalYear Int
+  filingType String @default("10-K")
+  filingDate String
+  reportDate String
+  sourceUrl String
+  sections Json
+  parserVersion String
+  createdAt DateTime @default(now())
+  @@unique([companyCik, accessionNumber, parserVersion])
+  @@map("ai_filings")
+}
+model AiSummary {
+  id String @id @default(cuid())
+  companyCik String @db.VarChar(10)
+  company Company @relation(fields: [companyCik], references: [cik], onDelete: Restrict)
+  fiscalYear Int
+  filingType String @default("10-K")
+  filingDate String
+  accessionNumber String
+  section String
+  model String
+  promptVersion String
+  summaryJson Json
+  sourceUrl String
+  usage Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([companyCik, accessionNumber, section, promptVersion])
+  @@map("ai_summaries")
+}
+model AiTask {
+  progress Json @default("{}")
+  id String @id
+  companyCik String @db.VarChar(10)
+  company Company @relation(fields: [companyCik], references: [cik], onDelete: Restrict)
+  section String
+  token String?
+  leaseUntil DateTime
+  status String
+  error String?
+  updatedAt DateTime @updatedAt
+  @@index([section, status, updatedAt])
+  @@map("ai_tasks")
 }

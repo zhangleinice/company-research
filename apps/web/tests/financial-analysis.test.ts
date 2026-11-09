@@ -96,7 +96,7 @@ for (const [ticker, cik] of [
     );
     const markers = [
       '公司基本信息',
-      '业务概览',
+      '业务概述',
       'data-analysis-module="growth"',
       'data-analysis-module="profitability"',
       'data-analysis-module="cash-flow"',
@@ -118,7 +118,10 @@ for (const [ticker, cik] of [
     assert.match(html, /123/);
     assert.match(html, new RegExp(ticker));
     assert.match(html, new RegExp(cik));
-    assert.equal((html.match(/待开发/g) ?? []).length, 3);
+    assert.equal((html.match(/待开发/g) ?? []).length, 1);
+    assert.equal((html.match(/>更新数据</g) ?? []).length, 1);
+    assert.doesNotMatch(html, /查看原文证据|重新生成|检查最新年报/);
+    assert.match(html, /ant-space-vertical/);
   });
 }
 test('selects the latest ten periods without mutating cached arrays or mixing quarterly and annual data', () => {

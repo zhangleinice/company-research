@@ -153,7 +153,8 @@ body {
   background: #fafafa;
 }
 @media (max-width: 600px) {
-  .analysis-module .ant-card-body {
+  .analysis-module .ant-card-body,
+  .ai-research-card .ant-card-body {
     padding: 16px;
   }
   .analysis-mode-controls {

@@ -78,3 +78,32 @@ export async function setCompanyFavorite(
     );
   }
 }
+
+export async function fetchAiResearch(
+  cik: string,
+  kind: import('@company-research/shared').AiResearchKind,
+  signal?: AbortSignal,
+): Promise<import('@company-research/shared').AiResearchState> {
+  return requestJson(
+    `/api/companies/${encodeURIComponent(cik)}/ai/${kind}`,
+    signal,
+  );
+}
+export async function companyUpdate(
+  cik: string,
+  action: 'status' | 'initialize' | 'start',
+  signal?: AbortSignal,
+): Promise<import('@company-research/shared').CompanyUpdateState> {
+  const url = `/api/companies/${encodeURIComponent(cik)}/updates${action === 'initialize' ? '/initialize' : ''}`;
+  const response = await fetch(url, {
+    method: action === 'status' ? 'GET' : 'POST',
+    signal,
+  });
+  const body =
+    (await response.json()) as import('@company-research/shared').CompanyUpdateState & {
+      message?: string;
+    };
+  if (!response.ok)
+    throw new Error(body.message ?? `更新请求失败 HTTP ${response.status}`);
+  return body;
+}

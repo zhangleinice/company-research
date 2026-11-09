@@ -188,6 +188,14 @@ describe('company directory and on-demand cache boundaries', () => {
     expect(sec.getCompanyFacts).not.toHaveBeenCalled();
     expect(sec.getCompany).not.toHaveBeenCalled();
   });
+  it('serves existing financial balances during refresh without another acquisition', async () => {
+    const { service, sec, rows } = setup();
+    await service.getCompany('GOOG');
+    rows.get('0001652044')!.financialStatus = 'FETCHING';
+    const current = await service.getCompany('GOOG');
+    expect(current.annual[0].revenue).toBe(120);
+    expect(sec.getCompanyFacts).toHaveBeenCalledTimes(1);
+  });
   it.each(directory)(
     'fetches $ticker once and reuses the saved data on repeated detail reads',
     async (company) => {

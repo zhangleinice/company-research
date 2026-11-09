@@ -1,4 +1,14 @@
-import { Alert, Button, Card, Descriptions, Segmented, Typography } from 'antd';
+import { ResearchCard } from '../AiResearch.js';
+import {
+  Alert,
+  Button,
+  Card,
+  Descriptions,
+  Segmented,
+  Typography,
+  Space,
+  Popconfirm,
+} from 'antd';
 import type { CompanyDetail, FinancialMode } from '@company-research/shared';
 import { AnalysisPlaceholder, FinancialAnalysis } from './FinancialAnalysis.js';
 
@@ -8,7 +18,9 @@ export function CompanyResearchSections({
   saving,
   onFavorite,
   onModeChange,
-  onReload,
+  onUpdate,
+  updating = false,
+  revision = 0,
 }: {
   detail: CompanyDetail;
   mode: FinancialMode;
@@ -16,15 +28,30 @@ export function CompanyResearchSections({
   onFavorite: () => void;
   onModeChange: (mode: FinancialMode) => void;
   onReload: () => void;
+  onUpdate?: () => void;
+  updating?: boolean;
+  revision?: number;
 }) {
   return (
-    <>
+    <Space orientation="vertical" size={24} className="full-width">
       <Card
         title="公司基本信息"
         extra={
-          <Button loading={saving} onClick={onFavorite}>
-            {detail.isFavorite ? '取消收藏' : '收藏公司'}
-          </Button>
+          <Space>
+            <Button loading={saving} onClick={onFavorite}>
+              {detail.isFavorite ? '取消收藏' : '收藏公司'}
+            </Button>
+            <Popconfirm
+              title="更新数据"
+              description="将重新获取 SEC 财务数据和最新年报，并重新生成两个 AI 摘要，可能产生 API 费用。是否继续？"
+              onConfirm={onUpdate}
+              disabled={updating}
+            >
+              <Button type="primary" loading={updating} disabled={updating}>
+                更新数据
+              </Button>
+            </Popconfirm>
+          </Space>
         }
       >
         <Descriptions
@@ -71,14 +98,23 @@ export function CompanyResearchSections({
             type="info"
             title="该公司数据正在获取中"
             description="另一个请求正在获取数据，请稍后重新加载。"
-            action={<Button onClick={onReload}>重新加载</Button>}
           />
         )}
       </Card>
-      <AnalysisPlaceholder title="业务概览 · Business" />
+      <ResearchCard
+        cik={detail.cik}
+        kind="business"
+        revision={revision}
+        updating={updating}
+      />
       <FinancialAnalysis detail={detail} mode={mode} />
-      <AnalysisPlaceholder title="管理层与风险 · Management & Risks" />
+      <ResearchCard
+        cik={detail.cik}
+        kind="management"
+        revision={revision}
+        updating={updating}
+      />
       <AnalysisPlaceholder title="估值分析 · Valuation" />
-    </>
+    </Space>
   );
 }

@@ -223,7 +223,10 @@ export class CompanyService {
       where: { cik: company.cik },
       include: financialRelations,
     });
-    if (stored.financialStatus === 'READY' && !refresh)
+    if (
+      (stored.financialStatus === 'READY' || stored.lastFetchedAt !== null) &&
+      !refresh
+    )
       return this.detail(stored);
     const existing = this.pending.get(company.cik);
     if (existing) return existing;
