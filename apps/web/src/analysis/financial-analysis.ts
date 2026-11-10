@@ -10,7 +10,7 @@ type DisplayMetric =
   | 'capexToOcf'
   | 'cashAndShortTermSecurities'
   | 'netDebtAfterLiquidAssets';
-export type MetricUnit = 'money' | 'percent' | 'perShare' | 'ratio';
+export type MetricUnit = 'money' | 'percent' | 'perShare' | 'ratio' | 'shares';
 export interface MetricDefinition {
   key: DisplayMetric;
   label: string;
@@ -24,6 +24,30 @@ const metric = (
   unit: MetricUnit = 'money',
 ): MetricDefinition => ({ key, label, description, unit });
 export const METRICS = {
+  dividendsPerShare: metric(
+    'dividendsPerShare',
+    'Dividends Per Share (DPS)',
+    '普通股已宣告每股现金股息，美元/股，与实际支付额 Dividends Paid 不同。季度仅采用当季直接披露值，不用全年或累计数替代。0 表示明确披露的零值，— 表示缺失。',
+    'perShare',
+  ),
+  dpsGrowth: metric(
+    'dpsGrowth',
+    'DPS YoY',
+    '已宣告每股股息同比；季度与去年同季度直接披露值比较。基期为 0 或缺失时不计算。',
+    'percent',
+  ),
+  dilutedShares: metric(
+    'dilutedShares',
+    'Diluted Shares',
+    '计算 EPS 使用的期间稀释加权平均股数，不是期末股数或回购股数。季度只取当季直接披露值；不推算拆股调整，历史趋势可能有口径断点。变化还受股权激励、增发等影响，不能全部归因于回购。',
+    'shares',
+  ),
+  dilutedSharesGrowth: metric(
+    'dilutedSharesGrowth',
+    'Diluted Shares YoY',
+    '与同一申报中披露的去年同期股数比较；仅使用直接披露的同期间、同拆股口径数据。缺失时不计算。',
+    'percent',
+  ),
   revenue: metric('revenue', 'Revenue', '营业收入：本报告期间确认的收入。'),
   revenueGrowth: metric(
     'revenueGrowth',
@@ -148,12 +172,12 @@ export const METRICS = {
   stockRepurchases: metric(
     'stockRepurchases',
     'Stock Repurchases',
-    '本报告期间实际回购普通股的现金支出，不代表回购授权额度。',
+    '当期回购普通股的现金支出，不是回购股数或回购授权额度；不据此估算实际回购股数。',
   ),
   dividendsPaid: metric(
     'dividendsPaid',
     'Dividends Paid',
-    '本报告期间实际支付的现金分红。',
+    '当期实际支付的现金股息，优先采用普通股支付额；缺少该标签时采用总额，可能包括优先股及非控股权益分配。与已宣告的普通股 DPS 口径不同，不能混算。',
   ),
   cash: metric(
     'cash',
@@ -213,22 +237,22 @@ export const ANALYSIS_MODULES = [
   {
     key: 'growth',
     title: '增长分析 · Growth',
-    purpose: '观察收入与每股收益是否持续增长，以及增长速度是否稳定。',
   },
   {
     key: 'profitability',
     title: '盈利能力 · Profitability',
-    purpose: '结合利润率与资本回报，观察公司盈利能力的强弱和持续性。',
   },
   {
     key: 'cash-flow',
     title: '现金流分析 · Cash Flow',
-    purpose: '观察利润能否转化为经营现金，以及资本开支如何影响自由现金流。',
   },
   {
     key: 'financial-health',
     title: '财务健康 · Financial Health',
-    purpose: '对比现金储备、债务规模与流动性，了解公司的偿债能力。',
+  },
+  {
+    key: 'shareholder-returns',
+    title: 'Shareholder Returns · 股东回报',
   },
 ] as const;
 
@@ -258,7 +282,7 @@ export function formatAnalysisValue(
   unit: MetricUnit,
 ): string {
   if (value === null) return '—';
-  const number = value / (unit === 'money' ? 1000000 : 1);
+  const number = value / (unit === 'money' || unit === 'shares' ? 1000000 : 1);
   const text = new Intl.NumberFormat('zh-CN', {
     maximumFractionDigits: 2,
     minimumFractionDigits: unit === 'percent' ? 2 : 0,

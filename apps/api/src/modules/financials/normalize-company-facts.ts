@@ -36,10 +36,15 @@ const FLOW_TAGS: Partial<Record<FinancialMetric, string[]>> = {
   operatingIncome: ['OperatingIncomeLoss'],
   netIncome: ['NetIncomeLoss', 'ProfitLoss'],
   eps: ['EarningsPerShareDiluted'],
+  dividendsPerShare: ['CommonStockDividendsPerShareDeclared'],
+  dilutedShares: ['WeightedAverageNumberOfDilutedSharesOutstanding'],
+  basicShares: ['WeightedAverageNumberOfSharesOutstandingBasic'],
   operatingCashFlow: ['NetCashProvidedByUsedInOperatingActivities'],
   capex: ['PaymentsToAcquirePropertyPlantAndEquipment'],
   stockRepurchases: ['PaymentsForRepurchaseOfCommonStock'],
-  dividendsPaid: ['PaymentsOfDividends', 'PaymentsOfDividendsCommonStock'],
+  // Prefer the narrower common-stock cash payment concept. Total payments
+  // also include preferred/noncontrolling distributions; UI discloses this fallback.
+  dividendsPaid: ['PaymentsOfDividendsCommonStock', 'PaymentsOfDividends'],
 };
 const INSTANT_TAGS: Partial<Record<FinancialMetric, string[]>> = {
   cash: ['CashAndCashEquivalentsAtCarryingValue'],
@@ -149,9 +154,9 @@ export function normalizeCompanyFacts(raw: unknown): {
     ...INSTANT_TAGS,
   }) as [FinancialMetric, string[]][]) {
     const unit =
-      metric === 'eps'
+      metric === 'eps' || metric === 'dividendsPerShare'
         ? 'USD/shares'
-        : metric === 'sharesOutstanding'
+        : ['sharesOutstanding', 'dilutedShares', 'basicShares'].includes(metric)
           ? 'shares'
           : 'USD';
     values.set(
@@ -228,6 +233,12 @@ export function normalizeCompanyFacts(raw: unknown): {
         (x) => x.fact.start === anchor.start && x.fact.end === anchor.end,
       );
       if (direct) {
+        if (
+          ['dilutedShares', 'basicShares'].includes(metric) &&
+          direct.fact.val <= 0
+        )
+          continue;
+        if (metric === 'dividendsPerShare' && direct.fact.val < 0) continue;
         result[metric] = direct.fact.val;
         result.sources[metric] = {
           method: 'reported',
@@ -236,7 +247,14 @@ export function normalizeCompanyFacts(raw: unknown): {
         continue;
       }
       // EPS is not additive: annual/YTD diluted EPS cannot safely be subtracted (weighted share counts differ).
-      if (!quarterly || metric === 'eps' || anchor.q === 1) continue;
+      if (
+        !quarterly ||
+        ['eps', 'dividendsPerShare', 'dilutedShares', 'basicShares'].includes(
+          metric,
+        ) ||
+        anchor.q === 1
+      )
+        continue;
       const current = cumulative(metric, anchor);
       if (!current) continue;
       const priorCandidates = (values.get(metric) ?? []).filter(
@@ -658,6 +676,88 @@ export function normalizeCompanyFacts(raw: unknown): {
             (metric !== 'eps' || (current.eps !== null && current.eps > 0))
               ? growth(current[metric], prior[metric])
               : null;
+        // Weighted averages are not additive. Compare direct observations from
+        // the SAME filing, which also avoids comparing pre/post split bases.
+        const pair = (values.get('dilutedShares') ?? [])
+          .filter(
+            (x) =>
+              x.fact.start === current.periodStart &&
+              x.fact.end === current.periodEnd &&
+              x.fact.val === current.dilutedShares,
+          )
+          .sort((a, b) => b.fact.filed.localeCompare(a.fact.filed))
+          .map((currentShares) => ({
+            currentShares,
+            priorShares: pick(
+              'dilutedShares',
+              (x) =>
+                x.fact.start === prior.periodStart &&
+                x.fact.end === prior.periodEnd &&
+                x.fact.accn === currentShares.fact.accn &&
+                x.fact.val === prior.dilutedShares,
+            ),
+          }))
+          .find((pair) => pair.priorShares);
+        const currentShares = pair?.currentShares;
+        const priorShares = pair?.priorShares;
+        if (
+          currentShares &&
+          priorShares &&
+          currentShares.fact.val > 0 &&
+          priorShares.fact.val > 0
+        ) {
+          current.dilutedSharesGrowth = growth(
+            currentShares.fact.val,
+            priorShares.fact.val,
+          );
+          current.sources.dilutedSharesGrowth = {
+            method: 'calculated',
+            formula: '(dilutedShares/priorYearDilutedShares-1)*100',
+            policy:
+              'direct same-duration observations in same accession; split basis as reported',
+            items: [source(currentShares), source(priorShares)],
+          };
+        }
+        // Reconcile latest values with a common accession before comparing DPS.
+        // This prevents unrelated restatement or split bases from being mixed.
+        const dpsPair = (values.get('dividendsPerShare') ?? [])
+          .filter(
+            (x) =>
+              x.fact.start === current.periodStart &&
+              x.fact.end === current.periodEnd &&
+              x.fact.val === current.dividendsPerShare,
+          )
+          .sort((a, b) => b.fact.filed.localeCompare(a.fact.filed))
+          .map((now) => ({
+            now,
+            before: pick(
+              'dividendsPerShare',
+              (x) =>
+                x.fact.start === prior.periodStart &&
+                x.fact.end === prior.periodEnd &&
+                x.fact.accn === now.fact.accn &&
+                x.fact.val === prior.dividendsPerShare,
+            ),
+          }))
+          .find((pair) => pair.before);
+        if (
+          dpsPair?.before &&
+          dpsPair.before.fact.val > 0 &&
+          dpsPair.now.fact.val >= 0
+        ) {
+          current.dpsGrowth = growth(
+            dpsPair.now.fact.val,
+            dpsPair.before.fact.val,
+          );
+          current.sources.dpsGrowth = {
+            method: 'calculated',
+            formula: '(dividendsPerShare/priorYearDividendsPerShare-1)*100',
+            items: [source(dpsPair.now), source(dpsPair.before)],
+            comparisonPeriodEnd: prior.periodEnd,
+            policy:
+              'direct same-duration observations in same accession matching latest values',
+          };
+        }
         current.sources.growthComparisonPeriodEnd = prior.periodEnd;
         current.sources.revenueComparisonPolicy =
           'same concept or reconciled revenue concepts with >=2 matching overlapping periods, no conflicts, USD only';

@@ -55,8 +55,10 @@ function MetricCards({
   metrics,
   row,
   mode,
+  columns = 4,
 }: {
   metrics: MetricDefinition[];
+  columns?: 3 | 4;
   row: FinancialPeriod | undefined;
   mode: FinancialMode;
 }) {
@@ -65,7 +67,7 @@ function MetricCards({
       {metrics.map((metric) => {
         const value = analysisValue(row, metric.key, mode);
         return (
-          <Col xs={24} sm={12} xl={6} key={metric.key}>
+          <Col xs={24} sm={12} xl={columns === 3 ? 8 : 6} key={metric.key}>
             <Card
               size="small"
               className="analysis-metric-card"
@@ -83,7 +85,9 @@ function MetricCards({
                     ? '美元 / 股'
                     : metric.unit === 'percent'
                       ? '百分比'
-                      : '倍'}
+                      : metric.unit === 'shares'
+                        ? '百万股'
+                        : '倍'}
               </Typography.Text>
             </Card>
           </Col>
@@ -140,7 +144,7 @@ function Chart({
   rows: FinancialPeriod[];
   mode: FinancialMode;
   series: TrendSeries[];
-  unit?: 'money' | 'percent';
+  unit?: 'money' | 'percent' | 'shares' | 'perShare';
   moneyDivisor?: number;
   moneyUnit?: string;
 }) {
@@ -194,9 +198,6 @@ export function FinancialAnalysis({
             title={<span id={`analysis-${module.key}`}>{module.title}</span>}
             className="analysis-module"
           >
-            <Typography.Paragraph type="secondary">
-              {module.purpose}
-            </Typography.Paragraph>
             <Typography.Paragraph className="analysis-period">
               {periodText} · 金额：百万美元 · 缺失数据：—
             </Typography.Paragraph>
@@ -327,7 +328,7 @@ export function FinancialAnalysis({
                     </Typography.Paragraph>
                     <CashFlowCharts rows={rows} mode={mode} />
                     <Typography.Title level={5}>
-                      辅助信息 · 增长与股东现金回报
+                      辅助信息 · 现金流与增长
                     </Typography.Title>
                     <Auxiliary
                       row={latest}
@@ -336,8 +337,6 @@ export function FinancialAnalysis({
                         METRICS.fcfGrowth,
                         METRICS.capexToOcf,
                         METRICS.netIncome,
-                        METRICS.stockRepurchases,
-                        METRICS.dividendsPaid,
                       ]}
                     />
                   </>
@@ -372,6 +371,61 @@ export function FinancialAnalysis({
                         METRICS.netDebtAfterLiquidAssets,
                       ]}
                     />
+                  </>
+                )}
+                {module.key === 'shareholder-returns' && (
+                  <>
+                    <MetricCards
+                      row={latest}
+                      columns={3}
+                      mode={mode}
+                      metrics={[
+                        METRICS.stockRepurchases,
+                        METRICS.dilutedShares,
+                        METRICS.dilutedSharesGrowth,
+                        METRICS.dividendsPaid,
+                        METRICS.dividendsPerShare,
+                        METRICS.dpsGrowth,
+                      ]}
+                    />
+                    <Row gutter={[24, 16]}>
+                      <Col xs={24} xl={12}>
+                        <Chart
+                          title="Stock Repurchases Trend · 回购现金支出趋势（百万美元）"
+                          rows={rows}
+                          mode={mode}
+                          series={[
+                            series(
+                              'stockRepurchases',
+                              'Stock Repurchases',
+                              BLUE,
+                            ),
+                          ]}
+                        />
+                      </Col>
+                      <Col xs={24} xl={12}>
+                        <Chart
+                          title="Diluted Shares Trend · 稀释股数趋势（百万股）"
+                          rows={rows}
+                          mode={mode}
+                          unit="shares"
+                          series={[
+                            series('dilutedShares', 'Diluted Shares', BLUE),
+                          ]}
+                        />
+                      </Col>
+                      <Col xs={24}>
+                        <Chart
+                          title="Dividends Per Share Trend · 每股股息趋势（美元/股）"
+                          rows={rows}
+                          mode={mode}
+                          unit="perShare"
+                          series={[
+                            series('dividendsPerShare', 'Declared DPS', BLUE),
+                          ]}
+                        />
+                      </Col>
+                    </Row>
                   </>
                 )}
               </>

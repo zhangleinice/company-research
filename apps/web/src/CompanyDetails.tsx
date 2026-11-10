@@ -11,9 +11,11 @@ import { CompanyResearchSections } from './analysis/CompanyResearchSections';
 export function CompanyDetails({
   identifier,
   onBack,
+  backLabel = '返回公司列表',
 }: {
   identifier: string;
   onBack: () => void;
+  backLabel?: string;
 }) {
   const [detail, setDetail] = useState<CompanyDetail | null>(null);
   const [loading, setLoading] = useState(true);
@@ -145,7 +147,7 @@ export function CompanyDetails({
     <Space orientation="vertical" size={24} className="full-width">
       {messageContext}
       <Space wrap>
-        <Button onClick={onBack}>← 返回公司列表</Button>
+        <Button onClick={onBack}>← {backLabel}</Button>
         <Typography.Title level={3} className="detail-title">
           {detail?.name ?? identifier}
         </Typography.Title>

@@ -82,7 +82,9 @@ export function FinancialTrendChart({
       : `${row.fiscalYear ?? row.periodEnd.slice(0, 4)} Q${row.fiscalQuarter ?? '—'}`;
   const tick = (value: number) => {
     if (unit === 'percent') return `${value.toFixed(1)}%`;
-    const displayed = value / (unit === 'money' ? moneyDivisor : 1);
+    const displayed =
+      value /
+      (unit === 'money' ? moneyDivisor : unit === 'shares' ? 1000000 : 1);
     return new Intl.NumberFormat('zh-CN', {
       maximumFractionDigits: 1,
       notation: Math.abs(displayed) >= 100000 ? 'compact' : 'standard',
@@ -109,9 +111,11 @@ export function FinancialTrendChart({
             ? moneyUnit
             : unit === 'percent'
               ? '百分数'
-              : unit === 'ratio'
-                ? '倍'
-                : '美元 / 股'}
+              : unit === 'shares'
+                ? '百万股'
+                : unit === 'ratio'
+                  ? '倍'
+                  : '美元 / 股'}
           。缺失值不连线；悬停数据点查看起止日期和数值。
         </desc>
         {Array.from({ length: 5 }, (_, index) => min + (span * index) / 4).map(
@@ -175,7 +179,7 @@ export function FinancialTrendChart({
                       />
                     )}
                   <circle cx={x(index)} cy={y(value)} r="3.5" fill={item.color}>
-                    <title>{`${row.periodStart} 至 ${row.periodEnd} · ${item.label}: ${unit === 'money' ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 6 }).format(value / moneyDivisor) : formatAnalysisValue(value, unit)}${unit === 'money' ? ` ${moneyUnit}（${value.toLocaleString('en-US')} USD）` : ''}`}</title>
+                    <title>{`${row.periodStart} 至 ${row.periodEnd} · ${item.label}: ${unit === 'money' ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 6 }).format(value / moneyDivisor) : formatAnalysisValue(value, unit)}${unit === 'money' ? ` ${moneyUnit}（${value.toLocaleString('en-US')} USD）` : unit === 'shares' ? ' 百万股' : ''}`}</title>
                   </circle>
                 </g>
               );

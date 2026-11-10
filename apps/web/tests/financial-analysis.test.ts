@@ -11,6 +11,7 @@ import { CompanyResearchSections } from '../src/analysis/CompanyResearchSections
 import { FinancialAnalysis } from '../src/analysis/FinancialAnalysis.js';
 import { FinancialTrendChart } from '../src/analysis/FinancialTrendChart.js';
 import {
+  METRICS,
   analysisPeriods,
   analysisValue,
   formatAnalysisValue,
@@ -348,4 +349,98 @@ test('health auxiliary metrics display only API evidence, preserve negative adju
     createElement(FinancialAnalysis, { detail: source, mode: 'quarterly' }),
   );
   assert.match(quarter, /data-metric="cashAndShortTermSecurities">—/);
+});
+
+test('shareholder returns appear in their own fifth module with share units and explicit missing values', () => {
+  const company = detail('GOOG', '0001652044');
+  company.annual[0].dilutedShares = 12230000000;
+  company.annual[0].dilutedSharesGrowth = -1.743391982;
+  company.annual[0].stockRepurchases = 45709000000;
+  const html = renderToStaticMarkup(
+    createElement(FinancialAnalysis, { detail: company, mode: 'annual' }),
+  );
+  assert.equal((html.match(/data-metric="stockRepurchases"/g) ?? []).length, 1);
+  assert.equal((html.match(/data-metric="dividendsPaid"/g) ?? []).length, 1);
+  assert.ok(html.includes('Shareholder Returns'));
+  assert.ok(html.includes('Diluted Shares Trend'));
+  assert.ok(html.includes('12,230'));
+  assert.ok(html.includes('百万股'));
+  assert.ok(html.includes('-1.74%'));
+  assert.equal(formatAnalysisValue(null, 'shares'), '—');
+  assert.equal(formatAnalysisValue(12230000000, 'shares'), '12,230');
+});
+
+test('GOOGL dividend analysis labels declared DPS separately from cash payments and zero from missing', () => {
+  const company = detail('GOOGL', '0001652044');
+  company.annual = [
+    period('2023-12-31', { dividendsPerShare: 0, dpsGrowth: null }),
+    period('2024-12-31', { dividendsPerShare: 0.6, dpsGrowth: null }),
+    period('2025-12-31', { dividendsPerShare: 0.83, dpsGrowth: 38.33333333 }),
+  ];
+  const html = renderToStaticMarkup(
+    createElement(FinancialAnalysis, { detail: company, mode: 'annual' }),
+  );
+  assert.ok(html.includes('Dividends Per Share Trend'));
+  assert.ok(html.includes('38.33%'));
+  assert.ok(html.includes('Declared DPS: 0'));
+  assert.ok(html.includes('Declared DPS: 0.83'));
+  assert.ok(METRICS.dividendsPaid.description.includes('实际支付'));
+  assert.ok(METRICS.dividendsPerShare.description.includes('已宣告'));
+  assert.ok(!html.includes('回购金额不等于回购股数'));
+  assert.ok(!html.includes('DPS 为普通股已宣告每股股息'));
+  assert.equal((html.match(/data-metric="dividendsPaid"/g) ?? []).length, 1);
+  assert.equal(
+    (html.match(/data-metric="dividendsPerShare"/g) ?? []).length,
+    1,
+  );
+  company.annual[0].dividendsPerShare = null;
+  const missing = renderToStaticMarkup(
+    createElement(FinancialAnalysis, { detail: company, mode: 'annual' }),
+  );
+  assert.ok(!missing.includes('2023-01-01 至 2023-12-31 · Declared DPS:'));
+});
+
+test('five modules keep shareholder metrics and charts outside Cash Flow in both modes', () => {
+  for (const mode of ['annual', 'quarterly'] as const) {
+    const html = renderToStaticMarkup(
+      createElement(FinancialAnalysis, {
+        detail: detail('GOOGL', '0001652044'),
+        mode,
+      }),
+    );
+    assert.equal((html.match(/data-analysis-module=/g) ?? []).length, 5);
+    const cash = html.slice(
+      html.indexOf('data-analysis-module="cash-flow"'),
+      html.indexOf('data-analysis-module="financial-health"'),
+    );
+    for (const key of [
+      'stockRepurchases',
+      'dilutedShares',
+      'dilutedSharesGrowth',
+      'dividendsPaid',
+      'dividendsPerShare',
+      'dpsGrowth',
+    ])
+      assert.ok(!cash.includes(`data-metric="${key}"`));
+    const shareholder = html.slice(
+      html.indexOf('data-analysis-module="shareholder-returns"'),
+    );
+    for (const key of [
+      'stockRepurchases',
+      'dilutedShares',
+      'dilutedSharesGrowth',
+      'dividendsPaid',
+      'dividendsPerShare',
+      'dpsGrowth',
+    ])
+      assert.equal(
+        (shareholder.match(new RegExp(`data-metric="${key}"`, 'g')) ?? [])
+          .length,
+        1,
+      );
+    assert.ok(shareholder.includes('Stock Repurchases Trend'));
+    assert.ok(shareholder.includes('Diluted Shares Trend'));
+    assert.ok(shareholder.includes('Dividends Per Share Trend'));
+    assert.ok(cash.includes('data-metric="operatingCashFlow"'));
+  }
 });
