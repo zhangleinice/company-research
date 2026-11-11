@@ -1,9 +1,9 @@
+import { ShareholderReturnsChart } from './ShareholderReturnsChart.js';
 import { FinancialHealthChart } from './FinancialHealthChart.js';
 import { CashFlowCharts } from './CashFlowCharts.js';
 import { ProfitabilityCharts } from './ProfitabilityCharts.js';
 import { GrowthChart } from '../GrowthChart.js';
 import {
-  Alert,
   Card,
   Col,
   Descriptions,
@@ -272,149 +272,78 @@ export function FinancialAnalysis({
                         METRICS.grossMargin,
                         METRICS.operatingMargin,
                         METRICS.netMargin,
-                        mode === 'annual' ? METRICS.roe : METRICS.netIncome,
+                        METRICS.roe,
                       ]}
                     />
-                    <Auxiliary
-                      row={latest}
-                      mode={mode}
-                      metrics={[
-                        METRICS.grossProfit,
-                        METRICS.operatingIncome,
-                        ...(mode === 'annual'
-                          ? [METRICS.netIncome, METRICS.roa]
-                          : []),
-                      ]}
-                    />
-                    {mode === 'quarterly' && (
-                      <Typography.Paragraph type="secondary">
-                        季度资本回报口径尚未验证，不展示 ROE /
-                        ROA，也不以年度值替代。
-                      </Typography.Paragraph>
-                    )}
                     <ProfitabilityCharts rows={rows} mode={mode} />
                   </>
                 )}
                 {module.key === 'cash-flow' && (
                   <>
-                    <MetricCards
-                      row={latest}
-                      mode={mode}
-                      metrics={[
-                        METRICS.operatingCashFlow,
-                        METRICS.capex,
-                        METRICS.fcf,
-                        METRICS.fcfMargin,
-                      ]}
-                    />
-                    <Typography.Paragraph className="cash-flow-formula">
-                      <Typography.Text strong>
-                        FCF = OCF − CapEx
-                      </Typography.Text>
-                    </Typography.Paragraph>
-                    {latest &&
-                      (latest.capex === null || latest.fcf === null) && (
-                        <Alert
-                          type="info"
-                          showIcon
-                          className="analysis-note"
-                          title="CapEx / FCF 数据不完整"
-                          description="缺失可能源于标准字段未覆盖、单位或报告期间不匹配；本页保留缺失状态。没有可靠 CapEx 时不会填 0 或估算 FCF。"
-                        />
-                      )}
-                    <Typography.Paragraph type="secondary">
-                      CapEx
-                      当前采用购建物业、厂房及设备的现金支出；不把并购、净投资现金流或无形资产购置混入该口径。
-                    </Typography.Paragraph>
-                    <CashFlowCharts rows={rows} mode={mode} />
-                    <Typography.Title level={5}>
-                      辅助信息 · 现金流与增长
-                    </Typography.Title>
-                    <Auxiliary
-                      row={latest}
-                      mode={mode}
-                      metrics={[
-                        METRICS.fcfGrowth,
-                        METRICS.capexToOcf,
-                        METRICS.netIncome,
-                      ]}
-                    />
-                  </>
-                )}
-                {module.key === 'financial-health' && (
-                  <>
-                    <MetricCards
-                      row={latest}
-                      mode={mode}
-                      metrics={[
-                        METRICS.cash,
-                        METRICS.totalDebt,
-                        METRICS.netDebt,
-                        METRICS.currentRatio,
-                      ]}
-                    />
-                    <Typography.Paragraph type="secondary">
-                      余额均取对应报告期末。Net Debt = Total Debt −
-                      Cash，仅扣现金及现金等价物，不扣短期投资；Total Debt
-                      是有息债务，不是 Total Liabilities。
-                    </Typography.Paragraph>
-                    <FinancialHealthChart rows={rows} mode={mode} />
-                    <Auxiliary
-                      row={latest}
-                      mode={mode}
-                      metrics={[
-                        METRICS.marketableSecurities,
-                        METRICS.currentAssets,
-                        METRICS.currentLiabilities,
-                        METRICS.debtToEquity,
-                        METRICS.cashAndShortTermSecurities,
-                        METRICS.netDebtAfterLiquidAssets,
-                      ]}
-                    />
+                    <section
+                      data-financial-region="cash-flow"
+                      aria-labelledby="cash-flow-region"
+                    >
+                      <Typography.Title level={5} id="cash-flow-region">
+                        Cash Flow · 现金流
+                      </Typography.Title>
+                      <MetricCards
+                        row={latest}
+                        mode={mode}
+                        columns={3}
+                        metrics={[
+                          METRICS.operatingCashFlow,
+                          METRICS.capex,
+                          METRICS.fcf,
+                        ]}
+                      />
+                    </section>
+                    <section
+                      data-financial-region="financial-health"
+                      aria-labelledby="health-region"
+                      className="analysis-chart-panel"
+                    >
+                      <Typography.Title level={5} id="health-region">
+                        Financial Health · 财务健康
+                      </Typography.Title>
+                      <MetricCards
+                        row={latest}
+                        mode={mode}
+                        metrics={[
+                          METRICS.cashAndShortTermSecurities,
+                          METRICS.totalDebt,
+                          METRICS.currentRatio,
+                          METRICS.debtToEquity,
+                        ]}
+                      />
+                    </section>
+                    <Row gutter={[24, 24]}>
+                      <Col xs={24} xl={12}>
+                        <CashFlowCharts rows={rows} mode={mode} />
+                      </Col>
+                      <Col xs={24} xl={12}>
+                        <FinancialHealthChart rows={rows} mode={mode} />
+                      </Col>
+                    </Row>
                   </>
                 )}
                 {module.key === 'shareholder-returns' && (
                   <>
                     <MetricCards
                       row={latest}
-                      columns={3}
                       mode={mode}
                       metrics={[
                         METRICS.stockRepurchases,
-                        METRICS.dilutedShares,
                         METRICS.dilutedSharesGrowth,
-                        METRICS.dividendsPaid,
                         METRICS.dividendsPerShare,
                         METRICS.dpsGrowth,
                       ]}
                     />
                     <Row gutter={[24, 16]}>
                       <Col xs={24} xl={12}>
-                        <Chart
-                          title="Stock Repurchases Trend · 回购现金支出趋势（百万美元）"
-                          rows={rows}
-                          mode={mode}
-                          series={[
-                            series(
-                              'stockRepurchases',
-                              'Stock Repurchases',
-                              BLUE,
-                            ),
-                          ]}
-                        />
+                        <ShareholderReturnsChart rows={rows} mode={mode} />
                       </Col>
                       <Col xs={24} xl={12}>
-                        <Chart
-                          title="Diluted Shares Trend · 稀释股数趋势（百万股）"
-                          rows={rows}
-                          mode={mode}
-                          unit="shares"
-                          series={[
-                            series('dilutedShares', 'Diluted Shares', BLUE),
-                          ]}
-                        />
-                      </Col>
-                      <Col xs={24}>
                         <Chart
                           title="Dividends Per Share Trend · 每股股息趋势（美元/股）"
                           rows={rows}

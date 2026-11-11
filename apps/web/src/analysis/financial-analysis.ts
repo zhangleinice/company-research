@@ -127,7 +127,7 @@ export const METRICS = {
   roe: metric(
     'roe',
     'ROE',
-    '年度净资产收益率 = 年度净利润 ÷ 期初与期末股东权益的平均值 × 100%；净利润与权益归属口径须一致，缺失或权益非正时不计算。',
+    '年度净利润相对于平均股东权益的回报率；按期初、期末权益的平均值计算。缺失、权益非正或季度口径未验证时显示 —。',
     'percent',
   ),
   roa: metric(
@@ -201,8 +201,8 @@ export const METRICS = {
   ),
   cashAndShortTermSecurities: metric(
     'cashAndShortTermSecurities',
-    'Cash & Short-term Marketable Securities',
-    '现金及现金等价物 + 单独列报的流动可交易证券。仅在与 SEC 同期披露的合计核对一致后展示；不含非流动或不可交易投资。',
+    'Cash + Marketable Securities',
+    '报告期末现金及现金等价物 + 与现金分列的流动可交易证券。仅采用后端已与 SEC 同期披露合计核对一致、确认不重叠的值；不含非流动或不可交易投资。不能核实时显示 —，不在前端自行相加。',
   ),
   netDebtAfterLiquidAssets: metric(
     'netDebtAfterLiquidAssets',
@@ -240,15 +240,11 @@ export const ANALYSIS_MODULES = [
   },
   {
     key: 'profitability',
-    title: '盈利能力 · Profitability',
+    title: 'Profitability · 盈利能力',
   },
   {
     key: 'cash-flow',
-    title: '现金流分析 · Cash Flow',
-  },
-  {
-    key: 'financial-health',
-    title: '财务健康 · Financial Health',
+    title: 'Cash Flow & Financial Health · 现金流与财务健康',
   },
   {
     key: 'shareholder-returns',

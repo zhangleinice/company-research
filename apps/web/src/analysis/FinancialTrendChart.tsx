@@ -25,6 +25,7 @@ export function FinancialTrendChart({
   title,
   moneyDivisor = 1000000,
   moneyUnit = '百万美元',
+  periodKind = 'duration',
 }: {
   rows: FinancialPeriod[];
   mode: FinancialMode;
@@ -33,6 +34,7 @@ export function FinancialTrendChart({
   title: string;
   moneyDivisor?: number;
   moneyUnit?: string;
+  periodKind?: 'duration' | 'instant';
 }) {
   const id = useId();
   const points = [...rows].sort((a, b) =>
@@ -107,6 +109,7 @@ export function FinancialTrendChart({
         <title id={`${id}-title`}>{title}</title>
         <desc id={`${id}-description`}>
           {mode === 'annual' ? '年度' : '独立季度'}；
+          {periodKind === 'instant' ? '对应报告期末余额；' : ''}
           {unit === 'money'
             ? moneyUnit
             : unit === 'percent'
@@ -116,7 +119,8 @@ export function FinancialTrendChart({
                 : unit === 'ratio'
                   ? '倍'
                   : '美元 / 股'}
-          。缺失值不连线；悬停数据点查看起止日期和数值。
+          。缺失值不连线；悬停数据点查看
+          {periodKind === 'instant' ? '期末日期' : '起止日期'}和数值。
         </desc>
         {Array.from({ length: 5 }, (_, index) => min + (span * index) / 4).map(
           (value, index) => (
@@ -179,7 +183,7 @@ export function FinancialTrendChart({
                       />
                     )}
                   <circle cx={x(index)} cy={y(value)} r="3.5" fill={item.color}>
-                    <title>{`${row.periodStart} 至 ${row.periodEnd} · ${item.label}: ${unit === 'money' ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 6 }).format(value / moneyDivisor) : formatAnalysisValue(value, unit)}${unit === 'money' ? ` ${moneyUnit}（${value.toLocaleString('en-US')} USD）` : unit === 'shares' ? ' 百万股' : ''}`}</title>
+                    <title>{`${periodKind === 'instant' ? `截至 ${row.periodEnd}` : `${row.periodStart} 至 ${row.periodEnd}`} · ${item.label}: ${unit === 'money' ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 6 }).format(value / moneyDivisor) : formatAnalysisValue(value, unit)}${unit === 'money' ? ` ${moneyUnit}（${value.toLocaleString('en-US')} USD）` : unit === 'shares' ? ' 百万股' : ''}`}</title>
                   </circle>
                 </g>
               );

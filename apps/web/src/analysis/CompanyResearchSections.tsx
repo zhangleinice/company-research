@@ -90,7 +90,7 @@ export function CompanyResearchSections({
           />
           <Typography.Text type="secondary">
             {mode === 'annual' ? '最近 10 个完整财年' : '最近 10 个独立季度'} ·
-            以下五个财务模块同步切换
+            以下四个财务模块同步切换
           </Typography.Text>
         </div>
         {detail.financialStatus === 'FETCHING' && (

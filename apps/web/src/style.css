@@ -170,3 +170,8 @@ body {
   border-inline-end: 1px solid #f0f0f0;
   padding-top: 16px;
 }
+
+.health-chart-filter {
+  max-width: 100%;
+  overflow-x: auto;
+}
