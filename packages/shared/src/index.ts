@@ -155,6 +155,9 @@ export interface AiResearchSummary {
       findings: {
         kind: '公司披露的事实' | '管理层观点' | 'AI 推断';
         text: string;
+        businessName?: string;
+        offering?: string;
+        monetization?: string;
         evidence: { paragraphId: string; quote: string }[];
       }[];
     }[];
@@ -184,4 +187,48 @@ export interface CompanyUpdateState {
   updatedAt: string | null;
   error: string | null;
   progress: CompanyUpdateProgress | null;
+}
+
+/** Exact integer USD amounts remain strings through storage and transport. */
+export interface RevenueFact {
+  value: string;
+  fiscalYear: number;
+  unit: 'USD';
+  concept: string;
+  accessionNumber: string;
+  sourceUrl: string;
+  factUrl: string;
+  context: {
+    id: string;
+    cik: string;
+    start: string;
+    end: string;
+    dimensions: { dimension: string; member: string }[];
+  };
+  yoy: {
+    value: number | null;
+    reason: string;
+    priorPeriod?: { start: string; end: string };
+  };
+}
+export interface RevenueGroup {
+  tableIndex: number;
+  tableId: string | null;
+  header: string;
+  sourceUrl: string;
+  accessionNumber: string;
+  rows: {
+    rowIndex: number;
+    name: string;
+    originalRow: string;
+    facts: RevenueFact[];
+  }[];
+}
+export interface RevenueBreakdownResponse {
+  status: string;
+  accessionNumber: string | null;
+  sourceUrl: string | null;
+  fiscalYear: number | null;
+  extractedAt: string | null;
+  groups: RevenueGroup[];
 }

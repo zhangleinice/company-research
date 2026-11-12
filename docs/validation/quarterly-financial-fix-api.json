@@ -1,0 +1,31 @@
+{
+  "verifiedAt": "2026-11-12T14:02:04.688Z",
+  "results": [
+    {
+      "cik": "0001652044",
+      "apiAndDatabaseMatch": true,
+      "viteProxyMatches": true,
+      "normalizedAnnualUnchanged": true,
+      "normalizedOtherQuarterMetricsUnchanged": true,
+      "epsYoYPoints": 8
+    },
+    {
+      "cik": "0000320193",
+      "apiAndDatabaseMatch": true,
+      "viteProxyMatches": true,
+      "normalizedAnnualUnchanged": true,
+      "normalizedOtherQuarterMetricsUnchanged": true,
+      "epsYoYPoints": 7
+    },
+    {
+      "cik": "0001045810",
+      "apiAndDatabaseMatch": true,
+      "viteProxyMatches": true,
+      "normalizedAnnualUnchanged": true,
+      "normalizedOtherQuarterMetricsUnchanged": true,
+      "epsYoYPoints": 7
+    }
+  ],
+  "allNonQuarterTablesUnchanged": true,
+  "postPatchDatabaseStillMatchesBackup": true
+}

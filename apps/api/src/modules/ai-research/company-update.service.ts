@@ -15,7 +15,11 @@ import type {
 import { PrismaService } from '../prisma/prisma.service';
 import { CompanyService } from '../company/company.service';
 import { AiResearchService } from './ai-research.service';
-import { PROMPT_VERSION } from './summary-model';
+import {
+  PROMPT_VERSION,
+  BUSINESS_PROMPT_VERSION,
+  MANAGEMENT_PROMPT_VERSION,
+} from './summary-model';
 const json = (v: unknown) => v as Prisma.InputJsonValue;
 const lease = () => new Date(Date.now() + 300000);
 const active = ['QUEUED', 'GENERATING'];
@@ -75,8 +79,18 @@ export class CompanyUpdateService implements OnModuleInit, OnModuleDestroy {
       const summaries = await this.db.aiSummary.findMany({
         where: {
           companyCik: cik,
-          promptVersion: PROMPT_VERSION,
-          section: { in: ['business', 'management'] },
+          OR: [
+            {
+              section: 'business',
+              promptVersion: { in: [PROMPT_VERSION, BUSINESS_PROMPT_VERSION] },
+            },
+            {
+              section: 'management',
+              promptVersion: {
+                in: [PROMPT_VERSION, MANAGEMENT_PROMPT_VERSION],
+              },
+            },
+          ],
         },
         select: { section: true },
       });

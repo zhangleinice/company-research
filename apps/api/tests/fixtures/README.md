@@ -1,1 +1,3 @@
 These ZIP and ticker fixtures contain synthetic test data only. They are never used as application fallback data.
+
+`quarterly-eps-audit.json` contains a reduced set of actual SEC CompanyFacts observations from the 2026-11-12 quarterly audit (Alphabet, Apple and Nvidia). It retains the original EPS/revenue records from 2023 onward, including filing IDs, reporting dates and split-adjusted comparative values. Sources are the corresponding `https://data.sec.gov/api/xbrl/companyfacts/CIK##########.json` files recorded in `docs/validation/quarterly-financial-audit.md`. It is an offline regression fixture, never application fallback data.

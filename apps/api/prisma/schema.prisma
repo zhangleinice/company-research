@@ -27,6 +27,7 @@ model Company {
   fetchToken String?
   fetchStartedAt DateTime?
   lastError String?
+  revenueBreakdown RevenueBreakdownCache?
   aiFilings AiFiling[]
   aiSummaries AiSummary[]
   aiTasks AiTask[]
@@ -206,4 +207,22 @@ model AiTask {
   updatedAt DateTime @updatedAt
   @@index([section, status, updatedAt])
   @@map("ai_tasks")
+}
+
+model RevenueBreakdownCache {
+  companyCik String @id @db.VarChar(10)
+  company Company @relation(fields: [companyCik], references: [cik], onDelete: Restrict)
+  status String @default("NOT_FETCHED")
+  accessionNumber String?
+  sourceUrl String?
+  fiscalYear Int?
+  reportDate String?
+  parserVersion String?
+  data Json @default("[]")
+  extractedAt DateTime?
+  checkedAt DateTime?
+  fetchToken String?
+  leaseUntil DateTime?
+  lastError String?
+  @@map("revenue_breakdown_cache")
 }

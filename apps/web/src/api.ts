@@ -107,3 +107,13 @@ export async function companyUpdate(
     throw new Error(body.message ?? `更新请求失败 HTTP ${response.status}`);
   return body;
 }
+
+export function fetchRevenueBreakdown(
+  cik: string,
+  signal?: AbortSignal,
+): Promise<import('@company-research/shared').RevenueBreakdownResponse> {
+  return requestJson(
+    `/api/companies/${encodeURIComponent(cik)}/revenue-breakdown`,
+    signal,
+  );
+}

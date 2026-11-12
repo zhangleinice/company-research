@@ -1,0 +1,4409 @@
+{
+  "auditedAt": "2026-11-12T13:48:50.262Z",
+  "networkRequestsByAuditScript": 0,
+  "companies": [
+    {
+      "cik": "0000320193",
+      "ticker": "AAPL",
+      "cacheLastFetchedAt": "2026-11-10T10:25:27.297Z",
+      "sourceFileHash": "f085735b4d08fb116ade18d24247ffabe11df8eb52eae6556b165831f15ef1ad",
+      "sourceFileModifiedAt": "2026-11-12T13:33:15.626Z",
+      "annualCount": 10,
+      "quarterCount": 10,
+      "sourceOccurrences": 392,
+      "yoyChecks": 31,
+      "provenanceFailures": [],
+      "periodFailures": [],
+      "formulaFailures": [],
+      "cacheDifferences": [],
+      "crosschecks": [
+        {
+          "fy": 2026,
+          "start": "2025-09-28",
+          "end": "2026-09-26",
+          "days": 364,
+          "flows": {
+            "revenue": {
+              "annual": 478834000000,
+              "quarters": [
+                143756000000,
+                111184000000,
+                109417000000,
+                114477000000
+              ],
+              "sum": 478834000000,
+              "difference": 0
+            },
+            "netIncome": {
+              "annual": 132175000000,
+              "quarters": [
+                42097000000,
+                29578000000,
+                29789000000,
+                30711000000
+              ],
+              "sum": 132175000000,
+              "difference": 0
+            },
+            "operatingCashFlow": {
+              "annual": 145097000000,
+              "quarters": [
+                53925000000,
+                28702000000,
+                34369000000,
+                28101000000
+              ],
+              "sum": 145097000000,
+              "difference": 0
+            },
+            "capex": {
+              "annual": 9041000000,
+              "quarters": [
+                2373000000,
+                1971000000,
+                2455000000,
+                2242000000
+              ],
+              "sum": 9041000000,
+              "difference": 0
+            }
+          },
+          "balanceMismatches": []
+        },
+        {
+          "fy": 2025,
+          "start": "2024-09-29",
+          "end": "2025-09-27",
+          "days": 364,
+          "flows": {
+            "revenue": {
+              "annual": 416161000000,
+              "quarters": [
+                124300000000,
+                95359000000,
+                94036000000,
+                102466000000
+              ],
+              "sum": 416161000000,
+              "difference": 0
+            },
+            "netIncome": {
+              "annual": 112010000000,
+              "quarters": [
+                36330000000,
+                24780000000,
+                23434000000,
+                27466000000
+              ],
+              "sum": 112010000000,
+              "difference": 0
+            },
+            "operatingCashFlow": {
+              "annual": 111482000000,
+              "quarters": [
+                29935000000,
+                23952000000,
+                27867000000,
+                29728000000
+              ],
+              "sum": 111482000000,
+              "difference": 0
+            },
+            "capex": {
+              "annual": 12715000000,
+              "quarters": [
+                2940000000,
+                3071000000,
+                3462000000,
+                3242000000
+              ],
+              "sum": 12715000000,
+              "difference": 0
+            }
+          },
+          "balanceMismatches": []
+        }
+      ],
+      "epsComparisons": [
+        {
+          "end": "2026-06-27",
+          "eps": 2.02,
+          "growth": 28.66242038,
+          "current": {
+            "fp": "Q3",
+            "fy": 2026,
+            "end": "2026-06-27",
+            "val": 2.02,
+            "accn": "0000320193-26-000020",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2026-07-31",
+            "frame": "CY2026Q2",
+            "start": "2026-03-29",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2025-03-30",
+            "end": "2025-06-28",
+            "val": 1.57,
+            "accn": "0000320193-26-000020",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-07-31",
+            "frame": "CY2025Q2"
+          },
+          "sameAccessionPairExists": true
+        },
+        {
+          "end": "2026-03-28",
+          "eps": 2.01,
+          "growth": 21.81818182,
+          "current": {
+            "fp": "Q2",
+            "fy": 2026,
+            "end": "2026-03-28",
+            "val": 2.01,
+            "accn": "0000320193-26-000013",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2026-05-01",
+            "frame": "CY2026Q1",
+            "start": "2025-12-28",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2024-12-29",
+            "end": "2025-03-29",
+            "val": 1.65,
+            "accn": "0000320193-26-000013",
+            "fy": 2026,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-05-01",
+            "frame": "CY2025Q1"
+          },
+          "sameAccessionPairExists": true
+        },
+        {
+          "end": "2025-12-27",
+          "eps": 2.84,
+          "growth": 18.33333333,
+          "current": {
+            "fp": "Q1",
+            "fy": 2026,
+            "end": "2025-12-27",
+            "val": 2.84,
+            "accn": "0000320193-26-000006",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2026-01-30",
+            "frame": "CY2025Q4",
+            "start": "2025-09-28",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2024-09-29",
+            "end": "2024-12-28",
+            "val": 2.4,
+            "accn": "0000320193-26-000006",
+            "fy": 2026,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2026-01-30",
+            "frame": "CY2024Q4"
+          },
+          "sameAccessionPairExists": true
+        },
+        {
+          "end": "2025-06-28",
+          "eps": 1.57,
+          "growth": 12.14285714,
+          "current": {
+            "fp": "Q3",
+            "fy": 2026,
+            "end": "2025-06-28",
+            "val": 1.57,
+            "accn": "0000320193-26-000020",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2026-07-31",
+            "frame": "CY2025Q2",
+            "start": "2025-03-30",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2024-03-31",
+            "end": "2024-06-29",
+            "val": 1.4,
+            "accn": "0000320193-25-000073",
+            "fy": 2025,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2025-08-01",
+            "frame": "CY2024Q2"
+          },
+          "sameAccessionPairExists": false
+        },
+        {
+          "end": "2025-03-29",
+          "eps": 1.65,
+          "growth": 7.84313725,
+          "current": {
+            "fp": "Q2",
+            "fy": 2026,
+            "end": "2025-03-29",
+            "val": 1.65,
+            "accn": "0000320193-26-000013",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2026-05-01",
+            "frame": "CY2025Q1",
+            "start": "2024-12-29",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2023-12-31",
+            "end": "2024-03-30",
+            "val": 1.53,
+            "accn": "0000320193-25-000057",
+            "fy": 2025,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2025-05-02",
+            "frame": "CY2024Q1"
+          },
+          "sameAccessionPairExists": false
+        },
+        {
+          "end": "2024-12-28",
+          "eps": 2.4,
+          "growth": 10.09174312,
+          "current": {
+            "fp": "Q1",
+            "fy": 2026,
+            "end": "2024-12-28",
+            "val": 2.4,
+            "accn": "0000320193-26-000006",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2026-01-30",
+            "frame": "CY2024Q4",
+            "start": "2024-09-29",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2023-10-01",
+            "end": "2023-12-30",
+            "val": 2.18,
+            "accn": "0000320193-25-000008",
+            "fy": 2025,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2025-01-31",
+            "frame": "CY2023Q4"
+          },
+          "sameAccessionPairExists": false
+        },
+        {
+          "end": "2024-06-29",
+          "eps": 1.4,
+          "growth": 11.11111111,
+          "current": {
+            "fp": "Q3",
+            "fy": 2025,
+            "end": "2024-06-29",
+            "val": 1.4,
+            "accn": "0000320193-25-000073",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2025-08-01",
+            "frame": "CY2024Q2",
+            "start": "2024-03-31",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2023-04-02",
+            "end": "2023-07-01",
+            "val": 1.26,
+            "accn": "0000320193-24-000081",
+            "fy": 2024,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2024-08-02",
+            "frame": "CY2023Q2"
+          },
+          "sameAccessionPairExists": false
+        }
+      ],
+      "quarterSummary": [
+        {
+          "fy": 2026,
+          "q": 4,
+          "start": "2026-06-28",
+          "end": "2026-09-26",
+          "days": 91,
+          "values": {
+            "revenue": 114477000000,
+            "revenueGrowth": 11.72193703,
+            "eps": null,
+            "epsGrowth": null,
+            "grossMargin": 47.88734855,
+            "operatingMargin": 31.12502948,
+            "netMargin": 26.82722294,
+            "roe": null,
+            "operatingCashFlow": 28101000000,
+            "capex": 2242000000,
+            "fcf": 25859000000,
+            "cash": 36305000000,
+            "marketableSecurities": 20417000000,
+            "totalDebt": 80111000000,
+            "currentRatio": 1.02319984,
+            "debtToEquity": 0.71468334,
+            "stockRepurchases": 24296000000,
+            "dilutedShares": null,
+            "dilutedSharesGrowth": null,
+            "dividendsPerShare": null,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "ytd_difference",
+            "eps": null,
+            "operatingCashFlow": "ytd_difference",
+            "capex": "ytd_difference",
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": null,
+            "dividendsPerShare": null
+          }
+        },
+        {
+          "fy": 2026,
+          "q": 3,
+          "start": "2026-03-29",
+          "end": "2026-06-27",
+          "days": 91,
+          "values": {
+            "revenue": 109417000000,
+            "revenueGrowth": 16.35650177,
+            "eps": 2.02,
+            "epsGrowth": 28.66242038,
+            "grossMargin": 50.05620699,
+            "operatingMargin": 32.62290138,
+            "netMargin": 27.22520267,
+            "roe": null,
+            "operatingCashFlow": 34369000000,
+            "capex": 2455000000,
+            "fcf": 31914000000,
+            "cash": 39544000000,
+            "marketableSecurities": 22855000000,
+            "totalDebt": 84344000000,
+            "currentRatio": 1.0032948,
+            "debtToEquity": 0.7844494,
+            "stockRepurchases": 25105000000,
+            "dilutedShares": 14714676000,
+            "dilutedSharesGrowth": -1.56208325,
+            "dividendsPerShare": 0.27,
+            "dpsGrowth": 3.84615385
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "ytd_difference",
+            "capex": "ytd_difference",
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": "reported",
+            "dividendsPerShare": "reported"
+          }
+        },
+        {
+          "fy": 2026,
+          "q": 2,
+          "start": "2025-12-28",
+          "end": "2026-03-28",
+          "days": 91,
+          "values": {
+            "revenue": 111184000000,
+            "revenueGrowth": 16.59518242,
+            "eps": 2.01,
+            "epsGrowth": 21.81818182,
+            "grossMargin": 49.2705785,
+            "operatingMargin": 32.27532739,
+            "netMargin": 26.6027486,
+            "roe": null,
+            "operatingCashFlow": 28702000000,
+            "capex": 1971000000,
+            "fcf": 26731000000,
+            "cash": 45572000000,
+            "marketableSecurities": 22935000000,
+            "totalDebt": 84711000000,
+            "currentRatio": 1.07035747,
+            "debtToEquity": 0.79547567,
+            "stockRepurchases": 12288000000,
+            "dilutedShares": 14725873000,
+            "dilutedSharesGrowth": -2.19352473,
+            "dividendsPerShare": 0.26,
+            "dpsGrowth": 4
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "ytd_difference",
+            "capex": "ytd_difference",
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": "reported",
+            "dividendsPerShare": "reported"
+          }
+        },
+        {
+          "fy": 2026,
+          "q": 1,
+          "start": "2025-09-28",
+          "end": "2025-12-27",
+          "days": 91,
+          "values": {
+            "revenue": 143756000000,
+            "revenueGrowth": 15.65245374,
+            "eps": 2.84,
+            "epsGrowth": 18.33333333,
+            "grossMargin": 48.15868555,
+            "operatingMargin": 35.37382788,
+            "netMargin": 29.28364729,
+            "roe": null,
+            "operatingCashFlow": 53925000000,
+            "capex": 2373000000,
+            "fcf": 51552000000,
+            "cash": 45317000000,
+            "marketableSecurities": 21590000000,
+            "totalDebt": 90509000000,
+            "currentRatio": 0.97374466,
+            "debtToEquity": 1.0262955,
+            "stockRepurchases": 24701000000,
+            "dilutedShares": 14810356000,
+            "dilutedSharesGrowth": -2.24745584,
+            "dividendsPerShare": 0.26,
+            "dpsGrowth": 4
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "reported",
+            "capex": "reported",
+            "stockRepurchases": "reported",
+            "dilutedShares": "reported",
+            "dividendsPerShare": "reported"
+          }
+        },
+        {
+          "fy": 2025,
+          "q": 4,
+          "start": "2025-06-29",
+          "end": "2025-09-27",
+          "days": 91,
+          "values": {
+            "revenue": 102466000000,
+            "revenueGrowth": 7.93848099,
+            "eps": null,
+            "epsGrowth": null,
+            "grossMargin": 47.17760037,
+            "operatingMargin": 31.64659497,
+            "netMargin": 26.80498897,
+            "roe": null,
+            "operatingCashFlow": 29728000000,
+            "capex": 3242000000,
+            "fcf": 26486000000,
+            "cash": 35934000000,
+            "marketableSecurities": 18763000000,
+            "totalDebt": 98657000000,
+            "currentRatio": 0.89329292,
+            "debtToEquity": 1.33803046,
+            "stockRepurchases": 20132000000,
+            "dilutedShares": null,
+            "dilutedSharesGrowth": null,
+            "dividendsPerShare": null,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "ytd_difference",
+            "eps": null,
+            "operatingCashFlow": "ytd_difference",
+            "capex": "ytd_difference",
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": null,
+            "dividendsPerShare": null
+          }
+        },
+        {
+          "fy": 2025,
+          "q": 3,
+          "start": "2025-03-30",
+          "end": "2025-06-28",
+          "days": 91,
+          "values": {
+            "revenue": 94036000000,
+            "revenueGrowth": 9.62845518,
+            "eps": 1.57,
+            "epsGrowth": 12.14285714,
+            "grossMargin": 46.49070569,
+            "operatingMargin": 29.99064188,
+            "netMargin": 24.92024331,
+            "roe": null,
+            "operatingCashFlow": 27867000000,
+            "capex": 3462000000,
+            "fcf": 24405000000,
+            "cash": 36269000000,
+            "marketableSecurities": 19103000000,
+            "totalDebt": 101698000000,
+            "currentRatio": 0.86799178,
+            "debtToEquity": 1.54485797,
+            "stockRepurchases": 21075000000,
+            "dilutedShares": 14948179000,
+            "dilutedSharesGrowth": -2.60614698,
+            "dividendsPerShare": 0.26,
+            "dpsGrowth": 4
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "ytd_difference",
+            "capex": "ytd_difference",
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": "reported",
+            "dividendsPerShare": "reported"
+          }
+        },
+        {
+          "fy": 2025,
+          "q": 2,
+          "start": "2024-12-29",
+          "end": "2025-03-29",
+          "days": 91,
+          "values": {
+            "revenue": 95359000000,
+            "revenueGrowth": 5.07531431,
+            "eps": 1.65,
+            "epsGrowth": 7.84313725,
+            "grossMargin": 47.05061924,
+            "operatingMargin": 31.02905861,
+            "netMargin": 25.98601076,
+            "roe": null,
+            "operatingCashFlow": 23952000000,
+            "capex": 3071000000,
+            "fcf": 20881000000,
+            "cash": 28162000000,
+            "marketableSecurities": 20336000000,
+            "totalDebt": 98186000000,
+            "currentRatio": 0.82087002,
+            "debtToEquity": 1.46993832,
+            "stockRepurchases": 25898000000,
+            "dilutedShares": 15056133000,
+            "dilutedSharesGrowth": -2.64198958,
+            "dividendsPerShare": 0.25,
+            "dpsGrowth": 4.16666667
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "ytd_difference",
+            "capex": "ytd_difference",
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": "reported",
+            "dividendsPerShare": "reported"
+          }
+        },
+        {
+          "fy": 2025,
+          "q": 1,
+          "start": "2024-09-29",
+          "end": "2024-12-28",
+          "days": 91,
+          "values": {
+            "revenue": 124300000000,
+            "revenueGrowth": 3.95149488,
+            "eps": 2.4,
+            "epsGrowth": 10.09174312,
+            "grossMargin": 46.88254224,
+            "operatingMargin": 34.45856798,
+            "netMargin": 29.22767498,
+            "roe": null,
+            "operatingCashFlow": 29935000000,
+            "capex": 2940000000,
+            "fcf": 26995000000,
+            "cash": 30299000000,
+            "marketableSecurities": 23476000000,
+            "totalDebt": 96799000000,
+            "currentRatio": 0.92293839,
+            "debtToEquity": 1.4499985,
+            "stockRepurchases": 23606000000,
+            "dilutedShares": 15150865000,
+            "dilutedSharesGrowth": -2.73342629,
+            "dividendsPerShare": 0.25,
+            "dpsGrowth": 4.16666667
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "reported",
+            "capex": "reported",
+            "stockRepurchases": "reported",
+            "dilutedShares": "reported",
+            "dividendsPerShare": "reported"
+          }
+        },
+        {
+          "fy": 2024,
+          "q": 4,
+          "start": "2024-06-30",
+          "end": "2024-09-28",
+          "days": 91,
+          "values": {
+            "revenue": 94930000000,
+            "revenueGrowth": 6.06940937,
+            "eps": null,
+            "epsGrowth": null,
+            "grossMargin": 46.22247972,
+            "operatingMargin": 31.17138944,
+            "netMargin": 15.52301696,
+            "roe": null,
+            "operatingCashFlow": 26811000000,
+            "capex": 2908000000,
+            "fcf": 23903000000,
+            "cash": 29943000000,
+            "marketableSecurities": 35228000000,
+            "totalDebt": 106629000000,
+            "currentRatio": 0.86731258,
+            "debtToEquity": 1.8723266,
+            "stockRepurchases": 25083000000,
+            "dilutedShares": null,
+            "dilutedSharesGrowth": null,
+            "dividendsPerShare": null,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "ytd_difference",
+            "eps": null,
+            "operatingCashFlow": "ytd_difference",
+            "capex": "ytd_difference",
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": null,
+            "dividendsPerShare": null
+          }
+        },
+        {
+          "fy": 2024,
+          "q": 3,
+          "start": "2024-03-31",
+          "end": "2024-06-29",
+          "days": 91,
+          "values": {
+            "revenue": 85777000000,
+            "revenueGrowth": 4.86570412,
+            "eps": 1.4,
+            "epsGrowth": 11.11111111,
+            "grossMargin": 46.25715518,
+            "operatingMargin": 29.55570841,
+            "netMargin": 25.0043718,
+            "roe": null,
+            "operatingCashFlow": 28858000000,
+            "capex": 2151000000,
+            "fcf": 26707000000,
+            "cash": 25565000000,
+            "marketableSecurities": 36236000000,
+            "totalDebt": 101304000000,
+            "currentRatio": 0.9529797,
+            "debtToEquity": 1.51861846,
+            "stockRepurchases": 26522000000,
+            "dilutedShares": 15348175000,
+            "dilutedSharesGrowth": -2.70583475,
+            "dividendsPerShare": 0.25,
+            "dpsGrowth": 4.16666667
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "ytd_difference",
+            "capex": "ytd_difference",
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": "reported",
+            "dividendsPerShare": "reported"
+          }
+        }
+      ],
+      "chartsChecked": 15,
+      "apiSerializationAndReactMatch": true,
+      "latestSources": {
+        "fcf": {
+          "inputs": [
+            {
+              "items": [
+                {
+                  "fp": "FY",
+                  "fy": 2026,
+                  "end": "2026-09-26",
+                  "val": 145097000000,
+                  "accn": "0000320193-26-000026",
+                  "form": "10-K",
+                  "unit": "USD",
+                  "filed": "2026-11-03",
+                  "frame": "CY2026",
+                  "start": "2025-09-28",
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+                },
+                {
+                  "fp": "Q3",
+                  "fy": 2026,
+                  "end": "2026-06-27",
+                  "val": 116996000000,
+                  "accn": "0000320193-26-000020",
+                  "form": "10-Q",
+                  "unit": "USD",
+                  "filed": "2026-07-31",
+                  "start": "2025-09-28",
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+                }
+              ],
+              "method": "ytd_difference"
+            },
+            {
+              "items": [
+                {
+                  "fp": "FY",
+                  "fy": 2026,
+                  "end": "2026-09-26",
+                  "val": 9041000000,
+                  "accn": "0000320193-26-000026",
+                  "form": "10-K",
+                  "unit": "USD",
+                  "filed": "2026-11-03",
+                  "frame": "CY2026",
+                  "start": "2025-09-28",
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+                },
+                {
+                  "fp": "Q3",
+                  "fy": 2026,
+                  "end": "2026-06-27",
+                  "val": 6799000000,
+                  "accn": "0000320193-26-000020",
+                  "form": "10-Q",
+                  "unit": "USD",
+                  "filed": "2026-07-31",
+                  "start": "2025-09-28",
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+                }
+              ],
+              "method": "ytd_difference"
+            }
+          ],
+          "method": "calculated",
+          "formula": "operatingCashFlow-capex"
+        },
+        "cash": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 36305000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:CashAndCashEquivalentsAtCarryingValue"
+            }
+          ],
+          "method": "reported"
+        },
+        "capex": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 9041000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026",
+              "start": "2025-09-28",
+              "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+            },
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-06-27",
+              "val": 6799000000,
+              "accn": "0000320193-26-000020",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-07-31",
+              "start": "2025-09-28",
+              "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+            }
+          ],
+          "method": "ytd_difference"
+        },
+        "assets": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 404548000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:Assets"
+            }
+          ],
+          "method": "reported"
+        },
+        "equity": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 112093000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:StockholdersEquity"
+            }
+          ],
+          "method": "reported"
+        },
+        "revenue": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 478834000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026",
+              "start": "2025-09-28",
+              "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax"
+            },
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-06-27",
+              "val": 364357000000,
+              "accn": "0000320193-26-000020",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-07-31",
+              "start": "2025-09-28",
+              "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax"
+            }
+          ],
+          "method": "ytd_difference"
+        },
+        "netIncome": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 132175000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026",
+              "start": "2025-09-28",
+              "concept": "us-gaap:NetIncomeLoss"
+            },
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-06-27",
+              "val": 101464000000,
+              "accn": "0000320193-26-000020",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-07-31",
+              "start": "2025-09-28",
+              "concept": "us-gaap:NetIncomeLoss"
+            }
+          ],
+          "method": "ytd_difference"
+        },
+        "totalDebt": {
+          "inputs": [
+            {
+              "items": [
+                {
+                  "fp": "FY",
+                  "fy": 2026,
+                  "end": "2026-09-26",
+                  "val": 1997000000,
+                  "accn": "0000320193-26-000026",
+                  "form": "10-K",
+                  "unit": "USD",
+                  "filed": "2026-11-03",
+                  "frame": "CY2026Q3I",
+                  "concept": "us-gaap:CommercialPaper"
+                },
+                {
+                  "fp": "FY",
+                  "fy": 2026,
+                  "end": "2026-09-26",
+                  "val": 9906000000,
+                  "accn": "0000320193-26-000026",
+                  "form": "10-K",
+                  "unit": "USD",
+                  "filed": "2026-11-03",
+                  "frame": "CY2026Q3I",
+                  "concept": "us-gaap:LongTermDebtCurrent"
+                }
+              ],
+              "method": "sum_current_borrowings"
+            },
+            {
+              "items": [
+                {
+                  "fp": "FY",
+                  "fy": 2026,
+                  "end": "2026-09-26",
+                  "val": 68208000000,
+                  "accn": "0000320193-26-000026",
+                  "form": "10-K",
+                  "unit": "USD",
+                  "filed": "2026-11-03",
+                  "frame": "CY2026Q3I",
+                  "concept": "us-gaap:LongTermDebtNoncurrent"
+                }
+              ],
+              "method": "reported"
+            }
+          ],
+          "method": "calculated",
+          "formula": "currentDebt+noncurrentDebt"
+        },
+        "capexToOcf": {
+          "inputs": [
+            {
+              "items": [
+                {
+                  "fp": "FY",
+                  "fy": 2026,
+                  "end": "2026-09-26",
+                  "val": 9041000000,
+                  "accn": "0000320193-26-000026",
+                  "form": "10-K",
+                  "unit": "USD",
+                  "filed": "2026-11-03",
+                  "frame": "CY2026",
+                  "start": "2025-09-28",
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+                },
+                {
+                  "fp": "Q3",
+                  "fy": 2026,
+                  "end": "2026-06-27",
+                  "val": 6799000000,
+                  "accn": "0000320193-26-000020",
+                  "form": "10-Q",
+                  "unit": "USD",
+                  "filed": "2026-07-31",
+                  "start": "2025-09-28",
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+                }
+              ],
+              "method": "ytd_difference"
+            },
+            {
+              "items": [
+                {
+                  "fp": "FY",
+                  "fy": 2026,
+                  "end": "2026-09-26",
+                  "val": 145097000000,
+                  "accn": "0000320193-26-000026",
+                  "form": "10-K",
+                  "unit": "USD",
+                  "filed": "2026-11-03",
+                  "frame": "CY2026",
+                  "start": "2025-09-28",
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+                },
+                {
+                  "fp": "Q3",
+                  "fy": 2026,
+                  "end": "2026-06-27",
+                  "val": 116996000000,
+                  "accn": "0000320193-26-000020",
+                  "form": "10-Q",
+                  "unit": "USD",
+                  "filed": "2026-07-31",
+                  "start": "2025-09-28",
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+                }
+              ],
+              "method": "ytd_difference"
+            }
+          ],
+          "method": "calculated",
+          "formula": "capex/operatingCashFlow*100"
+        },
+        "grossProfit": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 233602000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026",
+              "start": "2025-09-28",
+              "concept": "us-gaap:GrossProfit"
+            },
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-06-27",
+              "val": 178782000000,
+              "accn": "0000320193-26-000020",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-07-31",
+              "start": "2025-09-28",
+              "concept": "us-gaap:GrossProfit"
+            }
+          ],
+          "method": "ytd_difference"
+        },
+        "liabilities": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 292455000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:Liabilities"
+            }
+          ],
+          "method": "reported"
+        },
+        "longTermDebt": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 68208000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:LongTermDebtNoncurrent"
+            }
+          ],
+          "method": "reported"
+        },
+        "currentAssets": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 173857000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:AssetsCurrent"
+            }
+          ],
+          "method": "reported"
+        },
+        "dividendsPaid": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 15721000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026",
+              "start": "2025-09-28",
+              "concept": "us-gaap:PaymentsOfDividends"
+            },
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-06-27",
+              "val": 11778000000,
+              "accn": "0000320193-26-000020",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-07-31",
+              "start": "2025-09-28",
+              "concept": "us-gaap:PaymentsOfDividends"
+            }
+          ],
+          "method": "ytd_difference"
+        },
+        "shortTermDebt": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 1997000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:CommercialPaper"
+            },
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 9906000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:LongTermDebtCurrent"
+            }
+          ],
+          "method": "sum_current_borrowings"
+        },
+        "operatingIncome": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 158063000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026",
+              "start": "2025-09-28",
+              "concept": "us-gaap:OperatingIncomeLoss"
+            },
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-06-27",
+              "val": 122432000000,
+              "accn": "0000320193-26-000020",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-07-31",
+              "start": "2025-09-28",
+              "concept": "us-gaap:OperatingIncomeLoss"
+            }
+          ],
+          "method": "ytd_difference"
+        },
+        "stockRepurchases": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 86390000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026",
+              "start": "2025-09-28",
+              "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+            },
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-06-27",
+              "val": 62094000000,
+              "accn": "0000320193-26-000020",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-07-31",
+              "start": "2025-09-28",
+              "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+            }
+          ],
+          "method": "ytd_difference"
+        },
+        "calculationPolicy": {
+          "fcf": "operatingCashFlow-capex",
+          "roa": "annual netIncome/average beginning and ending assets",
+          "roe": "annual netIncome/average beginning and ending equity",
+          "version": 1,
+          "totalDebt": "shortTermDebt+longTermDebt",
+          "percentages": "percentage_points",
+          "quarterlyEps": "reported independent quarter only"
+        },
+        "operatingCashFlow": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 145097000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026",
+              "start": "2025-09-28",
+              "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+            },
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-06-27",
+              "val": 116996000000,
+              "accn": "0000320193-26-000020",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-07-31",
+              "start": "2025-09-28",
+              "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+            }
+          ],
+          "method": "ytd_difference"
+        },
+        "sharesOutstanding": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 14532259000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "shares",
+              "filed": "2026-11-03",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:CommonStockSharesOutstanding"
+            }
+          ],
+          "method": "reported"
+        },
+        "currentLiabilities": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 169915000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:LiabilitiesCurrent"
+            }
+          ],
+          "method": "reported"
+        },
+        "marketableSecurities": {
+          "items": [
+            {
+              "fp": "FY",
+              "fy": 2026,
+              "end": "2026-09-26",
+              "val": 20417000000,
+              "accn": "0000320193-26-000026",
+              "form": "10-K",
+              "unit": "USD",
+              "filed": "2026-11-03",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:MarketableSecuritiesCurrent"
+            }
+          ],
+          "method": "reported"
+        },
+        "financialHealthPolicy": {
+          "debt": "carrying amounts; no face value, fair value, or unseparated noncurrent lease obligations",
+          "version": 1,
+          "missingDebt": null,
+          "snapshotAccession": "0000320193-26-000026"
+        },
+        "revenueComparisonPolicy": "same concept or reconciled revenue concepts with >=2 matching overlapping periods, no conflicts, USD only",
+        "growthComparisonPeriodEnd": "2025-09-27"
+      },
+      "normalizedLatestShareholderSources": {
+        "dilutedShares": null,
+        "dilutedSharesGrowth": null,
+        "dividendsPerShare": null,
+        "dpsGrowth": null
+      },
+      "capexCoverage": {
+        "PaymentsToAcquirePropertyPlantAndEquipment": {
+          "definition": "The cash outflow associated with the acquisition of long-lived, physical assets that are used in the normal conduct of business to produce goods and services and not intended for resale; includes cash outflows to pay for construction of self-constructed assets.",
+          "currentYearFacts": [
+            {
+              "start": "2025-09-28",
+              "end": "2026-06-27",
+              "val": 6799000000,
+              "accn": "0000320193-26-000020",
+              "fy": 2026,
+              "fp": "Q3",
+              "form": "10-Q",
+              "filed": "2026-07-31"
+            },
+            {
+              "start": "2025-09-28",
+              "end": "2026-09-26",
+              "val": 9041000000,
+              "accn": "0000320193-26-000026",
+              "fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-11-03",
+              "frame": "CY2026"
+            }
+          ]
+        },
+        "PaymentsToAcquireProductiveAssets": {
+          "definition": "The cash outflow for purchases of and capital improvements on property, plant and equipment (capital expenditures), software, and other intangible assets.",
+          "currentYearFacts": []
+        }
+      }
+    },
+    {
+      "cik": "0001045810",
+      "ticker": "NVDA",
+      "cacheLastFetchedAt": "2026-11-05T09:44:15.646Z",
+      "sourceFileHash": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "sourceFileModifiedAt": "2026-11-12T13:33:16.680Z",
+      "annualCount": 10,
+      "quarterCount": 10,
+      "sourceOccurrences": 190,
+      "yoyChecks": 18,
+      "provenanceFailures": [],
+      "periodFailures": [],
+      "formulaFailures": [],
+      "cacheDifferences": [
+        {
+          "end": "2026-07-26",
+          "metric": "dividendsPerShare",
+          "stored": null,
+          "normalized": 0.25
+        },
+        {
+          "end": "2026-07-26",
+          "metric": "dpsGrowth",
+          "stored": null,
+          "normalized": 2400
+        },
+        {
+          "end": "2026-07-26",
+          "metric": "dilutedShares",
+          "stored": null,
+          "normalized": 24285000000
+        },
+        {
+          "end": "2026-07-26",
+          "metric": "basicShares",
+          "stored": null,
+          "normalized": 24190000000
+        },
+        {
+          "end": "2026-07-26",
+          "metric": "dilutedSharesGrowth",
+          "stored": null,
+          "normalized": -1.0068481982716482
+        },
+        {
+          "end": "2026-04-26",
+          "metric": "dividendsPerShare",
+          "stored": null,
+          "normalized": 0.01
+        },
+        {
+          "end": "2026-04-26",
+          "metric": "dpsGrowth",
+          "stored": null,
+          "normalized": 0
+        },
+        {
+          "end": "2026-04-26",
+          "metric": "dilutedShares",
+          "stored": null,
+          "normalized": 24391000000
+        },
+        {
+          "end": "2026-04-26",
+          "metric": "basicShares",
+          "stored": null,
+          "normalized": 24286000000
+        },
+        {
+          "end": "2026-04-26",
+          "metric": "dilutedSharesGrowth",
+          "stored": null,
+          "normalized": -0.8939092275811578
+        },
+        {
+          "end": "2025-10-26",
+          "metric": "dividendsPerShare",
+          "stored": null,
+          "normalized": 0.01
+        },
+        {
+          "end": "2025-10-26",
+          "metric": "dpsGrowth",
+          "stored": null,
+          "normalized": 0
+        },
+        {
+          "end": "2025-10-26",
+          "metric": "dilutedShares",
+          "stored": null,
+          "normalized": 24483000000
+        },
+        {
+          "end": "2025-10-26",
+          "metric": "basicShares",
+          "stored": null,
+          "normalized": 24327000000
+        },
+        {
+          "end": "2025-10-26",
+          "metric": "dilutedSharesGrowth",
+          "stored": null,
+          "normalized": -1.1746185517074403
+        },
+        {
+          "end": "2025-07-27",
+          "metric": "dividendsPerShare",
+          "stored": null,
+          "normalized": 0.01
+        },
+        {
+          "end": "2025-07-27",
+          "metric": "dpsGrowth",
+          "stored": null,
+          "normalized": 0
+        },
+        {
+          "end": "2025-07-27",
+          "metric": "dilutedShares",
+          "stored": null,
+          "normalized": 24532000000
+        },
+        {
+          "end": "2025-07-27",
+          "metric": "basicShares",
+          "stored": null,
+          "normalized": 24366000000
+        },
+        {
+          "end": "2025-07-27",
+          "metric": "dilutedSharesGrowth",
+          "stored": null,
+          "normalized": -1.2717321313586605
+        },
+        {
+          "end": "2025-04-27",
+          "metric": "dividendsPerShare",
+          "stored": null,
+          "normalized": 0.01
+        },
+        {
+          "end": "2025-04-27",
+          "metric": "dpsGrowth",
+          "stored": null,
+          "normalized": 150
+        },
+        {
+          "end": "2025-04-27",
+          "metric": "dilutedShares",
+          "stored": null,
+          "normalized": 24611000000
+        },
+        {
+          "end": "2025-04-27",
+          "metric": "basicShares",
+          "stored": null,
+          "normalized": 24441000000
+        },
+        {
+          "end": "2025-04-27",
+          "metric": "dilutedSharesGrowth",
+          "stored": null,
+          "normalized": -1.1209321012454754
+        },
+        {
+          "end": "2025-01-26",
+          "metric": "marketableSecurities",
+          "stored": 34621000000,
+          "normalized": null
+        },
+        {
+          "end": "2024-10-27",
+          "metric": "dividendsPerShare",
+          "stored": null,
+          "normalized": 0.01
+        },
+        {
+          "end": "2024-10-27",
+          "metric": "dpsGrowth",
+          "stored": null,
+          "normalized": 150
+        },
+        {
+          "end": "2024-10-27",
+          "metric": "dilutedShares",
+          "stored": null,
+          "normalized": 24774000000
+        },
+        {
+          "end": "2024-10-27",
+          "metric": "basicShares",
+          "stored": null,
+          "normalized": 24533000000
+        },
+        {
+          "end": "2024-10-27",
+          "metric": "dilutedSharesGrowth",
+          "stored": null,
+          "normalized": -0.6655974338412141
+        },
+        {
+          "end": "2024-07-28",
+          "metric": "dividendsPerShare",
+          "stored": null,
+          "normalized": 0.01
+        },
+        {
+          "end": "2024-07-28",
+          "metric": "dpsGrowth",
+          "stored": null,
+          "normalized": 150
+        },
+        {
+          "end": "2024-07-28",
+          "metric": "dilutedShares",
+          "stored": null,
+          "normalized": 24848000000
+        },
+        {
+          "end": "2024-07-28",
+          "metric": "basicShares",
+          "stored": null,
+          "normalized": 24578000000
+        },
+        {
+          "end": "2024-07-28",
+          "metric": "dilutedSharesGrowth",
+          "stored": null,
+          "normalized": -0.5841401936464763
+        },
+        {
+          "end": "2024-04-28",
+          "metric": "dividendsPerShare",
+          "stored": null,
+          "normalized": 0.004
+        },
+        {
+          "end": "2024-04-28",
+          "metric": "dilutedShares",
+          "stored": null,
+          "normalized": 24890000000
+        },
+        {
+          "end": "2024-04-28",
+          "metric": "basicShares",
+          "stored": null,
+          "normalized": 24620000000
+        }
+      ],
+      "crosschecks": [
+        {
+          "fy": 2026,
+          "start": "2025-01-27",
+          "end": "2026-01-25",
+          "days": 364,
+          "flows": {
+            "revenue": {
+              "annual": 215938000000,
+              "quarters": [
+                44062000000,
+                46743000000,
+                57006000000,
+                68127000000
+              ],
+              "sum": 215938000000,
+              "difference": 0
+            },
+            "netIncome": {
+              "annual": 120067000000,
+              "quarters": [
+                18775000000,
+                26422000000,
+                31910000000,
+                42960000000
+              ],
+              "sum": 120067000000,
+              "difference": 0
+            },
+            "operatingCashFlow": {
+              "annual": 102718000000,
+              "quarters": [
+                27414000000,
+                15365000000,
+                23751000000,
+                36188000000
+              ],
+              "sum": 102718000000,
+              "difference": 0
+            },
+            "capex": {
+              "annual": null,
+              "quarters": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "sum": null,
+              "difference": null
+            }
+          },
+          "balanceMismatches": []
+        },
+        {
+          "fy": 2025,
+          "start": "2024-01-29",
+          "end": "2025-01-26",
+          "days": 364,
+          "flows": {
+            "revenue": {
+              "annual": 130497000000,
+              "quarters": [
+                26044000000,
+                30040000000,
+                35082000000,
+                39331000000
+              ],
+              "sum": 130497000000,
+              "difference": 0
+            },
+            "netIncome": {
+              "annual": 72880000000,
+              "quarters": [
+                14881000000,
+                16599000000,
+                19309000000,
+                22091000000
+              ],
+              "sum": 72880000000,
+              "difference": 0
+            },
+            "operatingCashFlow": {
+              "annual": 64089000000,
+              "quarters": [
+                15345000000,
+                14488000000,
+                17627000000,
+                16629000000
+              ],
+              "sum": 64089000000,
+              "difference": 0
+            },
+            "capex": {
+              "annual": null,
+              "quarters": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "sum": null,
+              "difference": null
+            }
+          },
+          "balanceMismatches": []
+        }
+      ],
+      "epsComparisons": [
+        {
+          "end": "2026-07-26",
+          "eps": 2.46,
+          "growth": 127.77777778,
+          "current": {
+            "fp": "Q2",
+            "fy": 2027,
+            "end": "2026-07-26",
+            "val": 2.46,
+            "accn": "0001045810-26-000075",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2026-08-26",
+            "frame": "CY2026Q2",
+            "start": "2026-04-27",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2025-04-28",
+            "end": "2025-07-27",
+            "val": 1.08,
+            "accn": "0001045810-26-000075",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-26",
+            "frame": "CY2025Q2"
+          },
+          "sameAccessionPairExists": true
+        },
+        {
+          "end": "2026-04-26",
+          "eps": 2.39,
+          "growth": 214.47368421,
+          "current": {
+            "fp": "Q1",
+            "fy": 2027,
+            "end": "2026-04-26",
+            "val": 2.39,
+            "accn": "0001045810-26-000052",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2026-05-20",
+            "frame": "CY2026Q1",
+            "start": "2026-01-26",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2025-01-27",
+            "end": "2025-04-27",
+            "val": 0.76,
+            "accn": "0001045810-26-000052",
+            "fy": 2027,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2026-05-20",
+            "frame": "CY2025Q1"
+          },
+          "sameAccessionPairExists": true
+        },
+        {
+          "end": "2025-10-26",
+          "eps": 1.3,
+          "growth": 66.66666667,
+          "current": {
+            "fp": "Q3",
+            "fy": 2026,
+            "end": "2025-10-26",
+            "val": 1.3,
+            "accn": "0001045810-25-000230",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2025-11-19",
+            "frame": "CY2025Q3",
+            "start": "2025-07-28",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2024-07-29",
+            "end": "2024-10-27",
+            "val": 0.78,
+            "accn": "0001045810-25-000230",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2025-11-19",
+            "frame": "CY2024Q3"
+          },
+          "sameAccessionPairExists": true
+        },
+        {
+          "end": "2025-07-27",
+          "eps": 1.08,
+          "growth": 61.19402985,
+          "current": {
+            "fp": "Q2",
+            "fy": 2027,
+            "end": "2025-07-27",
+            "val": 1.08,
+            "accn": "0001045810-26-000075",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2026-08-26",
+            "frame": "CY2025Q2",
+            "start": "2025-04-28",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2024-04-29",
+            "end": "2024-07-28",
+            "val": 0.67,
+            "accn": "0001045810-25-000209",
+            "fy": 2026,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2025-08-27",
+            "frame": "CY2024Q2"
+          },
+          "sameAccessionPairExists": false
+        },
+        {
+          "end": "2025-04-27",
+          "eps": 0.76,
+          "growth": 26.66666667,
+          "current": {
+            "fp": "Q1",
+            "fy": 2027,
+            "end": "2025-04-27",
+            "val": 0.76,
+            "accn": "0001045810-26-000052",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2026-05-20",
+            "frame": "CY2025Q1",
+            "start": "2025-01-27",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2024-01-29",
+            "end": "2024-04-28",
+            "val": 0.6,
+            "accn": "0001045810-25-000116",
+            "fy": 2026,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2025-05-28",
+            "frame": "CY2024Q1"
+          },
+          "sameAccessionPairExists": false
+        },
+        {
+          "end": "2024-10-27",
+          "eps": 0.78,
+          "growth": 110.81081081,
+          "current": {
+            "fp": "Q3",
+            "fy": 2026,
+            "end": "2024-10-27",
+            "val": 0.78,
+            "accn": "0001045810-25-000230",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2025-11-19",
+            "frame": "CY2024Q3",
+            "start": "2024-07-29",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2023-07-31",
+            "end": "2023-10-29",
+            "val": 0.37,
+            "accn": "0001045810-24-000316",
+            "fy": 2025,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2024-11-20",
+            "frame": "CY2023Q3"
+          },
+          "sameAccessionPairExists": false
+        },
+        {
+          "end": "2024-07-28",
+          "eps": 0.67,
+          "growth": 168,
+          "current": {
+            "fp": "Q2",
+            "fy": 2026,
+            "end": "2024-07-28",
+            "val": 0.67,
+            "accn": "0001045810-25-000209",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2025-08-27",
+            "frame": "CY2024Q2",
+            "start": "2024-04-29",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2023-05-01",
+            "end": "2023-07-30",
+            "val": 0.25,
+            "accn": "0001045810-24-000264",
+            "fy": 2025,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2024-08-28",
+            "frame": "CY2023Q2"
+          },
+          "sameAccessionPairExists": false
+        },
+        {
+          "end": "2024-04-28",
+          "eps": 0.6,
+          "growth": -26.82926829,
+          "current": {
+            "fp": "Q1",
+            "fy": 2026,
+            "end": "2024-04-28",
+            "val": 0.6,
+            "accn": "0001045810-25-000116",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2025-05-28",
+            "frame": "CY2024Q1",
+            "start": "2024-01-29",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2023-01-30",
+            "end": "2023-04-30",
+            "val": 0.82,
+            "accn": "0001045810-24-000124",
+            "fy": 2025,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2024-05-29",
+            "frame": "CY2023Q1"
+          },
+          "sameAccessionPairExists": false
+        }
+      ],
+      "quarterSummary": [
+        {
+          "fy": 2027,
+          "q": 2,
+          "start": "2026-04-27",
+          "end": "2026-07-26",
+          "days": 91,
+          "values": {
+            "revenue": 96221000000,
+            "revenueGrowth": 105.85114349,
+            "eps": 2.46,
+            "epsGrowth": 127.77777778,
+            "grossMargin": 74.97531724,
+            "operatingMargin": 66.23710001,
+            "netMargin": 62.03219671,
+            "roe": null,
+            "operatingCashFlow": 24077000000,
+            "capex": null,
+            "fcf": null,
+            "cash": 22443000000,
+            "marketableSecurities": null,
+            "totalDebt": 33366000000,
+            "currentRatio": 4.58894907,
+            "debtToEquity": 0.14571324,
+            "stockRepurchases": 19732000000,
+            "dilutedShares": null,
+            "dilutedSharesGrowth": null,
+            "dividendsPerShare": null,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "ytd_difference",
+            "capex": null,
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": null,
+            "dividendsPerShare": null
+          }
+        },
+        {
+          "fy": 2027,
+          "q": 1,
+          "start": "2026-01-26",
+          "end": "2026-04-26",
+          "days": 91,
+          "values": {
+            "revenue": 81615000000,
+            "revenueGrowth": 85.22763379,
+            "eps": 2.39,
+            "epsGrowth": 214.47368421,
+            "grossMargin": 74.93352938,
+            "operatingMargin": 65.59578509,
+            "netMargin": 71.45867794,
+            "roe": null,
+            "operatingCashFlow": 50344000000,
+            "capex": null,
+            "fcf": null,
+            "cash": 13237000000,
+            "marketableSecurities": null,
+            "totalDebt": 8470000000,
+            "currentRatio": 3.44077568,
+            "debtToEquity": 0.04333057,
+            "stockRepurchases": 19312000000,
+            "dilutedShares": null,
+            "dilutedSharesGrowth": null,
+            "dividendsPerShare": null,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "reported",
+            "capex": null,
+            "stockRepurchases": "reported",
+            "dilutedShares": null,
+            "dividendsPerShare": null
+          }
+        },
+        {
+          "fy": 2026,
+          "q": 4,
+          "start": "2025-10-27",
+          "end": "2026-01-25",
+          "days": 91,
+          "values": {
+            "revenue": 68127000000,
+            "revenueGrowth": 73.21451273,
+            "eps": null,
+            "epsGrowth": null,
+            "grossMargin": 74.99669734,
+            "operatingMargin": 65.02414608,
+            "netMargin": 63.05869919,
+            "roe": null,
+            "operatingCashFlow": 36188000000,
+            "capex": null,
+            "fcf": null,
+            "cash": 10605000000,
+            "marketableSecurities": null,
+            "totalDebt": 8468000000,
+            "currentRatio": 3.90526381,
+            "debtToEquity": 0.05383584,
+            "stockRepurchases": 3815000000,
+            "dilutedShares": null,
+            "dilutedSharesGrowth": null,
+            "dividendsPerShare": null,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "ytd_difference",
+            "eps": null,
+            "operatingCashFlow": "ytd_difference",
+            "capex": null,
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": null,
+            "dividendsPerShare": null
+          }
+        },
+        {
+          "fy": 2026,
+          "q": 3,
+          "start": "2025-07-28",
+          "end": "2025-10-26",
+          "days": 91,
+          "values": {
+            "revenue": 57006000000,
+            "revenueGrowth": 62.49358645,
+            "eps": 1.3,
+            "epsGrowth": 66.66666667,
+            "grossMargin": 73.41157071,
+            "operatingMargin": 63.16878925,
+            "netMargin": 55.97656387,
+            "roe": null,
+            "operatingCashFlow": 23751000000,
+            "capex": null,
+            "fcf": null,
+            "cash": 11486000000,
+            "marketableSecurities": 49122000000,
+            "totalDebt": 8467000000,
+            "currentRatio": 4.4675743,
+            "debtToEquity": 0.0712129,
+            "stockRepurchases": 12456000000,
+            "dilutedShares": null,
+            "dilutedSharesGrowth": null,
+            "dividendsPerShare": null,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "ytd_difference",
+            "capex": null,
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": null,
+            "dividendsPerShare": null
+          }
+        },
+        {
+          "fy": 2026,
+          "q": 2,
+          "start": "2025-04-28",
+          "end": "2025-07-27",
+          "days": 91,
+          "values": {
+            "revenue": 46743000000,
+            "revenueGrowth": 55.60252996,
+            "eps": 1.08,
+            "epsGrowth": 61.19402985,
+            "grossMargin": 72.42367841,
+            "operatingMargin": 60.84333483,
+            "netMargin": 56.52611086,
+            "roe": null,
+            "operatingCashFlow": 15365000000,
+            "capex": null,
+            "fcf": null,
+            "cash": 11639000000,
+            "marketableSecurities": 45152000000,
+            "totalDebt": null,
+            "currentRatio": 4.21400008,
+            "debtToEquity": null,
+            "stockRepurchases": 9720000000,
+            "dilutedShares": null,
+            "dilutedSharesGrowth": null,
+            "dividendsPerShare": null,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "ytd_difference",
+            "capex": null,
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": null,
+            "dividendsPerShare": null
+          }
+        },
+        {
+          "fy": 2026,
+          "q": 1,
+          "start": "2025-01-27",
+          "end": "2025-04-27",
+          "days": 91,
+          "values": {
+            "revenue": 44062000000,
+            "revenueGrowth": 69.18292121,
+            "eps": 0.76,
+            "epsGrowth": 26.66666667,
+            "grossMargin": 60.52380736,
+            "operatingMargin": 49.10807499,
+            "netMargin": 42.6104126,
+            "roe": null,
+            "operatingCashFlow": 27414000000,
+            "capex": null,
+            "fcf": null,
+            "cash": 15234000000,
+            "marketableSecurities": 38457000000,
+            "totalDebt": null,
+            "currentRatio": 3.38840329,
+            "debtToEquity": null,
+            "stockRepurchases": 14095000000,
+            "dilutedShares": null,
+            "dilutedSharesGrowth": null,
+            "dividendsPerShare": null,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "reported",
+            "capex": null,
+            "stockRepurchases": "reported",
+            "dilutedShares": null,
+            "dividendsPerShare": null
+          }
+        },
+        {
+          "fy": 2025,
+          "q": 4,
+          "start": "2024-10-28",
+          "end": "2025-01-26",
+          "days": 91,
+          "values": {
+            "revenue": 39331000000,
+            "revenueGrowth": 77.94417047,
+            "eps": null,
+            "epsGrowth": null,
+            "grossMargin": 73.02890849,
+            "operatingMargin": 61.10701482,
+            "netMargin": 56.16689126,
+            "roe": null,
+            "operatingCashFlow": 16629000000,
+            "capex": null,
+            "fcf": null,
+            "cash": 8589000000,
+            "marketableSecurities": 34621000000,
+            "totalDebt": 8463000000,
+            "currentRatio": 4.4398515,
+            "debtToEquity": 0.10668499,
+            "stockRepurchases": 7811000000,
+            "dilutedShares": null,
+            "dilutedSharesGrowth": null,
+            "dividendsPerShare": null,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "ytd_difference",
+            "eps": null,
+            "operatingCashFlow": "ytd_difference",
+            "capex": null,
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": null,
+            "dividendsPerShare": null
+          }
+        },
+        {
+          "fy": 2025,
+          "q": 3,
+          "start": "2024-07-29",
+          "end": "2024-10-27",
+          "days": 91,
+          "values": {
+            "revenue": 35082000000,
+            "revenueGrowth": 93.60927152,
+            "eps": 0.78,
+            "epsGrowth": 110.81081081,
+            "grossMargin": 74.55675275,
+            "operatingMargin": 62.3368109,
+            "netMargin": 55.03962146,
+            "roe": null,
+            "operatingCashFlow": 17627000000,
+            "capex": null,
+            "fcf": null,
+            "cash": 9107000000,
+            "marketableSecurities": 29380000000,
+            "totalDebt": 8462000000,
+            "currentRatio": 4.104618,
+            "debtToEquity": 0.12840863,
+            "stockRepurchases": 10997000000,
+            "dilutedShares": null,
+            "dilutedSharesGrowth": null,
+            "dividendsPerShare": null,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "ytd_difference",
+            "capex": null,
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": null,
+            "dividendsPerShare": null
+          }
+        },
+        {
+          "fy": 2025,
+          "q": 2,
+          "start": "2024-04-29",
+          "end": "2024-07-28",
+          "days": 91,
+          "values": {
+            "revenue": 30040000000,
+            "revenueGrowth": 122.40319834,
+            "eps": 0.67,
+            "epsGrowth": 168,
+            "grossMargin": 75.14647137,
+            "operatingMargin": 62.05725699,
+            "netMargin": 55.2563249,
+            "roe": null,
+            "operatingCashFlow": 14488000000,
+            "capex": null,
+            "fcf": null,
+            "cash": 8563000000,
+            "marketableSecurities": 26237000000,
+            "totalDebt": 8461000000,
+            "currentRatio": 4.26895268,
+            "debtToEquity": 0.1454855,
+            "stockRepurchases": 7158000000,
+            "dilutedShares": null,
+            "dilutedSharesGrowth": null,
+            "dividendsPerShare": null,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "ytd_difference",
+            "capex": null,
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": null,
+            "dividendsPerShare": null
+          }
+        },
+        {
+          "fy": 2025,
+          "q": 1,
+          "start": "2024-01-29",
+          "end": "2024-04-28",
+          "days": 91,
+          "values": {
+            "revenue": 26044000000,
+            "revenueGrowth": 262.12458287,
+            "eps": 0.6,
+            "epsGrowth": -26.82926829,
+            "grossMargin": 78.35201966,
+            "operatingMargin": 64.92474274,
+            "netMargin": 57.13792044,
+            "roe": null,
+            "operatingCashFlow": 15345000000,
+            "capex": null,
+            "fcf": null,
+            "cash": 7587000000,
+            "marketableSecurities": 23851000000,
+            "totalDebt": 9710000000,
+            "currentRatio": 3.529462,
+            "debtToEquity": 0.19759066,
+            "stockRepurchases": 7740000000,
+            "dilutedShares": null,
+            "dilutedSharesGrowth": null,
+            "dividendsPerShare": null,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "reported",
+            "capex": null,
+            "stockRepurchases": "reported",
+            "dilutedShares": null,
+            "dividendsPerShare": null
+          }
+        }
+      ],
+      "chartsChecked": 15,
+      "apiSerializationAndReactMatch": true,
+      "latestSources": {
+        "eps": {
+          "items": [
+            {
+              "fp": "Q2",
+              "fy": 2027,
+              "end": "2026-07-26",
+              "val": 2.46,
+              "accn": "0001045810-26-000075",
+              "form": "10-Q",
+              "unit": "USD/shares",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2",
+              "start": "2026-04-27",
+              "concept": "us-gaap:EarningsPerShareDiluted"
+            }
+          ],
+          "method": "reported"
+        },
+        "cash": {
+          "items": [
+            {
+              "fp": "Q2",
+              "fy": 2027,
+              "end": "2026-07-26",
+              "val": 22443000000,
+              "accn": "0001045810-26-000075",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2I",
+              "concept": "us-gaap:CashAndCashEquivalentsAtCarryingValue"
+            }
+          ],
+          "method": "reported"
+        },
+        "assets": {
+          "items": [
+            {
+              "fp": "Q2",
+              "fy": 2027,
+              "end": "2026-07-26",
+              "val": 320272000000,
+              "accn": "0001045810-26-000075",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2I",
+              "concept": "us-gaap:Assets"
+            }
+          ],
+          "method": "reported"
+        },
+        "equity": {
+          "items": [
+            {
+              "fp": "Q2",
+              "fy": 2027,
+              "end": "2026-07-26",
+              "val": 228984000000,
+              "accn": "0001045810-26-000075",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2I",
+              "concept": "us-gaap:StockholdersEquity"
+            }
+          ],
+          "method": "reported"
+        },
+        "revenue": {
+          "items": [
+            {
+              "fp": "Q2",
+              "fy": 2027,
+              "end": "2026-07-26",
+              "val": 96221000000,
+              "accn": "0001045810-26-000075",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2",
+              "start": "2026-04-27",
+              "concept": "us-gaap:Revenues"
+            }
+          ],
+          "method": "reported"
+        },
+        "netIncome": {
+          "items": [
+            {
+              "fp": "Q2",
+              "fy": 2027,
+              "end": "2026-07-26",
+              "val": 59688000000,
+              "accn": "0001045810-26-000075",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2",
+              "start": "2026-04-27",
+              "concept": "us-gaap:NetIncomeLoss"
+            }
+          ],
+          "method": "reported"
+        },
+        "grossProfit": {
+          "items": [
+            {
+              "fp": "Q2",
+              "fy": 2027,
+              "end": "2026-07-26",
+              "val": 72142000000,
+              "accn": "0001045810-26-000075",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2",
+              "start": "2026-04-27",
+              "concept": "us-gaap:GrossProfit"
+            }
+          ],
+          "method": "reported"
+        },
+        "liabilities": {
+          "items": [
+            {
+              "fp": "Q2",
+              "fy": 2027,
+              "end": "2026-07-26",
+              "val": 91288000000,
+              "accn": "0001045810-26-000075",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2I",
+              "concept": "us-gaap:Liabilities"
+            }
+          ],
+          "method": "reported"
+        },
+        "longTermDebt": {
+          "items": [
+            {
+              "fp": "Q2",
+              "fy": 2027,
+              "end": "2026-07-26",
+              "val": 32366000000,
+              "accn": "0001045810-26-000075",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2I",
+              "concept": "us-gaap:LongTermDebtNoncurrent"
+            }
+          ],
+          "method": "reported"
+        },
+        "currentAssets": {
+          "items": [
+            {
+              "fp": "Q2",
+              "fy": 2027,
+              "end": "2026-07-26",
+              "val": 197412000000,
+              "accn": "0001045810-26-000075",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2I",
+              "concept": "us-gaap:AssetsCurrent"
+            }
+          ],
+          "method": "reported"
+        },
+        "dividendsPaid": {
+          "items": [
+            {
+              "fp": "Q2",
+              "fy": 2027,
+              "end": "2026-07-26",
+              "val": 6000000000,
+              "accn": "0001045810-26-000075",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2",
+              "start": "2026-04-27",
+              "concept": "us-gaap:PaymentsOfDividends"
+            }
+          ],
+          "method": "reported"
+        },
+        "shortTermDebt": {
+          "items": [
+            {
+              "fp": "Q2",
+              "fy": 2027,
+              "end": "2026-07-26",
+              "val": 1000000000,
+              "accn": "0001045810-26-000075",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2I",
+              "concept": "us-gaap:DebtCurrent"
+            }
+          ],
+          "method": "reported"
+        },
+        "operatingIncome": {
+          "items": [
+            {
+              "fp": "Q2",
+              "fy": 2027,
+              "end": "2026-07-26",
+              "val": 63734000000,
+              "accn": "0001045810-26-000075",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2",
+              "start": "2026-04-27",
+              "concept": "us-gaap:OperatingIncomeLoss"
+            }
+          ],
+          "method": "reported"
+        },
+        "stockRepurchases": {
+          "items": [
+            {
+              "fp": "Q2",
+              "fy": 2027,
+              "end": "2026-07-26",
+              "val": 39044000000,
+              "accn": "0001045810-26-000075",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-08-26",
+              "start": "2026-01-26",
+              "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+            },
+            {
+              "fp": "Q1",
+              "fy": 2027,
+              "end": "2026-04-26",
+              "val": 19312000000,
+              "accn": "0001045810-26-000052",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-05-20",
+              "frame": "CY2026Q1",
+              "start": "2026-01-26",
+              "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+            }
+          ],
+          "method": "ytd_difference"
+        },
+        "calculationPolicy": {
+          "fcf": "operatingCashFlow-capex",
+          "roa": "annual netIncome/average beginning and ending assets",
+          "roe": "annual netIncome/average beginning and ending equity",
+          "version": 1,
+          "totalDebt": "shortTermDebt+longTermDebt",
+          "percentages": "percentage_points",
+          "quarterlyEps": "reported independent quarter only"
+        },
+        "operatingCashFlow": {
+          "items": [
+            {
+              "fp": "Q2",
+              "fy": 2027,
+              "end": "2026-07-26",
+              "val": 74421000000,
+              "accn": "0001045810-26-000075",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-08-26",
+              "start": "2026-01-26",
+              "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+            },
+            {
+              "fp": "Q1",
+              "fy": 2027,
+              "end": "2026-04-26",
+              "val": 50344000000,
+              "accn": "0001045810-26-000052",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-05-20",
+              "frame": "CY2026Q1",
+              "start": "2026-01-26",
+              "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+            }
+          ],
+          "method": "ytd_difference"
+        },
+        "currentLiabilities": {
+          "items": [
+            {
+              "fp": "Q2",
+              "fy": 2027,
+              "end": "2026-07-26",
+              "val": 43019000000,
+              "accn": "0001045810-26-000075",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2I",
+              "concept": "us-gaap:LiabilitiesCurrent"
+            }
+          ],
+          "method": "reported"
+        },
+        "growthComparisonPeriodEnd": "2025-07-27"
+      },
+      "normalizedLatestShareholderSources": {
+        "dilutedShares": {
+          "method": "reported",
+          "items": [
+            {
+              "concept": "us-gaap:WeightedAverageNumberOfDilutedSharesOutstanding",
+              "unit": "shares",
+              "start": "2026-04-27",
+              "end": "2026-07-26",
+              "val": 24285000000,
+              "accn": "0001045810-26-000075",
+              "fy": 2027,
+              "fp": "Q2",
+              "form": "10-Q",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2"
+            }
+          ]
+        },
+        "dilutedSharesGrowth": {
+          "method": "calculated",
+          "formula": "(dilutedShares/priorYearDilutedShares-1)*100",
+          "policy": "direct same-duration observations in same accession; split basis as reported",
+          "items": [
+            {
+              "concept": "us-gaap:WeightedAverageNumberOfDilutedSharesOutstanding",
+              "unit": "shares",
+              "start": "2026-04-27",
+              "end": "2026-07-26",
+              "val": 24285000000,
+              "accn": "0001045810-26-000075",
+              "fy": 2027,
+              "fp": "Q2",
+              "form": "10-Q",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2"
+            },
+            {
+              "concept": "us-gaap:WeightedAverageNumberOfDilutedSharesOutstanding",
+              "unit": "shares",
+              "start": "2025-04-28",
+              "end": "2025-07-27",
+              "val": 24532000000,
+              "accn": "0001045810-26-000075",
+              "fy": 2027,
+              "fp": "Q2",
+              "form": "10-Q",
+              "filed": "2026-08-26",
+              "frame": "CY2025Q2"
+            }
+          ]
+        },
+        "dividendsPerShare": {
+          "method": "reported",
+          "items": [
+            {
+              "concept": "us-gaap:CommonStockDividendsPerShareDeclared",
+              "unit": "USD/shares",
+              "start": "2026-04-27",
+              "end": "2026-07-26",
+              "val": 0.25,
+              "accn": "0001045810-26-000075",
+              "fy": 2027,
+              "fp": "Q2",
+              "form": "10-Q",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2"
+            }
+          ]
+        },
+        "dpsGrowth": {
+          "method": "calculated",
+          "formula": "(dividendsPerShare/priorYearDividendsPerShare-1)*100",
+          "items": [
+            {
+              "concept": "us-gaap:CommonStockDividendsPerShareDeclared",
+              "unit": "USD/shares",
+              "start": "2026-04-27",
+              "end": "2026-07-26",
+              "val": 0.25,
+              "accn": "0001045810-26-000075",
+              "fy": 2027,
+              "fp": "Q2",
+              "form": "10-Q",
+              "filed": "2026-08-26",
+              "frame": "CY2026Q2"
+            },
+            {
+              "concept": "us-gaap:CommonStockDividendsPerShareDeclared",
+              "unit": "USD/shares",
+              "start": "2025-04-28",
+              "end": "2025-07-27",
+              "val": 0.01,
+              "accn": "0001045810-26-000075",
+              "fy": 2027,
+              "fp": "Q2",
+              "form": "10-Q",
+              "filed": "2026-08-26",
+              "frame": "CY2025Q2"
+            }
+          ],
+          "comparisonPeriodEnd": "2025-07-27",
+          "policy": "direct same-duration observations in same accession matching latest values"
+        }
+      },
+      "capexCoverage": {
+        "PaymentsToAcquirePropertyPlantAndEquipment": {
+          "definition": "The cash outflow associated with the acquisition of long-lived, physical assets that are used in the normal conduct of business to produce goods and services and not intended for resale; includes cash outflows to pay for construction of self-constructed assets.",
+          "currentYearFacts": []
+        },
+        "PaymentsToAcquireProductiveAssets": {
+          "definition": "The cash outflow for purchases of and capital improvements on property, plant and equipment (capital expenditures), software, and other intangible assets.",
+          "currentYearFacts": [
+            {
+              "start": "2026-01-26",
+              "end": "2026-04-26",
+              "val": 1757000000,
+              "accn": "0001045810-26-000052",
+              "fy": 2027,
+              "fp": "Q1",
+              "form": "10-Q",
+              "filed": "2026-05-20",
+              "frame": "CY2026Q1"
+            },
+            {
+              "start": "2026-01-26",
+              "end": "2026-07-26",
+              "val": 4434000000,
+              "accn": "0001045810-26-000075",
+              "fy": 2027,
+              "fp": "Q2",
+              "form": "10-Q",
+              "filed": "2026-08-26"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "cik": "0001652044",
+      "ticker": "GOOGL",
+      "cacheLastFetchedAt": "2026-11-09T09:25:54.261Z",
+      "sourceFileHash": "f87bc183f74b45ecf9a0933e0e0a1b6b97ead51a9d29367a7dae436574e1c1d0",
+      "sourceFileModifiedAt": "2026-11-12T13:33:14.278Z",
+      "annualCount": 10,
+      "quarterCount": 10,
+      "sourceOccurrences": 411,
+      "yoyChecks": 31,
+      "provenanceFailures": [],
+      "periodFailures": [],
+      "formulaFailures": [],
+      "cacheDifferences": [],
+      "crosschecks": [
+        {
+          "fy": 2025,
+          "start": "2025-01-01",
+          "end": "2025-12-31",
+          "days": 365,
+          "flows": {
+            "revenue": {
+              "annual": 402836000000,
+              "quarters": [
+                90234000000,
+                96428000000,
+                102346000000,
+                113829000000
+              ],
+              "sum": 402837000000,
+              "difference": 1000000
+            },
+            "netIncome": {
+              "annual": 132170000000,
+              "quarters": [
+                34540000000,
+                28196000000,
+                34979000000,
+                34455000000
+              ],
+              "sum": 132170000000,
+              "difference": 0
+            },
+            "operatingCashFlow": {
+              "annual": 164713000000,
+              "quarters": [
+                36150000000,
+                27747000000,
+                48414000000,
+                52402000000
+              ],
+              "sum": 164713000000,
+              "difference": 0
+            },
+            "capex": {
+              "annual": 91447000000,
+              "quarters": [
+                17197000000,
+                22446000000,
+                23953000000,
+                27851000000
+              ],
+              "sum": 91447000000,
+              "difference": 0
+            }
+          },
+          "balanceMismatches": []
+        }
+      ],
+      "epsComparisons": [
+        {
+          "end": "2026-09-30",
+          "eps": 2.12,
+          "growth": -26.13240418,
+          "current": {
+            "fp": "Q3",
+            "fy": 2026,
+            "end": "2026-09-30",
+            "val": 2.12,
+            "accn": "0001652044-26-000084",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2026-10-29",
+            "frame": "CY2026Q3",
+            "start": "2026-07-01",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2025-07-01",
+            "end": "2025-09-30",
+            "val": 2.87,
+            "accn": "0001652044-26-000084",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-29",
+            "frame": "CY2025Q3"
+          },
+          "sameAccessionPairExists": true
+        },
+        {
+          "end": "2026-06-30",
+          "eps": 9.11,
+          "growth": 294.37229437,
+          "current": {
+            "fp": "Q2",
+            "fy": 2026,
+            "end": "2026-06-30",
+            "val": 9.11,
+            "accn": "0001652044-26-000071",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2026-07-23",
+            "frame": "CY2026Q2",
+            "start": "2026-04-01",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2025-04-01",
+            "end": "2025-06-30",
+            "val": 2.31,
+            "accn": "0001652044-26-000071",
+            "fy": 2026,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-07-23",
+            "frame": "CY2025Q2"
+          },
+          "sameAccessionPairExists": true
+        },
+        {
+          "end": "2026-03-31",
+          "eps": 5.11,
+          "growth": 81.85053381,
+          "current": {
+            "fp": "Q1",
+            "fy": 2026,
+            "end": "2026-03-31",
+            "val": 5.11,
+            "accn": "0001652044-26-000048",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2026-04-30",
+            "frame": "CY2026Q1",
+            "start": "2026-01-01",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2025-01-01",
+            "end": "2025-03-31",
+            "val": 2.81,
+            "accn": "0001652044-26-000048",
+            "fy": 2026,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2026-04-30",
+            "frame": "CY2025Q1"
+          },
+          "sameAccessionPairExists": true
+        },
+        {
+          "end": "2025-09-30",
+          "eps": 2.87,
+          "growth": 35.37735849,
+          "current": {
+            "fp": "Q3",
+            "fy": 2026,
+            "end": "2025-09-30",
+            "val": 2.87,
+            "accn": "0001652044-26-000084",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2026-10-29",
+            "frame": "CY2025Q3",
+            "start": "2025-07-01",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2024-07-01",
+            "end": "2024-09-30",
+            "val": 2.12,
+            "accn": "0001652044-25-000091",
+            "fy": 2025,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2025-10-30",
+            "frame": "CY2024Q3"
+          },
+          "sameAccessionPairExists": false
+        },
+        {
+          "end": "2025-06-30",
+          "eps": 2.31,
+          "growth": 22.22222222,
+          "current": {
+            "fp": "Q2",
+            "fy": 2026,
+            "end": "2025-06-30",
+            "val": 2.31,
+            "accn": "0001652044-26-000071",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2026-07-23",
+            "frame": "CY2025Q2",
+            "start": "2025-04-01",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2024-04-01",
+            "end": "2024-06-30",
+            "val": 1.89,
+            "accn": "0001652044-25-000062",
+            "fy": 2025,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2025-07-24",
+            "frame": "CY2024Q2"
+          },
+          "sameAccessionPairExists": false
+        },
+        {
+          "end": "2025-03-31",
+          "eps": 2.81,
+          "growth": 48.67724868,
+          "current": {
+            "fp": "Q1",
+            "fy": 2026,
+            "end": "2025-03-31",
+            "val": 2.81,
+            "accn": "0001652044-26-000048",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2026-04-30",
+            "frame": "CY2025Q1",
+            "start": "2025-01-01",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2024-01-01",
+            "end": "2024-03-31",
+            "val": 1.89,
+            "accn": "0001652044-25-000043",
+            "fy": 2025,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2025-04-25",
+            "frame": "CY2024Q1"
+          },
+          "sameAccessionPairExists": false
+        },
+        {
+          "end": "2024-09-30",
+          "eps": 2.12,
+          "growth": 36.77419355,
+          "current": {
+            "fp": "Q3",
+            "fy": 2025,
+            "end": "2024-09-30",
+            "val": 2.12,
+            "accn": "0001652044-25-000091",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2025-10-30",
+            "frame": "CY2024Q3",
+            "start": "2024-07-01",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2023-07-01",
+            "end": "2023-09-30",
+            "val": 1.55,
+            "accn": "0001652044-24-000118",
+            "fy": 2024,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2024-10-30",
+            "frame": "CY2023Q3"
+          },
+          "sameAccessionPairExists": false
+        },
+        {
+          "end": "2024-06-30",
+          "eps": 1.89,
+          "growth": 31.25,
+          "current": {
+            "fp": "Q2",
+            "fy": 2025,
+            "end": "2024-06-30",
+            "val": 1.89,
+            "accn": "0001652044-25-000062",
+            "form": "10-Q",
+            "unit": "USD/shares",
+            "filed": "2025-07-24",
+            "frame": "CY2024Q2",
+            "start": "2024-04-01",
+            "concept": "us-gaap:EarningsPerShareDiluted"
+          },
+          "prior": {
+            "start": "2023-04-01",
+            "end": "2023-06-30",
+            "val": 1.44,
+            "accn": "0001652044-24-000079",
+            "fy": 2024,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2024-07-24",
+            "frame": "CY2023Q2"
+          },
+          "sameAccessionPairExists": false
+        }
+      ],
+      "quarterSummary": [
+        {
+          "fy": 2026,
+          "q": 3,
+          "start": "2026-07-01",
+          "end": "2026-09-30",
+          "days": 92,
+          "values": {
+            "revenue": 127577000000,
+            "revenueGrowth": 24.65264886,
+            "eps": 2.12,
+            "epsGrowth": -26.13240418,
+            "grossMargin": 59.69571318,
+            "operatingMargin": 31.80510594,
+            "netMargin": 20.74668631,
+            "roe": null,
+            "operatingCashFlow": 42290000000,
+            "capex": 51355000000,
+            "fcf": -9065000000,
+            "cash": 56334000000,
+            "marketableSecurities": 208764000000,
+            "totalDebt": 126118000000,
+            "currentRatio": 2.78559267,
+            "debtToEquity": 0.18613857,
+            "stockRepurchases": 0,
+            "dilutedShares": 12368000000,
+            "dilutedSharesGrowth": 1.35212653,
+            "dividendsPerShare": 0.22,
+            "dpsGrowth": 4.76190476
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "ytd_difference",
+            "capex": "ytd_difference",
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": "reported",
+            "dividendsPerShare": "reported"
+          }
+        },
+        {
+          "fy": 2026,
+          "q": 2,
+          "start": "2026-04-01",
+          "end": "2026-06-30",
+          "days": 91,
+          "values": {
+            "revenue": 119796000000,
+            "revenueGrowth": 24.23362509,
+            "eps": 9.11,
+            "epsGrowth": 294.37229437,
+            "grossMargin": 61.64896992,
+            "operatingMargin": 34.03285585,
+            "netMargin": 93.65337741,
+            "roe": null,
+            "operatingCashFlow": 39069000000,
+            "capex": 44924000000,
+            "fcf": -5855000000,
+            "cash": 55911000000,
+            "marketableSecurities": 186563000000,
+            "totalDebt": 100164000000,
+            "currentRatio": 2.72398125,
+            "debtToEquity": 0.15638896,
+            "stockRepurchases": 0,
+            "dilutedShares": 12309000000,
+            "dilutedSharesGrowth": 0.90998524,
+            "dividendsPerShare": 0.22,
+            "dpsGrowth": 4.76190476
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "ytd_difference",
+            "capex": "ytd_difference",
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": "reported",
+            "dividendsPerShare": "reported"
+          }
+        },
+        {
+          "fy": 2026,
+          "q": 1,
+          "start": "2026-01-01",
+          "end": "2026-03-31",
+          "days": 90,
+          "values": {
+            "revenue": 109896000000,
+            "revenueGrowth": 21.79001263,
+            "eps": 5.11,
+            "epsGrowth": 81.85053381,
+            "grossMargin": 62.44540293,
+            "operatingMargin": 36.12142389,
+            "netMargin": 56.94292786,
+            "roe": null,
+            "operatingCashFlow": 45790000000,
+            "capex": 35674000000,
+            "fcf": 10116000000,
+            "cash": 38063000000,
+            "marketableSecurities": 88777000000,
+            "totalDebt": null,
+            "currentRatio": 1.92244667,
+            "debtToEquity": null,
+            "stockRepurchases": 0,
+            "dilutedShares": 12238000000,
+            "dilutedSharesGrowth": -0.43120983,
+            "dividendsPerShare": 0.21,
+            "dpsGrowth": 5
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "reported",
+            "capex": "reported",
+            "stockRepurchases": "reported",
+            "dilutedShares": "reported",
+            "dividendsPerShare": "reported"
+          }
+        },
+        {
+          "fy": 2025,
+          "q": 4,
+          "start": "2025-10-01",
+          "end": "2025-12-31",
+          "days": 92,
+          "values": {
+            "revenue": 113829000000,
+            "revenueGrowth": 17.99541822,
+            "eps": null,
+            "epsGrowth": null,
+            "grossMargin": 59.79319857,
+            "operatingMargin": 31.56840524,
+            "netMargin": 30.26908784,
+            "roe": null,
+            "operatingCashFlow": 52402000000,
+            "capex": 27851000000,
+            "fcf": 24551000000,
+            "cash": 30708000000,
+            "marketableSecurities": 96135000000,
+            "totalDebt": 48543000000,
+            "currentRatio": 2.00533359,
+            "debtToEquity": 0.11689644,
+            "stockRepurchases": 5499000000,
+            "dilutedShares": null,
+            "dilutedSharesGrowth": null,
+            "dividendsPerShare": null,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "ytd_difference",
+            "eps": null,
+            "operatingCashFlow": "ytd_difference",
+            "capex": "ytd_difference",
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": null,
+            "dividendsPerShare": null
+          }
+        },
+        {
+          "fy": 2025,
+          "q": 3,
+          "start": "2025-07-01",
+          "end": "2025-09-30",
+          "days": 92,
+          "values": {
+            "revenue": 102346000000,
+            "revenueGrowth": 15.94915485,
+            "eps": 2.87,
+            "epsGrowth": 35.37735849,
+            "grossMargin": 59.57927032,
+            "operatingMargin": 30.51218416,
+            "netMargin": 34.17720282,
+            "roe": null,
+            "operatingCashFlow": 48414000000,
+            "capex": 23953000000,
+            "fcf": 24461000000,
+            "cash": 23090000000,
+            "marketableSecurities": 75406000000,
+            "totalDebt": 26602000000,
+            "currentRatio": 1.747333,
+            "debtToEquity": 0.06876265,
+            "stockRepurchases": 11504000000,
+            "dilutedShares": 12203000000,
+            "dilutedSharesGrowth": -1.73927047,
+            "dividendsPerShare": 0.21,
+            "dpsGrowth": 5
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "ytd_difference",
+            "capex": "ytd_difference",
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": "reported",
+            "dividendsPerShare": "reported"
+          }
+        },
+        {
+          "fy": 2025,
+          "q": 2,
+          "start": "2025-04-01",
+          "end": "2025-06-30",
+          "days": 91,
+          "values": {
+            "revenue": 96428000000,
+            "revenueGrowth": 13.79009228,
+            "eps": 2.31,
+            "epsGrowth": 22.22222222,
+            "grossMargin": 59.5148712,
+            "operatingMargin": 32.42937736,
+            "netMargin": 29.24046957,
+            "roe": null,
+            "operatingCashFlow": 27747000000,
+            "capex": 22446000000,
+            "fcf": 5301000000,
+            "cash": 21036000000,
+            "marketableSecurities": 74112000000,
+            "totalDebt": 27607000000,
+            "currentRatio": 1.90374528,
+            "debtToEquity": 0.07606994,
+            "stockRepurchases": 13238000000,
+            "dilutedShares": 12198000000,
+            "dilutedSharesGrowth": -2.37695078,
+            "dividendsPerShare": 0.21,
+            "dpsGrowth": 5
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "ytd_difference",
+            "capex": "ytd_difference",
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": "reported",
+            "dividendsPerShare": "reported"
+          }
+        },
+        {
+          "fy": 2025,
+          "q": 1,
+          "start": "2025-01-01",
+          "end": "2025-03-31",
+          "days": 90,
+          "values": {
+            "revenue": 90234000000,
+            "revenueGrowth": 12.03764636,
+            "eps": 2.81,
+            "epsGrowth": 48.67724868,
+            "grossMargin": 59.70365937,
+            "operatingMargin": 33.91847862,
+            "netMargin": 38.27825432,
+            "roe": null,
+            "operatingCashFlow": 36150000000,
+            "capex": 17197000000,
+            "fcf": 18953000000,
+            "cash": 23264000000,
+            "marketableSecurities": 72064000000,
+            "totalDebt": 14386000000,
+            "currentRatio": 1.76808432,
+            "debtToEquity": 0.0416663,
+            "stockRepurchases": 15068000000,
+            "dilutedShares": 12291000000,
+            "dilutedSharesGrowth": -1.88393071,
+            "dividendsPerShare": 0.2,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "reported",
+            "capex": "reported",
+            "stockRepurchases": "reported",
+            "dilutedShares": "reported",
+            "dividendsPerShare": "reported"
+          }
+        },
+        {
+          "fy": 2024,
+          "q": 4,
+          "start": "2024-10-01",
+          "end": "2024-12-31",
+          "days": 92,
+          "values": {
+            "revenue": 96469000000,
+            "revenueGrowth": 11.77036265,
+            "eps": null,
+            "epsGrowth": null,
+            "grossMargin": 57.90046543,
+            "operatingMargin": 32.10565052,
+            "netMargin": 27.50728213,
+            "roe": null,
+            "operatingCashFlow": 39113000000,
+            "capex": 14276000000,
+            "fcf": 24837000000,
+            "cash": 23466000000,
+            "marketableSecurities": 72191000000,
+            "totalDebt": 14182000000,
+            "currentRatio": 1.8369314,
+            "debtToEquity": 0.04362565,
+            "stockRepurchases": 15551000000,
+            "dilutedShares": null,
+            "dilutedSharesGrowth": null,
+            "dividendsPerShare": null,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "ytd_difference",
+            "eps": null,
+            "operatingCashFlow": "ytd_difference",
+            "capex": "ytd_difference",
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": null,
+            "dividendsPerShare": null
+          }
+        },
+        {
+          "fy": 2024,
+          "q": 3,
+          "start": "2024-07-01",
+          "end": "2024-09-30",
+          "days": 92,
+          "values": {
+            "revenue": 88268000000,
+            "revenueGrowth": 15.09264209,
+            "eps": 2.12,
+            "epsGrowth": 36.77419355,
+            "grossMargin": 58.67811664,
+            "operatingMargin": 32.31182308,
+            "netMargin": 29.79675534,
+            "roe": null,
+            "operatingCashFlow": 30698000000,
+            "capex": 13061000000,
+            "fcf": 17637000000,
+            "cash": 19959000000,
+            "marketableSecurities": 73271000000,
+            "totalDebt": 12879000000,
+            "currentRatio": 1.94969246,
+            "debtToEquity": 0.04100039,
+            "stockRepurchases": 15291000000,
+            "dilutedShares": 12419000000,
+            "dilutedSharesGrowth": -2.18178954,
+            "dividendsPerShare": 0.2,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "ytd_difference",
+            "capex": "ytd_difference",
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": "reported",
+            "dividendsPerShare": "reported"
+          }
+        },
+        {
+          "fy": 2024,
+          "q": 2,
+          "start": "2024-04-01",
+          "end": "2024-06-30",
+          "days": 91,
+          "values": {
+            "revenue": 84742000000,
+            "revenueGrowth": 13.5890837,
+            "eps": 1.89,
+            "epsGrowth": 31.25,
+            "grossMargin": 58.09987963,
+            "operatingMargin": 32.36293691,
+            "netMargin": 27.8716575,
+            "roe": null,
+            "operatingCashFlow": 26640000000,
+            "capex": 13186000000,
+            "fcf": 13454000000,
+            "cash": 27225000000,
+            "marketableSecurities": 73500000000,
+            "totalDebt": 11876000000,
+            "currentRatio": 2.07917806,
+            "debtToEquity": 0.03948755,
+            "stockRepurchases": 15684000000,
+            "dilutedShares": 12495000000,
+            "dilutedSharesGrowth": -2.10748982,
+            "dividendsPerShare": 0.2,
+            "dpsGrowth": null
+          },
+          "methods": {
+            "revenue": "reported",
+            "eps": "reported",
+            "operatingCashFlow": "ytd_difference",
+            "capex": "ytd_difference",
+            "stockRepurchases": "ytd_difference",
+            "dilutedShares": "reported",
+            "dividendsPerShare": "reported"
+          }
+        }
+      ],
+      "chartsChecked": 15,
+      "apiSerializationAndReactMatch": true,
+      "latestSources": {
+        "eps": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 2.12,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD/shares",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3",
+              "start": "2026-07-01",
+              "concept": "us-gaap:EarningsPerShareDiluted"
+            }
+          ],
+          "method": "reported"
+        },
+        "fcf": {
+          "inputs": [
+            {
+              "items": [
+                {
+                  "fp": "Q3",
+                  "fy": 2026,
+                  "end": "2026-09-30",
+                  "val": 127149000000,
+                  "accn": "0001652044-26-000084",
+                  "form": "10-Q",
+                  "unit": "USD",
+                  "filed": "2026-10-29",
+                  "start": "2026-01-01",
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+                },
+                {
+                  "fp": "Q2",
+                  "fy": 2026,
+                  "end": "2026-06-30",
+                  "val": 84859000000,
+                  "accn": "0001652044-26-000071",
+                  "form": "10-Q",
+                  "unit": "USD",
+                  "filed": "2026-07-23",
+                  "start": "2026-01-01",
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+                }
+              ],
+              "method": "ytd_difference"
+            },
+            {
+              "items": [
+                {
+                  "fp": "Q3",
+                  "fy": 2026,
+                  "end": "2026-09-30",
+                  "val": 131953000000,
+                  "accn": "0001652044-26-000084",
+                  "form": "10-Q",
+                  "unit": "USD",
+                  "filed": "2026-10-29",
+                  "start": "2026-01-01",
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+                },
+                {
+                  "fp": "Q2",
+                  "fy": 2026,
+                  "end": "2026-06-30",
+                  "val": 80598000000,
+                  "accn": "0001652044-26-000071",
+                  "form": "10-Q",
+                  "unit": "USD",
+                  "filed": "2026-07-23",
+                  "start": "2026-01-01",
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+                }
+              ],
+              "method": "ytd_difference"
+            }
+          ],
+          "method": "calculated",
+          "formula": "operatingCashFlow-capex"
+        },
+        "cash": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 56334000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:CashAndCashEquivalentsAtCarryingValue"
+            }
+          ],
+          "method": "reported"
+        },
+        "capex": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 131953000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "start": "2026-01-01",
+              "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+            },
+            {
+              "fp": "Q2",
+              "fy": 2026,
+              "end": "2026-06-30",
+              "val": 80598000000,
+              "accn": "0001652044-26-000071",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-07-23",
+              "start": "2026-01-01",
+              "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+            }
+          ],
+          "method": "ytd_difference"
+        },
+        "assets": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 1003312000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:Assets"
+            }
+          ],
+          "method": "reported"
+        },
+        "equity": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 677549000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:StockholdersEquity"
+            }
+          ],
+          "method": "reported"
+        },
+        "revenue": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 127577000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3",
+              "start": "2026-07-01",
+              "concept": "us-gaap:Revenues"
+            }
+          ],
+          "method": "reported"
+        },
+        "dpsGrowth": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 0.22,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD/shares",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3",
+              "start": "2026-07-01",
+              "concept": "us-gaap:CommonStockDividendsPerShareDeclared"
+            },
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2025-09-30",
+              "val": 0.21,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD/shares",
+              "filed": "2026-10-29",
+              "frame": "CY2025Q3",
+              "start": "2025-07-01",
+              "concept": "us-gaap:CommonStockDividendsPerShareDeclared"
+            }
+          ],
+          "method": "calculated",
+          "policy": "direct same-duration observations in same accession matching latest values",
+          "formula": "(dividendsPerShare/priorYearDividendsPerShare-1)*100",
+          "comparisonPeriodEnd": "2025-09-30"
+        },
+        "netIncome": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 26468000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3",
+              "start": "2026-07-01",
+              "concept": "us-gaap:NetIncomeLoss"
+            }
+          ],
+          "method": "reported"
+        },
+        "totalDebt": {
+          "inputs": [
+            {
+              "items": [
+                {
+                  "fp": "Q3",
+                  "fy": 2026,
+                  "end": "2026-09-30",
+                  "val": 0,
+                  "accn": "0001652044-26-000084",
+                  "form": "10-Q",
+                  "unit": "USD",
+                  "filed": "2026-10-29",
+                  "frame": "CY2026Q3I",
+                  "concept": "us-gaap:CommercialPaper"
+                },
+                {
+                  "fp": "Q3",
+                  "fy": 2026,
+                  "end": "2026-09-30",
+                  "val": 1016000000,
+                  "accn": "0001652044-26-000084",
+                  "form": "10-Q",
+                  "unit": "USD",
+                  "filed": "2026-10-29",
+                  "frame": "CY2026Q3I",
+                  "concept": "us-gaap:LongTermDebtCurrent"
+                }
+              ],
+              "method": "sum_current_borrowings"
+            },
+            {
+              "items": [
+                {
+                  "fp": "Q3",
+                  "fy": 2026,
+                  "end": "2026-09-30",
+                  "val": 125102000000,
+                  "accn": "0001652044-26-000084",
+                  "form": "10-Q",
+                  "unit": "USD",
+                  "filed": "2026-10-29",
+                  "frame": "CY2026Q3I",
+                  "concept": "us-gaap:LongTermDebtNoncurrent"
+                }
+              ],
+              "method": "reported"
+            }
+          ],
+          "method": "calculated",
+          "formula": "currentDebt+noncurrentDebt"
+        },
+        "capexToOcf": {
+          "inputs": [
+            {
+              "items": [
+                {
+                  "fp": "Q3",
+                  "fy": 2026,
+                  "end": "2026-09-30",
+                  "val": 131953000000,
+                  "accn": "0001652044-26-000084",
+                  "form": "10-Q",
+                  "unit": "USD",
+                  "filed": "2026-10-29",
+                  "start": "2026-01-01",
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+                },
+                {
+                  "fp": "Q2",
+                  "fy": 2026,
+                  "end": "2026-06-30",
+                  "val": 80598000000,
+                  "accn": "0001652044-26-000071",
+                  "form": "10-Q",
+                  "unit": "USD",
+                  "filed": "2026-07-23",
+                  "start": "2026-01-01",
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment"
+                }
+              ],
+              "method": "ytd_difference"
+            },
+            {
+              "items": [
+                {
+                  "fp": "Q3",
+                  "fy": 2026,
+                  "end": "2026-09-30",
+                  "val": 127149000000,
+                  "accn": "0001652044-26-000084",
+                  "form": "10-Q",
+                  "unit": "USD",
+                  "filed": "2026-10-29",
+                  "start": "2026-01-01",
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+                },
+                {
+                  "fp": "Q2",
+                  "fy": 2026,
+                  "end": "2026-06-30",
+                  "val": 84859000000,
+                  "accn": "0001652044-26-000071",
+                  "form": "10-Q",
+                  "unit": "USD",
+                  "filed": "2026-07-23",
+                  "start": "2026-01-01",
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+                }
+              ],
+              "method": "ytd_difference"
+            }
+          ],
+          "method": "calculated",
+          "formula": "capex/operatingCashFlow*100"
+        },
+        "basicShares": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 12256000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "shares",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3",
+              "start": "2026-07-01",
+              "concept": "us-gaap:WeightedAverageNumberOfSharesOutstandingBasic"
+            }
+          ],
+          "method": "reported"
+        },
+        "grossProfit": {
+          "inputs": [
+            {
+              "items": [
+                {
+                  "fp": "Q3",
+                  "fy": 2026,
+                  "end": "2026-09-30",
+                  "val": 127577000000,
+                  "accn": "0001652044-26-000084",
+                  "form": "10-Q",
+                  "unit": "USD",
+                  "filed": "2026-10-29",
+                  "frame": "CY2026Q3",
+                  "start": "2026-07-01",
+                  "concept": "us-gaap:Revenues"
+                }
+              ],
+              "method": "reported"
+            },
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 51419000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3",
+              "start": "2026-07-01",
+              "concept": "us-gaap:CostOfRevenue"
+            }
+          ],
+          "method": "calculated",
+          "formula": "revenue-costOfRevenue",
+          "costMethod": "reported"
+        },
+        "liabilities": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 325763000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:Liabilities"
+            }
+          ],
+          "method": "reported"
+        },
+        "longTermDebt": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 125102000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:LongTermDebtNoncurrent"
+            }
+          ],
+          "method": "reported"
+        },
+        "currentAssets": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 374665000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:AssetsCurrent"
+            }
+          ],
+          "method": "reported"
+        },
+        "dilutedShares": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 12368000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "shares",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3",
+              "start": "2026-07-01",
+              "concept": "us-gaap:WeightedAverageNumberOfDilutedSharesOutstanding"
+            }
+          ],
+          "method": "reported"
+        },
+        "shortTermDebt": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 0,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:CommercialPaper"
+            },
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 1016000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:LongTermDebtCurrent"
+            }
+          ],
+          "method": "sum_current_borrowings"
+        },
+        "operatingIncome": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 40576000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3",
+              "start": "2026-07-01",
+              "concept": "us-gaap:OperatingIncomeLoss"
+            }
+          ],
+          "method": "reported"
+        },
+        "stockRepurchases": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 0,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "start": "2026-01-01",
+              "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+            },
+            {
+              "fp": "Q2",
+              "fy": 2026,
+              "end": "2026-06-30",
+              "val": 0,
+              "accn": "0001652044-26-000071",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-07-23",
+              "start": "2026-01-01",
+              "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock"
+            }
+          ],
+          "method": "ytd_difference"
+        },
+        "calculationPolicy": {
+          "fcf": "operatingCashFlow-capex",
+          "roa": "annual netIncome/average beginning and ending assets",
+          "roe": "annual netIncome/average beginning and ending equity",
+          "version": 1,
+          "totalDebt": "shortTermDebt+longTermDebt",
+          "percentages": "percentage_points",
+          "quarterlyEps": "reported independent quarter only"
+        },
+        "dividendsPerShare": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 0.22,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD/shares",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3",
+              "start": "2026-07-01",
+              "concept": "us-gaap:CommonStockDividendsPerShareDeclared"
+            }
+          ],
+          "method": "reported"
+        },
+        "operatingCashFlow": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 127149000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "start": "2026-01-01",
+              "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+            },
+            {
+              "fp": "Q2",
+              "fy": 2026,
+              "end": "2026-06-30",
+              "val": 84859000000,
+              "accn": "0001652044-26-000071",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-07-23",
+              "start": "2026-01-01",
+              "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+            }
+          ],
+          "method": "ytd_difference"
+        },
+        "sharesOutstanding": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 12294000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "shares",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:CommonStockSharesOutstanding"
+            }
+          ],
+          "method": "reported"
+        },
+        "currentLiabilities": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 134501000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:LiabilitiesCurrent"
+            }
+          ],
+          "method": "reported"
+        },
+        "dilutedSharesGrowth": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 12368000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "shares",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3",
+              "start": "2026-07-01",
+              "concept": "us-gaap:WeightedAverageNumberOfDilutedSharesOutstanding"
+            },
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2025-09-30",
+              "val": 12203000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "shares",
+              "filed": "2026-10-29",
+              "frame": "CY2025Q3",
+              "start": "2025-07-01",
+              "concept": "us-gaap:WeightedAverageNumberOfDilutedSharesOutstanding"
+            }
+          ],
+          "method": "calculated",
+          "policy": "direct same-duration observations in same accession; split basis as reported",
+          "formula": "(dilutedShares/priorYearDilutedShares-1)*100"
+        },
+        "marketableSecurities": {
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 208764000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:MarketableSecuritiesCurrent"
+            }
+          ],
+          "method": "reported"
+        },
+        "verifiedLiquidAssets": {
+          "cash": 56334000000,
+          "items": [
+            {
+              "fp": "Q3",
+              "fy": 2026,
+              "end": "2026-09-30",
+              "val": 265098000000,
+              "accn": "0001652044-26-000084",
+              "form": "10-Q",
+              "unit": "USD",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3I",
+              "concept": "us-gaap:CashCashEquivalentsAndShortTermInvestments"
+            }
+          ],
+          "scope": "cash equivalents plus separately classified current marketable securities; excludes noncurrent investments",
+          "amount": 265098000000,
+          "method": "reconciled_reported_total",
+          "securities": 208764000000
+        },
+        "financialHealthPolicy": {
+          "debt": "carrying amounts; no face value, fair value, or unseparated noncurrent lease obligations",
+          "version": 1,
+          "missingDebt": null,
+          "snapshotAccession": "0001652044-26-000084"
+        },
+        "revenueComparisonPolicy": "same concept or reconciled revenue concepts with >=2 matching overlapping periods, no conflicts, USD only",
+        "growthComparisonPeriodEnd": "2025-09-30"
+      },
+      "normalizedLatestShareholderSources": {
+        "dilutedShares": {
+          "method": "reported",
+          "items": [
+            {
+              "concept": "us-gaap:WeightedAverageNumberOfDilutedSharesOutstanding",
+              "unit": "shares",
+              "start": "2026-07-01",
+              "end": "2026-09-30",
+              "val": 12368000000,
+              "accn": "0001652044-26-000084",
+              "fy": 2026,
+              "fp": "Q3",
+              "form": "10-Q",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3"
+            }
+          ]
+        },
+        "dilutedSharesGrowth": {
+          "method": "calculated",
+          "formula": "(dilutedShares/priorYearDilutedShares-1)*100",
+          "policy": "direct same-duration observations in same accession; split basis as reported",
+          "items": [
+            {
+              "concept": "us-gaap:WeightedAverageNumberOfDilutedSharesOutstanding",
+              "unit": "shares",
+              "start": "2026-07-01",
+              "end": "2026-09-30",
+              "val": 12368000000,
+              "accn": "0001652044-26-000084",
+              "fy": 2026,
+              "fp": "Q3",
+              "form": "10-Q",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3"
+            },
+            {
+              "concept": "us-gaap:WeightedAverageNumberOfDilutedSharesOutstanding",
+              "unit": "shares",
+              "start": "2025-07-01",
+              "end": "2025-09-30",
+              "val": 12203000000,
+              "accn": "0001652044-26-000084",
+              "fy": 2026,
+              "fp": "Q3",
+              "form": "10-Q",
+              "filed": "2026-10-29",
+              "frame": "CY2025Q3"
+            }
+          ]
+        },
+        "dividendsPerShare": {
+          "method": "reported",
+          "items": [
+            {
+              "concept": "us-gaap:CommonStockDividendsPerShareDeclared",
+              "unit": "USD/shares",
+              "start": "2026-07-01",
+              "end": "2026-09-30",
+              "val": 0.22,
+              "accn": "0001652044-26-000084",
+              "fy": 2026,
+              "fp": "Q3",
+              "form": "10-Q",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3"
+            }
+          ]
+        },
+        "dpsGrowth": {
+          "method": "calculated",
+          "formula": "(dividendsPerShare/priorYearDividendsPerShare-1)*100",
+          "items": [
+            {
+              "concept": "us-gaap:CommonStockDividendsPerShareDeclared",
+              "unit": "USD/shares",
+              "start": "2026-07-01",
+              "end": "2026-09-30",
+              "val": 0.22,
+              "accn": "0001652044-26-000084",
+              "fy": 2026,
+              "fp": "Q3",
+              "form": "10-Q",
+              "filed": "2026-10-29",
+              "frame": "CY2026Q3"
+            },
+            {
+              "concept": "us-gaap:CommonStockDividendsPerShareDeclared",
+              "unit": "USD/shares",
+              "start": "2025-07-01",
+              "end": "2025-09-30",
+              "val": 0.21,
+              "accn": "0001652044-26-000084",
+              "fy": 2026,
+              "fp": "Q3",
+              "form": "10-Q",
+              "filed": "2026-10-29",
+              "frame": "CY2025Q3"
+            }
+          ],
+          "comparisonPeriodEnd": "2025-09-30",
+          "policy": "direct same-duration observations in same accession matching latest values"
+        }
+      },
+      "capexCoverage": {
+        "PaymentsToAcquirePropertyPlantAndEquipment": {
+          "definition": "The cash outflow associated with the acquisition of long-lived, physical assets that are used in the normal conduct of business to produce goods and services and not intended for resale; includes cash outflows to pay for construction of self-constructed assets.",
+          "currentYearFacts": [
+            {
+              "start": "2026-01-01",
+              "end": "2026-06-30",
+              "val": 80598000000,
+              "accn": "0001652044-26-000071",
+              "fy": 2026,
+              "fp": "Q2",
+              "form": "10-Q",
+              "filed": "2026-07-23"
+            },
+            {
+              "start": "2026-01-01",
+              "end": "2026-09-30",
+              "val": 131953000000,
+              "accn": "0001652044-26-000084",
+              "fy": 2026,
+              "fp": "Q3",
+              "form": "10-Q",
+              "filed": "2026-10-29"
+            }
+          ]
+        },
+        "PaymentsToAcquireProductiveAssets": {
+          "definition": null,
+          "currentYearFacts": []
+        }
+      }
+    }
+  ],
+  "databaseUnchanged": true,
+  "databaseFingerprint": "38ca7eaf3927ab626d1def1131440f4b2f4683359949142b18dfa327abdcaecb"
+}

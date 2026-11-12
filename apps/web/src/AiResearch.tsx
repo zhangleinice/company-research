@@ -1,5 +1,7 @@
+import { ManagementSummary } from './ManagementSummary.js';
+import { BusinessSummary } from './BusinessSummary.js';
 import { useEffect, useState } from 'react';
-import { Alert, Card, Space, Spin, Tag, Typography } from 'antd';
+import { Alert, Card, Space, Spin, Typography } from 'antd';
 import type { AiResearchKind, AiResearchState } from '@company-research/shared';
 import { fetchAiResearch } from './api.js';
 
@@ -79,33 +81,11 @@ export function ResearchCard({
                 SEC 原始年报
               </Typography.Link>
             </Space>
-            {summary.summaryJson.groups.map((g, i) => (
-              <section key={g.topic}>
-                <Typography.Title level={5}>
-                  {i + 1}. {g.topic}
-                </Typography.Title>
-                {!g.findings.length && (
-                  <Typography.Text type="secondary">
-                    未找到相关披露
-                  </Typography.Text>
-                )}
-                {g.findings.map((f, j) => (
-                  <Typography.Paragraph key={j}>
-                    <Tag>{f.kind}</Tag>
-                    {f.text}{' '}
-                    <Typography.Text type="secondary">
-                      〔
-                      {[
-                        ...new Set(
-                          f.evidence.map((e) => e.paragraphId.split(':')[0]),
-                        ),
-                      ].join('、')}
-                      〕
-                    </Typography.Text>
-                  </Typography.Paragraph>
-                ))}
-              </section>
-            ))}
+            {kind === 'business' ? (
+              <BusinessSummary summary={summary.summaryJson} />
+            ) : (
+              <ManagementSummary summary={summary.summaryJson} />
+            )}
           </>
         )}
       </Space>

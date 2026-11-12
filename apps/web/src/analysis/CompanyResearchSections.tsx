@@ -1,3 +1,4 @@
+import { RevenueBreakdown } from '../RevenueBreakdown.js';
 import { ResearchCard } from '../AiResearch.js';
 import {
   Alert,
@@ -108,6 +109,7 @@ export function CompanyResearchSections({
         updating={updating}
       />
       <FinancialAnalysis detail={detail} mode={mode} />
+      <RevenueBreakdown key={detail.cik} cik={detail.cik} revision={revision} />
       <ResearchCard
         cik={detail.cik}
         kind="management"

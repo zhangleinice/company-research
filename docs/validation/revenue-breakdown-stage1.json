@@ -1,0 +1,72 @@
+[
+  {
+    "name": "alphabet",
+    "metadata": {
+      "cik": "0001652044",
+      "accessionNumber": "0001652044-26-000018",
+      "fiscalYear": 2025,
+      "reportDate": "2025-12-31",
+      "filingDate": "2026-02-05",
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+    },
+    "candidates": 38,
+    "duplicates": 9,
+    "conflicts": 0,
+    "dimensions": [
+      "{http://fasb.org/srt/2025}ProductOrServiceAxis",
+      "{http://fasb.org/us-gaap/2025}StatementBusinessSegmentsAxis",
+      "{http://fasb.org/srt/2025}StatementGeographicalAxis",
+      "{http://fasb.org/us-gaap/2025}ReclassificationOutOfAccumulatedOtherComprehensiveIncomeAxis",
+      "{http://fasb.org/us-gaap/2025}StatementEquityComponentsAxis"
+    ],
+    "withPresentationRole": 38,
+    "productionApproved": 0,
+    "stageTwoAllowed": false
+  },
+  {
+    "name": "apple",
+    "metadata": {
+      "cik": "0000320193",
+      "accessionNumber": "0000320193-26-000026",
+      "fiscalYear": 2026,
+      "reportDate": "2026-09-26",
+      "filingDate": "2026-11-03",
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+    },
+    "candidates": 45,
+    "duplicates": 3,
+    "conflicts": 0,
+    "dimensions": [
+      "{http://fasb.org/srt/2026}ProductOrServiceAxis",
+      "{http://fasb.org/us-gaap/2026}StatementBusinessSegmentsAxis",
+      "{http://fasb.org/srt/2026}ConsolidationItemsAxis",
+      "{http://fasb.org/srt/2026}StatementGeographicalAxis"
+    ],
+    "withPresentationRole": 45,
+    "productionApproved": 0,
+    "stageTwoAllowed": false
+  },
+  {
+    "name": "nvidia",
+    "metadata": {
+      "cik": "0001045810",
+      "accessionNumber": "0001045810-26-000021",
+      "fiscalYear": 2026,
+      "reportDate": "2026-01-25",
+      "filingDate": "2026-02-25",
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
+    },
+    "candidates": 42,
+    "duplicates": 0,
+    "conflicts": 0,
+    "dimensions": [
+      "{http://fasb.org/srt/2025}ConsolidationItemsAxis",
+      "{http://fasb.org/us-gaap/2025}StatementBusinessSegmentsAxis",
+      "{http://fasb.org/srt/2025}StatementGeographicalAxis",
+      "{http://fasb.org/srt/2025}ProductOrServiceAxis"
+    ],
+    "withPresentationRole": 42,
+    "productionApproved": 0,
+    "stageTwoAllowed": false
+  }
+]

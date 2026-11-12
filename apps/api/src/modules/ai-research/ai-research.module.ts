@@ -1,3 +1,4 @@
+import { RevenueModule } from '../revenue/revenue.module';
 import {
   Module,
   Controller,
@@ -56,7 +57,7 @@ export class CompanyUpdateController {
   }
 }
 @Module({
-  imports: [SecModule, PrismaModule, CompanyModule],
+  imports: [SecModule, PrismaModule, CompanyModule, RevenueModule],
   controllers: [AiResearchController, CompanyUpdateController],
   providers: [AiResearchService, SummaryModel, CompanyUpdateService],
 })

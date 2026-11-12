@@ -1,5 +1,7 @@
+import { RevenueService } from '../revenue/revenue.service';
 import {
   Injectable,
+  Optional,
   BadGatewayException,
   ConflictException,
 } from '@nestjs/common';
@@ -14,7 +16,12 @@ import {
   PARSER_VERSION,
   type Sections,
 } from './filing-parser';
-import { SummaryModel, MODEL, PROMPT_VERSION } from './summary-model';
+import {
+  SummaryModel,
+  MODEL,
+  PROMPT_VERSION,
+  promptVersionFor,
+} from './summary-model';
 import type { SummaryKind } from './summary-schema';
 
 const json = (value: unknown) => value as Prisma.InputJsonValue;
@@ -31,15 +38,26 @@ export class AiResearchService {
     private readonly sec: SecService,
     private readonly client: SecClient,
     private readonly model: SummaryModel,
+    @Optional() private readonly revenue?: RevenueService,
   ) {}
   async state(cik: string, section: SummaryKind) {
-    const [summary, task] = await Promise.all([
+    const [currentSummary, task] = await Promise.all([
       this.db.aiSummary.findFirst({
-        where: { companyCik: cik, section, promptVersion: PROMPT_VERSION },
+        where: {
+          companyCik: cik,
+          section,
+          promptVersion: promptVersionFor(section),
+        },
         orderBy: [{ fiscalYear: 'desc' }, { updatedAt: 'desc' }],
       }),
       this.db.aiTask.findUnique({ where: { id: `${cik}:${section}` } }),
     ]);
+    const summary =
+      currentSummary ??
+      (await this.db.aiSummary.findFirst({
+        where: { companyCik: cik, section, promptVersion: PROMPT_VERSION },
+        orderBy: [{ fiscalYear: 'desc' }, { updatedAt: 'desc' }],
+      }));
     const running =
       task?.status === 'GENERATING' && task.leaseUntil > new Date();
     const expired = task?.status === 'GENERATING' && !running;
@@ -69,12 +87,14 @@ export class AiResearchService {
       });
       if (cached) return cached;
     }
-    const metadata = latest10K(
-      await this.client.getJson(
-        `https://data.sec.gov/submissions/CIK${cik}.json`,
-      ),
-      cik,
-    );
+    const metadata = this.revenue
+      ? await this.revenue.metadata(cik)
+      : latest10K(
+          await this.client.getJson(
+            `https://data.sec.gov/submissions/CIK${cik}.json`,
+          ),
+          cik,
+        );
     const where = {
       companyCik_accessionNumber_parserVersion: {
         companyCik: cik,
@@ -86,7 +106,14 @@ export class AiResearchService {
     if (cached && !refresh) return cached;
     let sections: Sections;
     try {
-      sections = extractSections(await this.client.getText(metadata.sourceUrl));
+      const html = this.revenue
+        ? await this.revenue.html(metadata)
+        : await this.client.getText(metadata.sourceUrl);
+      if (this.revenue)
+        await this.revenue
+          .ensure(cik, true, { metadata, html })
+          .catch(() => undefined);
+      sections = extractSections(html);
     } catch (error) {
       throw new BadGatewayException(
         error instanceof Error ? error.message : '10-K 提取失败',
@@ -170,10 +197,21 @@ export class AiResearchService {
           companyCik: cik,
           accessionNumber: metadata.accessionNumber,
           section,
-          promptVersion: PROMPT_VERSION,
+          promptVersion: promptVersionFor(section),
         },
       };
-      const cached = await this.db.aiSummary.findUnique({ where });
+      const cached =
+        (await this.db.aiSummary.findUnique({ where })) ??
+        (!force
+          ? await this.db.aiSummary.findUnique({
+              where: {
+                companyCik_accessionNumber_section_promptVersion: {
+                  ...where.companyCik_accessionNumber_section_promptVersion,
+                  promptVersion: PROMPT_VERSION,
+                },
+              },
+            })
+          : null);
       if (cached && !force) {
         await this.db.aiTask.updateMany({
           where: { id, token },
@@ -218,7 +256,7 @@ export class AiResearchService {
           companyCik: cik,
           section,
           model: modelId ?? MODEL,
-          promptVersion: PROMPT_VERSION,
+          promptVersion: promptVersionFor(section),
           summaryJson: json(summary),
           usage: json(usage),
         };

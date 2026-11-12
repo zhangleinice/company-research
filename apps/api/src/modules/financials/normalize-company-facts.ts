@@ -670,12 +670,71 @@ export function normalizeCompanyFacts(raw: unknown): {
           ['fcfGrowth', 'fcf'],
           ['netIncomeGrowth', 'netIncome'],
           ['sharesChange', 'sharesOutstanding'],
-        ] as [FinancialMetric, FinancialMetric][])
+        ] as [FinancialMetric, FinancialMetric][]) {
+          if (quarterly && metric === 'eps') continue;
           current[out] =
             comparable(current, prior, metric) &&
             (metric !== 'eps' || (current.eps !== null && current.eps > 0))
               ? growth(current[metric], prior[metric])
               : null;
+        }
+        if (quarterly) {
+          // A common concept/unit does not establish a common split basis.
+          // Both direct observations must co-occur in a filing and match the
+          // values selected for the displayed current/prior independent quarters.
+          const epsPair = (values.get('eps') ?? [])
+            .filter(
+              (x) =>
+                x.fact.start === current.periodStart &&
+                x.fact.end === current.periodEnd &&
+                x.fact.val === current.eps &&
+                x.fact.val > 0,
+            )
+            .sort(
+              (a, b) =>
+                b.fact.filed.localeCompare(a.fact.filed) ||
+                b.fact.accn.localeCompare(a.fact.accn),
+            )
+            .map((now) => ({
+              now,
+              before: pick(
+                'eps',
+                (x) =>
+                  x.concept === now.concept &&
+                  x.unit === now.unit &&
+                  x.fact.accn === now.fact.accn &&
+                  x.fact.filed === now.fact.filed &&
+                  x.fact.form === now.fact.form &&
+                  x.fact.start === prior.periodStart &&
+                  x.fact.end === prior.periodEnd &&
+                  x.fact.val === prior.eps &&
+                  x.fact.val > 0,
+              ),
+            }))
+            .find((pair) => pair.before);
+          current.epsGrowth = epsPair?.before
+            ? growth(epsPair.now.fact.val, epsPair.before.fact.val)
+            : null;
+          current.sources.epsGrowth = epsPair?.before
+            ? {
+                method: 'calculated',
+                formula: '(eps/priorYearEps-1)*100',
+                policy:
+                  'direct independent quarters in same accession matching selected EPS values',
+                comparisonPeriodEnd: prior.periodEnd,
+                items: [source(epsPair.now), source(epsPair.before)],
+              }
+            : {
+                method: 'unavailable',
+                reason:
+                  'No same-filing comparable pair matching selected independent-quarter EPS values',
+                comparisonPeriodEnd: prior.periodEnd,
+                inputs: [
+                  current.sources.eps ?? null,
+                  prior.sources.eps ?? null,
+                ],
+              };
+        }
         // Weighted averages are not additive. Compare direct observations from
         // the SAME filing, which also avoids comparing pre/post split bases.
         const pair = (values.get('dilutedShares') ?? [])
