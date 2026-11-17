@@ -117,3 +117,10 @@ export function fetchRevenueBreakdown(
     signal,
   );
 }
+
+export function fetchMergers(
+  page: number,
+  signal?: AbortSignal,
+): Promise<import('@company-research/shared').MergerListResponse> {
+  return requestJson(`/api/mergers?page=${page}&limit=10`, signal);
+}

@@ -232,3 +232,21 @@ export interface RevenueBreakdownResponse {
   extractedAt: string | null;
   groups: RevenueGroup[];
 }
+
+export interface MergerListResponse {
+  page: number;
+  limit: number;
+  total: number;
+  checkedAt: string;
+  data: {
+    id: string;
+    companyName: string;
+    symbol: string | null;
+    targetedCompanyName: string;
+    targetedSymbol: string | null;
+    transactionDate: string;
+    acceptedDate: string | null;
+    link: string;
+    status: string;
+  }[];
+}

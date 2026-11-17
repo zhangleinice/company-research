@@ -1,6 +1,11 @@
+import { MergersPage } from './MergersPage';
 import { useEffect, useState } from 'react';
 import { Layout, Menu, Tag, Typography } from 'antd';
-import { UnorderedListOutlined, StarOutlined } from '@ant-design/icons';
+import {
+  UnorderedListOutlined,
+  StarOutlined,
+  SwapOutlined,
+} from '@ant-design/icons';
 import { CompanyDetails } from './CompanyDetails';
 import { CompanyListPage } from './CompanyListPage';
 import { companyPath, readRoute } from './routes';
@@ -77,6 +82,7 @@ export function App() {
                 label: '我的收藏',
                 icon: <StarOutlined />,
               },
+              { key: '/mergers', label: '并购套利', icon: <SwapOutlined /> },
             ]}
           />
         </Layout.Sider>
@@ -91,6 +97,8 @@ export function App() {
                 }
                 onBack={() => navigate(route.returnTo)}
               />
+            ) : route.listPath === '/mergers' ? (
+              <MergersPage />
             ) : (
               <CompanyListPage
                 key={route.listPath}
@@ -107,7 +115,8 @@ export function App() {
             )}
           </Layout.Content>
           <Layout.Footer className="app-footer">
-            数据来源：SEC EDGAR
+            数据来源：
+            {route.listPath === '/mergers' ? 'FMP / SEC EDGAR' : 'SEC EDGAR'}
           </Layout.Footer>
         </Layout>
       </Layout>

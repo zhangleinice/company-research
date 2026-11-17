@@ -1,4 +1,4 @@
-export type ListPath = '/companies' | '/favorites';
+export type ListPath = '/companies' | '/favorites' | '/mergers';
 
 export function listReturnPath(value: string | null): string {
   if (!value) return '/companies';
@@ -18,9 +18,11 @@ export function readRoute(url: URL) {
   const returnTo = listReturnPath(url.searchParams.get('from'));
   return {
     ticker: ticker || legacy,
-    listPath: (url.pathname === '/favorites'
-      ? '/favorites'
-      : '/companies') as ListPath,
+    listPath: (url.pathname === '/mergers'
+      ? '/mergers'
+      : url.pathname === '/favorites'
+        ? '/favorites'
+        : '/companies') as ListPath,
     returnTo,
   };
 }

@@ -26,3 +26,11 @@ test('direct detail links default to directory and reject external return paths'
   ])
     assert.equal(listReturnPath(path), '/companies');
 });
+
+test('mergers has an independent route and cannot become a company return path', () => {
+  assert.equal(
+    readRoute(new URL('http://localhost/mergers')).listPath,
+    '/mergers',
+  );
+  assert.equal(readRoute(new URL('http://localhost/mergers')).ticker, null);
+});

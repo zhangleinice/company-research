@@ -226,3 +226,26 @@ model RevenueBreakdownCache {
   lastError String?
   @@map("revenue_breakdown_cache")
 }
+
+model MergerDeal {
+  id String @id
+  companyName String
+  symbol String?
+  cik String?
+  targetedCompanyName String
+  targetedSymbol String?
+  targetedCik String?
+  transactionDate String @db.VarChar(10)
+  acceptedDate String?
+  link String
+  status String @default("UNVERIFIED")
+  createdAt DateTime @default(now())
+  @@index([transactionDate, id])
+  @@map("merger_deals")
+}
+
+model MergerImport {
+  id String @id
+  checkedAt DateTime @default(now())
+  @@map("merger_imports")
+}
