@@ -1,0 +1,25 @@
+{
+  "ticker": "GOOGL",
+  "source": "Actual SEC CompanyFacts local cache via production baseline and normalizer; offline API fixture",
+  "ocf": 179551,
+  "capex": 159804,
+  "fcf": 19747,
+  "defaultAssumptions": [
+    5,
+    10,
+    3
+  ],
+  "oneCard": true,
+  "noCheckboxes": true,
+  "noAlerts": true,
+  "oneResultTable": true,
+  "researchScenario": {
+    "fcff": 20000,
+    "warning": "Explicit hypothetical research input, not verified FCFF"
+  },
+  "automaticRecalculation": true,
+  "waccGuard": true,
+  "missingEquityStaysNull": true,
+  "mobileOverflow": false,
+  "runtimeExceptions": []
+}

@@ -20,6 +20,9 @@ model Company {
   ticker String
   name String?
   industry String?
+  website String?
+  investorWebsite String?
+  linksCheckedAt DateTime?
   isFavorite Boolean @default(false)
   financialStatus FinancialStatus @default(NOT_FETCHED)
   lastFetchedAt DateTime?
@@ -248,4 +251,10 @@ model MergerImport {
   id String @id
   checkedAt DateTime @default(now())
   @@map("merger_imports")
+}
+
+model ValuationCache {
+ cik String @id @db.VarChar(10)
+ data Json
+ @@map("valuation_cache")
 }

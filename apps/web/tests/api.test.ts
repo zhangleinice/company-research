@@ -132,3 +132,24 @@ test('AI reads are passive and unified updates use short POSTs', async () => {
   await companyUpdate('0001652044', 'status');
   assert.equal(fetchMock.mock.calls[3].arguments[1]?.method, 'GET');
 });
+
+test('optional company links use a passive CIK-only GET and support cancellation', async () => {
+  const { fetchCompanyWebsites } = await import('../src/api.js');
+  const controller = new AbortController();
+  const fetchMock = mock.method(
+    globalThis,
+    'fetch',
+    async () =>
+      new Response(JSON.stringify({ website: null, investorWebsite: null })),
+  );
+  assert.deepEqual(
+    await fetchCompanyWebsites('0001652044', controller.signal),
+    { website: null, investorWebsite: null },
+  );
+  assert.equal(
+    fetchMock.mock.calls[0].arguments[0],
+    '/api/companies/0001652044/links',
+  );
+  assert.equal(fetchMock.mock.calls[0].arguments[1]?.signal, controller.signal);
+  assert.equal(fetchMock.mock.callCount(), 1);
+});

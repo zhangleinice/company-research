@@ -124,3 +124,42 @@ export function fetchMergers(
 ): Promise<import('@company-research/shared').MergerListResponse> {
   return requestJson(`/api/mergers?page=${page}&limit=10`, signal);
 }
+
+export function fetchValuation(
+  ticker: string,
+  signal?: AbortSignal,
+): Promise<import('@company-research/shared').ValuationBaseline> {
+  return requestJson(
+    `/api/companies/${encodeURIComponent(ticker)}/valuation`,
+    signal,
+  );
+}
+
+export async function refreshValuation(
+  ticker: string,
+): Promise<import('@company-research/shared').ValuationBaseline> {
+  const response = await fetch(
+    `/api/companies/${encodeURIComponent(ticker)}/valuation/refresh`,
+    { method: 'POST' },
+  );
+  const body = await response.json();
+  if (!response.ok) throw new Error(body.message || '基准更新失败');
+  return body;
+}
+
+export function fetchValuationReferences(
+  ticker: string,
+  signal?: AbortSignal,
+): Promise<import('@company-research/shared').ValuationReferences> {
+  return requestJson(
+    `/api/companies/${encodeURIComponent(ticker)}/valuation/references`,
+    signal,
+  );
+}
+
+export function fetchCompanyWebsites(
+  cik: string,
+  signal?: AbortSignal,
+): Promise<import('@company-research/shared').CompanyWebsites> {
+  return requestJson(`/api/companies/${encodeURIComponent(cik)}/links`, signal);
+}

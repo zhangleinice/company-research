@@ -1,3 +1,4 @@
+import { ValuationModule } from './modules/valuation/valuation.module';
 import { MergersModule } from './modules/mergers/mergers.module';
 import { AiResearchModule } from './modules/ai-research/ai-research.module';
 import { join } from 'node:path';
@@ -14,6 +15,7 @@ import { CompanyModule } from './modules/company/company.module';
       envFilePath: join(__dirname, '..', '.env'),
     }),
     CompanyModule,
+    ValuationModule,
     MergersModule,
     AiResearchModule,
   ],

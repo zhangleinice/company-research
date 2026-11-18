@@ -1,3 +1,4 @@
+import { CompanyLinksService } from './company-links.service';
 import { Module } from '@nestjs/common';
 import { SecModule } from '../sec/sec.module';
 import { PrismaModule } from '../prisma/prisma.module';
@@ -8,7 +9,7 @@ import { CompanyService } from './company.service';
 @Module({
   imports: [SecModule, PrismaModule],
   controllers: [CompanyController],
-  providers: [CompanyService, FinancialService],
+  providers: [CompanyService, FinancialService, CompanyLinksService],
   exports: [CompanyService],
 })
 export class CompanyModule {}

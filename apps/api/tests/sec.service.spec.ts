@@ -159,3 +159,38 @@ describe('SEC mapping and cache', () => {
     },
   );
 });
+
+describe('Submissions website reuse', () => {
+  it('uses the existing single-company request and shared in-flight profile cache with a padded CIK', async () => {
+    const getJson = jest.fn(async (url: string) =>
+      url.includes('company_tickers')
+        ? mapping
+        : {
+            ...submission,
+            website: 'https://example.com',
+            investorWebsite: 'https://ir.example.com',
+          },
+    );
+    const service = new SecService({ getJson } as unknown as SecClient);
+    await service.getCompany('GOOG');
+    expect(await service.getCompanyWebsites('1652044')).toEqual({
+      website: 'https://example.com/',
+      investorWebsite: 'https://ir.example.com/',
+    });
+    expect(getJson).toHaveBeenCalledTimes(2);
+    expect(getJson).toHaveBeenLastCalledWith(
+      'https://data.sec.gov/submissions/CIK0001652044.json',
+    );
+  });
+  it('does not invent an investor URL when SEC provides only a homepage', async () => {
+    const service = new SecService({
+      getJson: jest
+        .fn()
+        .mockResolvedValue({ ...submission, website: 'https://example.com' }),
+    } as unknown as SecClient);
+    expect(await service.getCompanyWebsites('1652044')).toEqual({
+      website: 'https://example.com/',
+      investorWebsite: null,
+    });
+  });
+});

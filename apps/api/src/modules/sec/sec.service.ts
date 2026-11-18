@@ -4,6 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { SecClient } from './sec.client';
+import { companyWebsite, type CompanyWebsites } from '@company-research/shared';
 
 import type {
   Company,
@@ -11,7 +12,7 @@ import type {
   CompanyListResponse,
 } from '@company-research/shared';
 
-type Profile = Omit<Company, 'ticker'>;
+type Profile = Omit<Company, 'ticker'> & { websites: CompanyWebsites };
 const TICKER_TTL = 24 * 60 * 60 * 1000;
 const PROFILE_TTL = 60 * 60 * 1000;
 
@@ -67,7 +68,19 @@ export class SecService {
     const company = (await this.getTickers()).get(ticker);
     if (!company)
       throw new NotFoundException(`Company ticker ${ticker} not found`);
-    return { ticker, ...(await this.getProfile(company.cik)) };
+    const profile = await this.getProfile(company.cik);
+    return {
+      ticker,
+      cik: profile.cik,
+      name: profile.name,
+      sic: profile.sic,
+      industry: profile.industry,
+      fiscalYearEnd: profile.fiscalYearEnd,
+    };
+  }
+
+  async getCompanyWebsites(cik: string): Promise<CompanyWebsites> {
+    return (await this.getProfile(normalizeCik(cik))).websites;
   }
 
   async resolveCompany(input: string): Promise<CompanyListItem> {
@@ -156,6 +169,10 @@ export class SecService {
           : text(data.sic),
       industry: text(data.sicDescription),
       fiscalYearEnd: text(data.fiscalYearEnd),
+      websites: {
+        website: companyWebsite(data.website),
+        investorWebsite: companyWebsite(data.investorWebsite),
+      },
     };
     // Bound memory use; the least recently inserted profile is evicted first.
     this.profiles.delete(cik);

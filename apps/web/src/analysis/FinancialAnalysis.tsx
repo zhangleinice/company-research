@@ -11,7 +11,6 @@ import {
   Row,
   Space,
   Statistic,
-  Tag,
   Tooltip,
   Typography,
 } from 'antd';
@@ -163,17 +162,6 @@ function Chart({
     </section>
   );
 }
-export function AnalysisPlaceholder({ title }: { title: string }) {
-  return (
-    <Card size="small" className="analysis-placeholder">
-      <Space wrap>
-        <Typography.Text strong>{title}</Typography.Text>
-        <Tag>待开发</Tag>
-      </Space>
-    </Card>
-  );
-}
-
 export function FinancialAnalysis({
   detail,
   mode,

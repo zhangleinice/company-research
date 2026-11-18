@@ -1,45 +1,93 @@
-import { MergersPage } from './MergersPage';
 import { useEffect, useState } from 'react';
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useMatch,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 import { Layout, Menu, Tag, Typography } from 'antd';
 import {
   UnorderedListOutlined,
   StarOutlined,
   SwapOutlined,
 } from '@ant-design/icons';
+import { ValuationPage } from './ValuationPage';
+import { MergersPage } from './MergersPage';
 import { CompanyDetails } from './CompanyDetails';
 import { CompanyListPage } from './CompanyListPage';
-import { companyPath, readRoute } from './routes';
+import {
+  companyPath,
+  legacyHomePath,
+  listReturnPath,
+  routePaths,
+  valuationPath,
+} from './routes';
 
-function currentRoute() {
-  return readRoute(new URL(window.location.href));
+function HomeRedirect() {
+  const location = useLocation();
+  return <Navigate replace to={legacyHomePath(location.search)} />;
 }
-
+function ListRoute({ favorites = false }: { favorites?: boolean }) {
+  const location = useLocation(),
+    navigate = useNavigate();
+  const from = location.pathname + location.search;
+  return (
+    <CompanyListPage
+      key={location.pathname}
+      favorites={favorites}
+      onOpen={(ticker) => navigate(companyPath(ticker, from))}
+      onValuation={(ticker) => navigate(valuationPath(ticker, from))}
+    />
+  );
+}
+function CompanyRoute({ valuation = false }: { valuation?: boolean }) {
+  const { ticker } = useParams();
+  const [search] = useSearchParams();
+  const navigate = useNavigate();
+  const returnTo = listReturnPath(search.get('from'));
+  if (!ticker || !/^[A-Z0-9][A-Z0-9.-]{0,19}$/i.test(ticker))
+    return <Navigate replace to="/companies" />;
+  return valuation ? (
+    <ValuationPage
+      key={ticker}
+      ticker={ticker}
+      onBack={() => navigate(returnTo)}
+    />
+  ) : (
+    <CompanyDetails
+      key={ticker}
+      identifier={ticker}
+      backLabel={
+        returnTo.split('?')[0] === '/favorites'
+          ? '返回我的收藏'
+          : '返回公司列表'
+      }
+      onBack={() => navigate(returnTo)}
+    />
+  );
+}
 export function App() {
-  const [route, setRoute] = useState(currentRoute);
+  const location = useLocation(),
+    navigate = useNavigate();
+  const isValuation = Boolean(useMatch(routePaths.valuation));
+  const companyRoute = useMatch('/companies/:ticker/*');
   const [collapsed, setCollapsed] = useState(false);
+  const activePath = companyRoute
+    ? listReturnPath(new URLSearchParams(location.search).get('from')).split(
+        '?',
+      )[0]
+    : location.pathname === '/favorites'
+      ? '/favorites'
+      : location.pathname === '/mergers'
+        ? '/mergers'
+        : '/companies';
   useEffect(() => {
-    if (window.location.pathname === '/') {
-      const legacy = currentRoute();
-      window.history.replaceState(
-        null,
-        '',
-        legacy.ticker ? companyPath(legacy.ticker, '/companies') : '/companies',
-      );
-      setRoute(currentRoute());
-    }
-    const handler = () => setRoute(currentRoute());
-    window.addEventListener('popstate', handler);
-    return () => window.removeEventListener('popstate', handler);
-  }, []);
-
-  function navigate(path: string) {
-    window.history.pushState(null, '', path);
-    setRoute(currentRoute());
     window.scrollTo(0, 0);
-  }
-  const activePath = route.ticker
-    ? route.returnTo.split('?')[0]
-    : route.listPath;
+  }, [location.pathname]);
   return (
     <Layout className="app-layout">
       <Layout.Header className="app-header">
@@ -77,47 +125,39 @@ export function App() {
                 label: '公司列表',
                 icon: <UnorderedListOutlined />,
               },
-              {
-                key: '/favorites',
-                label: '我的收藏',
-                icon: <StarOutlined />,
-              },
+              { key: '/favorites', label: '我的收藏', icon: <StarOutlined /> },
               { key: '/mergers', label: '并购套利', icon: <SwapOutlined /> },
             ]}
           />
         </Layout.Sider>
         <Layout className="app-main">
-          <Layout.Content className="app-content">
-            {route.ticker ? (
-              <CompanyDetails
-                key={route.ticker}
-                identifier={route.ticker}
-                backLabel={
-                  activePath === '/favorites' ? '返回我的收藏' : '返回公司列表'
-                }
-                onBack={() => navigate(route.returnTo)}
+          <Layout.Content
+            className={`app-content${isValuation ? ' app-content-valuation' : ''}`}
+          >
+            <Routes>
+              <Route path="/" element={<HomeRedirect />} />
+              <Route path={routePaths.companies} element={<ListRoute />} />
+              <Route
+                path={routePaths.favorites}
+                element={<ListRoute favorites />}
               />
-            ) : route.listPath === '/mergers' ? (
-              <MergersPage />
-            ) : (
-              <CompanyListPage
-                key={route.listPath}
-                favorites={route.listPath === '/favorites'}
-                onOpen={(ticker) =>
-                  navigate(
-                    companyPath(
-                      ticker,
-                      window.location.pathname + window.location.search,
-                    ),
-                  )
-                }
+              <Route path={routePaths.mergers} element={<MergersPage />} />
+              <Route path={routePaths.detail} element={<CompanyRoute />} />
+              <Route
+                path={routePaths.valuation}
+                element={<CompanyRoute valuation />}
               />
-            )}
+              <Route path="*" element={<Navigate replace to="/companies" />} />
+            </Routes>
           </Layout.Content>
-          <Layout.Footer className="app-footer">
-            数据来源：
-            {route.listPath === '/mergers' ? 'FMP / SEC EDGAR' : 'SEC EDGAR'}
-          </Layout.Footer>
+          {!isValuation && (
+            <Layout.Footer className="app-footer">
+              数据来源：
+              {location.pathname === '/mergers'
+                ? 'FMP / SEC EDGAR'
+                : 'SEC EDGAR'}
+            </Layout.Footer>
+          )}
         </Layout>
       </Layout>
     </Layout>

@@ -1,3 +1,4 @@
+import { CompanyLinksService } from './company-links.service';
 import {
   BadRequestException,
   Body,
@@ -14,7 +15,10 @@ import { CompanyService } from './company.service';
 
 @Controller('companies')
 export class CompanyController {
-  constructor(private readonly companies: CompanyService) {}
+  constructor(
+    private readonly companies: CompanyService,
+    private readonly companyLinks: CompanyLinksService,
+  ) {}
 
   @Get('search')
   search(@Query('q', new DefaultValuePipe('')) query: string) {
@@ -51,6 +55,13 @@ export class CompanyController {
   @Post(':identifier/refresh')
   refresh(@Param('identifier') identifier: string) {
     return this.companies.getCompany(identifier, true);
+  }
+
+  @Get(':identifier/links')
+  links(@Param('identifier') cik: string) {
+    if (!/^\d{1,10}$/.test(cik) || /^0+$/.test(cik))
+      throw new BadRequestException('链接查询请使用有效CIK');
+    return this.companyLinks.get(cik);
   }
 
   @Get(':identifier/annual')

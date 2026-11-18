@@ -1,3 +1,4 @@
+import { InvestorRelationsLink } from './InvestorRelationsLink.js';
 import { useEffect, useState, useRef } from 'react';
 import { Alert, Button, Card, Space, Spin, Typography, message } from 'antd';
 import type {
@@ -5,7 +6,12 @@ import type {
   FinancialMode,
   CompanyUpdateState,
 } from '@company-research/shared';
-import { fetchCompanyDetail, setCompanyFavorite, companyUpdate } from './api';
+import {
+  fetchCompanyDetail,
+  setCompanyFavorite,
+  companyUpdate,
+  fetchCompanyWebsites,
+} from './api';
 import { CompanyResearchSections } from './analysis/CompanyResearchSections';
 
 export function CompanyDetails({
@@ -22,6 +28,7 @@ export function CompanyDetails({
   const [error, setError] = useState('');
   const [revision, setRevision] = useState(0);
   const [mode, setMode] = useState<FinancialMode>('annual');
+  const [investorWebsite, setInvestorWebsite] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [update, setUpdate] = useState<CompanyUpdateState | null>(null);
   const [starting, setStarting] = useState(false);
@@ -43,6 +50,20 @@ export function CompanyDetails({
     }
   };
   const cik = detail?.cik;
+  useEffect(() => {
+    const controller = new AbortController();
+    setInvestorWebsite(null);
+    if (cik)
+      void fetchCompanyWebsites(cik, controller.signal)
+        .then((links) => {
+          if (!controller.signal.aborted)
+            setInvestorWebsite(links.investorWebsite);
+        })
+        .catch(() => {
+          /* Optional profile links never block the detail page. */
+        });
+    return () => controller.abort();
+  }, [cik]);
   useEffect(() => {
     if (!cik) return;
     const controller = new AbortController();
@@ -151,6 +172,7 @@ export function CompanyDetails({
         <Typography.Title level={3} className="detail-title">
           {detail?.name ?? identifier}
         </Typography.Title>
+        <InvestorRelationsLink url={investorWebsite} />
       </Space>
       {error && (
         <Alert

@@ -1,0 +1,4870 @@
+{
+  "verifiedAt": "2026-11-18T09:22:46.763Z",
+  "companies": [
+    {
+      "ticker": "GOOGL",
+      "filing": {
+        "form": "10-Q",
+        "end": "2026-09-30",
+        "filed": "2026-10-29",
+        "accn": "0001652044-26-000084",
+        "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/goog-20260930.htm"
+      },
+      "ocf": {
+        "value": 179551000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 164713000000,
+            "accn": "0001652044-26-000018",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-05",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/0001652044-26-000018-index.html"
+          },
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 127149000000,
+            "accn": "0001652044-26-000084",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-29",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+          },
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 112311000000,
+            "accn": "0001652044-26-000084",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-29",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+          }
+        ]
+      },
+      "capex": {
+        "value": 159804000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 91447000000,
+            "accn": "0001652044-26-000018",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-05",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/0001652044-26-000018-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 131953000000,
+            "accn": "0001652044-26-000084",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-29",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 63596000000,
+            "accn": "0001652044-26-000084",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-29",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+          }
+        ]
+      },
+      "capexScope": "PP&E cash purchases",
+      "alternative": null,
+      "fcf": 19747000000,
+      "interest": {
+        "value": 3076000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:InterestExpenseNonoperating",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 736000000,
+            "accn": "0001652044-26-000018",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-05",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/0001652044-26-000018-index.html"
+          },
+          {
+            "concept": "us-gaap:InterestExpenseNonoperating",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 2778000000,
+            "accn": "0001652044-26-000084",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-29",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+          },
+          {
+            "concept": "us-gaap:InterestExpenseNonoperating",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 438000000,
+            "accn": "0001652044-26-000084",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-29",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+          }
+        ]
+      },
+      "interestPaid": null,
+      "interestAttempts": {
+        "InterestExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpense",
+            "definition": "Amount of the cost of borrowed funds accounted for as interest expense.",
+            "historical": true,
+            "latestEnd": "2024-03-31",
+            "latestFiling": "0001652044-24-000053"
+          }
+        },
+        "InterestExpenseNonoperating": {
+          "ttm": {
+            "value": 3076000000,
+            "method": "FY+currentYTD-priorComparableYTD",
+            "start": "2025-10-01",
+            "end": "2026-09-30",
+            "items": [
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2025-01-01",
+                "end": "2025-12-31",
+                "val": 736000000,
+                "accn": "0001652044-26-000018",
+                "fy": 2025,
+                "fp": "FY",
+                "form": "10-K",
+                "filed": "2026-02-05",
+                "frame": "CY2025",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/0001652044-26-000018-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2026-01-01",
+                "end": "2026-09-30",
+                "val": 2778000000,
+                "accn": "0001652044-26-000084",
+                "fy": 2026,
+                "fp": "Q3",
+                "form": "10-Q",
+                "filed": "2026-10-29",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2025-01-01",
+                "end": "2025-09-30",
+                "val": 438000000,
+                "accn": "0001652044-26-000084",
+                "fy": 2026,
+                "fp": "Q3",
+                "form": "10-Q",
+                "filed": "2026-10-29",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+              }
+            ]
+          },
+          "history": {
+            "tag": "InterestExpenseNonoperating",
+            "definition": null,
+            "historical": true,
+            "latestEnd": "2026-09-30",
+            "latestFiling": "0001652044-26-000084"
+          }
+        },
+        "InterestExpenseDebt": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebt",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestAndDebtExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestAndDebtExpense",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestExpenseDebtExcludingAmortization": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebtExcludingAmortization",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestPaid": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaid",
+            "definition": "Amount of cash paid for interest, including, but not limited to, capitalized interest and payment to settle zero-coupon bond attributable to accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount; classified as operating and investing activities.",
+            "historical": true,
+            "latestEnd": "2016-12-31",
+            "latestFiling": "0001652044-17-000008"
+          }
+        },
+        "InterestPaidNet": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidNet",
+            "definition": "Amount of cash paid for interest, excluding capitalized interest, classified as operating activity. Includes, but is not limited to, payment to settle zero-coupon bond for accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount.",
+            "historical": true,
+            "latestEnd": "2018-12-31",
+            "latestFiling": "0001652044-19-000004"
+          }
+        },
+        "InterestPaidCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidCapitalized",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestCostsCapitalized": {
+          "ttm": {
+            "value": 1146000000,
+            "method": "FY+currentYTD-priorComparableYTD",
+            "start": "2025-10-01",
+            "end": "2026-09-30",
+            "items": [
+              {
+                "concept": "us-gaap:InterestCostsCapitalized",
+                "unit": "USD",
+                "start": "2025-01-01",
+                "end": "2025-12-31",
+                "val": 447000000,
+                "accn": "0001652044-26-000018",
+                "fy": 2025,
+                "fp": "FY",
+                "form": "10-K",
+                "filed": "2026-02-05",
+                "frame": "CY2025",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/0001652044-26-000018-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestCostsCapitalized",
+                "unit": "USD",
+                "start": "2026-01-01",
+                "end": "2026-09-30",
+                "val": 1000000000,
+                "accn": "0001652044-26-000084",
+                "fy": 2026,
+                "fp": "Q3",
+                "form": "10-Q",
+                "filed": "2026-10-29",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestCostsCapitalized",
+                "unit": "USD",
+                "start": "2025-01-01",
+                "end": "2025-09-30",
+                "val": 301000000,
+                "accn": "0001652044-26-000084",
+                "fy": 2026,
+                "fp": "Q3",
+                "form": "10-Q",
+                "filed": "2026-10-29",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+              }
+            ]
+          },
+          "history": {
+            "tag": "InterestCostsCapitalized",
+            "definition": "Amount of interest capitalized during the period.",
+            "historical": true,
+            "latestEnd": "2026-09-30",
+            "latestFiling": "0001652044-26-000084"
+          }
+        }
+      },
+      "pretax": {
+        "value": 287637000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 158826000000,
+            "accn": "0001652044-26-000018",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-05",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/0001652044-26-000018-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 248520000000,
+            "accn": "0001652044-26-000084",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-29",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 119709000000,
+            "accn": "0001652044-26-000084",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-29",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+          }
+        ]
+      },
+      "tax": {
+        "value": 51943000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 26656000000,
+            "accn": "0001652044-26-000018",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-05",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/0001652044-26-000018-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 47281000000,
+            "accn": "0001652044-26-000084",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-29",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 21994000000,
+            "accn": "0001652044-26-000084",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-29",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+          }
+        ]
+      },
+      "historicalEffectiveTaxRate": 0.18058525154969632,
+      "taxShieldRate": null,
+      "simplifiedFCFF": null,
+      "reason": "Expense/cash interest bridge, capitalized/lease/financial-business adjustments and marginal usable tax shield not jointly verified; historical ETR is not a verified interest shield rate",
+      "rawInterestFacts": [
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}FinanceLeaseInterestExpense",
+          "start": "2025-07-01",
+          "end": "2025-09-30",
+          "value": "17000000",
+          "context": "c-40",
+          "id": "f-1123",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/goog-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}FinanceLeaseInterestExpense",
+          "start": "2026-07-01",
+          "end": "2026-09-30",
+          "value": "25000000",
+          "context": "c-41",
+          "id": "f-1124",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/goog-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}FinanceLeaseInterestExpense",
+          "start": "2025-01-01",
+          "end": "2025-09-30",
+          "value": "48000000",
+          "context": "c-42",
+          "id": "f-1125",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/goog-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}FinanceLeaseInterestExpense",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "value": "60000000",
+          "context": "c-1",
+          "id": "f-1126",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/goog-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2025-07-01",
+          "end": "2025-09-30",
+          "value": "143000000",
+          "context": "c-40",
+          "id": "f-1465",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/goog-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2026-07-01",
+          "end": "2026-09-30",
+          "value": "967000000",
+          "context": "c-41",
+          "id": "f-1466",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/goog-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2025-01-01",
+          "end": "2025-09-30",
+          "value": "438000000",
+          "context": "c-42",
+          "id": "f-1467",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/goog-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "value": "2778000000",
+          "context": "c-1",
+          "id": "f-1468",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/goog-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestCostsCapitalized",
+          "start": "2025-07-01",
+          "end": "2025-09-30",
+          "value": "130000000",
+          "context": "c-40",
+          "id": "f-1493",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/goog-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestCostsCapitalized",
+          "start": "2026-07-01",
+          "end": "2026-09-30",
+          "value": "405000000",
+          "context": "c-41",
+          "id": "f-1494",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/goog-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestCostsCapitalized",
+          "start": "2025-01-01",
+          "end": "2025-09-30",
+          "value": "301000000",
+          "context": "c-42",
+          "id": "f-1495",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/goog-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestCostsCapitalized",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "value": "1000000000",
+          "context": "c-1",
+          "id": "f-1496",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/goog-20260930.htm"
+        }
+      ],
+      "snippets": [
+        {
+          "term": "capitalized interest",
+          "present": false
+        },
+        {
+          "term": "interest capitalized",
+          "present": true
+        },
+        {
+          "term": "interest expense",
+          "present": true
+        },
+        {
+          "term": "cash interest",
+          "present": false
+        },
+        {
+          "term": "finance leases",
+          "present": true
+        },
+        {
+          "term": "income tax",
+          "present": true
+        }
+      ],
+      "supplement": null
+    },
+    {
+      "ticker": "AAPL",
+      "filing": {
+        "form": "10-K",
+        "end": "2026-09-26",
+        "filed": "2026-11-03",
+        "accn": "0000320193-26-000026",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+      },
+      "ocf": {
+        "value": 145097000000,
+        "method": "annual_is_TTM",
+        "start": "2025-09-28",
+        "end": "2026-09-26",
+        "items": [
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-09-28",
+            "end": "2026-09-26",
+            "val": 145097000000,
+            "accn": "0000320193-26-000026",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-11-03",
+            "frame": "CY2026",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/0000320193-26-000026-index.html"
+          }
+        ]
+      },
+      "capex": {
+        "value": 9041000000,
+        "method": "annual_is_TTM",
+        "start": "2025-09-28",
+        "end": "2026-09-26",
+        "items": [
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2025-09-28",
+            "end": "2026-09-26",
+            "val": 9041000000,
+            "accn": "0000320193-26-000026",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-11-03",
+            "frame": "CY2026",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/0000320193-26-000026-index.html"
+          }
+        ]
+      },
+      "capexScope": "PP&E cash purchases",
+      "alternative": null,
+      "fcf": 136056000000,
+      "interest": null,
+      "interestPaid": null,
+      "interestAttempts": {
+        "InterestExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpense",
+            "definition": "Amount of the cost of borrowed funds accounted for as interest expense.",
+            "historical": true,
+            "latestEnd": "2023-09-30",
+            "latestFiling": "0000320193-23-000106"
+          }
+        },
+        "InterestExpenseNonoperating": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseNonoperating",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestExpenseDebt": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebt",
+            "definition": "Amount of the cost of borrowed funds accounted for as interest expense for debt.",
+            "historical": true,
+            "latestEnd": "2021-09-25",
+            "latestFiling": "0000320193-21-000105"
+          }
+        },
+        "InterestAndDebtExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestAndDebtExpense",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestExpenseDebtExcludingAmortization": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebtExcludingAmortization",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestPaid": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaid",
+            "definition": "Amount of cash paid for interest, including, but not limited to, capitalized interest and payment to settle zero-coupon bond attributable to accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount; classified as operating and investing activities.",
+            "historical": true,
+            "latestEnd": "2018-06-30",
+            "latestFiling": "0000320193-18-000100"
+          }
+        },
+        "InterestPaidNet": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidNet",
+            "definition": "Amount of cash paid for interest, excluding capitalized interest, classified as operating activity. Includes, but is not limited to, payment to settle zero-coupon bond for accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount.",
+            "historical": true,
+            "latestEnd": "2023-09-30",
+            "latestFiling": "0000320193-23-000106"
+          }
+        },
+        "InterestPaidCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidCapitalized",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestCostsCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestCostsCapitalized",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        }
+      },
+      "pretax": {
+        "value": 159237000000,
+        "method": "annual_is_TTM",
+        "start": "2025-09-28",
+        "end": "2026-09-26",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2025-09-28",
+            "end": "2026-09-26",
+            "val": 159237000000,
+            "accn": "0000320193-26-000026",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-11-03",
+            "frame": "CY2026",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/0000320193-26-000026-index.html"
+          }
+        ]
+      },
+      "tax": {
+        "value": 27062000000,
+        "method": "annual_is_TTM",
+        "start": "2025-09-28",
+        "end": "2026-09-26",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-09-28",
+            "end": "2026-09-26",
+            "val": 27062000000,
+            "accn": "0000320193-26-000026",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-11-03",
+            "frame": "CY2026",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/0000320193-26-000026-index.html"
+          }
+        ]
+      },
+      "historicalEffectiveTaxRate": 0.169947939235228,
+      "taxShieldRate": null,
+      "simplifiedFCFF": null,
+      "reason": "Expense/cash interest bridge, capitalized/lease/financial-business adjustments and marginal usable tax shield not jointly verified; historical ETR is not a verified interest shield rate",
+      "rawInterestFacts": [],
+      "snippets": [
+        {
+          "term": "capitalized interest",
+          "present": false
+        },
+        {
+          "term": "interest capitalized",
+          "present": false
+        },
+        {
+          "term": "interest expense",
+          "present": true
+        },
+        {
+          "term": "cash interest",
+          "present": false
+        },
+        {
+          "term": "finance leases",
+          "present": true
+        },
+        {
+          "term": "income tax",
+          "present": true
+        }
+      ],
+      "supplement": null
+    },
+    {
+      "ticker": "MSFT",
+      "filing": {
+        "form": "10-Q",
+        "end": "2026-09-30",
+        "filed": "2026-10-28",
+        "accn": "0001193125-26-436133",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/msft-20260930.htm"
+      },
+      "ocf": {
+        "value": 195878000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-07-01",
+            "end": "2026-06-30",
+            "val": 182935000000,
+            "accn": "0001193125-26-323660",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-07-29",
+            "frame": "CY2026",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.html"
+          },
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2026-07-01",
+            "end": "2026-09-30",
+            "val": 58000000000,
+            "accn": "0001193125-26-436133",
+            "fy": 2027,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "frame": "CY2026Q3",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+          },
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-07-01",
+            "end": "2025-09-30",
+            "val": 45057000000,
+            "accn": "0001193125-26-436133",
+            "fy": 2027,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "frame": "CY2025Q3",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+          }
+        ]
+      },
+      "capex": {
+        "value": 135921000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2025-07-01",
+            "end": "2026-06-30",
+            "val": 115948000000,
+            "accn": "0001193125-26-323660",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-07-29",
+            "frame": "CY2026",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2026-07-01",
+            "end": "2026-09-30",
+            "val": 39367000000,
+            "accn": "0001193125-26-436133",
+            "fy": 2027,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "frame": "CY2026Q3",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2025-07-01",
+            "end": "2025-09-30",
+            "val": 19394000000,
+            "accn": "0001193125-26-436133",
+            "fy": 2027,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "frame": "CY2025Q3",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+          }
+        ]
+      },
+      "capexScope": "PP&E cash purchases",
+      "alternative": null,
+      "fcf": 59957000000,
+      "interest": {
+        "value": 3223000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:InterestExpenseNonoperating",
+            "unit": "USD",
+            "start": "2025-07-01",
+            "end": "2026-06-30",
+            "val": 3051000000,
+            "accn": "0001193125-26-323660",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-07-29",
+            "frame": "CY2026",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.html"
+          },
+          {
+            "concept": "us-gaap:InterestExpenseNonoperating",
+            "unit": "USD",
+            "start": "2026-07-01",
+            "end": "2026-09-30",
+            "val": 870000000,
+            "accn": "0001193125-26-436133",
+            "fy": 2027,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "frame": "CY2026Q3",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+          },
+          {
+            "concept": "us-gaap:InterestExpenseNonoperating",
+            "unit": "USD",
+            "start": "2025-07-01",
+            "end": "2025-09-30",
+            "val": 698000000,
+            "accn": "0001193125-26-436133",
+            "fy": 2027,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "frame": "CY2025Q3",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+          }
+        ]
+      },
+      "interestPaid": null,
+      "interestAttempts": {
+        "InterestExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpense",
+            "definition": "Amount of the cost of borrowed funds accounted for as interest expense.",
+            "historical": true,
+            "latestEnd": "2024-06-30",
+            "latestFiling": "0000950170-24-087843"
+          }
+        },
+        "InterestExpenseNonoperating": {
+          "ttm": {
+            "value": 3223000000,
+            "method": "FY+currentYTD-priorComparableYTD",
+            "start": "2025-10-01",
+            "end": "2026-09-30",
+            "items": [
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2025-07-01",
+                "end": "2026-06-30",
+                "val": 3051000000,
+                "accn": "0001193125-26-323660",
+                "fy": 2026,
+                "fp": "FY",
+                "form": "10-K",
+                "filed": "2026-07-29",
+                "frame": "CY2026",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2026-07-01",
+                "end": "2026-09-30",
+                "val": 870000000,
+                "accn": "0001193125-26-436133",
+                "fy": 2027,
+                "fp": "Q1",
+                "form": "10-Q",
+                "filed": "2026-10-28",
+                "frame": "CY2026Q3",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2025-07-01",
+                "end": "2025-09-30",
+                "val": 698000000,
+                "accn": "0001193125-26-436133",
+                "fy": 2027,
+                "fp": "Q1",
+                "form": "10-Q",
+                "filed": "2026-10-28",
+                "frame": "CY2025Q3",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+              }
+            ]
+          },
+          "history": {
+            "tag": "InterestExpenseNonoperating",
+            "definition": null,
+            "historical": true,
+            "latestEnd": "2026-09-30",
+            "latestFiling": "0001193125-26-436133"
+          }
+        },
+        "InterestExpenseDebt": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebt",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestAndDebtExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestAndDebtExpense",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestExpenseDebtExcludingAmortization": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebtExcludingAmortization",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestPaid": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaid",
+            "definition": "Amount of cash paid for interest, including, but not limited to, capitalized interest and payment to settle zero-coupon bond attributable to accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount; classified as operating and investing activities.",
+            "historical": true,
+            "latestEnd": "2026-06-30",
+            "latestFiling": "0001193125-26-323660"
+          }
+        },
+        "InterestPaidNet": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidNet",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestPaidCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidCapitalized",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestCostsCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestCostsCapitalized",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        }
+      },
+      "pretax": {
+        "value": 177586000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2025-07-01",
+            "end": "2026-06-30",
+            "val": 165934000000,
+            "accn": "0001193125-26-323660",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-07-29",
+            "frame": "CY2026",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2026-07-01",
+            "end": "2026-09-30",
+            "val": 45953000000,
+            "accn": "0001193125-26-436133",
+            "fy": 2027,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "frame": "CY2026Q3",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2025-07-01",
+            "end": "2025-09-30",
+            "val": 34301000000,
+            "accn": "0001193125-26-436133",
+            "fy": 2027,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "frame": "CY2025Q3",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+          }
+        ]
+      },
+      "tax": {
+        "value": 34955000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-07-01",
+            "end": "2026-06-30",
+            "val": 32185000000,
+            "accn": "0001193125-26-323660",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-07-29",
+            "frame": "CY2026",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2026-07-01",
+            "end": "2026-09-30",
+            "val": 9324000000,
+            "accn": "0001193125-26-436133",
+            "fy": 2027,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "frame": "CY2026Q3",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-07-01",
+            "end": "2025-09-30",
+            "val": 6554000000,
+            "accn": "0001193125-26-436133",
+            "fy": 2027,
+            "fp": "Q1",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "frame": "CY2025Q3",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+          }
+        ]
+      },
+      "historicalEffectiveTaxRate": 0.19683420990393388,
+      "taxShieldRate": null,
+      "simplifiedFCFF": null,
+      "reason": "Expense/cash interest bridge, capitalized/lease/financial-business adjustments and marginal usable tax shield not jointly verified; historical ETR is not a verified interest shield rate",
+      "rawInterestFacts": [
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2026-07-01",
+          "end": "2026-09-30",
+          "value": "870000000",
+          "context": "C_4ca01806-c4cd-49d2-87c6-16fd7f17ad5d",
+          "id": "F_4264a99e-0b27-489e-96b7-e722125a94d2",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/msft-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2025-07-01",
+          "end": "2025-09-30",
+          "value": "698000000",
+          "context": "C_3e98baf2-1fc5-4f5b-9b8c-c6e2e1dea677",
+          "id": "F_3220880c-71dc-40cb-9af5-257626db5596",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/msft-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}FinanceLeaseInterestExpense",
+          "start": "2026-07-01",
+          "end": "2026-09-30",
+          "value": "769000000",
+          "context": "C_4ca01806-c4cd-49d2-87c6-16fd7f17ad5d",
+          "id": "F_4c5458de-c3e5-4663-bb7c-568b5cb7929d",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/msft-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}FinanceLeaseInterestExpense",
+          "start": "2025-07-01",
+          "end": "2025-09-30",
+          "value": "546000000",
+          "context": "C_3e98baf2-1fc5-4f5b-9b8c-c6e2e1dea677",
+          "id": "F_dc1da5de-0033-4a37-a531-b51d53befa75",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/msft-20260930.htm"
+        }
+      ],
+      "snippets": [
+        {
+          "term": "capitalized interest",
+          "present": false
+        },
+        {
+          "term": "interest capitalized",
+          "present": false
+        },
+        {
+          "term": "interest expense",
+          "present": true
+        },
+        {
+          "term": "cash interest",
+          "present": false
+        },
+        {
+          "term": "finance leases",
+          "present": true
+        },
+        {
+          "term": "income tax",
+          "present": true
+        }
+      ],
+      "supplement": null
+    },
+    {
+      "ticker": "KO",
+      "filing": {
+        "form": "10-Q",
+        "end": "2026-10-02",
+        "filed": "2026-10-28",
+        "accn": "0001628280-26-067844",
+        "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+      },
+      "ocf": {
+        "value": 16227000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-09-27",
+        "end": "2026-10-02",
+        "items": [
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 7408000000,
+            "accn": "0001628280-26-010047",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-20",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/0001628280-26-010047-index.html"
+          },
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-10-02",
+            "val": 12471000000,
+            "accn": "0001628280-26-067844",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+          },
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-26",
+            "val": 3652000000,
+            "accn": "0001628280-26-067844",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+          }
+        ]
+      },
+      "capex": {
+        "value": 1945000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-09-27",
+        "end": "2026-10-02",
+        "items": [
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 2112000000,
+            "accn": "0001628280-26-010047",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-20",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/0001628280-26-010047-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-10-02",
+            "val": 1063000000,
+            "accn": "0001628280-26-067844",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-26",
+            "val": 1230000000,
+            "accn": "0001628280-26-067844",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+          }
+        ]
+      },
+      "capexScope": "PP&E cash purchases",
+      "alternative": null,
+      "fcf": 14282000000,
+      "interest": {
+        "value": 1529000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-09-27",
+        "end": "2026-10-02",
+        "items": [
+          {
+            "concept": "us-gaap:InterestExpense",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 1654000000,
+            "accn": "0001628280-26-010047",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-20",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/0001628280-26-010047-index.html"
+          },
+          {
+            "concept": "us-gaap:InterestExpense",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-10-02",
+            "val": 1098000000,
+            "accn": "0001628280-26-067844",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+          },
+          {
+            "concept": "us-gaap:InterestExpense",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-26",
+            "val": 1223000000,
+            "accn": "0001628280-26-067844",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+          }
+        ]
+      },
+      "interestPaid": null,
+      "interestAttempts": {
+        "InterestExpense": {
+          "ttm": {
+            "value": 1529000000,
+            "method": "FY+currentYTD-priorComparableYTD",
+            "start": "2025-09-27",
+            "end": "2026-10-02",
+            "items": [
+              {
+                "concept": "us-gaap:InterestExpense",
+                "unit": "USD",
+                "start": "2025-01-01",
+                "end": "2025-12-31",
+                "val": 1654000000,
+                "accn": "0001628280-26-010047",
+                "fy": 2025,
+                "fp": "FY",
+                "form": "10-K",
+                "filed": "2026-02-20",
+                "frame": "CY2025",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/0001628280-26-010047-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestExpense",
+                "unit": "USD",
+                "start": "2026-01-01",
+                "end": "2026-10-02",
+                "val": 1098000000,
+                "accn": "0001628280-26-067844",
+                "fy": 2026,
+                "fp": "Q3",
+                "form": "10-Q",
+                "filed": "2026-10-28",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestExpense",
+                "unit": "USD",
+                "start": "2025-01-01",
+                "end": "2025-09-26",
+                "val": 1223000000,
+                "accn": "0001628280-26-067844",
+                "fy": 2026,
+                "fp": "Q3",
+                "form": "10-Q",
+                "filed": "2026-10-28",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+              }
+            ]
+          },
+          "history": {
+            "tag": "InterestExpense",
+            "definition": "Amount of the cost of borrowed funds accounted for as interest expense.",
+            "historical": true,
+            "latestEnd": "2026-10-02",
+            "latestFiling": "0001628280-26-067844"
+          }
+        },
+        "InterestExpenseNonoperating": {
+          "ttm": {
+            "value": 1529000000,
+            "method": "FY+currentYTD-priorComparableYTD",
+            "start": "2025-09-27",
+            "end": "2026-10-02",
+            "items": [
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2025-01-01",
+                "end": "2025-12-31",
+                "val": 1654000000,
+                "accn": "0001628280-26-010047",
+                "fy": 2025,
+                "fp": "FY",
+                "form": "10-K",
+                "filed": "2026-02-20",
+                "frame": "CY2025",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/0001628280-26-010047-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2026-01-01",
+                "end": "2026-10-02",
+                "val": 1098000000,
+                "accn": "0001628280-26-067844",
+                "fy": 2026,
+                "fp": "Q3",
+                "form": "10-Q",
+                "filed": "2026-10-28",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2025-01-01",
+                "end": "2025-09-26",
+                "val": 1223000000,
+                "accn": "0001628280-26-067844",
+                "fy": 2026,
+                "fp": "Q3",
+                "form": "10-Q",
+                "filed": "2026-10-28",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+              }
+            ]
+          },
+          "history": {
+            "tag": "InterestExpenseNonoperating",
+            "definition": null,
+            "historical": true,
+            "latestEnd": "2026-10-02",
+            "latestFiling": "0001628280-26-067844"
+          }
+        },
+        "InterestExpenseDebt": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebt",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestAndDebtExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestAndDebtExpense",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestExpenseDebtExcludingAmortization": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebtExcludingAmortization",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestPaid": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaid",
+            "definition": "Amount of cash paid for interest, including, but not limited to, capitalized interest and payment to settle zero-coupon bond attributable to accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount; classified as operating and investing activities.",
+            "historical": true,
+            "latestEnd": "2025-12-31",
+            "latestFiling": "0001628280-26-010047"
+          }
+        },
+        "InterestPaidNet": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidNet",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestPaidCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidCapitalized",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestCostsCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestCostsCapitalized",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        }
+      },
+      "pretax": {
+        "value": 17881000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-09-27",
+        "end": "2026-10-02",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 15998000000,
+            "accn": "0001628280-26-010047",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-20",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/0001628280-26-010047-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-10-02",
+            "val": 14919000000,
+            "accn": "0001628280-26-067844",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-26",
+            "val": 13036000000,
+            "accn": "0001628280-26-067844",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+          }
+        ]
+      },
+      "tax": {
+        "value": 3105000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-09-27",
+        "end": "2026-10-02",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 2861000000,
+            "accn": "0001628280-26-010047",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-20",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/0001628280-26-010047-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-10-02",
+            "val": 2459000000,
+            "accn": "0001628280-26-067844",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-26",
+            "val": 2215000000,
+            "accn": "0001628280-26-067844",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+          }
+        ]
+      },
+      "historicalEffectiveTaxRate": 0.17364800626363178,
+      "taxShieldRate": null,
+      "simplifiedFCFF": null,
+      "reason": "Expense/cash interest bridge, capitalized/lease/financial-business adjustments and marginal usable tax shield not jointly verified; historical ETR is not a verified interest shield rate",
+      "rawInterestFacts": [
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2026-07-04",
+          "end": "2026-10-02",
+          "value": "354000000",
+          "context": "c-20",
+          "id": "f-106",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2025-06-28",
+          "end": "2025-09-26",
+          "value": "391000000",
+          "context": "c-21",
+          "id": "f-107",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2026-01-01",
+          "end": "2026-10-02",
+          "value": "1098000000",
+          "context": "c-1",
+          "id": "f-108",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2025-01-01",
+          "end": "2025-09-26",
+          "value": "1223000000",
+          "context": "c-22",
+          "id": "f-109",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpense",
+          "start": "2026-07-04",
+          "end": "2026-10-02",
+          "value": "354000000",
+          "context": "c-20",
+          "id": "f-1559",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpense",
+          "start": "2025-06-28",
+          "end": "2025-09-26",
+          "value": "391000000",
+          "context": "c-21",
+          "id": "f-1645",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpense",
+          "start": "2026-01-01",
+          "end": "2026-10-02",
+          "value": "1098000000",
+          "context": "c-1",
+          "id": "f-1731",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpense",
+          "start": "2025-01-01",
+          "end": "2025-09-26",
+          "value": "1223000000",
+          "context": "c-22",
+          "id": "f-1817",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+        }
+      ],
+      "snippets": [
+        {
+          "term": "capitalized interest",
+          "present": false
+        },
+        {
+          "term": "interest capitalized",
+          "present": false
+        },
+        {
+          "term": "interest expense",
+          "present": true
+        },
+        {
+          "term": "cash interest",
+          "present": false
+        },
+        {
+          "term": "finance leases",
+          "present": false
+        },
+        {
+          "term": "income tax",
+          "present": true
+        }
+      ],
+      "supplement": null
+    },
+    {
+      "ticker": "WMT",
+      "filing": {
+        "form": "10-Q",
+        "end": "2026-07-31",
+        "filed": "2026-08-28",
+        "accn": "0000104169-26-000154",
+        "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm"
+      },
+      "ocf": {
+        "value": 42923000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-08-01",
+        "end": "2026-07-31",
+        "items": [
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-02-01",
+            "end": "2026-01-31",
+            "val": 41565000000,
+            "accn": "0000104169-26-000055",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-03-13",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/0000104169-26-000055-index.html"
+          },
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2026-02-01",
+            "end": "2026-07-31",
+            "val": 19710000000,
+            "accn": "0000104169-26-000154",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/0000104169-26-000154-index.html"
+          },
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-02-01",
+            "end": "2025-07-31",
+            "val": 18352000000,
+            "accn": "0000104169-26-000154",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/0000104169-26-000154-index.html"
+          }
+        ]
+      },
+      "capex": {
+        "value": 29414000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-08-01",
+        "end": "2026-07-31",
+        "items": [
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2025-02-01",
+            "end": "2026-01-31",
+            "val": 26642000000,
+            "accn": "0000104169-26-000055",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-03-13",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/0000104169-26-000055-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2026-02-01",
+            "end": "2026-07-31",
+            "val": 14181000000,
+            "accn": "0000104169-26-000154",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/0000104169-26-000154-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2025-02-01",
+            "end": "2025-07-31",
+            "val": 11409000000,
+            "accn": "0000104169-26-000154",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/0000104169-26-000154-index.html"
+          }
+        ]
+      },
+      "capexScope": "PP&E cash purchases",
+      "alternative": null,
+      "fcf": 13509000000,
+      "interest": {
+        "value": 1859000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-08-01",
+        "end": "2026-07-31",
+        "items": [
+          {
+            "concept": "us-gaap:InterestExpenseDebt",
+            "unit": "USD",
+            "start": "2025-02-01",
+            "end": "2026-01-31",
+            "val": 2318000000,
+            "accn": "0000104169-26-000055",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-03-13",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/0000104169-26-000055-index.html"
+          },
+          {
+            "concept": "us-gaap:InterestExpenseDebt",
+            "unit": "USD",
+            "start": "2026-02-01",
+            "end": "2026-07-31",
+            "val": 711000000,
+            "accn": "0000104169-26-000154",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/0000104169-26-000154-index.html"
+          },
+          {
+            "concept": "us-gaap:InterestExpenseDebt",
+            "unit": "USD",
+            "start": "2025-02-01",
+            "end": "2025-07-31",
+            "val": 1170000000,
+            "accn": "0000104169-26-000154",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/0000104169-26-000154-index.html"
+          }
+        ]
+      },
+      "interestPaid": null,
+      "interestAttempts": {
+        "InterestExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpense",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestExpenseNonoperating": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseNonoperating",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestExpenseDebt": {
+          "ttm": {
+            "value": 1859000000,
+            "method": "FY+currentYTD-priorComparableYTD",
+            "start": "2025-08-01",
+            "end": "2026-07-31",
+            "items": [
+              {
+                "concept": "us-gaap:InterestExpenseDebt",
+                "unit": "USD",
+                "start": "2025-02-01",
+                "end": "2026-01-31",
+                "val": 2318000000,
+                "accn": "0000104169-26-000055",
+                "fy": 2026,
+                "fp": "FY",
+                "form": "10-K",
+                "filed": "2026-03-13",
+                "frame": "CY2025",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/0000104169-26-000055-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestExpenseDebt",
+                "unit": "USD",
+                "start": "2026-02-01",
+                "end": "2026-07-31",
+                "val": 711000000,
+                "accn": "0000104169-26-000154",
+                "fy": 2027,
+                "fp": "Q2",
+                "form": "10-Q",
+                "filed": "2026-08-28",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/0000104169-26-000154-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestExpenseDebt",
+                "unit": "USD",
+                "start": "2025-02-01",
+                "end": "2025-07-31",
+                "val": 1170000000,
+                "accn": "0000104169-26-000154",
+                "fy": 2027,
+                "fp": "Q2",
+                "form": "10-Q",
+                "filed": "2026-08-28",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/0000104169-26-000154-index.html"
+              }
+            ]
+          },
+          "history": {
+            "tag": "InterestExpenseDebt",
+            "definition": "Amount of the cost of borrowed funds accounted for as interest expense for debt.",
+            "historical": true,
+            "latestEnd": "2026-07-31",
+            "latestFiling": "0000104169-26-000154"
+          }
+        },
+        "InterestAndDebtExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestAndDebtExpense",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestExpenseDebtExcludingAmortization": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebtExcludingAmortization",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestPaid": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaid",
+            "definition": "Amount of cash paid for interest, including, but not limited to, capitalized interest and payment to settle zero-coupon bond attributable to accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount; classified as operating and investing activities.",
+            "historical": true,
+            "latestEnd": "2019-01-31",
+            "latestFiling": "0000104169-19-000016"
+          }
+        },
+        "InterestPaidNet": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidNet",
+            "definition": "Amount of cash paid for interest, excluding capitalized interest, classified as operating activity. Includes, but is not limited to, payment to settle zero-coupon bond for accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount.",
+            "historical": true,
+            "latestEnd": "2026-01-31",
+            "latestFiling": "0000104169-26-000055"
+          }
+        },
+        "InterestPaidCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidCapitalized",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestCostsCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestCostsCapitalized",
+            "definition": "Amount of interest capitalized during the period.",
+            "historical": true,
+            "latestEnd": "2013-01-31",
+            "latestFiling": "0000104169-13-000011"
+          }
+        }
+      },
+      "pretax": {
+        "value": 29316000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-08-01",
+        "end": "2026-07-31",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2025-02-01",
+            "end": "2026-01-31",
+            "val": 29469000000,
+            "accn": "0000104169-26-000055",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-03-13",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/0000104169-26-000055-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2026-02-01",
+            "end": "2026-07-31",
+            "val": 15160000000,
+            "accn": "0000104169-26-000154",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/0000104169-26-000154-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2025-02-01",
+            "end": "2025-07-31",
+            "val": 15313000000,
+            "accn": "0000104169-26-000154",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/0000104169-26-000154-index.html"
+          }
+        ]
+      },
+      "tax": {
+        "value": 6817000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-08-01",
+        "end": "2026-07-31",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-02-01",
+            "end": "2026-01-31",
+            "val": 7199000000,
+            "accn": "0000104169-26-000055",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-03-13",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/0000104169-26-000055-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2026-02-01",
+            "end": "2026-07-31",
+            "val": 3141000000,
+            "accn": "0000104169-26-000154",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/0000104169-26-000154-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-02-01",
+            "end": "2025-07-31",
+            "val": 3523000000,
+            "accn": "0000104169-26-000154",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-28",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/0000104169-26-000154-index.html"
+          }
+        ]
+      },
+      "historicalEffectiveTaxRate": 0.23253513439759857,
+      "taxShieldRate": null,
+      "simplifiedFCFF": null,
+      "reason": "Expense/cash interest bridge, capitalized/lease/financial-business adjustments and marginal usable tax shield not jointly verified; historical ETR is not a verified interest shield rate",
+      "rawInterestFacts": [
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseDebt",
+          "start": "2026-05-01",
+          "end": "2026-07-31",
+          "value": "137000000",
+          "context": "c-12",
+          "id": "f-78",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseDebt",
+          "start": "2025-05-01",
+          "end": "2025-07-31",
+          "value": "651000000",
+          "context": "c-13",
+          "id": "f-79",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseDebt",
+          "start": "2026-02-01",
+          "end": "2026-07-31",
+          "value": "711000000",
+          "context": "c-1",
+          "id": "f-80",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseDebt",
+          "start": "2025-02-01",
+          "end": "2025-07-31",
+          "value": "1170000000",
+          "context": "c-14",
+          "id": "f-81",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}FinanceLeaseInterestExpense",
+          "start": "2026-05-01",
+          "end": "2026-07-31",
+          "value": "126000000",
+          "context": "c-12",
+          "id": "f-82",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}FinanceLeaseInterestExpense",
+          "start": "2025-05-01",
+          "end": "2025-07-31",
+          "value": "118000000",
+          "context": "c-13",
+          "id": "f-83",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}FinanceLeaseInterestExpense",
+          "start": "2026-02-01",
+          "end": "2026-07-31",
+          "value": "251000000",
+          "context": "c-1",
+          "id": "f-84",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}FinanceLeaseInterestExpense",
+          "start": "2025-02-01",
+          "end": "2025-07-31",
+          "value": "236000000",
+          "context": "c-14",
+          "id": "f-85",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm"
+        }
+      ],
+      "snippets": [
+        {
+          "term": "capitalized interest",
+          "present": false
+        },
+        {
+          "term": "interest capitalized",
+          "present": false
+        },
+        {
+          "term": "interest expense",
+          "present": true
+        },
+        {
+          "term": "cash interest",
+          "present": false
+        },
+        {
+          "term": "finance leases",
+          "present": false
+        },
+        {
+          "term": "income tax",
+          "present": true
+        }
+      ],
+      "supplement": null
+    },
+    {
+      "ticker": "AMZN",
+      "filing": {
+        "form": "10-Q",
+        "end": "2026-09-30",
+        "filed": "2026-10-30",
+        "accn": "0001018724-26-000040",
+        "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+      },
+      "ocf": {
+        "value": 168300000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 139514000000,
+            "accn": "0001018724-26-000004",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-06",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/0001018724-26-000004-index.html"
+          },
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 113841000000,
+            "accn": "0001018724-26-000040",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-30",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/0001018724-26-000040-index.html"
+          },
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 85055000000,
+            "accn": "0001018724-26-000040",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-30",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/0001018724-26-000040-index.html"
+          }
+        ]
+      },
+      "capex": {
+        "value": 215192000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 131819000000,
+            "accn": "0001018724-26-000004",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-06",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/0001018724-26-000004-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 175670000000,
+            "accn": "0001018724-26-000040",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-30",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/0001018724-26-000040-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 92297000000,
+            "accn": "0001018724-26-000040",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-30",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/0001018724-26-000040-index.html"
+          }
+        ]
+      },
+      "capexScope": "reported gross purchases of property and equipment (not issuer net FCF)",
+      "alternative": {
+        "value": 215192000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 131819000000,
+            "accn": "0001018724-26-000004",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-06",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/0001018724-26-000004-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 175670000000,
+            "accn": "0001018724-26-000040",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-30",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/0001018724-26-000040-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 92297000000,
+            "accn": "0001018724-26-000040",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-30",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/0001018724-26-000040-index.html"
+          }
+        ],
+        "originalTable": {
+          "concept": "{http://fasb.org/us-gaap/2026}PaymentsToAcquireProductiveAssets",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "value": "175670000000",
+          "context": "c-1",
+          "id": "f-147",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm",
+          "row": "Purchases of property and equipment(35,095)(77,259)(92,297)(175,670)(120,131)(215,192)"
+        }
+      },
+      "fcf": -46892000000,
+      "interest": {
+        "value": 4484000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:InterestExpenseNonoperating",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 2274000000,
+            "accn": "0001018724-26-000004",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-06",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/0001018724-26-000004-index.html"
+          },
+          {
+            "concept": "us-gaap:InterestExpenseNonoperating",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 3805000000,
+            "accn": "0001018724-26-000040",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-30",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/0001018724-26-000040-index.html"
+          },
+          {
+            "concept": "us-gaap:InterestExpenseNonoperating",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 1595000000,
+            "accn": "0001018724-26-000040",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-30",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/0001018724-26-000040-index.html"
+          }
+        ]
+      },
+      "interestPaid": null,
+      "interestAttempts": {
+        "InterestExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpense",
+            "definition": "Amount of the cost of borrowed funds accounted for as interest expense.",
+            "historical": true,
+            "latestEnd": "2024-03-31",
+            "latestFiling": "0001018724-24-000083"
+          }
+        },
+        "InterestExpenseNonoperating": {
+          "ttm": {
+            "value": 4484000000,
+            "method": "FY+currentYTD-priorComparableYTD",
+            "start": "2025-10-01",
+            "end": "2026-09-30",
+            "items": [
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2025-01-01",
+                "end": "2025-12-31",
+                "val": 2274000000,
+                "accn": "0001018724-26-000004",
+                "fy": 2025,
+                "fp": "FY",
+                "form": "10-K",
+                "filed": "2026-02-06",
+                "frame": "CY2025",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/0001018724-26-000004-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2026-01-01",
+                "end": "2026-09-30",
+                "val": 3805000000,
+                "accn": "0001018724-26-000040",
+                "fy": 2026,
+                "fp": "Q3",
+                "form": "10-Q",
+                "filed": "2026-10-30",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/0001018724-26-000040-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2025-01-01",
+                "end": "2025-09-30",
+                "val": 1595000000,
+                "accn": "0001018724-26-000040",
+                "fy": 2026,
+                "fp": "Q3",
+                "form": "10-Q",
+                "filed": "2026-10-30",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/0001018724-26-000040-index.html"
+              }
+            ]
+          },
+          "history": {
+            "tag": "InterestExpenseNonoperating",
+            "definition": null,
+            "historical": true,
+            "latestEnd": "2026-09-30",
+            "latestFiling": "0001018724-26-000040"
+          }
+        },
+        "InterestExpenseDebt": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebt",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestAndDebtExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestAndDebtExpense",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestExpenseDebtExcludingAmortization": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebtExcludingAmortization",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestPaid": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaid",
+            "definition": "Amount of cash paid for interest, including, but not limited to, capitalized interest and payment to settle zero-coupon bond attributable to accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount; classified as operating and investing activities.",
+            "historical": true,
+            "latestEnd": "2017-03-31",
+            "latestFiling": "0001018724-17-000051"
+          }
+        },
+        "InterestPaidNet": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidNet",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestPaidCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidCapitalized",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestCostsCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestCostsCapitalized",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        }
+      },
+      "pretax": {
+        "value": 174165000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 97311000000,
+            "accn": "0001018724-26-000004",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-06",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/0001018724-26-000004-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 147560000000,
+            "accn": "0001018724-26-000040",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-30",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/0001018724-26-000040-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 70706000000,
+            "accn": "0001018724-26-000040",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-30",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/0001018724-26-000040-index.html"
+          }
+        ]
+      },
+      "tax": {
+        "value": 38885000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 19087000000,
+            "accn": "0001018724-26-000004",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-06",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/0001018724-26-000004-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 33939000000,
+            "accn": "0001018724-26-000040",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-30",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/0001018724-26-000040-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 14141000000,
+            "accn": "0001018724-26-000040",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-30",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/0001018724-26-000040-index.html"
+          }
+        ]
+      },
+      "historicalEffectiveTaxRate": 0.22326529440473114,
+      "taxShieldRate": null,
+      "simplifiedFCFF": null,
+      "reason": "Expense/cash interest bridge, capitalized/lease/financial-business adjustments and marginal usable tax shield not jointly verified; historical ETR is not a verified interest shield rate",
+      "rawInterestFacts": [
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2025-07-01",
+          "end": "2025-09-30",
+          "value": "538000000",
+          "context": "c-22",
+          "id": "f-288",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2026-07-01",
+          "end": "2026-09-30",
+          "value": "1691000000",
+          "context": "c-23",
+          "id": "f-289",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2025-01-01",
+          "end": "2025-09-30",
+          "value": "1595000000",
+          "context": "c-24",
+          "id": "f-290",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "value": "3805000000",
+          "context": "c-1",
+          "id": "f-291",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://www.amazon.com/20260930}InterestPaidOnLongTermDebt",
+          "start": "2025-07-01",
+          "end": "2025-09-30",
+          "value": "249000000",
+          "context": "c-22",
+          "id": "f-461",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://www.amazon.com/20260930}InterestPaidOnLongTermDebt",
+          "start": "2026-07-01",
+          "end": "2026-09-30",
+          "value": "1172000000",
+          "context": "c-23",
+          "id": "f-462",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://www.amazon.com/20260930}InterestPaidOnLongTermDebt",
+          "start": "2025-01-01",
+          "end": "2025-09-30",
+          "value": "1008000000",
+          "context": "c-24",
+          "id": "f-463",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://www.amazon.com/20260930}InterestPaidOnLongTermDebt",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "value": "2182000000",
+          "context": "c-1",
+          "id": "f-464",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://www.amazon.com/20260930}InterestPaidOnLongTermDebt",
+          "start": "2024-10-01",
+          "end": "2025-09-30",
+          "value": "1651000000",
+          "context": "c-25",
+          "id": "f-465",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://www.amazon.com/20260930}InterestPaidOnLongTermDebt",
+          "start": "2025-10-01",
+          "end": "2026-09-30",
+          "value": "2632000000",
+          "context": "c-26",
+          "id": "f-466",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://www.amazon.com/20260930}InterestPaidFinancingObligations",
+          "start": "2025-07-01",
+          "end": "2025-09-30",
+          "value": "52000000",
+          "context": "c-22",
+          "id": "f-479",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://www.amazon.com/20260930}InterestPaidFinancingObligations",
+          "start": "2026-07-01",
+          "end": "2026-09-30",
+          "value": "89000000",
+          "context": "c-23",
+          "id": "f-480",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://www.amazon.com/20260930}InterestPaidFinancingObligations",
+          "start": "2025-01-01",
+          "end": "2025-09-30",
+          "value": "159000000",
+          "context": "c-24",
+          "id": "f-481",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://www.amazon.com/20260930}InterestPaidFinancingObligations",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "value": "215000000",
+          "context": "c-1",
+          "id": "f-482",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://www.amazon.com/20260930}InterestPaidFinancingObligations",
+          "start": "2024-10-01",
+          "end": "2025-09-30",
+          "value": "217000000",
+          "context": "c-25",
+          "id": "f-483",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://www.amazon.com/20260930}InterestPaidFinancingObligations",
+          "start": "2025-10-01",
+          "end": "2026-09-30",
+          "value": "252000000",
+          "context": "c-26",
+          "id": "f-484",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}FinanceLeaseInterestExpense",
+          "start": "2025-07-01",
+          "end": "2025-09-30",
+          "value": "81000000",
+          "context": "c-22",
+          "id": "f-724",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}FinanceLeaseInterestExpense",
+          "start": "2026-07-01",
+          "end": "2026-09-30",
+          "value": "114000000",
+          "context": "c-23",
+          "id": "f-725",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}FinanceLeaseInterestExpense",
+          "start": "2025-01-01",
+          "end": "2025-09-30",
+          "value": "224000000",
+          "context": "c-24",
+          "id": "f-726",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}FinanceLeaseInterestExpense",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "value": "323000000",
+          "context": "c-1",
+          "id": "f-727",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+        }
+      ],
+      "snippets": [
+        {
+          "term": "capitalized interest",
+          "present": true
+        },
+        {
+          "term": "interest capitalized",
+          "present": false
+        },
+        {
+          "term": "interest expense",
+          "present": true
+        },
+        {
+          "term": "cash interest",
+          "present": false
+        },
+        {
+          "term": "finance leases",
+          "present": true
+        },
+        {
+          "term": "income tax",
+          "present": true
+        }
+      ],
+      "supplement": null
+    },
+    {
+      "ticker": "NVDA",
+      "filing": {
+        "form": "10-Q",
+        "end": "2026-07-26",
+        "filed": "2026-08-26",
+        "accn": "0001045810-26-000075",
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm"
+      },
+      "ocf": {
+        "value": 134360000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-07-28",
+        "end": "2026-07-26",
+        "items": [
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-01-27",
+            "end": "2026-01-25",
+            "val": 102718000000,
+            "accn": "0001045810-26-000021",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-25",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/0001045810-26-000021-index.html"
+          },
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2026-01-26",
+            "end": "2026-07-26",
+            "val": 74421000000,
+            "accn": "0001045810-26-000075",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-26",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/0001045810-26-000075-index.html"
+          },
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-01-27",
+            "end": "2025-07-27",
+            "val": 42779000000,
+            "accn": "0001045810-26-000075",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-26",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/0001045810-26-000075-index.html"
+          }
+        ]
+      },
+      "capex": {
+        "value": 7354000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-07-28",
+        "end": "2026-07-26",
+        "items": [
+          {
+            "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+            "unit": "USD",
+            "start": "2025-01-27",
+            "end": "2026-01-25",
+            "val": 6042000000,
+            "accn": "0001045810-26-000021",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-25",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/0001045810-26-000021-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+            "unit": "USD",
+            "start": "2026-01-26",
+            "end": "2026-07-26",
+            "val": 4434000000,
+            "accn": "0001045810-26-000075",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-26",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/0001045810-26-000075-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+            "unit": "USD",
+            "start": "2025-01-27",
+            "end": "2025-07-27",
+            "val": 3122000000,
+            "accn": "0001045810-26-000075",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-26",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/0001045810-26-000075-index.html"
+          }
+        ]
+      },
+      "capexScope": "reported purchases of property/equipment AND intangible assets",
+      "alternative": {
+        "value": 7354000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-07-28",
+        "end": "2026-07-26",
+        "items": [
+          {
+            "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+            "unit": "USD",
+            "start": "2025-01-27",
+            "end": "2026-01-25",
+            "val": 6042000000,
+            "accn": "0001045810-26-000021",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-25",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/0001045810-26-000021-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+            "unit": "USD",
+            "start": "2026-01-26",
+            "end": "2026-07-26",
+            "val": 4434000000,
+            "accn": "0001045810-26-000075",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-26",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/0001045810-26-000075-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquireProductiveAssets",
+            "unit": "USD",
+            "start": "2025-01-27",
+            "end": "2025-07-27",
+            "val": 3122000000,
+            "accn": "0001045810-26-000075",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-26",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/0001045810-26-000075-index.html"
+          }
+        ],
+        "originalTable": {
+          "concept": "{http://fasb.org/us-gaap/2026}PaymentsToAcquireProductiveAssets",
+          "start": "2026-01-26",
+          "end": "2026-07-26",
+          "value": "4434000000",
+          "context": "c-1",
+          "id": "f-334",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+          "row": "Purchases related to property and equipment and intangible assets(4,434)(3,122)"
+        }
+      },
+      "fcf": 127006000000,
+      "interest": {
+        "value": 464000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-07-28",
+        "end": "2026-07-26",
+        "items": [
+          {
+            "concept": "us-gaap:InterestExpenseNonoperating",
+            "unit": "USD",
+            "start": "2025-01-27",
+            "end": "2026-01-25",
+            "val": 259000000,
+            "accn": "0001045810-26-000021",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-25",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/0001045810-26-000021-index.html"
+          },
+          {
+            "concept": "us-gaap:InterestExpenseNonoperating",
+            "unit": "USD",
+            "start": "2026-01-26",
+            "end": "2026-07-26",
+            "val": 329000000,
+            "accn": "0001045810-26-000075",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-26",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/0001045810-26-000075-index.html"
+          },
+          {
+            "concept": "us-gaap:InterestExpenseNonoperating",
+            "unit": "USD",
+            "start": "2025-01-27",
+            "end": "2025-07-27",
+            "val": 124000000,
+            "accn": "0001045810-26-000075",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-26",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/0001045810-26-000075-index.html"
+          }
+        ]
+      },
+      "interestPaid": null,
+      "interestAttempts": {
+        "InterestExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpense",
+            "definition": "Amount of the cost of borrowed funds accounted for as interest expense.",
+            "historical": true,
+            "latestEnd": "2024-04-28",
+            "latestFiling": "0001045810-24-000124"
+          }
+        },
+        "InterestExpenseNonoperating": {
+          "ttm": {
+            "value": 464000000,
+            "method": "FY+currentYTD-priorComparableYTD",
+            "start": "2025-07-28",
+            "end": "2026-07-26",
+            "items": [
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2025-01-27",
+                "end": "2026-01-25",
+                "val": 259000000,
+                "accn": "0001045810-26-000021",
+                "fy": 2026,
+                "fp": "FY",
+                "form": "10-K",
+                "filed": "2026-02-25",
+                "frame": "CY2025",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/0001045810-26-000021-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2026-01-26",
+                "end": "2026-07-26",
+                "val": 329000000,
+                "accn": "0001045810-26-000075",
+                "fy": 2027,
+                "fp": "Q2",
+                "form": "10-Q",
+                "filed": "2026-08-26",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/0001045810-26-000075-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2025-01-27",
+                "end": "2025-07-27",
+                "val": 124000000,
+                "accn": "0001045810-26-000075",
+                "fy": 2027,
+                "fp": "Q2",
+                "form": "10-Q",
+                "filed": "2026-08-26",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/0001045810-26-000075-index.html"
+              }
+            ]
+          },
+          "history": {
+            "tag": "InterestExpenseNonoperating",
+            "definition": null,
+            "historical": true,
+            "latestEnd": "2026-07-26",
+            "latestFiling": "0001045810-26-000075"
+          }
+        },
+        "InterestExpenseDebt": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebt",
+            "definition": "Amount of the cost of borrowed funds accounted for as interest expense for debt.",
+            "historical": true,
+            "latestEnd": "2018-01-28",
+            "latestFiling": "0001045810-18-000010"
+          }
+        },
+        "InterestAndDebtExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestAndDebtExpense",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestExpenseDebtExcludingAmortization": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebtExcludingAmortization",
+            "definition": "Represents the portion of interest incurred in the period on debt arrangements that was charged against earnings, excluding amortization of debt discount (premium) and financing costs.",
+            "historical": true,
+            "latestEnd": "2018-01-28",
+            "latestFiling": "0001045810-18-000010"
+          }
+        },
+        "InterestPaid": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaid",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestPaidNet": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidNet",
+            "definition": "Amount of cash paid for interest, excluding capitalized interest, classified as operating activity. Includes, but is not limited to, payment to settle zero-coupon bond for accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount.",
+            "historical": true,
+            "latestEnd": "2025-01-26",
+            "latestFiling": "0001045810-25-000023"
+          }
+        },
+        "InterestPaidCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidCapitalized",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestCostsCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestCostsCapitalized",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        }
+      },
+      "pretax": {
+        "value": 229743000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-07-28",
+        "end": "2026-07-26",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2025-01-27",
+            "end": "2026-01-25",
+            "val": 141450000000,
+            "accn": "0001045810-26-000021",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-25",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/0001045810-26-000021-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2026-01-26",
+            "end": "2026-07-26",
+            "val": 141410000000,
+            "accn": "0001045810-26-000075",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-26",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/0001045810-26-000075-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2025-01-27",
+            "end": "2025-07-27",
+            "val": 53117000000,
+            "accn": "0001045810-26-000075",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-26",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/0001045810-26-000075-index.html"
+          }
+        ]
+      },
+      "tax": {
+        "value": 36863000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-07-28",
+        "end": "2026-07-26",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-01-27",
+            "end": "2026-01-25",
+            "val": 21383000000,
+            "accn": "0001045810-26-000021",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-25",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/0001045810-26-000021-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2026-01-26",
+            "end": "2026-07-26",
+            "val": 23400000000,
+            "accn": "0001045810-26-000075",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-26",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/0001045810-26-000075-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-01-27",
+            "end": "2025-07-27",
+            "val": 7920000000,
+            "accn": "0001045810-26-000075",
+            "fy": 2027,
+            "fp": "Q2",
+            "form": "10-Q",
+            "filed": "2026-08-26",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/0001045810-26-000075-index.html"
+          }
+        ]
+      },
+      "historicalEffectiveTaxRate": 0.16045320205621064,
+      "taxShieldRate": null,
+      "simplifiedFCFF": null,
+      "reason": "Expense/cash interest bridge, capitalized/lease/financial-business adjustments and marginal usable tax shield not jointly verified; historical ETR is not a verified interest shield rate",
+      "rawInterestFacts": [
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2026-04-27",
+          "end": "2026-07-26",
+          "value": "227000000",
+          "context": "c-3",
+          "id": "f-704",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2025-04-28",
+          "end": "2025-07-27",
+          "value": "62000000",
+          "context": "c-4",
+          "id": "f-705",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2026-01-26",
+          "end": "2026-07-26",
+          "value": "329000000",
+          "context": "c-1",
+          "id": "f-706",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2025-01-27",
+          "end": "2025-07-27",
+          "value": "124000000",
+          "context": "c-5",
+          "id": "f-707",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm"
+        }
+      ],
+      "snippets": [
+        {
+          "term": "capitalized interest",
+          "present": false
+        },
+        {
+          "term": "interest capitalized",
+          "present": false
+        },
+        {
+          "term": "interest expense",
+          "present": true
+        },
+        {
+          "term": "cash interest",
+          "present": false
+        },
+        {
+          "term": "finance leases",
+          "present": false
+        },
+        {
+          "term": "income tax",
+          "present": true
+        }
+      ],
+      "supplement": null
+    },
+    {
+      "ticker": "TSLA",
+      "filing": {
+        "form": "10-Q",
+        "end": "2026-09-30",
+        "filed": "2026-10-22",
+        "accn": "0001628280-26-066775",
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm"
+      },
+      "ocf": {
+        "value": 18710000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 14747000000,
+            "accn": "0001628280-26-003952",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-01-29",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/0001628280-26-003952-index.html"
+          },
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 14897000000,
+            "accn": "0001628280-26-066775",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-22",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/0001628280-26-066775-index.html"
+          },
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 10934000000,
+            "accn": "0001628280-26-066775",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-22",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/0001628280-26-066775-index.html"
+          }
+        ]
+      },
+      "capex": {
+        "value": 15407000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 8527000000,
+            "accn": "0001628280-26-003952",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-01-29",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/0001628280-26-003952-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 13014000000,
+            "accn": "0001628280-26-066775",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-22",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/0001628280-26-066775-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 6134000000,
+            "accn": "0001628280-26-066775",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-22",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/0001628280-26-066775-index.html"
+          }
+        ]
+      },
+      "capexScope": "PP&E cash purchases",
+      "alternative": null,
+      "fcf": 3303000000,
+      "interest": {
+        "value": 348000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:InterestExpenseNonoperating",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 338000000,
+            "accn": "0001628280-26-003952",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-01-29",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/0001628280-26-003952-index.html"
+          },
+          {
+            "concept": "us-gaap:InterestExpenseNonoperating",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 263000000,
+            "accn": "0001628280-26-066775",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-22",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/0001628280-26-066775-index.html"
+          },
+          {
+            "concept": "us-gaap:InterestExpenseNonoperating",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 253000000,
+            "accn": "0001628280-26-066775",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-22",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/0001628280-26-066775-index.html"
+          }
+        ]
+      },
+      "interestPaid": null,
+      "interestAttempts": {
+        "InterestExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpense",
+            "definition": "Amount of the cost of borrowed funds accounted for as interest expense.",
+            "historical": true,
+            "latestEnd": "2024-06-30",
+            "latestFiling": "0001628280-24-032662"
+          }
+        },
+        "InterestExpenseNonoperating": {
+          "ttm": {
+            "value": 348000000,
+            "method": "FY+currentYTD-priorComparableYTD",
+            "start": "2025-10-01",
+            "end": "2026-09-30",
+            "items": [
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2025-01-01",
+                "end": "2025-12-31",
+                "val": 338000000,
+                "accn": "0001628280-26-003952",
+                "fy": 2025,
+                "fp": "FY",
+                "form": "10-K",
+                "filed": "2026-01-29",
+                "frame": "CY2025",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/0001628280-26-003952-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2026-01-01",
+                "end": "2026-09-30",
+                "val": 263000000,
+                "accn": "0001628280-26-066775",
+                "fy": 2026,
+                "fp": "Q3",
+                "form": "10-Q",
+                "filed": "2026-10-22",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/0001628280-26-066775-index.html"
+              },
+              {
+                "concept": "us-gaap:InterestExpenseNonoperating",
+                "unit": "USD",
+                "start": "2025-01-01",
+                "end": "2025-09-30",
+                "val": 253000000,
+                "accn": "0001628280-26-066775",
+                "fy": 2026,
+                "fp": "Q3",
+                "form": "10-Q",
+                "filed": "2026-10-22",
+                "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+                "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/0001628280-26-066775-index.html"
+              }
+            ]
+          },
+          "history": {
+            "tag": "InterestExpenseNonoperating",
+            "definition": null,
+            "historical": true,
+            "latestEnd": "2026-09-30",
+            "latestFiling": "0001628280-26-066775"
+          }
+        },
+        "InterestExpenseDebt": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebt",
+            "definition": "Amount of the cost of borrowed funds accounted for as interest expense for debt.",
+            "historical": true,
+            "latestEnd": "2022-09-30",
+            "latestFiling": "0000950170-22-019867"
+          }
+        },
+        "InterestAndDebtExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestAndDebtExpense",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestExpenseDebtExcludingAmortization": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebtExcludingAmortization",
+            "definition": "Represents the portion of interest incurred in the period on debt arrangements that was charged against earnings, excluding amortization of debt discount (premium) and financing costs.",
+            "historical": true,
+            "latestEnd": "2022-09-30",
+            "latestFiling": "0000950170-22-019867"
+          }
+        },
+        "InterestPaid": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaid",
+            "definition": "Amount of cash paid for interest, including, but not limited to, capitalized interest and payment to settle zero-coupon bond attributable to accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount; classified as operating and investing activities.",
+            "historical": true,
+            "latestEnd": "2017-12-31",
+            "latestFiling": "0001564590-18-002956"
+          }
+        },
+        "InterestPaidNet": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidNet",
+            "definition": "Amount of cash paid for interest, excluding capitalized interest, classified as operating activity. Includes, but is not limited to, payment to settle zero-coupon bond for accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount.",
+            "historical": true,
+            "latestEnd": "2025-12-31",
+            "latestFiling": "0001628280-26-003952"
+          }
+        },
+        "InterestPaidCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidCapitalized",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestCostsCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestCostsCapitalized",
+            "definition": "Amount of interest capitalized during the period.",
+            "historical": true,
+            "latestEnd": "2021-12-31",
+            "latestFiling": "0000950170-23-001409"
+          }
+        }
+      },
+      "pretax": {
+        "value": 4214000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 5278000000,
+            "accn": "0001628280-26-003952",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-01-29",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/0001628280-26-003952-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 3033000000,
+            "accn": "0001628280-26-066775",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-22",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/0001628280-26-066775-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 4097000000,
+            "accn": "0001628280-26-066775",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-22",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/0001628280-26-066775-index.html"
+          }
+        ]
+      },
+      "tax": {
+        "value": 935000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 1423000000,
+            "accn": "0001628280-26-003952",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-01-29",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/0001628280-26-003952-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 610000000,
+            "accn": "0001628280-26-066775",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-22",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/0001628280-26-066775-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 1098000000,
+            "accn": "0001628280-26-066775",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-10-22",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/0001628280-26-066775-index.html"
+          }
+        ]
+      },
+      "historicalEffectiveTaxRate": 0.2218794494542003,
+      "taxShieldRate": null,
+      "simplifiedFCFF": null,
+      "reason": "Expense/cash interest bridge, capitalized/lease/financial-business adjustments and marginal usable tax shield not jointly verified; historical ETR is not a verified interest shield rate",
+      "rawInterestFacts": [
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2026-07-01",
+          "end": "2026-09-30",
+          "value": "90000000",
+          "context": "c-33",
+          "id": "f-192",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2025-07-01",
+          "end": "2025-09-30",
+          "value": "76000000",
+          "context": "c-34",
+          "id": "f-193",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "value": "263000000",
+          "context": "c-1",
+          "id": "f-194",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpenseNonoperating",
+          "start": "2025-01-01",
+          "end": "2025-09-30",
+          "value": "253000000",
+          "context": "c-35",
+          "id": "f-195",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm"
+        }
+      ],
+      "snippets": [
+        {
+          "term": "capitalized interest",
+          "present": false
+        },
+        {
+          "term": "interest capitalized",
+          "present": false
+        },
+        {
+          "term": "interest expense",
+          "present": true
+        },
+        {
+          "term": "cash interest",
+          "present": true
+        },
+        {
+          "term": "finance leases",
+          "present": true
+        },
+        {
+          "term": "income tax",
+          "present": true
+        }
+      ],
+      "supplement": null
+    },
+    {
+      "ticker": "XOM",
+      "filing": {
+        "form": "10-Q",
+        "end": "2026-06-30",
+        "filed": "2026-08-03",
+        "accn": "0000034088-26-000093",
+        "url": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+      },
+      "ocf": null,
+      "capex": null,
+      "capexScope": "PP&E cash purchases",
+      "alternative": null,
+      "fcf": null,
+      "interest": null,
+      "interestPaid": null,
+      "interestAttempts": {
+        "InterestExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpense",
+            "definition": "Amount of the cost of borrowed funds accounted for as interest expense.",
+            "historical": true,
+            "latestEnd": "2026-03-31",
+            "latestFiling": "0000034088-26-000067"
+          }
+        },
+        "InterestExpenseNonoperating": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseNonoperating",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestExpenseDebt": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebt",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestAndDebtExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestAndDebtExpense",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestExpenseDebtExcludingAmortization": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebtExcludingAmortization",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestPaid": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaid",
+            "definition": "Amount of cash paid for interest, including, but not limited to, capitalized interest and payment to settle zero-coupon bond attributable to accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount; classified as operating and investing activities.",
+            "historical": true,
+            "latestEnd": "2026-03-31",
+            "latestFiling": "0000034088-26-000067"
+          }
+        },
+        "InterestPaidNet": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidNet",
+            "definition": "Amount of cash paid for interest, excluding capitalized interest, classified as operating activity. Includes, but is not limited to, payment to settle zero-coupon bond for accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount.",
+            "historical": true,
+            "latestEnd": "2026-03-31",
+            "latestFiling": "0000034088-26-000067"
+          }
+        },
+        "InterestPaidCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidCapitalized",
+            "definition": "Amount of cash paid for interest capitalized, classified as investing activity.",
+            "historical": true,
+            "latestEnd": "2026-03-31",
+            "latestFiling": "0000034088-26-000067"
+          }
+        },
+        "InterestCostsCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestCostsCapitalized",
+            "definition": "Amount of interest capitalized during the period.",
+            "historical": true,
+            "latestEnd": "2020-12-31",
+            "latestFiling": "0000034088-21-000012"
+          }
+        }
+      },
+      "pretax": null,
+      "tax": null,
+      "historicalEffectiveTaxRate": null,
+      "taxShieldRate": null,
+      "simplifiedFCFF": null,
+      "reason": "Expense/cash interest bridge, capitalized/lease/financial-business adjustments and marginal usable tax shield not jointly verified; historical ETR is not a verified interest shield rate",
+      "rawInterestFacts": [
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpense",
+          "start": "2026-04-01",
+          "end": "2026-06-30",
+          "value": "227000000",
+          "context": "c-20",
+          "id": "f-90",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpense",
+          "start": "2025-04-01",
+          "end": "2025-06-30",
+          "value": "145000000",
+          "context": "c-21",
+          "id": "f-91",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpense",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "value": "522000000",
+          "context": "c-1",
+          "id": "f-92",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestExpense",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "value": "350000000",
+          "context": "c-22",
+          "id": "f-93",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestPaidNet",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "value": "402000000",
+          "context": "c-1",
+          "id": "f-285",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestPaidNet",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "value": "169000000",
+          "context": "c-22",
+          "id": "f-286",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestPaidCapitalized",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "value": "508000000",
+          "context": "c-1",
+          "id": "f-287",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestPaidCapitalized",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "value": "707000000",
+          "context": "c-22",
+          "id": "f-288",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestPaid",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "value": "910000000",
+          "context": "c-1",
+          "id": "f-289",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+        },
+        {
+          "concept": "{http://fasb.org/us-gaap/2026}InterestPaid",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "value": "876000000",
+          "context": "c-22",
+          "id": "f-290",
+          "unit": "USD",
+          "source": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+        }
+      ],
+      "snippets": [
+        {
+          "term": "capitalized interest",
+          "present": false
+        },
+        {
+          "term": "interest capitalized",
+          "present": false
+        },
+        {
+          "term": "interest expense",
+          "present": true
+        },
+        {
+          "term": "cash interest",
+          "present": true
+        },
+        {
+          "term": "finance leases",
+          "present": true
+        },
+        {
+          "term": "income tax",
+          "present": true
+        }
+      ],
+      "supplement": {
+        "ocf": {
+          "tag": "NetCashProvidedByUsedInOperatingActivities",
+          "start": "2025-07-01",
+          "end": "2026-06-30",
+          "value": 59727000000,
+          "items": [
+            {
+              "start": "2025-01-01",
+              "end": "2025-12-31",
+              "val": 51970000000,
+              "accn": "0000034088-26-000045",
+              "fy": 2025,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-02-18",
+              "frame": "CY2025",
+              "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+              "unit": "USD",
+              "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000034088.json"
+            },
+            {
+              "concept": "{http://fasb.org/us-gaap/2026}NetCashProvidedByUsedInOperatingActivities",
+              "start": "2026-01-01",
+              "end": "2026-06-30",
+              "value": "32260000000",
+              "context": "c-1",
+              "id": "f-241",
+              "unit": "USD",
+              "source": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm",
+              "row": "Net cash provided by operating activities32,26024,503"
+            },
+            {
+              "concept": "{http://fasb.org/us-gaap/2026}NetCashProvidedByUsedInOperatingActivities",
+              "start": "2025-01-01",
+              "end": "2025-06-30",
+              "value": "24503000000",
+              "context": "c-22",
+              "id": "f-242",
+              "unit": "USD",
+              "source": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm",
+              "row": "Net cash provided by operating activities32,26024,503"
+            }
+          ]
+        },
+        "capex": {
+          "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+          "start": "2025-07-01",
+          "end": "2026-06-30",
+          "value": 29174000000,
+          "items": [
+            {
+              "start": "2025-01-01",
+              "end": "2025-12-31",
+              "val": 28358000000,
+              "accn": "0000034088-26-000045",
+              "fy": 2025,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-02-18",
+              "frame": "CY2025",
+              "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+              "unit": "USD",
+              "source": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000034088.json"
+            },
+            {
+              "concept": "{http://fasb.org/us-gaap/2026}PaymentsToAcquirePropertyPlantAndEquipment",
+              "start": "2026-01-01",
+              "end": "2026-06-30",
+              "value": "12997000000",
+              "context": "c-1",
+              "id": "f-243",
+              "unit": "USD",
+              "source": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm",
+              "row": "Additions to property, plant and equipment(12,997)(12,181)"
+            },
+            {
+              "concept": "{http://fasb.org/us-gaap/2026}PaymentsToAcquirePropertyPlantAndEquipment",
+              "start": "2025-01-01",
+              "end": "2025-06-30",
+              "value": "12181000000",
+              "context": "c-22",
+              "id": "f-244",
+              "unit": "USD",
+              "source": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm",
+              "row": "Additions to property, plant and equipment(12,997)(12,181)"
+            }
+          ]
+        },
+        "fcf": 30553000000,
+        "source": "raw standard Inline XBRL + existing CompanyFacts annual; not CompanyFacts-only"
+      }
+    },
+    {
+      "ticker": "CAT",
+      "filing": {
+        "form": "10-Q",
+        "end": "2026-09-30",
+        "filed": "2026-11-04",
+        "accn": "0000018230-26-000057",
+        "url": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000057/cat-20260930.htm"
+      },
+      "ocf": {
+        "value": 14184000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 11739000000,
+            "accn": "0000018230-26-000008",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-13",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000008/0000018230-26-000008-index.html"
+          },
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 10593000000,
+            "accn": "0000018230-26-000057",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-11-04",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000057/0000018230-26-000057-index.html"
+          },
+          {
+            "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 8148000000,
+            "accn": "0000018230-26-000057",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-11-04",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000057/0000018230-26-000057-index.html"
+          }
+        ]
+      },
+      "capex": {
+        "value": 2910000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 2821000000,
+            "accn": "0000018230-26-000008",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-13",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000008/0000018230-26-000008-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 2012000000,
+            "accn": "0000018230-26-000057",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-11-04",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000057/0000018230-26-000057-index.html"
+          },
+          {
+            "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 1923000000,
+            "accn": "0000018230-26-000057",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-11-04",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000057/0000018230-26-000057-index.html"
+          }
+        ]
+      },
+      "capexScope": "PP&E cash purchases",
+      "alternative": null,
+      "fcf": 11274000000,
+      "interest": null,
+      "interestPaid": null,
+      "interestAttempts": {
+        "InterestExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpense",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestExpenseNonoperating": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseNonoperating",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestExpenseDebt": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebt",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestAndDebtExpense": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestAndDebtExpense",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestExpenseDebtExcludingAmortization": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestExpenseDebtExcludingAmortization",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestPaid": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaid",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestPaidNet": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidNet",
+            "definition": "Amount of cash paid for interest, excluding capitalized interest, classified as operating activity. Includes, but is not limited to, payment to settle zero-coupon bond for accreted interest of debt discount and debt instrument with insignificant coupon interest rate in relation to effective interest rate of borrowing attributable to accreted interest of debt discount.",
+            "historical": true,
+            "latestEnd": "2025-12-31",
+            "latestFiling": "0000018230-26-000008"
+          }
+        },
+        "InterestPaidCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestPaidCapitalized",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        },
+        "InterestCostsCapitalized": {
+          "ttm": null,
+          "history": {
+            "tag": "InterestCostsCapitalized",
+            "definition": null,
+            "historical": false,
+            "latestEnd": null,
+            "latestFiling": null
+          }
+        }
+      },
+      "pretax": {
+        "value": 15015000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 11541000000,
+            "accn": "0000018230-26-000008",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-13",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000008/0000018230-26-000008-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 11989000000,
+            "accn": "0000018230-26-000057",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-11-04",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000057/0000018230-26-000057-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 8515000000,
+            "accn": "0000018230-26-000057",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-11-04",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000057/0000018230-26-000057-index.html"
+          }
+        ]
+      },
+      "tax": {
+        "value": 3405000000,
+        "method": "FY+currentYTD-priorComparableYTD",
+        "start": "2025-10-01",
+        "end": "2026-09-30",
+        "items": [
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 2768000000,
+            "accn": "0000018230-26-000008",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-13",
+            "frame": "CY2025",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000008/0000018230-26-000008-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2026-01-01",
+            "end": "2026-09-30",
+            "val": 2693000000,
+            "accn": "0000018230-26-000057",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-11-04",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000057/0000018230-26-000057-index.html"
+          },
+          {
+            "concept": "us-gaap:IncomeTaxExpenseBenefit",
+            "unit": "USD",
+            "start": "2025-01-01",
+            "end": "2025-09-30",
+            "val": 2056000000,
+            "accn": "0000018230-26-000057",
+            "fy": 2026,
+            "fp": "Q3",
+            "form": "10-Q",
+            "filed": "2026-11-04",
+            "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json",
+            "filingUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000057/0000018230-26-000057-index.html"
+          }
+        ]
+      },
+      "historicalEffectiveTaxRate": 0.22677322677322678,
+      "taxShieldRate": null,
+      "simplifiedFCFF": null,
+      "reason": "Expense/cash interest bridge, capitalized/lease/financial-business adjustments and marginal usable tax shield not jointly verified; historical ETR is not a verified interest shield rate",
+      "rawInterestFacts": [],
+      "snippets": [
+        {
+          "term": "capitalized interest",
+          "present": false
+        },
+        {
+          "term": "interest capitalized",
+          "present": false
+        },
+        {
+          "term": "interest expense",
+          "present": true
+        },
+        {
+          "term": "cash interest",
+          "present": false
+        },
+        {
+          "term": "finance leases",
+          "present": true
+        },
+        {
+          "term": "income tax",
+          "present": true
+        }
+      ],
+      "supplement": null
+    }
+  ],
+  "companyFactsFCFCount": 9,
+  "supplementedFCFCount": 10,
+  "approvedFCFFCount": 0,
+  "xomFreshResponseCheck": {
+    "NetCashProvidedByUsedInOperatingActivities": {
+      "latestEnd": "2026-03-31",
+      "latestAccessionPresent": false,
+      "latestRawFilingEnd": "2026-06-30"
+    },
+    "PaymentsToAcquirePropertyPlantAndEquipment": {
+      "latestEnd": "2026-03-31",
+      "latestAccessionPresent": false,
+      "latestRawFilingEnd": "2026-06-30"
+    }
+  }
+}

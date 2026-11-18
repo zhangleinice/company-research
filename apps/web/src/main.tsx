@@ -1,3 +1,4 @@
+import { BrowserRouter } from 'react-router-dom';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ConfigProvider } from 'antd';
@@ -12,7 +13,9 @@ createRoot(document.getElementById('root')!).render(
       locale={zhCN}
       theme={{ token: { colorPrimary: '#1677ff', borderRadius: 8 } }}
     >
-      <App />
+      <BrowserRouter useTransitions={false}>
+        <App />
+      </BrowserRouter>
     </ConfigProvider>
   </StrictMode>,
 );

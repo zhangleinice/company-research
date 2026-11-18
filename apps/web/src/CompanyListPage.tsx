@@ -1,3 +1,5 @@
+import { useSearchParams } from 'react-router-dom';
+import { listFilters } from './routes.js';
 import { useEffect, useState } from 'react';
 import {
   Alert,
@@ -17,47 +19,50 @@ import type {
   ResearchCompany,
   ResearchListResponse,
 } from '@company-research/shared';
-import { fetchResearchList, setCompanyFavorite } from './api';
-import { amount, percent } from './financial-columns';
+import { fetchResearchList, setCompanyFavorite } from './api.js';
+import { amount, percent } from './financial-columns.js';
 
 export function CompanyListPage({
   favorites,
   onOpen,
+  onValuation,
 }: {
   favorites: boolean;
   onOpen: (ticker: string) => void;
+  onValuation: (ticker: string) => void;
 }) {
   const [form] = Form.useForm<{ q: string }>();
-  const [page, setPage] = useState(() =>
-    Math.max(
-      1,
-      Number(new URLSearchParams(window.location.search).get('page')) || 1,
-    ),
-  );
-  const [query, setQuery] = useState(
-    () => new URLSearchParams(window.location.search).get('q') ?? '',
-  );
-  const [mode, setMode] = useState<FinancialMode>(() =>
-    new URLSearchParams(window.location.search).get('mode') === 'quarterly'
-      ? 'quarterly'
-      : 'annual',
-  );
+  const [params, setParams] = useSearchParams();
+  const { page, query, mode } = listFilters(params);
+  const updateFilters = (patch: {
+    page?: number;
+    q?: string;
+    mode?: FinancialMode;
+  }) => {
+    const next = new URLSearchParams(params);
+    if (patch.page !== undefined) {
+      if (patch.page > 1) next.set('page', String(patch.page));
+      else next.delete('page');
+    }
+    if (patch.q !== undefined) {
+      if (patch.q) next.set('q', patch.q);
+      else next.delete('q');
+    }
+    if (patch.mode !== undefined) {
+      if (patch.mode === 'quarterly') next.set('mode', patch.mode);
+      else next.delete('mode');
+    }
+    setParams(next, { replace: true });
+  };
+  const setPage = (next: number) => updateFilters({ page: next });
   const [list, setList] = useState<ResearchListResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [revision, setRevision] = useState(0);
   const [saving, setSaving] = useState<Set<string>>(new Set());
   useEffect(() => {
-    const params = new URLSearchParams();
-    if (page > 1) params.set('page', String(page));
-    if (query) params.set('q', query);
-    if (mode === 'quarterly') params.set('mode', mode);
-    window.history.replaceState(
-      null,
-      '',
-      `${window.location.pathname}${params.size ? `?${params}` : ''}`,
-    );
-  }, [page, query, mode]);
+    form.setFieldsValue({ q: query });
+  }, [form, query]);
   useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
@@ -153,17 +158,25 @@ export function CompanyListPage({
       render: (_value, row) => row.financial?.periodEnd ?? '—',
     },
     {
-      title: '收藏',
-      key: 'favorite',
-      width: 100,
-      render: (_value, row) => (
-        <Button
-          type="link"
-          loading={saving.has(row.cik)}
-          onClick={() => favorite(row)}
-        >
-          {row.isFavorite ? '取消收藏' : '收藏'}
-        </Button>
+      title: '操作',
+      key: 'actions',
+      width: 210,
+      render: (_, row) => (
+        <Space size="small">
+          <Typography.Link onClick={() => onOpen(row.ticker)}>
+            详情
+          </Typography.Link>
+          <Typography.Link onClick={() => onValuation(row.ticker)}>
+            估值
+          </Typography.Link>
+          <Button
+            type="link"
+            loading={saving.has(row.cik)}
+            onClick={() => favorite(row)}
+          >
+            {row.isFavorite ? '取消收藏' : '收藏'}
+          </Button>
+        </Space>
       ),
     },
   ];
@@ -176,8 +189,7 @@ export function CompanyListPage({
           layout="inline"
           className="query-form"
           onFinish={(values) => {
-            setPage(1);
-            setQuery(values.q?.trim() ?? '');
+            updateFilters({ page: 1, q: values.q?.trim() ?? '' });
           }}
         >
           <Form.Item name="q" label="公司 / Ticker">
@@ -194,9 +206,8 @@ export function CompanyListPage({
               </Button>
               <Button
                 onClick={() => {
-                  form.resetFields();
-                  setPage(1);
-                  setQuery('');
+                  form.setFieldsValue({ q: '' });
+                  updateFilters({ page: 1, q: '' });
                 }}
               >
                 重置
@@ -221,8 +232,7 @@ export function CompanyListPage({
               { label: 'Quarterly', value: 'quarterly' },
             ]}
             onChange={(value) => {
-              setMode(value as FinancialMode);
-              setPage(1);
+              updateFilters({ mode: value as FinancialMode, page: 1 });
             }}
           />
           <Typography.Text type="secondary">

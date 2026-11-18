@@ -1,0 +1,837 @@
+{
+  "GOOGL": {
+    "raw": {
+      "cik": "0001652044",
+      "facts": {
+        "us-gaap": {
+          "Revenues": {
+            "units": {
+              "USD": [
+                {
+                  "concept": "us-gaap:Revenues",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-12-31",
+                  "val": 402836000000,
+                  "accn": "0001652044-26-000018",
+                  "fy": 2025,
+                  "fp": "FY",
+                  "form": "10-K",
+                  "filed": "2026-02-05",
+                  "frame": "CY2025",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/0001652044-26-000018-index.html"
+                },
+                {
+                  "concept": "us-gaap:Revenues",
+                  "unit": "USD",
+                  "start": "2026-01-01",
+                  "end": "2026-09-30",
+                  "val": 357269000000,
+                  "accn": "0001652044-26-000084",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-29",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+                },
+                {
+                  "concept": "us-gaap:Revenues",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-09-30",
+                  "val": 289007000000,
+                  "accn": "0001652044-26-000084",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-29",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+                }
+              ]
+            }
+          },
+          "OperatingIncomeLoss": {
+            "units": {
+              "USD": [
+                {
+                  "concept": "us-gaap:OperatingIncomeLoss",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-12-31",
+                  "val": 129039000000,
+                  "accn": "0001652044-26-000018",
+                  "fy": 2025,
+                  "fp": "FY",
+                  "form": "10-K",
+                  "filed": "2026-02-05",
+                  "frame": "CY2025",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/0001652044-26-000018-index.html"
+                },
+                {
+                  "concept": "us-gaap:OperatingIncomeLoss",
+                  "unit": "USD",
+                  "start": "2026-01-01",
+                  "end": "2026-09-30",
+                  "val": 121042000000,
+                  "accn": "0001652044-26-000084",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-29",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+                },
+                {
+                  "concept": "us-gaap:OperatingIncomeLoss",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-09-30",
+                  "val": 93105000000,
+                  "accn": "0001652044-26-000084",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-29",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+                }
+              ]
+            }
+          },
+          "NetCashProvidedByUsedInOperatingActivities": {
+            "units": {
+              "USD": [
+                {
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-12-31",
+                  "val": 164713000000,
+                  "accn": "0001652044-26-000018",
+                  "fy": 2025,
+                  "fp": "FY",
+                  "form": "10-K",
+                  "filed": "2026-02-05",
+                  "frame": "CY2025",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/0001652044-26-000018-index.html"
+                },
+                {
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+                  "unit": "USD",
+                  "start": "2026-01-01",
+                  "end": "2026-09-30",
+                  "val": 127149000000,
+                  "accn": "0001652044-26-000084",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-29",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+                },
+                {
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-09-30",
+                  "val": 112311000000,
+                  "accn": "0001652044-26-000084",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-29",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+                }
+              ]
+            }
+          },
+          "PaymentsToAcquirePropertyPlantAndEquipment": {
+            "units": {
+              "USD": [
+                {
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-12-31",
+                  "val": 91447000000,
+                  "accn": "0001652044-26-000018",
+                  "fy": 2025,
+                  "fp": "FY",
+                  "form": "10-K",
+                  "filed": "2026-02-05",
+                  "frame": "CY2025",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/0001652044-26-000018-index.html"
+                },
+                {
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+                  "unit": "USD",
+                  "start": "2026-01-01",
+                  "end": "2026-09-30",
+                  "val": 131953000000,
+                  "accn": "0001652044-26-000084",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-29",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+                },
+                {
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-09-30",
+                  "val": 63596000000,
+                  "accn": "0001652044-26-000084",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-29",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+                }
+              ]
+            }
+          },
+          "InterestExpenseNonoperating": {
+            "units": {
+              "USD": [
+                {
+                  "concept": "us-gaap:InterestExpenseNonoperating",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-12-31",
+                  "val": 736000000,
+                  "accn": "0001652044-26-000018",
+                  "fy": 2025,
+                  "fp": "FY",
+                  "form": "10-K",
+                  "filed": "2026-02-05",
+                  "frame": "CY2025",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/0001652044-26-000018-index.html"
+                },
+                {
+                  "concept": "us-gaap:InterestExpenseNonoperating",
+                  "unit": "USD",
+                  "start": "2026-01-01",
+                  "end": "2026-09-30",
+                  "val": 2778000000,
+                  "accn": "0001652044-26-000084",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-29",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+                },
+                {
+                  "concept": "us-gaap:InterestExpenseNonoperating",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-09-30",
+                  "val": 438000000,
+                  "accn": "0001652044-26-000084",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-29",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/0001652044-26-000084-index.html"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "sub": {
+      "cik": "0001652044",
+      "sic": "7370",
+      "name": "Alphabet Inc.",
+      "filings": {
+        "recent": {
+          "form": [
+            "10-Q"
+          ],
+          "reportDate": [
+            "2026-09-30"
+          ],
+          "filingDate": [
+            "2026-10-29"
+          ],
+          "accessionNumber": [
+            "0001652044-26-000084"
+          ]
+        }
+      }
+    }
+  },
+  "MSFT": {
+    "raw": {
+      "cik": "0000789019",
+      "facts": {
+        "us-gaap": {
+          "RevenueFromContractWithCustomerExcludingAssessedTax": {
+            "units": {
+              "USD": [
+                {
+                  "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+                  "unit": "USD",
+                  "start": "2025-07-01",
+                  "end": "2026-06-30",
+                  "val": 331839000000,
+                  "accn": "0001193125-26-323660",
+                  "fy": 2026,
+                  "fp": "FY",
+                  "form": "10-K",
+                  "filed": "2026-07-29",
+                  "frame": "CY2026",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.html"
+                },
+                {
+                  "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+                  "unit": "USD",
+                  "start": "2026-07-01",
+                  "end": "2026-09-30",
+                  "val": 92279000000,
+                  "accn": "0001193125-26-436133",
+                  "fy": 2027,
+                  "fp": "Q1",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "frame": "CY2026Q3",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+                },
+                {
+                  "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+                  "unit": "USD",
+                  "start": "2025-07-01",
+                  "end": "2025-09-30",
+                  "val": 77673000000,
+                  "accn": "0001193125-26-436133",
+                  "fy": 2027,
+                  "fp": "Q1",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "frame": "CY2025Q3",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+                }
+              ]
+            }
+          },
+          "OperatingIncomeLoss": {
+            "units": {
+              "USD": [
+                {
+                  "concept": "us-gaap:OperatingIncomeLoss",
+                  "unit": "USD",
+                  "start": "2025-07-01",
+                  "end": "2026-06-30",
+                  "val": 155237000000,
+                  "accn": "0001193125-26-323660",
+                  "fy": 2026,
+                  "fp": "FY",
+                  "form": "10-K",
+                  "filed": "2026-07-29",
+                  "frame": "CY2026",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.html"
+                },
+                {
+                  "concept": "us-gaap:OperatingIncomeLoss",
+                  "unit": "USD",
+                  "start": "2026-07-01",
+                  "end": "2026-09-30",
+                  "val": 45915000000,
+                  "accn": "0001193125-26-436133",
+                  "fy": 2027,
+                  "fp": "Q1",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "frame": "CY2026Q3",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+                },
+                {
+                  "concept": "us-gaap:OperatingIncomeLoss",
+                  "unit": "USD",
+                  "start": "2025-07-01",
+                  "end": "2025-09-30",
+                  "val": 37961000000,
+                  "accn": "0001193125-26-436133",
+                  "fy": 2027,
+                  "fp": "Q1",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "frame": "CY2025Q3",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+                }
+              ]
+            }
+          },
+          "NetCashProvidedByUsedInOperatingActivities": {
+            "units": {
+              "USD": [
+                {
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+                  "unit": "USD",
+                  "start": "2025-07-01",
+                  "end": "2026-06-30",
+                  "val": 182935000000,
+                  "accn": "0001193125-26-323660",
+                  "fy": 2026,
+                  "fp": "FY",
+                  "form": "10-K",
+                  "filed": "2026-07-29",
+                  "frame": "CY2026",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.html"
+                },
+                {
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+                  "unit": "USD",
+                  "start": "2026-07-01",
+                  "end": "2026-09-30",
+                  "val": 58000000000,
+                  "accn": "0001193125-26-436133",
+                  "fy": 2027,
+                  "fp": "Q1",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "frame": "CY2026Q3",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+                },
+                {
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+                  "unit": "USD",
+                  "start": "2025-07-01",
+                  "end": "2025-09-30",
+                  "val": 45057000000,
+                  "accn": "0001193125-26-436133",
+                  "fy": 2027,
+                  "fp": "Q1",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "frame": "CY2025Q3",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+                }
+              ]
+            }
+          },
+          "PaymentsToAcquirePropertyPlantAndEquipment": {
+            "units": {
+              "USD": [
+                {
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+                  "unit": "USD",
+                  "start": "2025-07-01",
+                  "end": "2026-06-30",
+                  "val": 115948000000,
+                  "accn": "0001193125-26-323660",
+                  "fy": 2026,
+                  "fp": "FY",
+                  "form": "10-K",
+                  "filed": "2026-07-29",
+                  "frame": "CY2026",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.html"
+                },
+                {
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+                  "unit": "USD",
+                  "start": "2026-07-01",
+                  "end": "2026-09-30",
+                  "val": 39367000000,
+                  "accn": "0001193125-26-436133",
+                  "fy": 2027,
+                  "fp": "Q1",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "frame": "CY2026Q3",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+                },
+                {
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+                  "unit": "USD",
+                  "start": "2025-07-01",
+                  "end": "2025-09-30",
+                  "val": 19394000000,
+                  "accn": "0001193125-26-436133",
+                  "fy": 2027,
+                  "fp": "Q1",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "frame": "CY2025Q3",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+                }
+              ]
+            }
+          },
+          "InterestExpenseNonoperating": {
+            "units": {
+              "USD": [
+                {
+                  "concept": "us-gaap:InterestExpenseNonoperating",
+                  "unit": "USD",
+                  "start": "2025-07-01",
+                  "end": "2026-06-30",
+                  "val": 3051000000,
+                  "accn": "0001193125-26-323660",
+                  "fy": 2026,
+                  "fp": "FY",
+                  "form": "10-K",
+                  "filed": "2026-07-29",
+                  "frame": "CY2026",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.html"
+                },
+                {
+                  "concept": "us-gaap:InterestExpenseNonoperating",
+                  "unit": "USD",
+                  "start": "2026-07-01",
+                  "end": "2026-09-30",
+                  "val": 870000000,
+                  "accn": "0001193125-26-436133",
+                  "fy": 2027,
+                  "fp": "Q1",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "frame": "CY2026Q3",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+                },
+                {
+                  "concept": "us-gaap:InterestExpenseNonoperating",
+                  "unit": "USD",
+                  "start": "2025-07-01",
+                  "end": "2025-09-30",
+                  "val": 698000000,
+                  "accn": "0001193125-26-436133",
+                  "fy": 2027,
+                  "fp": "Q1",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "frame": "CY2025Q3",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/0001193125-26-436133-index.html"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "sub": {
+      "cik": "0000789019",
+      "sic": "7372",
+      "name": "MICROSOFT CORP",
+      "filings": {
+        "recent": {
+          "form": [
+            "10-Q"
+          ],
+          "reportDate": [
+            "2026-09-30"
+          ],
+          "filingDate": [
+            "2026-10-28"
+          ],
+          "accessionNumber": [
+            "0001193125-26-436133"
+          ]
+        }
+      }
+    }
+  },
+  "KO": {
+    "raw": {
+      "cik": "0000021344",
+      "facts": {
+        "us-gaap": {
+          "Revenues": {
+            "units": {
+              "USD": [
+                {
+                  "concept": "us-gaap:Revenues",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-12-31",
+                  "val": 47941000000,
+                  "accn": "0001628280-26-010047",
+                  "fy": 2025,
+                  "fp": "FY",
+                  "form": "10-K",
+                  "filed": "2026-02-20",
+                  "frame": "CY2025",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/0001628280-26-010047-index.html"
+                },
+                {
+                  "concept": "us-gaap:Revenues",
+                  "unit": "USD",
+                  "start": "2026-01-01",
+                  "end": "2026-10-02",
+                  "val": 39232000000,
+                  "accn": "0001628280-26-067844",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+                },
+                {
+                  "concept": "us-gaap:Revenues",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-09-26",
+                  "val": 36119000000,
+                  "accn": "0001628280-26-067844",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+                }
+              ]
+            }
+          },
+          "OperatingIncomeLoss": {
+            "units": {
+              "USD": [
+                {
+                  "concept": "us-gaap:OperatingIncomeLoss",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-12-31",
+                  "val": 13762000000,
+                  "accn": "0001628280-26-010047",
+                  "fy": 2025,
+                  "fp": "FY",
+                  "form": "10-K",
+                  "filed": "2026-02-20",
+                  "frame": "CY2025",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/0001628280-26-010047-index.html"
+                },
+                {
+                  "concept": "us-gaap:OperatingIncomeLoss",
+                  "unit": "USD",
+                  "start": "2026-01-01",
+                  "end": "2026-10-02",
+                  "val": 13496000000,
+                  "accn": "0001628280-26-067844",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+                },
+                {
+                  "concept": "us-gaap:OperatingIncomeLoss",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-09-26",
+                  "val": 11921000000,
+                  "accn": "0001628280-26-067844",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+                }
+              ]
+            }
+          },
+          "NetCashProvidedByUsedInOperatingActivities": {
+            "units": {
+              "USD": [
+                {
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-12-31",
+                  "val": 7408000000,
+                  "accn": "0001628280-26-010047",
+                  "fy": 2025,
+                  "fp": "FY",
+                  "form": "10-K",
+                  "filed": "2026-02-20",
+                  "frame": "CY2025",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/0001628280-26-010047-index.html"
+                },
+                {
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+                  "unit": "USD",
+                  "start": "2026-01-01",
+                  "end": "2026-10-02",
+                  "val": 12471000000,
+                  "accn": "0001628280-26-067844",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+                },
+                {
+                  "concept": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-09-26",
+                  "val": 3652000000,
+                  "accn": "0001628280-26-067844",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+                }
+              ]
+            }
+          },
+          "PaymentsToAcquirePropertyPlantAndEquipment": {
+            "units": {
+              "USD": [
+                {
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-12-31",
+                  "val": 2112000000,
+                  "accn": "0001628280-26-010047",
+                  "fy": 2025,
+                  "fp": "FY",
+                  "form": "10-K",
+                  "filed": "2026-02-20",
+                  "frame": "CY2025",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/0001628280-26-010047-index.html"
+                },
+                {
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+                  "unit": "USD",
+                  "start": "2026-01-01",
+                  "end": "2026-10-02",
+                  "val": 1063000000,
+                  "accn": "0001628280-26-067844",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+                },
+                {
+                  "concept": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-09-26",
+                  "val": 1230000000,
+                  "accn": "0001628280-26-067844",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+                }
+              ]
+            }
+          },
+          "InterestExpense": {
+            "units": {
+              "USD": [
+                {
+                  "concept": "us-gaap:InterestExpense",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-12-31",
+                  "val": 1654000000,
+                  "accn": "0001628280-26-010047",
+                  "fy": 2025,
+                  "fp": "FY",
+                  "form": "10-K",
+                  "filed": "2026-02-20",
+                  "frame": "CY2025",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/0001628280-26-010047-index.html"
+                },
+                {
+                  "concept": "us-gaap:InterestExpense",
+                  "unit": "USD",
+                  "start": "2026-01-01",
+                  "end": "2026-10-02",
+                  "val": 1098000000,
+                  "accn": "0001628280-26-067844",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+                },
+                {
+                  "concept": "us-gaap:InterestExpense",
+                  "unit": "USD",
+                  "start": "2025-01-01",
+                  "end": "2025-09-26",
+                  "val": 1223000000,
+                  "accn": "0001628280-26-067844",
+                  "fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-28",
+                  "companyFactsUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+                  "filingUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/0001628280-26-067844-index.html"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "sub": {
+      "cik": "0000021344",
+      "sic": "2080",
+      "name": "COCA COLA CO",
+      "filings": {
+        "recent": {
+          "form": [
+            "10-Q"
+          ],
+          "reportDate": [
+            "2026-10-02"
+          ],
+          "filingDate": [
+            "2026-10-28"
+          ],
+          "accessionNumber": [
+            "0001628280-26-067844"
+          ]
+        }
+      }
+    }
+  }
+}

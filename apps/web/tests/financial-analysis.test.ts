@@ -102,7 +102,6 @@ for (const [ticker, cik] of [
       'data-analysis-module="profitability"',
       'data-analysis-module="cash-flow"',
       '管理层与风险',
-      '估值分析',
     ];
     const positions = markers.map((marker) => html.indexOf(marker));
     assert.ok(positions.every((position) => position >= 0));
@@ -114,11 +113,11 @@ for (const [ticker, cik] of [
       !html.includes('ant-table-wrapper'),
       'The retired wide financial Table must not render',
     );
-    assert.doesNotMatch(html, /全部原始指标|查看选定期间/);
+    assert.doesNotMatch(html, /全部原始指标|查看选定期间|估值分析|Valuation/);
     assert.match(html, /123/);
     assert.match(html, new RegExp(ticker));
     assert.match(html, new RegExp(cik));
-    assert.equal((html.match(/待开发/g) ?? []).length, 1);
+    assert.equal((html.match(/待开发/g) ?? []).length, 0);
     assert.equal((html.match(/>更新数据</g) ?? []).length, 1);
     assert.doesNotMatch(html, /查看原文证据|重新生成|检查最新年报/);
     assert.match(html, /ant-space-vertical/);

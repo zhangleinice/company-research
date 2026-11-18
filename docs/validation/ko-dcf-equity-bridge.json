@@ -1,0 +1,1274 @@
+{
+  "asOf": "2026-11-18",
+  "units": "USD millions; shares millions",
+  "type": "CONDITIONAL_RESEARCH_ONLY",
+  "evidence": [
+    {
+      "concept": "CashAndCashEquivalentsAtCarryingValue",
+      "unit": "USD",
+      "end": "2026-10-02",
+      "val": 13454000000,
+      "accn": "0001628280-26-067844",
+      "fy": 2026,
+      "fp": "Q3",
+      "form": "10-Q",
+      "filed": "2026-10-28",
+      "frame": "CY2026Q3I",
+      "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+    },
+    {
+      "concept": "OtherShortTermInvestments",
+      "unit": "USD",
+      "end": "2026-10-02",
+      "val": 231000000,
+      "accn": "0001628280-26-067844",
+      "fy": 2026,
+      "fp": "Q3",
+      "form": "10-Q",
+      "filed": "2026-10-28",
+      "frame": "CY2026Q3I",
+      "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+    },
+    {
+      "concept": "MarketableSecurities",
+      "unit": "USD",
+      "end": "2026-10-02",
+      "val": 2910000000,
+      "accn": "0001628280-26-067844",
+      "fy": 2026,
+      "fp": "Q3",
+      "form": "10-Q",
+      "filed": "2026-10-28",
+      "frame": "CY2026Q3I",
+      "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+    },
+    {
+      "concept": "EquityMethodInvestments",
+      "unit": "USD",
+      "end": "2026-10-02",
+      "val": 20710000000,
+      "accn": "0001628280-26-067844",
+      "fy": 2026,
+      "fp": "Q3",
+      "form": "10-Q",
+      "filed": "2026-10-28",
+      "frame": "CY2026Q3I",
+      "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+    },
+    {
+      "concept": "LongTermDebtAndCapitalLeaseObligationsCurrent",
+      "unit": "USD",
+      "end": "2026-10-02",
+      "val": 4923000000,
+      "accn": "0001628280-26-067844",
+      "fy": 2026,
+      "fp": "Q3",
+      "form": "10-Q",
+      "filed": "2026-10-28",
+      "frame": "CY2026Q3I",
+      "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+    },
+    {
+      "concept": "LongTermDebtAndCapitalLeaseObligations",
+      "unit": "USD",
+      "end": "2026-10-02",
+      "val": 36623000000,
+      "accn": "0001628280-26-067844",
+      "fy": 2026,
+      "fp": "Q3",
+      "form": "10-Q",
+      "filed": "2026-10-28",
+      "frame": "CY2026Q3I",
+      "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+    },
+    {
+      "concept": "NotesAndLoansPayable",
+      "unit": "USD",
+      "end": "2026-10-02",
+      "val": 73000000,
+      "accn": "0001628280-26-067844",
+      "fy": 2026,
+      "fp": "Q3",
+      "form": "10-Q",
+      "filed": "2026-10-28",
+      "frame": "CY2026Q3I",
+      "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+    },
+    {
+      "concept": "MinorityInterest",
+      "unit": "USD",
+      "end": "2026-10-02",
+      "val": 2161000000,
+      "accn": "0001628280-26-067844",
+      "fy": 2026,
+      "fp": "Q3",
+      "form": "10-Q",
+      "filed": "2026-10-28",
+      "frame": "CY2026Q3I",
+      "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm"
+    }
+  ],
+  "bridge": {
+    "items": {
+      "excessCash": {
+        "value": 10685,
+        "reportedValue": 13685,
+        "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet 2026-10-02; filed 2026-10-28",
+        "rationale": "Conditional research assumption: retain 3,000 operating cash (~0.7 month of TTM revenue); add cash+short-term investments 13,685 less buffer. Excludes marketable securities, captive assets and IRS deposit. No claim that all cash is distributable.",
+        "method": "estimate",
+        "zeroConfirmed": false
+      },
+      "otherAssets": {
+        "value": 20710,
+        "reportedValue": 20710,
+        "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet equity method investments 2026-10-02",
+        "rationale": "Conditional book-value proxy for equity-method stakes, no market premium. Forecast based on operating EBIT excludes equity-method income; assume no affiliate dividends double counted. Other securities 2,910, insurance investments, IRS deposit and held-for-sale net assets receive no separate addback (deliberate 100% haircut/exclusion, not proven worthless). Strategic operating relationships and disposals remain limitations.",
+        "method": "estimate",
+        "zeroConfirmed": false
+      },
+      "debt": {
+        "value": 41619,
+        "reportedValue": 41619,
+        "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet 2026-10-02; 73+4,923+36,623",
+        "rationale": "Conditional book-debt approximation, each current/noncurrent line included once. Do not also subtract disclosed fair-value debt 35,398. Assume material finance-lease claims fall within debt proxy; unallocated financial lease/hedge/held-for-sale financing differences are not independently priced.",
+        "method": "estimate",
+        "zeroConfirmed": false
+      },
+      "leases": {
+        "value": 1722,
+        "reportedValue": 1722,
+        "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm operating lease note 2025-12-31; filed 2026-02-20",
+        "rationale": "Stale disclosed operating lease balance carried as an estimate, not current fact. Keep operating lease costs within forecast operating margin/FCFF and do not subtract lease liability again. No rent addback. Finance leases covered only by conditional debt approximation; no claim of fully verified lease inventory.",
+        "method": "estimate",
+        "zeroConfirmed": false
+      },
+      "minority": {
+        "value": 2161,
+        "reportedValue": 2161,
+        "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm consolidated balance sheet 2026-10-02",
+        "rationale": "Book minority interest used as value proxy because forecast is consolidated; no independently observed market value. Not included again in other claims.",
+        "method": "estimate",
+        "zeroConfirmed": false
+      },
+      "preferred": {
+        "value": 0,
+        "reportedValue": null,
+        "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm consolidated equity and financing review; conditional assumption 2026-11-18",
+        "rationale": "No preferred line in reviewed consolidated balance sheet; explicit conditional assumption of no material preferred/redemption claim. Not an SEC-disclosed zero and not inferred solely from a missing XBRL tag.",
+        "method": "estimate",
+        "zeroConfirmed": true
+      },
+      "otherClaims": {
+        "value": 7700,
+        "reportedValue": null,
+        "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm Note 9 and tax litigation; conditional sensitivity 2026-11-18",
+        "rationale": "Conditional 7,700 incremental IRS/other claim adjustment: half of disclosed 14,000 historical remaining exposure + 1,400 2026 YTD increment. Arithmetic midpoint only, NOT a probability-weighted estimate or company liability. No extra subtraction of tax reserve 538; paid deposit 6,000 and interest receivable are not added as assets, so loss of deposit is not deducted twice. Assume no additional material pension/guarantee/litigation/disposal claim outside operating forecasts and this adjustment. Future tax impact not calibrated; no audited conclusion.",
+        "method": "estimate",
+        "zeroConfirmed": false
+      },
+      "shares": {
+        "value": 4314,
+        "reportedValue": 4314,
+        "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm income statement quarter ended 2026-10-02",
+        "rationale": "Historical weighted-average diluted shares used as valuation proxy, not exact current fully diluted shares. Current common shares 4,301.902335 at 2026-10-26 differ; no future SBC dilution or buyback benefit modeled.",
+        "method": "estimate",
+        "zeroConfirmed": false
+      }
+    },
+    "sharesBasis": "weightedDiluted",
+    "leaseTreatment": "inFcff",
+    "assetsOverlapReviewed": true,
+    "claimsReviewed": true,
+    "unresolved": ""
+  },
+  "scenarios": [
+    {
+      "name": "保守",
+      "input": {
+        "mode": "detailed",
+        "revenue": 51054,
+        "historicalFcff": null,
+        "historicalVerified": false,
+        "years": [
+          {
+            "growth": 0.03,
+            "margin": 0.26,
+            "tax": 0.25,
+            "da": 0.021,
+            "capex": 0.045,
+            "deltaNwc": 306.3240000000005
+          },
+          {
+            "growth": 0.025,
+            "margin": 0.26,
+            "tax": 0.25,
+            "da": 0.021,
+            "capex": 0.045,
+            "deltaNwc": 262.92809999999884
+          },
+          {
+            "growth": 0.02,
+            "margin": 0.26,
+            "tax": 0.25,
+            "da": 0.021,
+            "capex": 0.045,
+            "deltaNwc": 215.6010420000006
+          },
+          {
+            "growth": 0.02,
+            "margin": 0.26,
+            "tax": 0.25,
+            "da": 0.021,
+            "capex": 0.045,
+            "deltaNwc": 219.9130628400002
+          },
+          {
+            "growth": 0.02,
+            "margin": 0.26,
+            "tax": 0.25,
+            "da": 0.021,
+            "capex": 0.045,
+            "deltaNwc": 224.31132409679995
+          }
+        ],
+        "wacc": null,
+        "capital": {
+          "rf": 0.0494,
+          "beta": 0.9,
+          "erp": 0.0441,
+          "kd": 0.055,
+          "tax": 0.25,
+          "equityWeight": 0.85,
+          "debtWeight": 0.15
+        },
+        "g": 0.02,
+        "stableGrowthConfirmed": true,
+        "nonOperatingAssets": null,
+        "debt": null,
+        "otherClaims": null,
+        "dilutedShares": null,
+        "assumptions": "KO scenario only; all growth/margin/reinvestment/beta/Kd/weights/tax are analyst assumptions, NOT SEC forecasts or measured capital structure. Rf/ERP dated Nov1 2026.",
+        "applicable": true,
+        "bridge": {
+          "items": {
+            "excessCash": {
+              "value": 10685,
+              "reportedValue": 13685,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet 2026-10-02; filed 2026-10-28",
+              "rationale": "Conditional research assumption: retain 3,000 operating cash (~0.7 month of TTM revenue); add cash+short-term investments 13,685 less buffer. Excludes marketable securities, captive assets and IRS deposit. No claim that all cash is distributable.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "otherAssets": {
+              "value": 20710,
+              "reportedValue": 20710,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet equity method investments 2026-10-02",
+              "rationale": "Conditional book-value proxy for equity-method stakes, no market premium. Forecast based on operating EBIT excludes equity-method income; assume no affiliate dividends double counted. Other securities 2,910, insurance investments, IRS deposit and held-for-sale net assets receive no separate addback (deliberate 100% haircut/exclusion, not proven worthless). Strategic operating relationships and disposals remain limitations.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "debt": {
+              "value": 41619,
+              "reportedValue": 41619,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet 2026-10-02; 73+4,923+36,623",
+              "rationale": "Conditional book-debt approximation, each current/noncurrent line included once. Do not also subtract disclosed fair-value debt 35,398. Assume material finance-lease claims fall within debt proxy; unallocated financial lease/hedge/held-for-sale financing differences are not independently priced.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "leases": {
+              "value": 1722,
+              "reportedValue": 1722,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm operating lease note 2025-12-31; filed 2026-02-20",
+              "rationale": "Stale disclosed operating lease balance carried as an estimate, not current fact. Keep operating lease costs within forecast operating margin/FCFF and do not subtract lease liability again. No rent addback. Finance leases covered only by conditional debt approximation; no claim of fully verified lease inventory.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "minority": {
+              "value": 2161,
+              "reportedValue": 2161,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm consolidated balance sheet 2026-10-02",
+              "rationale": "Book minority interest used as value proxy because forecast is consolidated; no independently observed market value. Not included again in other claims.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "preferred": {
+              "value": 0,
+              "reportedValue": null,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm consolidated equity and financing review; conditional assumption 2026-11-18",
+              "rationale": "No preferred line in reviewed consolidated balance sheet; explicit conditional assumption of no material preferred/redemption claim. Not an SEC-disclosed zero and not inferred solely from a missing XBRL tag.",
+              "method": "estimate",
+              "zeroConfirmed": true
+            },
+            "otherClaims": {
+              "value": 7700,
+              "reportedValue": null,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm Note 9 and tax litigation; conditional sensitivity 2026-11-18",
+              "rationale": "Conditional 7,700 incremental IRS/other claim adjustment: half of disclosed 14,000 historical remaining exposure + 1,400 2026 YTD increment. Arithmetic midpoint only, NOT a probability-weighted estimate or company liability. No extra subtraction of tax reserve 538; paid deposit 6,000 and interest receivable are not added as assets, so loss of deposit is not deducted twice. Assume no additional material pension/guarantee/litigation/disposal claim outside operating forecasts and this adjustment. Future tax impact not calibrated; no audited conclusion.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "shares": {
+              "value": 4314,
+              "reportedValue": 4314,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm income statement quarter ended 2026-10-02",
+              "rationale": "Historical weighted-average diluted shares used as valuation proxy, not exact current fully diluted shares. Current common shares 4,301.902335 at 2026-10-26 differ; no future SBC dilution or buyback benefit modeled.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            }
+          },
+          "sharesBasis": "weightedDiluted",
+          "leaseTreatment": "inFcff",
+          "assetsOverlapReviewed": true,
+          "claimsReviewed": true,
+          "unresolved": ""
+        }
+      },
+      "result": {
+        "status": "COMPLETE",
+        "errors": [],
+        "rows": [
+          {
+            "year": 1,
+            "revenue": 52585.62,
+            "ebit": 13672.2612,
+            "fcff": 8685.81702,
+            "discount": 0.9242878824010041,
+            "pv": 8028.1954203384
+          },
+          {
+            "year": 2,
+            "revenue": 53900.2605,
+            "ebit": 14014.067729999999,
+            "fcff": 8954.016445500001,
+            "discount": 0.8543080895533324,
+            "pv": 7649.488683384226
+          },
+          {
+            "year": 3,
+            "revenue": 54978.26571,
+            "ebit": 14294.3490846,
+            "fcff": 9185.68239441,
+            "discount": 0.7896266150112969,
+            "pv": 7253.259295666833
+          },
+          {
+            "year": 4,
+            "revenue": 56077.8310242,
+            "ebit": 14580.236066292,
+            "fcff": 9369.396042298202,
+            "discount": 0.7298423118762647,
+            "pv": 6838.181668395245
+          },
+          {
+            "year": 5,
+            "revenue": 57199.387644684,
+            "ebit": 14871.84078761784,
+            "fcff": 9556.783963144166,
+            "discount": 0.6745844049307659,
+            "pv": 6446.857422829494
+          }
+        ],
+        "wacc": 0.081914,
+        "terminalValue": 157442.89889858593,
+        "terminalPV": 106208.52426407732,
+        "ev": 142424.50675469154,
+        "equity": 122339.50675469154,
+        "perShare": 28.358717374754644,
+        "assumptions": "KO scenario only; all growth/margin/reinvestment/beta/Kd/weights/tax are analyst assumptions, NOT SEC forecasts or measured capital structure. Rf/ERP dated Nov1 2026.",
+        "bridge": {
+          "status": "RESEARCH",
+          "states": {
+            "excessCash": "ESTIMATED",
+            "otherAssets": "ESTIMATED",
+            "debt": "ESTIMATED",
+            "leases": "ESTIMATED",
+            "minority": "ESTIMATED",
+            "preferred": "ESTIMATED",
+            "otherClaims": "ESTIMATED",
+            "shares": "ESTIMATED"
+          },
+          "errors": [],
+          "nonOperatingAssets": 31395,
+          "debt": 41619,
+          "otherClaims": 9861,
+          "dilutedShares": 4314,
+          "input": {
+            "items": {
+              "excessCash": {
+                "value": 10685,
+                "reportedValue": 13685,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet 2026-10-02; filed 2026-10-28",
+                "rationale": "Conditional research assumption: retain 3,000 operating cash (~0.7 month of TTM revenue); add cash+short-term investments 13,685 less buffer. Excludes marketable securities, captive assets and IRS deposit. No claim that all cash is distributable.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "otherAssets": {
+                "value": 20710,
+                "reportedValue": 20710,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet equity method investments 2026-10-02",
+                "rationale": "Conditional book-value proxy for equity-method stakes, no market premium. Forecast based on operating EBIT excludes equity-method income; assume no affiliate dividends double counted. Other securities 2,910, insurance investments, IRS deposit and held-for-sale net assets receive no separate addback (deliberate 100% haircut/exclusion, not proven worthless). Strategic operating relationships and disposals remain limitations.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "debt": {
+                "value": 41619,
+                "reportedValue": 41619,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet 2026-10-02; 73+4,923+36,623",
+                "rationale": "Conditional book-debt approximation, each current/noncurrent line included once. Do not also subtract disclosed fair-value debt 35,398. Assume material finance-lease claims fall within debt proxy; unallocated financial lease/hedge/held-for-sale financing differences are not independently priced.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "leases": {
+                "value": 1722,
+                "reportedValue": 1722,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm operating lease note 2025-12-31; filed 2026-02-20",
+                "rationale": "Stale disclosed operating lease balance carried as an estimate, not current fact. Keep operating lease costs within forecast operating margin/FCFF and do not subtract lease liability again. No rent addback. Finance leases covered only by conditional debt approximation; no claim of fully verified lease inventory.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "minority": {
+                "value": 2161,
+                "reportedValue": 2161,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm consolidated balance sheet 2026-10-02",
+                "rationale": "Book minority interest used as value proxy because forecast is consolidated; no independently observed market value. Not included again in other claims.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "preferred": {
+                "value": 0,
+                "reportedValue": null,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm consolidated equity and financing review; conditional assumption 2026-11-18",
+                "rationale": "No preferred line in reviewed consolidated balance sheet; explicit conditional assumption of no material preferred/redemption claim. Not an SEC-disclosed zero and not inferred solely from a missing XBRL tag.",
+                "method": "estimate",
+                "zeroConfirmed": true
+              },
+              "otherClaims": {
+                "value": 7700,
+                "reportedValue": null,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm Note 9 and tax litigation; conditional sensitivity 2026-11-18",
+                "rationale": "Conditional 7,700 incremental IRS/other claim adjustment: half of disclosed 14,000 historical remaining exposure + 1,400 2026 YTD increment. Arithmetic midpoint only, NOT a probability-weighted estimate or company liability. No extra subtraction of tax reserve 538; paid deposit 6,000 and interest receivable are not added as assets, so loss of deposit is not deducted twice. Assume no additional material pension/guarantee/litigation/disposal claim outside operating forecasts and this adjustment. Future tax impact not calibrated; no audited conclusion.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "shares": {
+                "value": 4314,
+                "reportedValue": 4314,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm income statement quarter ended 2026-10-02",
+                "rationale": "Historical weighted-average diluted shares used as valuation proxy, not exact current fully diluted shares. Current common shares 4,301.902335 at 2026-10-26 differ; no future SBC dilution or buyback benefit modeled.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              }
+            },
+            "sharesBasis": "weightedDiluted",
+            "leaseTreatment": "inFcff",
+            "assetsOverlapReviewed": true,
+            "claimsReviewed": true,
+            "unresolved": ""
+          }
+        }
+      }
+    },
+    {
+      "name": "基准",
+      "input": {
+        "mode": "detailed",
+        "revenue": 51054,
+        "historicalFcff": null,
+        "historicalVerified": false,
+        "years": [
+          {
+            "growth": 0.05,
+            "margin": 0.295,
+            "tax": 0.23,
+            "da": 0.02,
+            "capex": 0.04,
+            "deltaNwc": 382.90500000000065
+          },
+          {
+            "growth": 0.045,
+            "margin": 0.295,
+            "tax": 0.23,
+            "da": 0.02,
+            "capex": 0.04,
+            "deltaNwc": 361.8452249999991
+          },
+          {
+            "growth": 0.035,
+            "margin": 0.295,
+            "tax": 0.23,
+            "da": 0.02,
+            "capex": 0.04,
+            "deltaNwc": 294.09975787499894
+          },
+          {
+            "growth": 0.025,
+            "margin": 0.295,
+            "tax": 0.23,
+            "da": 0.02,
+            "capex": 0.04,
+            "deltaNwc": 217.42374957187386
+          },
+          {
+            "growth": 0.025,
+            "margin": 0.295,
+            "tax": 0.23,
+            "da": 0.02,
+            "capex": 0.04,
+            "deltaNwc": 222.85934331117133
+          }
+        ],
+        "wacc": null,
+        "capital": {
+          "rf": 0.0494,
+          "beta": 0.7,
+          "erp": 0.0441,
+          "kd": 0.05,
+          "tax": 0.23,
+          "equityWeight": 0.85,
+          "debtWeight": 0.15
+        },
+        "g": 0.025,
+        "stableGrowthConfirmed": true,
+        "nonOperatingAssets": null,
+        "debt": null,
+        "otherClaims": null,
+        "dilutedShares": null,
+        "assumptions": "KO scenario only; all growth/margin/reinvestment/beta/Kd/weights/tax are analyst assumptions, NOT SEC forecasts or measured capital structure. Rf/ERP dated Nov1 2026.",
+        "applicable": true,
+        "bridge": {
+          "items": {
+            "excessCash": {
+              "value": 10685,
+              "reportedValue": 13685,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet 2026-10-02; filed 2026-10-28",
+              "rationale": "Conditional research assumption: retain 3,000 operating cash (~0.7 month of TTM revenue); add cash+short-term investments 13,685 less buffer. Excludes marketable securities, captive assets and IRS deposit. No claim that all cash is distributable.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "otherAssets": {
+              "value": 20710,
+              "reportedValue": 20710,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet equity method investments 2026-10-02",
+              "rationale": "Conditional book-value proxy for equity-method stakes, no market premium. Forecast based on operating EBIT excludes equity-method income; assume no affiliate dividends double counted. Other securities 2,910, insurance investments, IRS deposit and held-for-sale net assets receive no separate addback (deliberate 100% haircut/exclusion, not proven worthless). Strategic operating relationships and disposals remain limitations.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "debt": {
+              "value": 41619,
+              "reportedValue": 41619,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet 2026-10-02; 73+4,923+36,623",
+              "rationale": "Conditional book-debt approximation, each current/noncurrent line included once. Do not also subtract disclosed fair-value debt 35,398. Assume material finance-lease claims fall within debt proxy; unallocated financial lease/hedge/held-for-sale financing differences are not independently priced.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "leases": {
+              "value": 1722,
+              "reportedValue": 1722,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm operating lease note 2025-12-31; filed 2026-02-20",
+              "rationale": "Stale disclosed operating lease balance carried as an estimate, not current fact. Keep operating lease costs within forecast operating margin/FCFF and do not subtract lease liability again. No rent addback. Finance leases covered only by conditional debt approximation; no claim of fully verified lease inventory.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "minority": {
+              "value": 2161,
+              "reportedValue": 2161,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm consolidated balance sheet 2026-10-02",
+              "rationale": "Book minority interest used as value proxy because forecast is consolidated; no independently observed market value. Not included again in other claims.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "preferred": {
+              "value": 0,
+              "reportedValue": null,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm consolidated equity and financing review; conditional assumption 2026-11-18",
+              "rationale": "No preferred line in reviewed consolidated balance sheet; explicit conditional assumption of no material preferred/redemption claim. Not an SEC-disclosed zero and not inferred solely from a missing XBRL tag.",
+              "method": "estimate",
+              "zeroConfirmed": true
+            },
+            "otherClaims": {
+              "value": 7700,
+              "reportedValue": null,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm Note 9 and tax litigation; conditional sensitivity 2026-11-18",
+              "rationale": "Conditional 7,700 incremental IRS/other claim adjustment: half of disclosed 14,000 historical remaining exposure + 1,400 2026 YTD increment. Arithmetic midpoint only, NOT a probability-weighted estimate or company liability. No extra subtraction of tax reserve 538; paid deposit 6,000 and interest receivable are not added as assets, so loss of deposit is not deducted twice. Assume no additional material pension/guarantee/litigation/disposal claim outside operating forecasts and this adjustment. Future tax impact not calibrated; no audited conclusion.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "shares": {
+              "value": 4314,
+              "reportedValue": 4314,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm income statement quarter ended 2026-10-02",
+              "rationale": "Historical weighted-average diluted shares used as valuation proxy, not exact current fully diluted shares. Current common shares 4,301.902335 at 2026-10-26 differ; no future SBC dilution or buyback benefit modeled.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            }
+          },
+          "sharesBasis": "weightedDiluted",
+          "leaseTreatment": "inFcff",
+          "assetsOverlapReviewed": true,
+          "claimsReviewed": true,
+          "unresolved": ""
+        }
+      },
+      "result": {
+        "status": "COMPLETE",
+        "errors": [],
+        "rows": [
+          {
+            "year": 1,
+            "revenue": 53606.700000000004,
+            "ebit": 15813.9765,
+            "fcff": 10721.722905,
+            "discount": 0.9310947952266494,
+            "pv": 9982.940392707853
+          },
+          {
+            "year": 2,
+            "revenue": 56019.0015,
+            "ebit": 16525.6054425,
+            "fcff": 11242.490935725002,
+            "discount": 0.8669375176981561,
+            "pv": 9746.537184561454
+          },
+          {
+            "year": 3,
+            "revenue": 57979.66655249999,
+            "ebit": 17104.001632987496,
+            "fcff": 11716.388168475372,
+            "discount": 0.8072010105154644,
+            "pv": 9457.480369184752
+          },
+          {
+            "year": 4,
+            "revenue": 59429.158216312484,
+            "ebit": 17531.601673812183,
+            "fcff": 12093.326374937258,
+            "discount": 0.7515806595926409,
+            "pv": 9089.110213544425
+          },
+          {
+            "year": 5,
+            "revenue": 60914.88717172029,
+            "ebit": 17969.891715657486,
+            "fcff": 12395.65953431069,
+            "discount": 0.69979284033972,
+            "pv": 8674.393793399408
+          }
+        ],
+        "wacc": 0.0740045,
+        "terminalValue": 259273.1488469111,
+        "terminalPV": 181437.49325540292,
+        "ev": 228387.95520880082,
+        "equity": 208302.95520880082,
+        "perShare": 48.285339640426706,
+        "assumptions": "KO scenario only; all growth/margin/reinvestment/beta/Kd/weights/tax are analyst assumptions, NOT SEC forecasts or measured capital structure. Rf/ERP dated Nov1 2026.",
+        "bridge": {
+          "status": "RESEARCH",
+          "states": {
+            "excessCash": "ESTIMATED",
+            "otherAssets": "ESTIMATED",
+            "debt": "ESTIMATED",
+            "leases": "ESTIMATED",
+            "minority": "ESTIMATED",
+            "preferred": "ESTIMATED",
+            "otherClaims": "ESTIMATED",
+            "shares": "ESTIMATED"
+          },
+          "errors": [],
+          "nonOperatingAssets": 31395,
+          "debt": 41619,
+          "otherClaims": 9861,
+          "dilutedShares": 4314,
+          "input": {
+            "items": {
+              "excessCash": {
+                "value": 10685,
+                "reportedValue": 13685,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet 2026-10-02; filed 2026-10-28",
+                "rationale": "Conditional research assumption: retain 3,000 operating cash (~0.7 month of TTM revenue); add cash+short-term investments 13,685 less buffer. Excludes marketable securities, captive assets and IRS deposit. No claim that all cash is distributable.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "otherAssets": {
+                "value": 20710,
+                "reportedValue": 20710,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet equity method investments 2026-10-02",
+                "rationale": "Conditional book-value proxy for equity-method stakes, no market premium. Forecast based on operating EBIT excludes equity-method income; assume no affiliate dividends double counted. Other securities 2,910, insurance investments, IRS deposit and held-for-sale net assets receive no separate addback (deliberate 100% haircut/exclusion, not proven worthless). Strategic operating relationships and disposals remain limitations.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "debt": {
+                "value": 41619,
+                "reportedValue": 41619,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet 2026-10-02; 73+4,923+36,623",
+                "rationale": "Conditional book-debt approximation, each current/noncurrent line included once. Do not also subtract disclosed fair-value debt 35,398. Assume material finance-lease claims fall within debt proxy; unallocated financial lease/hedge/held-for-sale financing differences are not independently priced.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "leases": {
+                "value": 1722,
+                "reportedValue": 1722,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm operating lease note 2025-12-31; filed 2026-02-20",
+                "rationale": "Stale disclosed operating lease balance carried as an estimate, not current fact. Keep operating lease costs within forecast operating margin/FCFF and do not subtract lease liability again. No rent addback. Finance leases covered only by conditional debt approximation; no claim of fully verified lease inventory.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "minority": {
+                "value": 2161,
+                "reportedValue": 2161,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm consolidated balance sheet 2026-10-02",
+                "rationale": "Book minority interest used as value proxy because forecast is consolidated; no independently observed market value. Not included again in other claims.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "preferred": {
+                "value": 0,
+                "reportedValue": null,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm consolidated equity and financing review; conditional assumption 2026-11-18",
+                "rationale": "No preferred line in reviewed consolidated balance sheet; explicit conditional assumption of no material preferred/redemption claim. Not an SEC-disclosed zero and not inferred solely from a missing XBRL tag.",
+                "method": "estimate",
+                "zeroConfirmed": true
+              },
+              "otherClaims": {
+                "value": 7700,
+                "reportedValue": null,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm Note 9 and tax litigation; conditional sensitivity 2026-11-18",
+                "rationale": "Conditional 7,700 incremental IRS/other claim adjustment: half of disclosed 14,000 historical remaining exposure + 1,400 2026 YTD increment. Arithmetic midpoint only, NOT a probability-weighted estimate or company liability. No extra subtraction of tax reserve 538; paid deposit 6,000 and interest receivable are not added as assets, so loss of deposit is not deducted twice. Assume no additional material pension/guarantee/litigation/disposal claim outside operating forecasts and this adjustment. Future tax impact not calibrated; no audited conclusion.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "shares": {
+                "value": 4314,
+                "reportedValue": 4314,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm income statement quarter ended 2026-10-02",
+                "rationale": "Historical weighted-average diluted shares used as valuation proxy, not exact current fully diluted shares. Current common shares 4,301.902335 at 2026-10-26 differ; no future SBC dilution or buyback benefit modeled.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              }
+            },
+            "sharesBasis": "weightedDiluted",
+            "leaseTreatment": "inFcff",
+            "assetsOverlapReviewed": true,
+            "claimsReviewed": true,
+            "unresolved": ""
+          }
+        }
+      }
+    },
+    {
+      "name": "乐观",
+      "input": {
+        "mode": "detailed",
+        "revenue": 51054,
+        "historicalFcff": null,
+        "historicalVerified": false,
+        "years": [
+          {
+            "growth": 0.06,
+            "margin": 0.31,
+            "tax": 0.21,
+            "da": 0.02,
+            "capex": 0.04,
+            "deltaNwc": 306.3240000000005
+          },
+          {
+            "growth": 0.05,
+            "margin": 0.31,
+            "tax": 0.21,
+            "da": 0.02,
+            "capex": 0.04,
+            "deltaNwc": 270.58620000000013
+          },
+          {
+            "growth": 0.04,
+            "margin": 0.31,
+            "tax": 0.21,
+            "da": 0.02,
+            "capex": 0.04,
+            "deltaNwc": 227.29240800000045
+          },
+          {
+            "growth": 0.03,
+            "margin": 0.31,
+            "tax": 0.21,
+            "da": 0.02,
+            "capex": 0.04,
+            "deltaNwc": 177.28807824000035
+          },
+          {
+            "growth": 0.03,
+            "margin": 0.31,
+            "tax": 0.21,
+            "da": 0.02,
+            "capex": 0.04,
+            "deltaNwc": 182.60672058720013
+          }
+        ],
+        "wacc": null,
+        "capital": {
+          "rf": 0.0494,
+          "beta": 0.5,
+          "erp": 0.0441,
+          "kd": 0.045,
+          "tax": 0.21,
+          "equityWeight": 0.85,
+          "debtWeight": 0.15
+        },
+        "g": 0.03,
+        "stableGrowthConfirmed": true,
+        "nonOperatingAssets": null,
+        "debt": null,
+        "otherClaims": null,
+        "dilutedShares": null,
+        "assumptions": "KO scenario only; all growth/margin/reinvestment/beta/Kd/weights/tax are analyst assumptions, NOT SEC forecasts or measured capital structure. Rf/ERP dated Nov1 2026.",
+        "applicable": true,
+        "bridge": {
+          "items": {
+            "excessCash": {
+              "value": 10685,
+              "reportedValue": 13685,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet 2026-10-02; filed 2026-10-28",
+              "rationale": "Conditional research assumption: retain 3,000 operating cash (~0.7 month of TTM revenue); add cash+short-term investments 13,685 less buffer. Excludes marketable securities, captive assets and IRS deposit. No claim that all cash is distributable.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "otherAssets": {
+              "value": 20710,
+              "reportedValue": 20710,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet equity method investments 2026-10-02",
+              "rationale": "Conditional book-value proxy for equity-method stakes, no market premium. Forecast based on operating EBIT excludes equity-method income; assume no affiliate dividends double counted. Other securities 2,910, insurance investments, IRS deposit and held-for-sale net assets receive no separate addback (deliberate 100% haircut/exclusion, not proven worthless). Strategic operating relationships and disposals remain limitations.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "debt": {
+              "value": 41619,
+              "reportedValue": 41619,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet 2026-10-02; 73+4,923+36,623",
+              "rationale": "Conditional book-debt approximation, each current/noncurrent line included once. Do not also subtract disclosed fair-value debt 35,398. Assume material finance-lease claims fall within debt proxy; unallocated financial lease/hedge/held-for-sale financing differences are not independently priced.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "leases": {
+              "value": 1722,
+              "reportedValue": 1722,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm operating lease note 2025-12-31; filed 2026-02-20",
+              "rationale": "Stale disclosed operating lease balance carried as an estimate, not current fact. Keep operating lease costs within forecast operating margin/FCFF and do not subtract lease liability again. No rent addback. Finance leases covered only by conditional debt approximation; no claim of fully verified lease inventory.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "minority": {
+              "value": 2161,
+              "reportedValue": 2161,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm consolidated balance sheet 2026-10-02",
+              "rationale": "Book minority interest used as value proxy because forecast is consolidated; no independently observed market value. Not included again in other claims.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "preferred": {
+              "value": 0,
+              "reportedValue": null,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm consolidated equity and financing review; conditional assumption 2026-11-18",
+              "rationale": "No preferred line in reviewed consolidated balance sheet; explicit conditional assumption of no material preferred/redemption claim. Not an SEC-disclosed zero and not inferred solely from a missing XBRL tag.",
+              "method": "estimate",
+              "zeroConfirmed": true
+            },
+            "otherClaims": {
+              "value": 7700,
+              "reportedValue": null,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm Note 9 and tax litigation; conditional sensitivity 2026-11-18",
+              "rationale": "Conditional 7,700 incremental IRS/other claim adjustment: half of disclosed 14,000 historical remaining exposure + 1,400 2026 YTD increment. Arithmetic midpoint only, NOT a probability-weighted estimate or company liability. No extra subtraction of tax reserve 538; paid deposit 6,000 and interest receivable are not added as assets, so loss of deposit is not deducted twice. Assume no additional material pension/guarantee/litigation/disposal claim outside operating forecasts and this adjustment. Future tax impact not calibrated; no audited conclusion.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            },
+            "shares": {
+              "value": 4314,
+              "reportedValue": 4314,
+              "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm income statement quarter ended 2026-10-02",
+              "rationale": "Historical weighted-average diluted shares used as valuation proxy, not exact current fully diluted shares. Current common shares 4,301.902335 at 2026-10-26 differ; no future SBC dilution or buyback benefit modeled.",
+              "method": "estimate",
+              "zeroConfirmed": false
+            }
+          },
+          "sharesBasis": "weightedDiluted",
+          "leaseTreatment": "inFcff",
+          "assetsOverlapReviewed": true,
+          "claimsReviewed": true,
+          "unresolved": ""
+        }
+      },
+      "result": {
+        "status": "COMPLETE",
+        "errors": [],
+        "rows": [
+          {
+            "year": 1,
+            "revenue": 54117.240000000005,
+            "ebit": 16776.3444,
+            "fcff": 11864.643276000003,
+            "discount": 0.9380291070431915,
+            "pv": 11129.38073757229
+          },
+          {
+            "year": 2,
+            "revenue": 56823.102000000006,
+            "ebit": 17615.161620000003,
+            "fcff": 12508.929439800002,
+            "discount": 0.8798986056602472,
+            "pv": 11006.58957238244
+          },
+          {
+            "year": 3,
+            "revenue": 59096.02608000001,
+            "ebit": 18319.7680848,
+            "fcff": 13063.403857392002,
+            "discount": 0.8253705033560311,
+            "pv": 10782.148217318756
+          },
+          {
+            "year": 4,
+            "revenue": 60868.906862400014,
+            "ebit": 18869.361127344004,
+            "fcff": 13512.129075113762,
+            "discount": 0.7742215562428472,
+            "pv": 10461.3816006888
+          },
+          {
+            "year": 5,
+            "revenue": 62694.974068272015,
+            "ebit": 19435.441961164324,
+            "fcff": 13917.492947367175,
+            "discount": 0.726242355056068,
+            "pv": 10107.472854572154
+          }
+        ],
+        "wacc": 0.066065,
+        "terminalValue": 397477.26981251047,
+        "terminalPV": 288664.8285098938,
+        "ev": 342151.80149242823,
+        "equity": 322066.80149242823,
+        "perShare": 74.65618949754943,
+        "assumptions": "KO scenario only; all growth/margin/reinvestment/beta/Kd/weights/tax are analyst assumptions, NOT SEC forecasts or measured capital structure. Rf/ERP dated Nov1 2026.",
+        "bridge": {
+          "status": "RESEARCH",
+          "states": {
+            "excessCash": "ESTIMATED",
+            "otherAssets": "ESTIMATED",
+            "debt": "ESTIMATED",
+            "leases": "ESTIMATED",
+            "minority": "ESTIMATED",
+            "preferred": "ESTIMATED",
+            "otherClaims": "ESTIMATED",
+            "shares": "ESTIMATED"
+          },
+          "errors": [],
+          "nonOperatingAssets": 31395,
+          "debt": 41619,
+          "otherClaims": 9861,
+          "dilutedShares": 4314,
+          "input": {
+            "items": {
+              "excessCash": {
+                "value": 10685,
+                "reportedValue": 13685,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet 2026-10-02; filed 2026-10-28",
+                "rationale": "Conditional research assumption: retain 3,000 operating cash (~0.7 month of TTM revenue); add cash+short-term investments 13,685 less buffer. Excludes marketable securities, captive assets and IRS deposit. No claim that all cash is distributable.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "otherAssets": {
+                "value": 20710,
+                "reportedValue": 20710,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet equity method investments 2026-10-02",
+                "rationale": "Conditional book-value proxy for equity-method stakes, no market premium. Forecast based on operating EBIT excludes equity-method income; assume no affiliate dividends double counted. Other securities 2,910, insurance investments, IRS deposit and held-for-sale net assets receive no separate addback (deliberate 100% haircut/exclusion, not proven worthless). Strategic operating relationships and disposals remain limitations.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "debt": {
+                "value": 41619,
+                "reportedValue": 41619,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet 2026-10-02; 73+4,923+36,623",
+                "rationale": "Conditional book-debt approximation, each current/noncurrent line included once. Do not also subtract disclosed fair-value debt 35,398. Assume material finance-lease claims fall within debt proxy; unallocated financial lease/hedge/held-for-sale financing differences are not independently priced.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "leases": {
+                "value": 1722,
+                "reportedValue": 1722,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm operating lease note 2025-12-31; filed 2026-02-20",
+                "rationale": "Stale disclosed operating lease balance carried as an estimate, not current fact. Keep operating lease costs within forecast operating margin/FCFF and do not subtract lease liability again. No rent addback. Finance leases covered only by conditional debt approximation; no claim of fully verified lease inventory.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "minority": {
+                "value": 2161,
+                "reportedValue": 2161,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm consolidated balance sheet 2026-10-02",
+                "rationale": "Book minority interest used as value proxy because forecast is consolidated; no independently observed market value. Not included again in other claims.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "preferred": {
+                "value": 0,
+                "reportedValue": null,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm consolidated equity and financing review; conditional assumption 2026-11-18",
+                "rationale": "No preferred line in reviewed consolidated balance sheet; explicit conditional assumption of no material preferred/redemption claim. Not an SEC-disclosed zero and not inferred solely from a missing XBRL tag.",
+                "method": "estimate",
+                "zeroConfirmed": true
+              },
+              "otherClaims": {
+                "value": 7700,
+                "reportedValue": null,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm Note 9 and tax litigation; conditional sensitivity 2026-11-18",
+                "rationale": "Conditional 7,700 incremental IRS/other claim adjustment: half of disclosed 14,000 historical remaining exposure + 1,400 2026 YTD increment. Arithmetic midpoint only, NOT a probability-weighted estimate or company liability. No extra subtraction of tax reserve 538; paid deposit 6,000 and interest receivable are not added as assets, so loss of deposit is not deducted twice. Assume no additional material pension/guarantee/litigation/disposal claim outside operating forecasts and this adjustment. Future tax impact not calibrated; no audited conclusion.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              },
+              "shares": {
+                "value": 4314,
+                "reportedValue": 4314,
+                "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm income statement quarter ended 2026-10-02",
+                "rationale": "Historical weighted-average diluted shares used as valuation proxy, not exact current fully diluted shares. Current common shares 4,301.902335 at 2026-10-26 differ; no future SBC dilution or buyback benefit modeled.",
+                "method": "estimate",
+                "zeroConfirmed": false
+              }
+            },
+            "sharesBasis": "weightedDiluted",
+            "leaseTreatment": "inFcff",
+            "assetsOverlapReviewed": true,
+            "claimsReviewed": true,
+            "unresolved": ""
+          }
+        }
+      }
+    }
+  ],
+  "sensitivities": [
+    {
+      "conditionalIncrementalTaxClaim": 0,
+      "warning": "Conditional amounts only; 0 requires favorable resolution, not a default.",
+      "scenarios": [
+        {
+          "name": "保守",
+          "equity": 130039.50675469154,
+          "perShare": 30.143603791073605
+        },
+        {
+          "name": "基准",
+          "equity": 216002.95520880082,
+          "perShare": 50.07022605674567
+        },
+        {
+          "name": "乐观",
+          "equity": 329766.80149242823,
+          "perShare": 76.44107591386839
+        }
+      ]
+    },
+    {
+      "conditionalIncrementalTaxClaim": 7700,
+      "warning": "Conditional amounts only; 0 requires favorable resolution, not a default.",
+      "scenarios": [
+        {
+          "name": "保守",
+          "equity": 122339.50675469154,
+          "perShare": 28.358717374754644
+        },
+        {
+          "name": "基准",
+          "equity": 208302.95520880082,
+          "perShare": 48.285339640426706
+        },
+        {
+          "name": "乐观",
+          "equity": 322066.80149242823,
+          "perShare": 74.65618949754943
+        }
+      ]
+    },
+    {
+      "conditionalIncrementalTaxClaim": 15400,
+      "warning": "Conditional amounts only; 0 requires favorable resolution, not a default.",
+      "scenarios": [
+        {
+          "name": "保守",
+          "equity": 114639.50675469154,
+          "perShare": 26.573830958435682
+        },
+        {
+          "name": "基准",
+          "equity": 200602.95520880082,
+          "perShare": 46.500453224107744
+        },
+        {
+          "name": "乐观",
+          "equity": 314366.80149242823,
+          "perShare": 72.87130308123047
+        }
+      ]
+    }
+  ],
+  "commonShareSensitivity": [
+    {
+      "name": "保守",
+      "shares": 4301.902335,
+      "perShare": 28.438466805567668
+    },
+    {
+      "name": "基准",
+      "shares": 4301.902335,
+      "perShare": 48.42112604790244
+    },
+    {
+      "name": "乐观",
+      "shares": 4301.902335,
+      "perShare": 74.86613512169106
+    }
+  ],
+  "blockedResult": {
+    "status": "INPUT_REQUIRED",
+    "errors": [
+      "重大未知事项：IRS/lease/other material claim remains unquantified without accepting the conditional assumptions"
+    ],
+    "rows": [
+      {
+        "year": 1,
+        "revenue": 53606.700000000004,
+        "ebit": 15813.9765,
+        "fcff": 10721.722905,
+        "discount": 0.9310947952266494,
+        "pv": 9982.940392707853
+      },
+      {
+        "year": 2,
+        "revenue": 56019.0015,
+        "ebit": 16525.6054425,
+        "fcff": 11242.490935725002,
+        "discount": 0.8669375176981561,
+        "pv": 9746.537184561454
+      },
+      {
+        "year": 3,
+        "revenue": 57979.66655249999,
+        "ebit": 17104.001632987496,
+        "fcff": 11716.388168475372,
+        "discount": 0.8072010105154644,
+        "pv": 9457.480369184752
+      },
+      {
+        "year": 4,
+        "revenue": 59429.158216312484,
+        "ebit": 17531.601673812183,
+        "fcff": 12093.326374937258,
+        "discount": 0.7515806595926409,
+        "pv": 9089.110213544425
+      },
+      {
+        "year": 5,
+        "revenue": 60914.88717172029,
+        "ebit": 17969.891715657486,
+        "fcff": 12395.65953431069,
+        "discount": 0.69979284033972,
+        "pv": 8674.393793399408
+      }
+    ],
+    "wacc": 0.0740045,
+    "terminalValue": 259273.1488469111,
+    "terminalPV": 181437.49325540292,
+    "ev": 228387.95520880082,
+    "equity": null,
+    "perShare": null,
+    "assumptions": "KO scenario only; all growth/margin/reinvestment/beta/Kd/weights/tax are analyst assumptions, NOT SEC forecasts or measured capital structure. Rf/ERP dated Nov1 2026.",
+    "bridge": {
+      "status": "INSUFFICIENT",
+      "states": {
+        "excessCash": "ESTIMATED",
+        "otherAssets": "ESTIMATED",
+        "debt": "ESTIMATED",
+        "leases": "ESTIMATED",
+        "minority": "ESTIMATED",
+        "preferred": "ESTIMATED",
+        "otherClaims": "ESTIMATED",
+        "shares": "ESTIMATED"
+      },
+      "errors": [
+        "重大未知事项：IRS/lease/other material claim remains unquantified without accepting the conditional assumptions"
+      ],
+      "nonOperatingAssets": null,
+      "debt": null,
+      "otherClaims": null,
+      "dilutedShares": null,
+      "input": {
+        "items": {
+          "excessCash": {
+            "value": 10685,
+            "reportedValue": 13685,
+            "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet 2026-10-02; filed 2026-10-28",
+            "rationale": "Conditional research assumption: retain 3,000 operating cash (~0.7 month of TTM revenue); add cash+short-term investments 13,685 less buffer. Excludes marketable securities, captive assets and IRS deposit. No claim that all cash is distributable.",
+            "method": "estimate",
+            "zeroConfirmed": false
+          },
+          "otherAssets": {
+            "value": 20710,
+            "reportedValue": 20710,
+            "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet equity method investments 2026-10-02",
+            "rationale": "Conditional book-value proxy for equity-method stakes, no market premium. Forecast based on operating EBIT excludes equity-method income; assume no affiliate dividends double counted. Other securities 2,910, insurance investments, IRS deposit and held-for-sale net assets receive no separate addback (deliberate 100% haircut/exclusion, not proven worthless). Strategic operating relationships and disposals remain limitations.",
+            "method": "estimate",
+            "zeroConfirmed": false
+          },
+          "debt": {
+            "value": 41619,
+            "reportedValue": 41619,
+            "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm balance sheet 2026-10-02; 73+4,923+36,623",
+            "rationale": "Conditional book-debt approximation, each current/noncurrent line included once. Do not also subtract disclosed fair-value debt 35,398. Assume material finance-lease claims fall within debt proxy; unallocated financial lease/hedge/held-for-sale financing differences are not independently priced.",
+            "method": "estimate",
+            "zeroConfirmed": false
+          },
+          "leases": {
+            "value": 1722,
+            "reportedValue": 1722,
+            "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm operating lease note 2025-12-31; filed 2026-02-20",
+            "rationale": "Stale disclosed operating lease balance carried as an estimate, not current fact. Keep operating lease costs within forecast operating margin/FCFF and do not subtract lease liability again. No rent addback. Finance leases covered only by conditional debt approximation; no claim of fully verified lease inventory.",
+            "method": "estimate",
+            "zeroConfirmed": false
+          },
+          "minority": {
+            "value": 2161,
+            "reportedValue": 2161,
+            "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm consolidated balance sheet 2026-10-02",
+            "rationale": "Book minority interest used as value proxy because forecast is consolidated; no independently observed market value. Not included again in other claims.",
+            "method": "estimate",
+            "zeroConfirmed": false
+          },
+          "preferred": {
+            "value": 0,
+            "reportedValue": null,
+            "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm consolidated equity and financing review; conditional assumption 2026-11-18",
+            "rationale": "No preferred line in reviewed consolidated balance sheet; explicit conditional assumption of no material preferred/redemption claim. Not an SEC-disclosed zero and not inferred solely from a missing XBRL tag.",
+            "method": "estimate",
+            "zeroConfirmed": true
+          },
+          "otherClaims": {
+            "value": 7700,
+            "reportedValue": null,
+            "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm Note 9 and tax litigation; conditional sensitivity 2026-11-18",
+            "rationale": "Conditional 7,700 incremental IRS/other claim adjustment: half of disclosed 14,000 historical remaining exposure + 1,400 2026 YTD increment. Arithmetic midpoint only, NOT a probability-weighted estimate or company liability. No extra subtraction of tax reserve 538; paid deposit 6,000 and interest receivable are not added as assets, so loss of deposit is not deducted twice. Assume no additional material pension/guarantee/litigation/disposal claim outside operating forecasts and this adjustment. Future tax impact not calibrated; no audited conclusion.",
+            "method": "estimate",
+            "zeroConfirmed": false
+          },
+          "shares": {
+            "value": 4314,
+            "reportedValue": 4314,
+            "source": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm income statement quarter ended 2026-10-02",
+            "rationale": "Historical weighted-average diluted shares used as valuation proxy, not exact current fully diluted shares. Current common shares 4,301.902335 at 2026-10-26 differ; no future SBC dilution or buyback benefit modeled.",
+            "method": "estimate",
+            "zeroConfirmed": false
+          }
+        },
+        "sharesBasis": "weightedDiluted",
+        "leaseTreatment": "inFcff",
+        "assetsOverlapReviewed": true,
+        "claimsReviewed": true,
+        "unresolved": "IRS/lease/other material claim remains unquantified without accepting the conditional assumptions"
+      }
+    }
+  }
+}

@@ -65,7 +65,7 @@ export function ResearchCard({
         )}
         {summary && (
           <>
-            <Space wrap split="·">
+            <Space wrap separator="·">
               <Typography.Text>
                 {summary.fiscalYear} 财年 · 10-K
               </Typography.Text>

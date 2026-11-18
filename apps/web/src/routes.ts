@@ -1,32 +1,36 @@
-export type ListPath = '/companies' | '/favorites' | '/mergers';
+export const routePaths = {
+  companies: '/companies',
+  favorites: '/favorites',
+  mergers: '/mergers',
+  detail: '/companies/:ticker',
+  valuation: '/companies/:ticker/valuation',
+} as const;
 
 export function listReturnPath(value: string | null): string {
   if (!value) return '/companies';
   const path = value.split('?')[0];
   return path === '/companies' || path === '/favorites' ? value : '/companies';
 }
-
-export function readRoute(url: URL) {
-  const match = /^\/companies\/([^/]+)\/?$/.exec(url.pathname);
-  let ticker: string | null = null;
-  try {
-    ticker = match ? decodeURIComponent(match[1]) : null;
-  } catch {
-    // Malformed paths return to the directory.
-  }
-  const legacy = url.pathname === '/' ? url.searchParams.get('company') : null;
-  const returnTo = listReturnPath(url.searchParams.get('from'));
-  return {
-    ticker: ticker || legacy,
-    listPath: (url.pathname === '/mergers'
-      ? '/mergers'
-      : url.pathname === '/favorites'
-        ? '/favorites'
-        : '/companies') as ListPath,
-    returnTo,
-  };
-}
-
 export function companyPath(ticker: string, from: string) {
   return `/companies/${encodeURIComponent(ticker)}?${new URLSearchParams({ from: listReturnPath(from) })}`;
+}
+export function valuationPath(ticker: string, from: string) {
+  return `/companies/${encodeURIComponent(ticker)}/valuation?${new URLSearchParams({ from: listReturnPath(from) })}`;
+}
+export function legacyHomePath(search: string) {
+  const ticker = new URLSearchParams(search).get('company');
+  return ticker && /^[A-Z0-9][A-Z0-9.-]{0,19}$/i.test(ticker)
+    ? companyPath(ticker, '/companies')
+    : '/companies';
+}
+export function listFilters(params: URLSearchParams) {
+  const value = Number(params.get('page'));
+  return {
+    page: Number.isSafeInteger(value) && value > 0 ? value : 1,
+    query: params.get('q') ?? '',
+    mode:
+      params.get('mode') === 'quarterly'
+        ? ('quarterly' as const)
+        : ('annual' as const),
+  };
 }

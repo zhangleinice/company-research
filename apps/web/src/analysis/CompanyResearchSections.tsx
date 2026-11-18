@@ -11,7 +11,7 @@ import {
   Popconfirm,
 } from 'antd';
 import type { CompanyDetail, FinancialMode } from '@company-research/shared';
-import { AnalysisPlaceholder, FinancialAnalysis } from './FinancialAnalysis.js';
+import { FinancialAnalysis } from './FinancialAnalysis.js';
 
 export function CompanyResearchSections({
   detail,
@@ -116,7 +116,6 @@ export function CompanyResearchSections({
         revision={revision}
         updating={updating}
       />
-      <AnalysisPlaceholder title="估值分析 · Valuation" />
     </Space>
   );
 }
