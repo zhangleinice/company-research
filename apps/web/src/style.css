@@ -362,3 +362,128 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+.valuation-card > .ant-card-body {
+  padding: 8px 24px 20px;
+}
+.quality-analysis .ant-divider {
+  margin: 16px 0;
+}
+.quality-analysis h5.ant-typography {
+  margin: 0 0 10px;
+}
+.quality-analysis .ant-descriptions-item {
+  padding-bottom: 8px;
+}
+.quality-analysis .ant-table-wrapper {
+  margin: 8px 0;
+}
+.quality-result {
+  margin: 6px 0;
+  font-weight: 600;
+}
+.quality-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 12px;
+}
+@media (max-width: 600px) {
+  .valuation-card > .ant-card-body {
+    padding: 8px 14px 16px;
+  }
+}
+
+.dcf-forecast-table .dcf-ev-row > td {
+  font-weight: 600;
+  background: rgba(127, 127, 127, 0.06);
+}
+.dcf-composition {
+  container-type: inline-size;
+  margin: 14px 0 10px;
+  font-variant-numeric: tabular-nums;
+}
+.dcf-composition-bar {
+  display: flex;
+  height: 30px;
+  margin-top: 8px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.dcf-composition-bar > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  color: #fff;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.dcf-composition-forecast {
+  background-color: #1677ff;
+}
+.dcf-composition-terminal {
+  background-color: #237804;
+}
+.dcf-composition-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 6px;
+  font-size: 12px;
+}
+.dcf-composition-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.dcf-composition-legend i {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+}
+.dcf-composition-outside {
+  display: none;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 12px;
+}
+.has-small-share .dcf-composition-outside {
+  display: flex;
+}
+.has-small-share .dcf-composition-bar span {
+  display: none;
+}
+.dcf-calculation-details {
+  margin-top: 12px;
+  font-size: 13px;
+  color: inherit;
+}
+.dcf-formula-summary > strong {
+  display: block;
+  margin-top: 10px;
+}
+@container (max-width: 400px) {
+  .dcf-composition-outside {
+    display: flex;
+  }
+  .dcf-composition-bar span {
+    display: none;
+  }
+}
+
+.dcf-bridge-table {
+  margin: 8px 0;
+  font-variant-numeric: tabular-nums;
+}
+.dcf-bridge-table .dcf-ev-row > td {
+  font-weight: 600;
+  background: rgba(127, 127, 127, 0.06);
+}
+
+.dcf-bridge-hint {
+  cursor: help;
+  text-decoration: underline dotted rgba(127, 127, 127, 0.5);
+  text-underline-offset: 4px;
+}

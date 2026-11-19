@@ -7,6 +7,7 @@
 - 公司目录、搜索、分页和收藏；按 CIK 关联，Ticker 别名共享财务记录和收藏状态。
 - 公司详情：Business、Growth、Profitability、Cash Flow & Financial Health、Shareholder Returns、Revenue Breakdown 和 Management & Risks。
 - 最近10个年度与10个独立季度的财务指标、历史趋势及 SEC 来源。
+- 估值页面默认展示企业质量分析：股东盈余、ROIC、维持性CapEx、竞争优势和资本配置能力。只读现有缓存，未核准输入与结果保留未知；DCF位于独立Tab。
 - 独立 DCF 公式计算页：TTM现金流、研究性FCFF基准、可编辑情景假设、折现及股权价值桥接；关键数据缺失时保留空值。
 - SEC提供有效IR网址时显示投资者关系官网入口。
 - 并购公告列表：FMP记录统一标记为“待核实”，不代表已确认的收购协议。
@@ -117,3 +118,5 @@ npm run test:db
 - [季度财务审计](docs/validation/quarterly-financial-audit.md)与[最小修复记录](docs/validation/quarterly-financial-fix.md)
 
 历史验证文档记录当时实现与输入，当前页面行为以源码及测试为准。需要长期保留的验证证据放入 `docs/validation/`；临时截图、日志和浏览器输出放入被忽略的 `artifacts/`，避免误提交。
+
+企业质量缓存通过 `GET /api/companies/:ticker/valuation/quality` 只读返回；旧缓存缺字段时不自动请求SEC。常规估值基准采集复用现有TTM解析保存新增证据；已有原始SEC响应可先构建后运行 `DCF_CACHE_DIR=/path/to/cache node scripts/backfill-quality-cache.cjs` 查看计划，加 `--apply` 才在事务中回填。脚本仅处理四家已审计样本，备份写入被忽略的 `artifacts/`，已有DCF字段必须保持一致。

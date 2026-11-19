@@ -8,7 +8,7 @@ import {
   type ValuationBaseline,
   type ValuationReferences,
 } from '@company-research/shared';
-import { ValuationPage } from '../src/ValuationPage.js';
+import { DcfCalculator, ValuationPage } from '../src/ValuationPage.js';
 import {
   calculatorInput,
   initialScenario,
@@ -47,9 +47,9 @@ const params = () => ({
   researchReason: '',
   bridge: emptyEquityBridge(),
 });
-test('valuation is one card, one compact table, three default assumptions and no confirmation controls', () => {
+test('DCF tab retains forecast and equity detail tables, three default assumptions and no confirmation controls', () => {
   const html = renderToStaticMarkup(
-    createElement(ValuationPage, { ticker: 'GOOGL', onBack() {} }),
+    createElement(DcfCalculator, { ticker: 'GOOGL' }),
   );
   for (const text of [
     '自由现金流',
@@ -60,13 +60,30 @@ test('valuation is one card, one compact table, three default assumptions and no
     'FCFF(t) = FCFF₀',
   ])
     assert.ok(html.includes(text), text);
-  assert.equal((html.match(/class="ant-card(?:\s|")/g) ?? []).length, 1);
-  assert.equal((html.match(/<table/g) ?? []).length, 1);
+  assert.equal((html.match(/class="ant-card(?:\s|")/g) ?? []).length, 0);
+  assert.equal((html.match(/<table/g) ?? []).length, 2);
   assert.ok(!html.includes('数据来源'));
   assert.ok(html.includes('data-dcf-metric="fcff"'));
   assert.ok(html.includes('data-dcf-metric="ev"'));
-  assert.ok(html.includes('终值现值占EV比例'));
-  assert.ok(html.includes('每股内在价值：待补全股权桥接数据'));
+  assert.ok(html.includes('EV价值构成'));
+  assert.ok(html.includes('预计FCFF / TV'));
+  assert.ok(html.includes('第6年～永续（TV）'));
+  assert.ok(html.includes('合计EV'));
+  assert.match(
+    html,
+    /<details class="dcf-details dcf-calculation-details"><summary>查看计算公式<\/summary>/,
+  );
+  assert.equal(
+    (
+      html
+        .match(/<tbody[^>]*>[\s\S]*?<\/tbody>/)?.[0]
+        .match(/<tr[^>]*data-row-key=/g) ?? []
+    ).length,
+    7,
+  );
+  assert.ok(html.includes('暂不能计算每股内在价值'));
+  assert.ok(html.includes('SEC财报金额'));
+  assert.ok(html.includes('估值调整 / 结果'));
   assert.ok(!html.includes('class="dcf-result"'));
   assert.ok(html.includes('修改FCFF基准'));
   assert.ok(!html.includes('ant-alert'));
@@ -192,4 +209,15 @@ test('blur/Enter validation rejects incomplete or invalid drafts without replaci
   assert.equal(r.next.growth, 6);
   assert.equal(current.growth, 5);
   assert.deepEqual(initialScenario, { growth: 5, wacc: 10, terminalGrowth: 3 });
+});
+
+test('valuation defaults to enterprise quality in one card, leaving DCF independently available', () => {
+  const html = renderToStaticMarkup(
+    createElement(ValuationPage, { ticker: 'GOOGL', onBack() {} }),
+  );
+  assert.equal((html.match(/class="ant-card(?:\s|")/g) ?? []).length, 1);
+  assert.match(html, /企业质量分析/);
+  assert.match(html, /DCF估值/);
+  assert.match(html, /aria-selected="true"[^>]*>企业质量分析/);
+  assert.ok(!html.includes('data-dcf-metric="fcff"'));
 });

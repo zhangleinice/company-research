@@ -43,3 +43,41 @@ it('does not infer missing capex as zero or substitute prior period; verifies id
     valuationBaseline(f.raw, f.sub, 'GOOGL', '0000000001'),
   ).toThrow();
 });
+
+it('quality reuses exact TTM endpoints, keeps parent/common income distinct, and does not sum D&A components', () => {
+  const f = structuredClone(fixtures.GOOGL);
+  const template =
+    f.raw.facts['us-gaap'].NetCashProvidedByUsedInOperatingActivities;
+  const add = (tag: string, scale: number) => {
+    const copied = structuredClone(template);
+    copied.units.USD = copied.units.USD.map((x) => ({
+      ...x,
+      val: x.val * scale,
+    }));
+    f.raw.facts['us-gaap'][tag] = copied;
+  };
+  add('NetIncomeLoss', 1);
+  add('NetIncomeLossAvailableToCommonStockholdersBasic', 0.9);
+  add('Depreciation', 0.1);
+  add('AmortizationOfIntangibleAssets', 0.05);
+  add('IncomeTaxExpenseBenefit', 0.2);
+  add(
+    'IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest',
+    1,
+  );
+  const b = valuationBaseline(f.raw, f.sub, 'TEST', String(f.raw.cik));
+  expect(b.quality?.netIncome.value).toBe(b.ocf.value);
+  expect(b.quality?.commonNetIncome.value).toBeCloseTo(b.ocf.value! * 0.9);
+  expect(b.quality?.depreciation.value).toBeCloseTo(b.ocf.value! * 0.1);
+  expect(b.quality?.amortization.value).toBeCloseTo(b.ocf.value! * 0.05);
+  expect(b.quality?.depreciationAmortization.value).toBeNull();
+  expect(b.quality?.historicalTaxRate).toBeCloseTo(0.2);
+  expect(b.quality?.netIncome.items).toEqual(
+    b.ocf.items.map((x) => ({ ...x, concept: 'us-gaap:NetIncomeLoss' })),
+  );
+  expect(b.quality?.capital.map((x) => x.periodEnd)).toEqual([
+    '2025-09-30',
+    '2026-09-30',
+  ]);
+  expect(b.fcff).toBeNull();
+});

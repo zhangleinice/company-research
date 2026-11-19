@@ -1,3 +1,6 @@
+import { EquityBridgeDetails } from './EquityBridgeDetails.js';
+import { EvComposition } from './EvComposition.js';
+import { EnterpriseQualityPanel } from './EnterpriseQuality.js';
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import {
   Button,
@@ -9,6 +12,7 @@ import {
   Row,
   Space,
   Table,
+  Tabs,
   Tag,
   Typography,
 } from 'antd';
@@ -58,6 +62,36 @@ export function ValuationPage({
   ticker: string;
   onBack: () => void;
 }) {
+  return (
+    <Card
+      className="valuation-card"
+      title={
+        <Space wrap>
+          <Button onClick={onBack}>← 返回列表</Button>
+          <span>{ticker} · 估值分析</span>
+        </Space>
+      }
+    >
+      <Tabs
+        defaultActiveKey="quality"
+        items={[
+          {
+            key: 'quality',
+            label: '企业质量分析',
+            children: <EnterpriseQualityPanel ticker={ticker} />,
+          },
+          {
+            key: 'dcf',
+            label: 'DCF估值',
+            children: <DcfCalculator ticker={ticker} />,
+          },
+        ]}
+      />
+    </Card>
+  );
+}
+
+export function DcfCalculator({ ticker }: { ticker: string }) {
   const [baseline, setBaseline] = useState<ValuationBaseline | null>(null);
   const [refs, setRefs] = useState<ValuationReferences | null>(null);
   const [error, setError] = useState(''),
@@ -199,36 +233,8 @@ export function ValuationPage({
     result?.rows[4] && terminalGrowth !== null
       ? result.rows[4].fcff * (1 + terminalGrowth / 100)
       : null;
-  const summary = result?.bridge;
-  const missingBridge = Object.entries(bridge.items)
-    .filter(([, v]) => v.value === null)
-    .map(
-      ([key]) =>
-        ({
-          excessCash: '超额现金',
-          otherAssets: '其他非经营资产',
-          debt: '债务',
-          leases: '租赁口径',
-          minority: '少数股东权益',
-          preferred: '优先股',
-          otherClaims: '其他索偿',
-          shares: '估值股数',
-        })[key],
-    );
-  const terminalShare =
-    result?.ev != null && result.ev > 0 && result.terminalPV != null
-      ? (result.terminalPV / result.ev) * 100
-      : null;
   return (
-    <Card
-      className="dcf-calculator"
-      title={
-        <Space wrap>
-          <Button onClick={onBack}>← 返回列表</Button>
-          <span>{ticker} · DCF估值</span>
-        </Space>
-      }
-    >
+    <div className="dcf-calculator">
       <Typography.Paragraph type="secondary" className="dcf-period">
         TTM {baseline?.ocf.start ?? '—'} → {baseline?.asOf ?? '—'} ·
         金额：百万美元 · 股数：百万股
@@ -395,7 +401,7 @@ export function ValuationPage({
       <Divider />
       <section className="dcf-section">
         <div className="dcf-section-heading">
-          <Typography.Title level={5}>未来5年现金流折现</Typography.Title>
+          <Typography.Title level={5}>现金流折现</Typography.Title>
           <Typography.Text type="secondary">百万美元</Typography.Text>
         </div>
         <Equation
@@ -413,20 +419,29 @@ export function ValuationPage({
           pagination={false}
           rowKey="year"
           tableLayout="fixed"
-          dataSource={Array.from({ length: 5 }, (_, i) => ({
-            year: i + 1,
-            fcff: result?.rows[i]?.fcff ?? null,
-            pv: result?.rows[i]?.pv ?? null,
-          }))}
+          scroll={{ x: 480 }}
+          rowClassName={(row) => (row.year === '合计EV' ? 'dcf-ev-row' : '')}
+          dataSource={[
+            ...Array.from({ length: 5 }, (_, i) => ({
+              year: `第${i + 1}年`,
+              fcff: result?.rows[i]?.fcff ?? null,
+              pv: result?.rows[i]?.pv ?? null,
+            })),
+            {
+              year: '第6年～永续（TV）',
+              fcff: result?.terminalValue ?? null,
+              pv: result?.terminalPV ?? null,
+            },
+            { year: '合计EV', fcff: null, pv: result?.ev ?? null },
+          ]}
           columns={[
             {
               title: '年份',
               dataIndex: 'year',
-              width: 80,
-              render: (y) => `第${y}年`,
+              width: 150,
             },
             {
-              title: '预计FCFF',
+              title: '预计FCFF / TV',
               dataIndex: 'fcff',
               align: 'right',
               render: money,
@@ -439,36 +454,40 @@ export function ValuationPage({
             },
           ]}
         />
-      </section>
-      <Divider />
-      <section className="dcf-section">
-        <Typography.Title level={5}>终值与企业价值</Typography.Title>
-        <div className="dcf-formula-summary">
-          <Equation formula="TV = FCFF₆ / (WACC − 永续增长率)">
-            = {money(sixth)} / ({rate(wacc)} − {rate(terminalGrowth)}) ={' '}
-            <strong>{money(result?.terminalValue)}</strong>
-          </Equation>
-          <Equation
-            formula={
-              <>
-                PV(TV) = TV / (1 + WACC)<sup>5</sup>
-              </>
-            }
-          >
-            = {money(result?.terminalValue)} / (1 + {rate(wacc)})<sup>5</sup> ={' '}
-            <strong>{money(result?.terminalPV)}</strong>
-          </Equation>
-          <Equation formula="EV = 前5年FCFF现值合计 + 终值现值">
-            = {money(firstFive)} + {money(result?.terminalPV)} ={' '}
-            <strong className="dcf-ev-total">{money(result?.ev)}</strong>
-          </Equation>
-        </div>
         <Typography.Text type="secondary" className="dcf-note">
-          终值现值占EV比例 = PV(TV) / EV × 100% ={' '}
-          <strong>
-            {terminalShare == null ? '—' : `${terminalShare.toFixed(2)}%`}
-          </strong>
+          TV是第6年起永续现金流在第5年末的价值，并非第6年单年FCFF。
         </Typography.Text>
+        <EvComposition
+          firstFive={firstFive}
+          terminalPV={result?.terminalPV}
+          ev={result?.ev}
+        />
+        <details className="dcf-details dcf-calculation-details">
+          <summary>查看计算公式</summary>
+          <div className="dcf-formula-summary">
+            <strong>终值 TV（Terminal Value）</strong>
+            <Equation formula="TV = FCFF₆ / (WACC − 永续增长率)">
+              = {money(sixth)} / ({rate(wacc)} − {rate(terminalGrowth)}) ={' '}
+              <strong>{money(result?.terminalValue)}</strong>
+            </Equation>
+            <strong>终值现值 PV(TV)</strong>
+            <Equation
+              formula={
+                <>
+                  PV(TV) = TV / (1 + WACC)<sup>5</sup>
+                </>
+              }
+            >
+              = {money(result?.terminalValue)} / (1 + {rate(wacc)})<sup>5</sup>{' '}
+              = <strong>{money(result?.terminalPV)}</strong>
+            </Equation>
+            <strong>企业价值 EV（Enterprise Value）</strong>
+            <Equation formula="EV = 前5年FCFF现值合计 + 终值现值">
+              = {money(firstFive)} + {money(result?.terminalPV)} ={' '}
+              <strong className="dcf-ev-total">{money(result?.ev)}</strong>
+            </Equation>
+          </div>
+        </details>
         {result && result.ev === null && (
           <Typography.Paragraph type="secondary" className="dcf-note">
             {!baseline?.applicable
@@ -480,49 +499,12 @@ export function ValuationPage({
         )}
       </section>
       <Divider />
-      <section className="dcf-section dcf-equity">
-        <Typography.Title level={5}>
-          {result?.perShare == null
-            ? '每股内在价值：待补全股权桥接数据'
-            : '每股内在价值'}
-        </Typography.Title>
-        {result?.perShare != null ? (
-          <>
-            <div className="dcf-result">
-              ${money(result.perShare)}{' '}
-              <Typography.Text type="secondary">美元 / 股</Typography.Text>
-            </div>
-            <Equation formula="Equity Value = EV + 非经营资产 − 债务及其他索偿">
-              = {money(result.ev)} + {money(summary?.nonOperatingAssets)} −{' '}
-              {money(
-                summary?.debt != null && summary.otherClaims != null
-                  ? summary.debt + summary.otherClaims
-                  : null,
-              )}{' '}
-              = <strong>{money(result.equity)}</strong>
-            </Equation>
-            <Equation formula="每股内在价值 = Equity Value / 估值股数">
-              = {money(result.equity)} / {money(summary?.dilutedShares)} ={' '}
-              <strong>{money(result.perShare)}</strong> 美元 / 股
-            </Equation>
-            <Typography.Text type="secondary" className="dcf-note">
-              基于所列假设的{verifiedBase ? '情景估值' : '条件性研究估值'}。
-            </Typography.Text>
-          </>
-        ) : (
-          <>
-            <div className="dcf-unavailable-formulas">
-              Equity Value = EV + 非经营资产 − 债务及其他索偿
-              <br />
-              每股内在价值 = Equity Value / 估值股数
-            </div>
-            <Typography.Text type="secondary" className="dcf-note">
-              主要缺失：{missingBridge.join('、') || '资产/索偿口径'}
-              。未知项不补0。{refsError}
-            </Typography.Text>
-          </>
-        )}
-      </section>
-    </Card>
+      <EquityBridgeDetails
+        baseline={baseline}
+        references={refs}
+        result={result}
+        error={refsError}
+      />
+    </div>
   );
 }

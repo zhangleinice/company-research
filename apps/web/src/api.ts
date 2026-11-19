@@ -151,3 +151,11 @@ export function fetchCompanyWebsites(
 ): Promise<import('@company-research/shared').CompanyWebsites> {
   return requestJson(`/api/companies/${encodeURIComponent(cik)}/links`, signal);
 }
+
+/** Existing database cache only; does not acquire CompanyFacts or start AI tasks. */
+export function fetchEnterpriseQuality(ticker: string, signal?: AbortSignal) {
+  return requestJson<import('@company-research/shared').EnterpriseQuality>(
+    `/api/companies/${encodeURIComponent(ticker)}/valuation/quality`,
+    signal,
+  );
+}

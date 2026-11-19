@@ -1,3 +1,8 @@
+import { bridgeDisclosures } from './bridge-disclosures';
+import {
+  historicalEffectiveTaxRate,
+  type QualityCapitalSnapshot,
+} from './enterprise-quality';
 import { withResearchFcff } from './research-fcff';
 import { historicalFcff } from '@company-research/shared';
 import { normalizeCompanyFacts } from '../financials/normalize-company-facts';
@@ -167,7 +172,63 @@ export function valuationBaseline(
   const applicable =
     /^\d{4}$/.test(sub.sic ?? '') &&
     !/^(60|61|62|63|64|65|66|67)/.test(sub.sic ?? '');
+  const taxExpense = metric(['IncomeTaxExpenseBenefit']);
+  const pretaxIncome = metric([
+    'IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest',
+  ]);
+  const start = ocf.start;
+  const priorEnd = start
+    ? new Date(Date.parse(start) - 86400000).toISOString().slice(0, 10)
+    : null;
+  const capital: QualityCapitalSnapshot[] = [priorEnd, latest.end]
+    .filter((end): end is string => end !== null)
+    .map((end) => {
+      const row = [...normalized.annual, ...normalized.quarterly].find(
+        (x) => x.periodEnd === end,
+      );
+      const fact = (
+        key: 'equity' | 'totalDebt' | 'cash' | 'marketableSecurities',
+      ): ValuationFact => ({
+        value: row?.[key] ?? null,
+        start: null,
+        end,
+        concept: null,
+        items: row?.sources[key] ? [{ provenance: row.sources[key] }] : [],
+      });
+      return {
+        periodEnd: end,
+        equity: fact('equity'),
+        debt: fact('totalDebt'),
+        cash: fact('cash'),
+        securities: fact('marketableSecurities'),
+      };
+    });
   return withResearchFcff({
+    bridgeDisclosures: bridgeDisclosures(raw, cik, latest, normalized),
+    quality: {
+      version: 1,
+      ticker,
+      cik,
+      start,
+      asOf: latest.end,
+      applicable,
+      netIncome: metric(['NetIncomeLoss']),
+      commonNetIncome: metric([
+        'NetIncomeLossAvailableToCommonStockholdersBasic',
+      ]),
+      depreciationAmortization: metric([
+        'DepreciationDepletionAndAmortization',
+        'DepreciationAndAmortization',
+      ]),
+      depreciation: metric(['Depreciation']),
+      amortization: metric(['AmortizationOfIntangibleAssets']),
+      ebit,
+      capex,
+      taxExpense,
+      pretaxIncome,
+      historicalTaxRate: historicalEffectiveTaxRate(taxExpense, pretaxIncome),
+      capital,
+    },
     ticker,
     cik,
     name: sub.name ?? null,

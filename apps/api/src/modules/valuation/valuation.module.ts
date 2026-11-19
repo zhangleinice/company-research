@@ -13,6 +13,7 @@ import { SecClient } from '../sec/sec.client';
 import { PrismaModule } from '../prisma/prisma.module';
 import { PrismaService } from '../prisma/prisma.service';
 import { valuationBaseline } from './baseline';
+import { cachedQuality } from './enterprise-quality';
 import { withResearchFcff } from './research-fcff';
 import type { ValuationBaseline } from '@company-research/shared';
 import type { Prisma } from '@prisma/client';
@@ -74,6 +75,33 @@ export class ValuationController {
         ),
       ),
     };
+  }
+  /** Quality analysis reads existing database caches only, including negative/partial coverage. */
+  @Get('quality') async quality(@Param('ticker') ticker: string) {
+    if (!/^[A-Z0-9][A-Z0-9.-]{0,19}$/i.test(ticker))
+      throw new BadRequestException('无效公司代码');
+    const company = await this.db.company.findFirst({
+      where: {
+        OR: [
+          { ticker: { equals: ticker, mode: 'insensitive' } },
+          ...(/^\d{1,10}$/.test(ticker)
+            ? [{ cik: ticker.padStart(10, '0') }]
+            : []),
+        ],
+      },
+    });
+    const stored = await this.db.valuationCache.findFirst({
+      where: {
+        OR: [
+          { data: { path: ['ticker'], equals: ticker.toUpperCase() } },
+          ...(company ? [{ cik: company.cik }] : []),
+        ],
+      },
+    });
+    return cachedQuality(
+      ticker.toUpperCase(),
+      (stored?.data as unknown as ValuationBaseline) ?? null,
+    );
   }
   @Post('refresh') refresh(@Param('ticker') ticker: string) {
     return this.load(ticker, true);

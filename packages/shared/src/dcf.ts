@@ -296,6 +296,8 @@ export interface ValuationFact {
   items: Record<string, unknown>[];
 }
 export interface ValuationBaseline {
+  bridgeDisclosures?: import('./bridge-disclosures.js').BridgeDisclosures;
+  quality?: import('./enterprise-quality.js').EnterpriseQuality;
   ticker: string;
   cik: string;
   name: string | null;
