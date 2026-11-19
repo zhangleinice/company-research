@@ -12,9 +12,11 @@ import {
 } from 'antd';
 import type { CompanyDetail, FinancialMode } from '@company-research/shared';
 import { FinancialAnalysis } from './FinancialAnalysis.js';
+import { InvestorRelationsLink } from '../InvestorRelationsLink.js';
 
 export function CompanyResearchSections({
   detail,
+  investorWebsite = null,
   mode,
   saving,
   onFavorite,
@@ -24,6 +26,7 @@ export function CompanyResearchSections({
   revision = 0,
 }: {
   detail: CompanyDetail;
+  investorWebsite?: string | null;
   mode: FinancialMode;
   saving: boolean;
   onFavorite: () => void;
@@ -69,6 +72,11 @@ export function CompanyResearchSections({
               key: 'industry',
               label: '行业',
               children: detail.industry ?? '—',
+            },
+            {
+              key: 'investorWebsite',
+              label: '投资者关系',
+              children: <InvestorRelationsLink url={investorWebsite} />,
             },
             {
               key: 'updated',

@@ -1,4 +1,3 @@
-import { InvestorRelationsLink } from './InvestorRelationsLink.js';
 import { useEffect, useState, useRef } from 'react';
 import { Alert, Button, Card, Space, Spin, Typography, message } from 'antd';
 import type {
@@ -172,7 +171,6 @@ export function CompanyDetails({
         <Typography.Title level={3} className="detail-title">
           {detail?.name ?? identifier}
         </Typography.Title>
-        <InvestorRelationsLink url={investorWebsite} />
       </Space>
       {error && (
         <Alert
@@ -241,6 +239,7 @@ export function CompanyDetails({
       {detail && (
         <CompanyResearchSections
           detail={detail}
+          investorWebsite={investorWebsite}
           onUpdate={updateData}
           updating={updating}
           revision={aiRevision}

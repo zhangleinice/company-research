@@ -10,7 +10,7 @@ test('official SEC-provided absolute HTTP(S) links open in a new tab with opener
       url: 'https://ir.example.com/earnings',
     }),
   );
-  assert.ok(html.includes('投资者关系 ↗'));
+  assert.ok(html.includes('官网 ↗'));
   assert.ok(html.includes('href="https://ir.example.com/earnings"'));
   assert.ok(html.includes('target="_blank"'));
   assert.ok(html.includes('rel="noopener noreferrer"'));
@@ -19,7 +19,7 @@ test('official SEC-provided absolute HTTP(S) links open in a new tab with opener
     'http://example.com/ir',
   );
 });
-test('missing and unsafe URLs hide the link completely without an error or placeholder', () => {
+test('missing and unsafe URLs show a dash without an external link', () => {
   for (const url of [
     null,
     '',
@@ -35,7 +35,7 @@ test('missing and unsafe URLs hide the link completely without an error or place
     assert.equal(companyWebsite(url), null);
     assert.equal(
       renderToStaticMarkup(createElement(InvestorRelationsLink, { url })),
-      '',
+      '—',
     );
   }
 });

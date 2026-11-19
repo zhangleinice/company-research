@@ -9,3 +9,7 @@ coverage/
 .test-dist/
 *.tsbuildinfo
 apps/api/data/
+
+# Disposable browser screenshots, traces, and validation output.
+# Keep curated docs/validation evidence and test fixtures tracked.
+/artifacts/

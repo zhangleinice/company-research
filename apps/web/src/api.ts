@@ -135,18 +135,6 @@ export function fetchValuation(
   );
 }
 
-export async function refreshValuation(
-  ticker: string,
-): Promise<import('@company-research/shared').ValuationBaseline> {
-  const response = await fetch(
-    `/api/companies/${encodeURIComponent(ticker)}/valuation/refresh`,
-    { method: 'POST' },
-  );
-  const body = await response.json();
-  if (!response.ok) throw new Error(body.message || '基准更新失败');
-  return body;
-}
-
 export function fetchValuationReferences(
   ticker: string,
   signal?: AbortSignal,

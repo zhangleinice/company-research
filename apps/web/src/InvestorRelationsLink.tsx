@@ -4,7 +4,9 @@ export function InvestorRelationsLink({ url }: { url: string | null }) {
   const href = companyWebsite(url);
   return href ? (
     <Typography.Link href={href} target="_blank" rel="noopener noreferrer">
-      投资者关系 ↗
+      官网 ↗
     </Typography.Link>
-  ) : null;
+  ) : (
+    <>—</>
+  );
 }

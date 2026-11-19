@@ -7,6 +7,7 @@ import {
   Input,
   InputNumber,
   Row,
+  Space,
   Table,
   Tag,
   Typography,
@@ -221,8 +222,12 @@ export function ValuationPage({
   return (
     <Card
       className="dcf-calculator"
-      title={`${ticker} · DCF估值`}
-      extra={<Button onClick={onBack}>返回列表</Button>}
+      title={
+        <Space wrap>
+          <Button onClick={onBack}>← 返回列表</Button>
+          <span>{ticker} · DCF估值</span>
+        </Space>
+      }
     >
       <Typography.Paragraph type="secondary" className="dcf-period">
         TTM {baseline?.ocf.start ?? '—'} → {baseline?.asOf ?? '—'} ·
