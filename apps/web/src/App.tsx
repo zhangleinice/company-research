@@ -15,7 +15,6 @@ import {
   StarOutlined,
   SwapOutlined,
 } from '@ant-design/icons';
-import { ValuationPage } from './ValuationPage';
 import { MergersPage } from './MergersPage';
 import { CompanyDetails } from './CompanyDetails';
 import { CompanyListPage } from './CompanyListPage';
@@ -24,7 +23,7 @@ import {
   legacyHomePath,
   listReturnPath,
   routePaths,
-  valuationPath,
+  legacyValuationPath,
 } from './routes';
 
 function HomeRedirect() {
@@ -40,24 +39,17 @@ function ListRoute({ favorites = false }: { favorites?: boolean }) {
       key={location.pathname}
       favorites={favorites}
       onOpen={(ticker) => navigate(companyPath(ticker, from))}
-      onValuation={(ticker) => navigate(valuationPath(ticker, from))}
     />
   );
 }
-function CompanyRoute({ valuation = false }: { valuation?: boolean }) {
+function CompanyRoute() {
   const { ticker } = useParams();
   const [search] = useSearchParams();
   const navigate = useNavigate();
   const returnTo = listReturnPath(search.get('from'));
   if (!ticker || !/^[A-Z0-9][A-Z0-9.-]{0,19}$/i.test(ticker))
     return <Navigate replace to="/companies" />;
-  return valuation ? (
-    <ValuationPage
-      key={ticker}
-      ticker={ticker}
-      onBack={() => navigate(returnTo)}
-    />
-  ) : (
+  return (
     <CompanyDetails
       key={ticker}
       identifier={ticker}
@@ -70,10 +62,16 @@ function CompanyRoute({ valuation = false }: { valuation?: boolean }) {
     />
   );
 }
+function LegacyValuationRedirect() {
+  const { ticker } = useParams();
+  const location = useLocation();
+  if (!ticker || !/^[A-Z0-9][A-Z0-9.-]{0,19}$/i.test(ticker))
+    return <Navigate replace to="/companies" />;
+  return <Navigate replace to={legacyValuationPath(ticker, location.search)} />;
+}
 export function App() {
   const location = useLocation(),
     navigate = useNavigate();
-  const isValuation = Boolean(useMatch(routePaths.valuation));
   const companyRoute = useMatch('/companies/:ticker/*');
   const [collapsed, setCollapsed] = useState(false);
   const activePath = companyRoute
@@ -132,7 +130,7 @@ export function App() {
         </Layout.Sider>
         <Layout className="app-main">
           <Layout.Content
-            className={`app-content${isValuation ? ' app-content-valuation' : ''}`}
+            className={`app-content${companyRoute ? ' app-content-company' : ''}`}
           >
             <Routes>
               <Route path="/" element={<HomeRedirect />} />
@@ -145,19 +143,15 @@ export function App() {
               <Route path={routePaths.detail} element={<CompanyRoute />} />
               <Route
                 path={routePaths.valuation}
-                element={<CompanyRoute valuation />}
+                element={<LegacyValuationRedirect />}
               />
               <Route path="*" element={<Navigate replace to="/companies" />} />
             </Routes>
           </Layout.Content>
-          {!isValuation && (
-            <Layout.Footer className="app-footer">
-              数据来源：
-              {location.pathname === '/mergers'
-                ? 'FMP / SEC EDGAR'
-                : 'SEC EDGAR'}
-            </Layout.Footer>
-          )}
+          <Layout.Footer className="app-footer">
+            数据来源：
+            {location.pathname === '/mergers' ? 'FMP / SEC EDGAR' : 'SEC EDGAR'}
+          </Layout.Footer>
         </Layout>
       </Layout>
     </Layout>

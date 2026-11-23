@@ -1,18 +1,14 @@
 import { EquityBridgeDetails } from './EquityBridgeDetails.js';
 import { EvComposition } from './EvComposition.js';
-import { EnterpriseQualityPanel } from './EnterpriseQuality.js';
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import {
   Button,
-  Card,
   Col,
   Divider,
   Input,
   InputNumber,
   Row,
-  Space,
   Table,
-  Tabs,
   Tag,
   Typography,
 } from 'antd';
@@ -55,42 +51,6 @@ function Equation({
     </div>
   );
 }
-export function ValuationPage({
-  ticker,
-  onBack,
-}: {
-  ticker: string;
-  onBack: () => void;
-}) {
-  return (
-    <Card
-      className="valuation-card"
-      title={
-        <Space wrap>
-          <Button onClick={onBack}>← 返回列表</Button>
-          <span>{ticker} · 估值分析</span>
-        </Space>
-      }
-    >
-      <Tabs
-        defaultActiveKey="quality"
-        items={[
-          {
-            key: 'quality',
-            label: '企业质量分析',
-            children: <EnterpriseQualityPanel ticker={ticker} />,
-          },
-          {
-            key: 'dcf',
-            label: 'DCF估值',
-            children: <DcfCalculator ticker={ticker} />,
-          },
-        ]}
-      />
-    </Card>
-  );
-}
-
 export function DcfCalculator({ ticker }: { ticker: string }) {
   const [baseline, setBaseline] = useState<ValuationBaseline | null>(null);
   const [refs, setRefs] = useState<ValuationReferences | null>(null);

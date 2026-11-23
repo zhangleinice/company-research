@@ -1,4 +1,5 @@
 import { verifiedLiquidity } from '../financials/financial-health';
+import { annualCapitalAllocation } from '../financials/capital-allocation';
 import { capexToOperatingCashFlow } from '../financials/cash-flow-calculations';
 import {
   BadGatewayException,
@@ -241,7 +242,15 @@ export class CompanyService {
   private detail(stored: Stored): CompanyDetail {
     return {
       ...item(stored, stored, 'annual'),
-      annual: stored.annualFinancials.map(period),
+      annual: stored.annualFinancials.map((row) => {
+        const result = period(row);
+        result.capitalAllocation = annualCapitalAllocation(
+          result,
+          row.sources,
+          row.companyCik,
+        );
+        return result;
+      }),
       quarterly: stored.quarterlyFinancials.map(period),
       lastError: stored.lastError,
     };

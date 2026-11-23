@@ -70,6 +70,7 @@ describe('10-K sections and grounded JSON', () => {
         topic: string;
         findings: {
           kind: string;
+          businessName?: string;
           text: string;
           evidence: { paragraphId: string; quote: string }[];
         }[];
@@ -77,6 +78,7 @@ describe('10-K sections and grounded JSON', () => {
     };
     value.groups[0].findings.push({
       kind: '公司披露的事实',
+      businessName: 'Disclosed Business',
       text: '公司披露产品业务。',
       evidence: [
         { paragraphId: 'Item 1:p1', quote: 'specific disclosed business fact' },

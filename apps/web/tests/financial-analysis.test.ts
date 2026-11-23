@@ -7,8 +7,12 @@ import {
   type CompanyDetail,
   type FinancialPeriod,
 } from '@company-research/shared';
-import { CompanyResearchSections } from '../src/analysis/CompanyResearchSections.js';
+import {
+  CompanyResearchSections,
+  CompanyQualityContent,
+} from '../src/analysis/CompanyResearchSections.js';
 import { FinancialAnalysis } from '../src/analysis/FinancialAnalysis.js';
+import { ManagementAnalysis } from '../src/analysis/ManagementAnalysis.js';
 import { FinancialTrendChart } from '../src/analysis/FinancialTrendChart.js';
 import {
   METRICS,
@@ -84,7 +88,7 @@ for (const [ticker, cik] of [
   ['NVDA', '0001045810'],
   ['AAPL', '0000320193'],
 ]) {
-  test(`${ticker}: renders the prescribed single-page module order without the retired financial table`, () => {
+  test(`${ticker}: renders basic information above four tabs and defaults to Business without mounting other analyses`, () => {
     const html = renderToStaticMarkup(
       createElement(CompanyResearchSections, {
         detail: detail(ticker, cik),
@@ -95,26 +99,15 @@ for (const [ticker, cik] of [
         onModeChange: () => {},
       }),
     );
-    const markers = [
-      '公司基本信息',
-      '业务概述',
-      'data-analysis-module="growth"',
-      'data-analysis-module="profitability"',
-      'data-analysis-module="cash-flow"',
-      '管理层与风险',
-    ];
-    const positions = markers.map((marker) => html.indexOf(marker));
-    assert.ok(positions.every((position) => position >= 0));
-    assert.deepEqual(
-      [...positions].sort((a, b) => a - b),
-      positions,
-    );
-    assert.ok(
-      !html.includes('ant-table-wrapper'),
-      'The retired wide financial Table must not render',
-    );
-    assert.doesNotMatch(html, /全部原始指标|查看选定期间|估值分析|Valuation/);
-    assert.match(html, /123/);
+    assert.ok(html.includes('公司基本信息'));
+    for (const label of ['商业模式', '企业质量', '管理层', '内在价值'])
+      assert.ok(html.includes(label), label);
+    assert.match(html, /aria-selected="true"[^>]*>商业模式/);
+    assert.ok(html.indexOf('公司基本信息') < html.indexOf('ant-tabs'));
+    assert.ok(html.includes('业务概述'));
+    assert.ok(!html.includes('data-analysis-module='));
+    assert.ok(!html.includes('财务报告期间口径'));
+    assert.ok(!html.includes('data-dcf-metric='));
     assert.match(html, new RegExp(ticker));
     assert.match(html, new RegExp(cik));
     assert.equal((html.match(/待开发/g) ?? []).length, 0);
@@ -596,4 +589,40 @@ test('profitability contains four fixed core cards and one full-width margin cha
     assert.ok(!section.includes('ant-col-xl-12'));
     assert.ok(!section.includes('季度资本回报口径尚未验证'));
   }
+});
+
+test('quality reuses Growth, Profitability and Cash Flow in order; shareholder returns is isolated in Management', () => {
+  const source = detail('GOOGL', '0001652044');
+  const html = renderToStaticMarkup(
+    createElement(CompanyQualityContent, {
+      detail: source,
+      mode: 'quarterly',
+      onModeChange() {},
+    }),
+  );
+  const markers = [
+    'data-analysis-module="growth"',
+    'data-analysis-module="profitability"',
+    'data-analysis-module="cash-flow"',
+    'Advanced Quality Metrics · 高级质量指标',
+    '读取企业质量缓存',
+    '管理层与风险',
+  ];
+  const positions = markers.map((x) => html.indexOf(x));
+  assert.ok(positions.every((x) => x >= 0));
+  assert.deepEqual(
+    positions,
+    [...positions].sort((a, b) => a - b),
+  );
+  assert.ok(!html.includes('data-analysis-module="shareholder-returns"'));
+  assert.ok(html.includes('财务报告期间口径'));
+  assert.ok(html.includes('独立季度'));
+  const management = renderToStaticMarkup(
+    createElement(ManagementAnalysis, { detail: source }),
+  );
+  assert.ok(management.includes('data-analysis-module="dividends"'));
+  assert.ok(management.includes('data-analysis-module="repurchases"'));
+  assert.ok(!management.includes('data-analysis-module="growth"'));
+  assert.ok(management.includes('2025-01-01 至 2025-12-31'));
+  assert.ok(!management.includes('2026-04-01 至 2026-06-30'));
 });

@@ -25,11 +25,9 @@ import { amount, percent } from './financial-columns.js';
 export function CompanyListPage({
   favorites,
   onOpen,
-  onValuation,
 }: {
   favorites: boolean;
   onOpen: (ticker: string) => void;
-  onValuation: (ticker: string) => void;
 }) {
   const [form] = Form.useForm<{ q: string }>();
   const [params, setParams] = useSearchParams();
@@ -160,15 +158,9 @@ export function CompanyListPage({
     {
       title: '操作',
       key: 'actions',
-      width: 210,
+      width: 110,
       render: (_, row) => (
         <Space size="small">
-          <Typography.Link onClick={() => onOpen(row.ticker)}>
-            详情
-          </Typography.Link>
-          <Typography.Link onClick={() => onValuation(row.ticker)}>
-            估值
-          </Typography.Link>
           <Button
             type="link"
             loading={saving.has(row.cik)}

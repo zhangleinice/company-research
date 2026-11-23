@@ -14,8 +14,12 @@ export function listReturnPath(value: string | null): string {
 export function companyPath(ticker: string, from: string) {
   return `/companies/${encodeURIComponent(ticker)}?${new URLSearchParams({ from: listReturnPath(from) })}`;
 }
-export function valuationPath(ticker: string, from: string) {
-  return `/companies/${encodeURIComponent(ticker)}/valuation?${new URLSearchParams({ from: listReturnPath(from) })}`;
+/** Old valuation links now open the unified detail, without a URL-selected tab. */
+export function legacyValuationPath(ticker: string, search: string) {
+  const from = new URLSearchParams(search).get('from');
+  return from
+    ? companyPath(ticker, listReturnPath(from))
+    : `/companies/${encodeURIComponent(ticker)}`;
 }
 export function legacyHomePath(search: string) {
   const ticker = new URLSearchParams(search).get('company');

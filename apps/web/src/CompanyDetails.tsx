@@ -68,13 +68,9 @@ export function CompanyDetails({
     const controller = new AbortController();
     let timer: ReturnType<typeof setTimeout>;
     let signature = '';
-    const poll = async (initialize = false) => {
+    const poll = async () => {
       try {
-        const next = await companyUpdate(
-          cik,
-          initialize ? 'initialize' : 'status',
-          controller.signal,
-        );
+        const next = await companyUpdate(cik, 'status', controller.signal);
         if (controller.signal.aborted) return;
         setUpdate(next);
         lastUpdateError.current = '';
@@ -109,7 +105,7 @@ export function CompanyDetails({
         }
       }
     };
-    void poll(true);
+    void poll();
     return () => {
       controller.abort();
       clearTimeout(timer);

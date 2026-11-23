@@ -9,11 +9,11 @@ import {
   listFilters,
   listReturnPath,
   routePaths,
-  valuationPath,
+  legacyValuationPath,
 } from '../src/routes.js';
 import { CompanyListPage } from '../src/CompanyListPage.js';
 const routes = Object.values(routePaths).map((path) => ({ path }));
-test('React Router matches independent company, favorite, merger, detail and valuation routes', () => {
+test('React Router retains the legacy valuation route alongside the unified detail route', () => {
   for (const [url, expected] of [
     ['/companies', routePaths.companies],
     ['/favorites', routePaths.favorites],
@@ -28,13 +28,26 @@ test('React Router matches independent company, favorite, merger, detail and val
   );
   assert.equal(matchRoutes(routes, '/unknown'), null);
 });
-test('detail and valuation links retain favorite filters across return, direct load and refresh', () => {
+test('detail links and legacy valuation redirects retain list filters without selecting a tab in the URL', () => {
   const from = '/favorites?page=2&q=Alphabet&mode=quarterly';
-  for (const path of [companyPath('GOOG', from), valuationPath('GOOG', from)]) {
-    const u = new URL(path, 'http://localhost');
-    assert.equal(listReturnPath(u.searchParams.get('from')), from);
-    assert.ok(matchRoutes(routes, path));
-  }
+  const path = companyPath('GOOG', from);
+  const u = new URL(path, 'http://localhost');
+  assert.equal(listReturnPath(u.searchParams.get('from')), from);
+  assert.equal(
+    legacyValuationPath('GOOG', '?' + new URLSearchParams({ from })),
+    path,
+  );
+  assert.equal(
+    matchRoutes(routes, path)?.at(-1)?.route.path,
+    routePaths.detail,
+  );
+  assert.equal(legacyValuationPath('GOOGL', ''), '/companies/GOOGL');
+  assert.ok(
+    !new URL(
+      legacyValuationPath('GOOGL', '?tab=valuation'),
+      'http://localhost',
+    ).searchParams.has('tab'),
+  );
 });
 test('legacy home links redirect safely and invalid/external return paths remain rejected', () => {
   assert.equal(legacyHomePath(''), '/companies');
@@ -67,7 +80,6 @@ test('URL-backed list filters restore search, pagination and annual/quarterly mo
       createElement(CompanyListPage, {
         favorites: true,
         onOpen() {},
-        onValuation() {},
       }),
     ),
   );

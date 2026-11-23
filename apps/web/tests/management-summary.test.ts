@@ -74,3 +74,70 @@ for (const company of ['Google', 'Apple', 'Nvidia'])
     assert.ok(!html.includes('旧摘要'));
     assert.ok(!html.includes('AI 推断'));
   });
+test('composed Item caches show their individual filing sources, structured risk impact and missing/legacy status', () => {
+  const summary: AiResearchSummary['summaryJson'] = {
+    groups: titles.map((topic, i) => ({
+      topic,
+      findings:
+        i === 3
+          ? [
+              {
+                ...finding,
+                riskType: '竞争风险',
+                text: '竞争影响需求。',
+                impact: '可能降低经营收入。',
+                evidence: [
+                  {
+                    paragraphId: 'Item 1A:p1',
+                    quote: 'Competition may reduce revenue.',
+                  },
+                ],
+              },
+            ]
+          : [],
+    })),
+    itemSources: [
+      {
+        item: 'Item 7',
+        accessionNumber: 'old',
+        sourceUrl: 'https://www.sec.gov/old',
+        fiscalYear: 2024,
+        filingDate: '2025-02-01',
+        generatedAt: '2025-02-02',
+        promptVersion: 'old',
+        legacy: true,
+      },
+      {
+        item: 'Item 1A',
+        accessionNumber: 'new',
+        sourceUrl: 'https://www.sec.gov/new',
+        fiscalYear: 2025,
+        filingDate: '2026-02-01',
+        generatedAt: '2026-02-02',
+        promptVersion: 'item1a-risks-v1',
+        legacy: false,
+      },
+    ],
+  };
+  const html = renderToStaticMarkup(
+    createElement(ManagementSummary, { summary }),
+  );
+  for (const value of [
+    '竞争风险',
+    '可能降低经营收入',
+    '旧版混合摘要缓存',
+    'https://www.sec.gov/old',
+    'https://www.sec.gov/new',
+  ])
+    assert.ok(html.includes(value));
+  const partial = renderToStaticMarkup(
+    createElement(ManagementSummary, {
+      summary: {
+        groups: titles.map((topic) => ({ topic, findings: [] })),
+        unavailableItems: ['Item 1A'],
+      },
+    }),
+  );
+  assert.ok(partial.includes('该章节尚无有效缓存'));
+  assert.ok(!partial.includes('AI 推断'));
+});

@@ -109,7 +109,35 @@ export const FINANCIAL_METRICS = [
 export type FinancialMetric = (typeof FINANCIAL_METRICS)[number];
 export type FinancialMode = 'annual' | 'quarterly';
 export type FinancialStatus = 'NOT_FETCHED' | 'FETCHING' | 'READY' | 'FAILED';
+export interface AllocationSource {
+  concept: string;
+  unit: string;
+  start?: string;
+  end: string;
+  accessionNumber: string;
+  filed: string;
+  url: string;
+}
+export interface AllocationValue {
+  value: number | null;
+  reason: string | null;
+  sources: AllocationSource[];
+}
+export interface AnnualCapitalAllocation {
+  reinvestment?: {
+    capex: AllocationValue;
+    capexToOcf: AllocationValue;
+    capexToRevenue: AllocationValue;
+  };
+  references: Partial<Record<FinancialMetric, AllocationSource[]>>;
+  dividendsPaid: AllocationValue & { scope: 'common' | 'total' | 'unknown' };
+  sharesOutstanding: AllocationValue;
+  payoutRatio: AllocationValue;
+  buybackToFcf: AllocationValue;
+}
 export type FinancialPeriod = Record<FinancialMetric, number | null> & {
+  /** Read-only derivatives of existing annual cache values and SEC provenance. */
+  capitalAllocation?: AnnualCapitalAllocation;
   /** Derived by the API from cached same-period inputs; not a separate database column. */
   capexToOcf?: number | null;
   /** Only present as reliable values when SEC combined-current-liquidity provenance reconciles. */
@@ -150,11 +178,36 @@ export interface AiResearchSummary {
   createdAt: string;
   updatedAt: string;
   summaryJson: {
+    extraction?: {
+      strategy?: 'whole-item-v1';
+      item: 'Item 1' | 'Item 1A' | 'Item 7';
+      filingId: string;
+      cik: string;
+      accessionNumber: string;
+      parserVersion: string;
+      inputHash: string;
+      language: 'zh-CN';
+      evidenceParagraphs: { id: string; text: string }[];
+    };
+    unavailableItems?: ('Item 1' | 'Item 1A' | 'Item 7')[];
+    itemSources?: {
+      item: 'Item 1' | 'Item 1A' | 'Item 7';
+      accessionNumber: string;
+      sourceUrl: string;
+      fiscalYear: number;
+      filingDate: string;
+      generatedAt: string;
+      promptVersion: string;
+      legacy: boolean;
+    }[];
+    capitalAllocation?: import('./capital-information.js').CapitalAllocationInformation;
     groups: {
       topic: string;
       findings: {
         kind: '公司披露的事实' | '管理层观点' | 'AI 推断';
         text: string;
+        riskType?: string;
+        impact?: string | null;
         businessName?: string;
         offering?: string;
         monetization?: string;
@@ -260,3 +313,12 @@ export * from './company-websites.js';
 export * from './enterprise-quality.js';
 
 export * from './bridge-disclosures.js';
+export * from './capital-information.js';
+
+/** Business summary generation format; legacy cached JSON remains readable. */
+export const BUSINESS_MODEL_PROMPT_VERSION = 'business-model-v4';
+export const BUSINESS_MODEL_TOPICS = [
+  '公司做什么？',
+  '公司怎么赚钱？',
+  '未来有哪些增长机会？',
+] as const;

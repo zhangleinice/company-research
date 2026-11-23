@@ -173,7 +173,7 @@ body {
   overflow-x: auto;
 }
 
-.app-content-valuation {
+.app-content-company {
   max-width: none;
   padding: 20px clamp(16px, 2vw, 32px);
 }

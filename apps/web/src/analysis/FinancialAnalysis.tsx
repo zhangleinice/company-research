@@ -130,7 +130,7 @@ function Auxiliary({
     />
   );
 }
-function Chart({
+export function Chart({
   title,
   rows,
   mode,
@@ -165,9 +165,11 @@ function Chart({
 export function FinancialAnalysis({
   detail,
   mode,
+  modules,
 }: {
   detail: Pick<CompanyDetail, 'annual' | 'quarterly'>;
   mode: FinancialMode;
+  modules?: readonly (typeof ANALYSIS_MODULES)[number]['key'][];
 }) {
   const rows = analysisPeriods(detail, mode),
     latest = rows[0];
@@ -176,7 +178,9 @@ export function FinancialAnalysis({
     : '当前口径暂无可用报告期间';
   return (
     <Space orientation="vertical" size={24} className="full-width">
-      {ANALYSIS_MODULES.map((module) => (
+      {ANALYSIS_MODULES.filter(
+        (module) => !modules || modules.includes(module.key),
+      ).map((module) => (
         <section
           key={module.key}
           data-analysis-module={module.key}

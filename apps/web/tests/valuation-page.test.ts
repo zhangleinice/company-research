@@ -8,7 +8,7 @@ import {
   type ValuationBaseline,
   type ValuationReferences,
 } from '@company-research/shared';
-import { DcfCalculator, ValuationPage } from '../src/ValuationPage.js';
+import { DcfCalculator } from '../src/ValuationPage.js';
 import {
   calculatorInput,
   initialScenario,
@@ -209,15 +209,4 @@ test('blur/Enter validation rejects incomplete or invalid drafts without replaci
   assert.equal(r.next.growth, 6);
   assert.equal(current.growth, 5);
   assert.deepEqual(initialScenario, { growth: 5, wacc: 10, terminalGrowth: 3 });
-});
-
-test('valuation defaults to enterprise quality in one card, leaving DCF independently available', () => {
-  const html = renderToStaticMarkup(
-    createElement(ValuationPage, { ticker: 'GOOGL', onBack() {} }),
-  );
-  assert.equal((html.match(/class="ant-card(?:\s|")/g) ?? []).length, 1);
-  assert.match(html, /企业质量分析/);
-  assert.match(html, /DCF估值/);
-  assert.match(html, /aria-selected="true"[^>]*>企业质量分析/);
-  assert.ok(!html.includes('data-dcf-metric="fcff"'));
 });

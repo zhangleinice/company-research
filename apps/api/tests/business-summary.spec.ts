@@ -124,10 +124,12 @@ it('non-forced initial generation reuses the old accession cache without calling
       updateMany: jest.fn().mockResolvedValue({ count: 1 }),
     },
     aiSummary: {
-      findUnique: jest
-        .fn()
-        .mockResolvedValueOnce(null)
-        .mockResolvedValueOnce(cached),
+      findUnique: jest.fn(async ({ where }) =>
+        where.companyCik_accessionNumber_section_promptVersion.promptVersion ===
+        PROMPT_VERSION
+          ? cached
+          : null,
+      ),
     },
   };
   const generate = jest.fn();
@@ -210,9 +212,113 @@ it('explicit refresh stores a new business version without overwriting the legac
     'business',
     [source],
     expect.any(Function),
+    expect.objectContaining({
+      source: expect.objectContaining({ item: 'Item 1' }),
+    }),
   );
   expect(
     upsert.mock.calls[0][0].where
       .companyCik_accessionNumber_section_promptVersion.promptVersion,
   ).toBe(BUSINESS_PROMPT_VERSION);
+});
+
+it('new Business requires three questions and named businesses, excludes inferred or quantitative financial content', () => {
+  const result = summary();
+  result.groups[0].findings = [
+    {
+      kind: '公司披露的事实',
+      businessName: 'Enterprise Services',
+      text: '面向企业提供订阅软件。',
+      offering: '企业软件。',
+      monetization: '企业订阅付费。',
+      evidence: [{ paragraphId: source.id, quote: source.text }],
+    },
+  ];
+  expect(validateSummary(result, 'business', [source]).groups).toHaveLength(3);
+  const old = structuredClone(result);
+  old.groups.splice(2, 0, { topic: '公司有什么竞争优势？', findings: [] });
+  expect(() => validateSummary(old, 'business', [source])).toThrow();
+  for (const text of [
+    '收入为100亿美元。',
+    '利润率达到25%。',
+    '收入为USD 100 million。',
+  ]) {
+    const invalid = structuredClone(result);
+    invalid.groups[0].findings[0].text = text;
+    expect(() => validateSummary(invalid, 'business', [source])).toThrow(
+      '金额或百分比',
+    );
+  }
+  const unnamed = structuredClone(result);
+  unnamed.groups[0].findings[0].businessName = '';
+  expect(() => validateSummary(unnamed, 'business', [source])).toThrow();
+  const insufficient = structuredClone(result);
+  insufficient.groups[1].findings = [
+    {
+      ...result.groups[0].findings[0],
+      monetization: 'SEC披露信息不足，无法确认具体收费方式。',
+    },
+  ];
+  expect(
+    validateSummary(insufficient, 'business', [source]).groups[1].findings[0]
+      .monetization,
+  ).toContain('信息不足');
+});
+it('passive reads select existing four-question v3 caches instead of regenerating after version upgrade', async () => {
+  const cached = {
+    promptVersion: 'business-model-v3',
+    summaryJson: { groups: [] },
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+  const findFirst = jest
+    .fn()
+    .mockResolvedValueOnce(null)
+    .mockResolvedValueOnce(cached);
+  const model = { generate: jest.fn() };
+  const service = new AiResearchService(
+    {
+      aiSummary: { findFirst },
+      aiTask: { findUnique: jest.fn().mockResolvedValue(null) },
+    } as never,
+    {} as never,
+    {} as never,
+    model as never,
+  );
+  expect(
+    (await service.state('0001652044', 'business')).summary?.promptVersion,
+  ).toBe('business-model-v3');
+  expect(findFirst.mock.calls[1][0].where.promptVersion.in).toContain(
+    'business-model-v3',
+  );
+  expect(model.generate).not.toHaveBeenCalled();
+});
+it('initialization with an old business cache and no previous task does not enqueue a paid update', async () => {
+  const { CompanyUpdateService } =
+    await import('../src/modules/ai-research/company-update.service');
+  const createMany = jest.fn();
+  const generate = jest.fn();
+  const db = {
+    company: { findUnique: jest.fn().mockResolvedValue({ cik: '0001652044' }) },
+    aiSummary: {
+      findMany: jest.fn(async ({ where }) =>
+        where.OR.some(
+          (entry: { section: string; promptVersion: { in?: string[] } }) =>
+            entry.section === 'business' &&
+            entry.promptVersion.in?.includes('business-model-v3'),
+        )
+          ? [{ section: 'business' }, { section: 'management' }]
+          : [],
+      ),
+    },
+    aiTask: { findUnique: jest.fn().mockResolvedValue(null), createMany },
+  };
+  const service = new CompanyUpdateService(
+    db as never,
+    {} as never,
+    { generate } as never,
+  );
+  expect((await service.start('0001652044', 'INITIAL')).status).toBe('IDLE');
+  expect(createMany).not.toHaveBeenCalled();
+  expect(generate).not.toHaveBeenCalled();
 });

@@ -4,6 +4,7 @@ import {
 } from '../src/modules/ai-research/summary-schema';
 import {
   MANAGEMENT_PROMPT_VERSION,
+  promptVersionFor,
   PROMPT_VERSION,
 } from '../src/modules/ai-research/summary-model';
 import { AiResearchService } from '../src/modules/ai-research/ai-research.service';
@@ -78,10 +79,11 @@ it('passive reads fall back to old management without model, SEC or writes', asy
     createdAt: new Date(),
     updatedAt: new Date(),
   };
-  const findFirst = jest
-    .fn()
-    .mockResolvedValueOnce(null)
-    .mockResolvedValueOnce(legacy);
+  const findFirst = jest.fn(async ({ where }) =>
+    where.section === 'management' && typeof where.promptVersion === 'object'
+      ? legacy
+      : null,
+  );
   const model = { generate: jest.fn() };
   const client = { getJson: jest.fn(), getText: jest.fn() };
   const service = new AiResearchService(
@@ -96,26 +98,34 @@ it('passive reads fall back to old management without model, SEC or writes', asy
   expect(
     (await service.state('0001652044', 'management')).summary?.promptVersion,
   ).toBe(PROMPT_VERSION);
-  expect(findFirst.mock.calls[0][0].where.promptVersion).toBe(
-    MANAGEMENT_PROMPT_VERSION,
-  );
+  expect(
+    findFirst.mock.calls.some(
+      ([args]) =>
+        args.where.section === 'management' &&
+        args.where.promptVersion === MANAGEMENT_PROMPT_VERSION,
+    ),
+  ).toBe(true);
   expect(model.generate).not.toHaveBeenCalled();
   expect(client.getJson).not.toHaveBeenCalled();
   expect(client.getText).not.toHaveBeenCalled();
 });
 it.each([false, true])(
-  'management explicit force=%s preserves legacy or writes the new version using mocked generation',
+  'explicit management force=%s preserves legacy or publishes independently',
   async (force) => {
     const legacy = {
+      section: 'management',
       promptVersion: PROMPT_VERSION,
+      summaryJson: summary(),
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-    const upsert = jest.fn(async ({ create }) => ({
-      ...create,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }));
+    const rows = new Map<string, unknown>();
+    const upsert = jest.fn(async ({ create }) => {
+      const row = { ...create, createdAt: new Date(), updatedAt: new Date() };
+      rows.set(create.section, row);
+      return row;
+    });
+    const updateMany = jest.fn().mockResolvedValue({ count: 1 });
     const db = {
       company: {
         findUniqueOrThrow: jest
@@ -125,29 +135,35 @@ it.each([false, true])(
       },
       aiTask: {
         upsert: jest.fn(),
-        updateMany: jest.fn().mockResolvedValue({ count: 1 }),
+        updateMany,
+        findUnique: jest.fn().mockResolvedValue(null),
       },
       aiSummary: {
-        findUnique: jest
-          .fn()
-          .mockResolvedValueOnce(null)
-          .mockResolvedValueOnce(legacy),
+        findUnique: jest.fn().mockResolvedValue(null),
+        findFirst: jest.fn(
+          async ({ where }) =>
+            rows.get(where.section) ??
+            (where.section === 'management' ? legacy : null),
+        ),
       },
-      $transaction: jest.fn(async (callback) =>
-        callback({
-          aiTask: { updateMany: jest.fn().mockResolvedValue({ count: 1 }) },
-          aiSummary: { upsert },
-        }),
+      $transaction: jest.fn(async (cb) =>
+        cb({ aiTask: { updateMany }, aiSummary: { upsert } }),
       ),
     };
+    const { emptyCapitalInformation } =
+      await import('../src/modules/ai-research/capital-information');
     const model = {
-      generate: jest
-        .fn()
-        .mockResolvedValue({
-          summary: summary(),
-          usage: { calls: 0 },
-          modelId: 'mock',
-        }),
+      generate: jest.fn(async (kind: string) => ({
+        summary:
+          kind === 'mda'
+            ? {
+                groups: summary().groups.slice(0, 3),
+                capitalAllocation: emptyCapitalInformation(),
+              }
+            : { groups: [{ topic: '重大风险', findings: [] }] },
+        usage: { calls: 0 },
+        modelId: 'mock',
+      })),
     };
     const service = new AiResearchService(
       db as never,
@@ -171,21 +187,128 @@ it.each([false, true])(
       filing as never,
     );
     expect(result.summary?.promptVersion).toBe(
-      force ? MANAGEMENT_PROMPT_VERSION : PROMPT_VERSION,
+      force ? 'item-composition-v1' : PROMPT_VERSION,
     );
     if (force) {
-      expect(model.generate).toHaveBeenCalledWith(
-        'management',
-        [operating, risk],
-        expect.any(Function),
-      );
-      expect(
-        upsert.mock.calls[0][0].where
-          .companyCik_accessionNumber_section_promptVersion.promptVersion,
-      ).toBe(MANAGEMENT_PROMPT_VERSION);
+      expect(model.generate).toHaveBeenCalledTimes(2);
+      expect(model.generate.mock.calls.map((call) => call[0])).toEqual([
+        'mda',
+        'risks',
+      ]);
+      expect(rows.size).toBe(2);
     } else {
       expect(model.generate).not.toHaveBeenCalled();
       expect(upsert).not.toHaveBeenCalled();
     }
   },
 );
+
+it('binds unified extraction to its actual filing and independent paragraph snapshots; failed refresh keeps old summary', async () => {
+  const { emptyCapitalInformation } =
+    await import('../src/modules/ai-research/capital-information');
+  const capital = emptyCapitalInformation();
+  const p = {
+    id: 'Item 7:p1',
+    text: 'We expect to increase investment in technical infrastructure during 2026.',
+  };
+  capital.reinvestment.investmentPlans = [
+    {
+      text: '预计增加技术基础设施投资',
+      kind: 'plan',
+      evidence: [{ paragraphId: p.id, quote: p.text }],
+    },
+  ];
+  const existing = {
+    summaryJson: { groups: [] },
+    promptVersion: MANAGEMENT_PROMPT_VERSION,
+  };
+  const upsert = jest.fn(async ({ create }) => ({
+    ...create,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  }));
+  const updateMany = jest.fn().mockResolvedValue({ count: 1 });
+  const db = {
+    company: {
+      findUniqueOrThrow: jest
+        .fn()
+        .mockResolvedValue({ cik: '0001652044', ticker: 'GOOGL' }),
+      upsert: jest.fn(),
+    },
+    aiTask: { upsert: jest.fn(), updateMany },
+    aiSummary: { findUnique: jest.fn().mockResolvedValue(existing) },
+    $transaction: jest.fn(async (cb) =>
+      cb({ aiTask: { updateMany }, aiSummary: { upsert } }),
+    ),
+  };
+  const model = {
+    generate: jest.fn().mockResolvedValue({
+      summary: {
+        groups: summary().groups.slice(0, 3),
+        capitalAllocation: capital,
+      },
+      usage: { calls: 0 },
+      modelId: 'mock',
+    }),
+  };
+  const filing = {
+    id: 'original-record',
+    companyCik: '0001652044',
+    accessionNumber: '0001652044-26-000018',
+    fiscalYear: 2025,
+    filingType: '10-K',
+    filingDate: '2026-02-05',
+    reportDate: '2025-12-31',
+    sourceUrl: 'https://www.sec.gov/Archives/example.htm',
+    parserVersion: 'items-v2',
+    sections: { 'Item 7': [p], 'Item 1A': [risk] },
+  };
+  const service = new AiResearchService(
+    db as never,
+    {} as never,
+    {} as never,
+    model as never,
+  );
+  const result = await service.generateItem(
+    'GOOGL',
+    'Item 7',
+    true,
+    filing as never,
+  );
+  const stored = result.summary!.summaryJson as unknown as {
+    capitalAllocation: typeof capital;
+  };
+  expect(result.summary?.promptVersion).toBe(promptVersionFor('mda'));
+  expect(stored.capitalAllocation.source).toMatchObject({
+    filingId: 'original-record',
+    parserVersion: 'items-v2',
+    accessionNumber: filing.accessionNumber,
+    item: 'Item 7',
+  });
+  expect(stored.capitalAllocation.source!.inputHash).toMatch(/^[a-f0-9]{64}$/);
+  p.text = 'Changed by a later parse';
+  expect(stored.capitalAllocation.source!.evidenceParagraphs[0].text).toContain(
+    'expect to increase',
+  );
+  const before = JSON.stringify(existing);
+  model.generate.mockRejectedValueOnce(new Error('Mock extraction failure'));
+  await expect(
+    service.generateItem('GOOGL', 'Item 7', true, filing as never),
+  ).rejects.toThrow('Mock extraction failure');
+  expect(upsert).toHaveBeenCalledTimes(1);
+  model.generate.mockResolvedValueOnce({
+    summary: { groups: summary().groups },
+    usage: { calls: 0 },
+    modelId: 'mock',
+  } as never);
+  await expect(
+    service.generateItem('GOOGL', 'Item 7', true, filing as never),
+  ).rejects.toThrow('缺少资本配置字段');
+  expect(upsert).toHaveBeenCalledTimes(1);
+  expect(JSON.stringify(existing)).toBe(before);
+  expect(updateMany).toHaveBeenLastCalledWith(
+    expect.objectContaining({
+      data: expect.objectContaining({ status: 'FAILED' }),
+    }),
+  );
+});

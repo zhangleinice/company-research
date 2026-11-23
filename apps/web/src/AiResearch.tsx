@@ -5,32 +5,59 @@ import { Alert, Card, Space, Spin, Typography } from 'antd';
 import type { AiResearchKind, AiResearchState } from '@company-research/shared';
 import { fetchAiResearch } from './api.js';
 
+export interface CachedResearch {
+  state: AiResearchState | null;
+  error: string;
+}
+export function useCachedResearch(
+  cik: string,
+  kind: AiResearchKind,
+  revision = 0,
+  enabled = true,
+): CachedResearch {
+  const [state, setState] = useState<AiResearchState | null>(null);
+  const [error, setError] = useState('');
+  const [owner, setOwner] = useState('');
+  useEffect(() => {
+    if (!enabled) return;
+    const controller = new AbortController();
+    setError('');
+    fetchAiResearch(cik, kind, controller.signal)
+      .then((next) => {
+        if (!controller.signal.aborted) {
+          setOwner(`${cik}:${kind}`);
+          setState(next);
+        }
+      })
+      .catch((e) => {
+        if (!controller.signal.aborted) {
+          if (owner !== `${cik}:${kind}`) setState(null);
+          setOwner(`${cik}:${kind}`);
+          setError(e instanceof Error ? e.message : '摘要缓存读取失败');
+        }
+      });
+    return () => controller.abort();
+  }, [cik, kind, revision, enabled]);
+  return {
+    state: owner === `${cik}:${kind}` ? state : null,
+    error: owner === `${cik}:${kind}` ? error : '',
+  };
+}
 export function ResearchCard({
   cik,
   kind,
   revision = 0,
   updating = false,
+  research,
 }: {
   cik: string;
   kind: AiResearchKind;
   revision?: number;
   updating?: boolean;
+  research?: CachedResearch;
 }) {
-  const [state, setState] = useState<AiResearchState | null>(null);
-  const [error, setError] = useState('');
-  useEffect(() => {
-    const controller = new AbortController();
-    setError('');
-    fetchAiResearch(cik, kind, controller.signal)
-      .then((next) => {
-        if (!controller.signal.aborted) setState(next);
-      })
-      .catch((e) => {
-        if (!controller.signal.aborted)
-          setError(e instanceof Error ? e.message : '摘要缓存读取失败');
-      });
-    return () => controller.abort();
-  }, [cik, kind, revision]);
+  const own = useCachedResearch(cik, kind, revision, research === undefined);
+  const { state, error } = research ?? own;
   const summary = state?.summary;
   return (
     <Card
@@ -82,7 +109,10 @@ export function ResearchCard({
               </Typography.Link>
             </Space>
             {kind === 'business' ? (
-              <BusinessSummary summary={summary.summaryJson} />
+              <BusinessSummary
+                summary={summary.summaryJson}
+                promptVersion={summary.promptVersion}
+              />
             ) : (
               <ManagementSummary summary={summary.summaryJson} />
             )}

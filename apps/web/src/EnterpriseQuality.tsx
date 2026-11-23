@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Descriptions, Divider, Spin, Table, Typography } from 'antd';
+import { Card, Descriptions, Divider, Spin, Table, Typography } from 'antd';
 import type {
   EnterpriseQuality,
   ValuationFact,
@@ -263,11 +263,27 @@ export function EnterpriseQualityPanel({ ticker }: { ticker: string }) {
       });
     return () => controller.abort();
   }, [ticker]);
-  return data ? (
-    <QualityAnalysis data={data} />
-  ) : error ? (
-    <Typography.Text type="secondary">{error}</Typography.Text>
-  ) : (
-    <Spin aria-label="读取企业质量缓存" />
+  return (
+    <section
+      data-analysis-module="advanced-quality"
+      aria-labelledby="advanced-quality-title"
+    >
+      <Card
+        className="analysis-module"
+        title={
+          <span id="advanced-quality-title">
+            Advanced Quality Metrics · 高级质量指标
+          </span>
+        }
+      >
+        {data ? (
+          <QualityAnalysis data={data} />
+        ) : error ? (
+          <Typography.Text type="secondary">{error}</Typography.Text>
+        ) : (
+          <Spin aria-label="读取企业质量缓存" />
+        )}
+      </Card>
+    </section>
   );
 }

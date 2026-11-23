@@ -16,9 +16,12 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CompanyService } from '../company/company.service';
 import { AiResearchService } from './ai-research.service';
 import {
-  PROMPT_VERSION,
   BUSINESS_PROMPT_VERSION,
+  LEGACY_BUSINESS_PROMPT_VERSIONS,
   MANAGEMENT_PROMPT_VERSION,
+  LEGACY_MDA_PROMPT_VERSIONS,
+  promptVersionFor,
+  LEGACY_MANAGEMENT_PROMPT_VERSIONS,
 } from './summary-model';
 const json = (v: unknown) => v as Prisma.InputJsonValue;
 const lease = () => new Date(Date.now() + 300000);
@@ -81,20 +84,40 @@ export class CompanyUpdateService implements OnModuleInit, OnModuleDestroy {
           companyCik: cik,
           OR: [
             {
+              section: 'mda',
+              promptVersion: {
+                in: [promptVersionFor('mda'), ...LEGACY_MDA_PROMPT_VERSIONS],
+              },
+            },
+            { section: 'risks', promptVersion: promptVersionFor('risks') },
+            {
               section: 'business',
-              promptVersion: { in: [PROMPT_VERSION, BUSINESS_PROMPT_VERSION] },
+              promptVersion: {
+                in: [
+                  BUSINESS_PROMPT_VERSION,
+                  ...LEGACY_BUSINESS_PROMPT_VERSIONS,
+                ],
+              },
             },
             {
               section: 'management',
               promptVersion: {
-                in: [PROMPT_VERSION, MANAGEMENT_PROMPT_VERSION],
+                in: [
+                  MANAGEMENT_PROMPT_VERSION,
+                  ...LEGACY_MANAGEMENT_PROMPT_VERSIONS,
+                ],
               },
             },
           ],
         },
         select: { section: true },
       });
-      if (new Set(summaries.map((x) => x.section)).size === 2)
+      const available = new Set(summaries.map((x) => x.section));
+      if (
+        available.has('business') &&
+        (available.has('management') ||
+          (available.has('mda') && available.has('risks')))
+      )
         return this.state(cik);
       const previous = await this.db.aiTask.findUnique({ where: { id } });
       // Automatic paid initialization is attempted only once, even after failures/restarts.

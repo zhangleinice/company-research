@@ -13,6 +13,27 @@ export function ManagementSummary({ summary }: { summary: Summary }) {
   const legacy = !summary.groups.some((g) => g.topic === sections[0].title);
   return (
     <Space orientation="vertical" size={20} className="full-width">
+      {summary.itemSources?.some((s) => s.legacy) && (
+        <Typography.Text type="secondary">
+          部分内容使用旧版混合摘要缓存；下次手动更新后按章节独立生成。
+        </Typography.Text>
+      )}
+      {summary.itemSources && (
+        <Space wrap>
+          {summary.itemSources.map((s) => (
+            <Typography.Link
+              key={s.item}
+              title={`生成：${s.generatedAt} · ${s.legacy ? '旧版混合缓存' : '独立章节缓存'}`}
+              href={s.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {s.item} · {s.fiscalYear} 财年 · 申报：{s.filingDate}
+              {s.legacy ? '（旧缓存）' : ''}
+            </Typography.Link>
+          ))}
+        </Space>
+      )}
       {legacy && (
         <Typography.Text type="secondary">
           旧摘要已按新栏目整理；新版内容将在下次手动更新后生成。
@@ -33,7 +54,11 @@ export function ManagementSummary({ summary }: { summary: Summary }) {
             </Typography.Title>
             {!findings.length && (
               <Typography.Text type="secondary">
-                未找到充分的相关披露
+                {summary.unavailableItems?.includes(
+                  index === 3 ? 'Item 1A' : 'Item 7',
+                )
+                  ? '该章节尚无有效缓存，请在需要时主动更新。'
+                  : '未找到充分的相关披露'}
               </Typography.Text>
             )}
             {findings.map((finding, i) => (
@@ -43,7 +68,11 @@ export function ManagementSummary({ summary }: { summary: Summary }) {
                     {finding.kind === '管理层观点' ? '管理层观点' : '分析判断'}
                   </Tag>
                 )}
-                {finding.text}{' '}
+                {finding.riskType && (
+                  <Typography.Text strong>{finding.riskType}：</Typography.Text>
+                )}
+                {finding.text}
+                {finding.impact && ` 可能影响：${finding.impact}`}{' '}
                 <Typography.Text
                   type="secondary"
                   title={finding.evidence

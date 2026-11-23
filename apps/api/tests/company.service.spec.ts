@@ -367,6 +367,17 @@ describe('company directory and on-demand cache boundaries', () => {
     expect((await service.getCompany('GOOG')).annual[0].capexToOcf).toBeNull();
     expect(sec.getCompanyFacts).toHaveBeenCalledTimes(1);
   });
+  it('returns annual allocation metadata from cached provenance without another SEC request', async () => {
+    const { service, sec } = setup();
+    await service.getCompany('GOOG');
+    const cached = await service.getCompany('GOOG');
+    expect(cached.annual[0].capitalAllocation).toBeDefined();
+    expect(cached.annual[0].capitalAllocation?.payoutRatio.value).toBeNull();
+    expect(
+      cached.quarterly.every((row) => row.capitalAllocation === undefined),
+    ).toBe(true);
+    expect(sec.getCompanyFacts).toHaveBeenCalledTimes(1);
+  });
   it('validates pagination, mode and favorite payloads', async () => {
     const { service } = setup();
     await expect(service.getCompanies(0, 10)).rejects.toThrow(

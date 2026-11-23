@@ -1,21 +1,31 @@
 import { Card, Space, Tag, Typography } from 'antd';
-import type { AiResearchSummary } from '@company-research/shared';
+import {
+  BUSINESS_MODEL_TOPICS,
+  BUSINESS_MODEL_PROMPT_VERSION,
+  type AiResearchSummary,
+} from '@company-research/shared';
 type Summary = AiResearchSummary['summaryJson'];
-const topics = [
-  '公司做什么？',
-  '公司怎么赚钱？',
-  '公司有什么竞争优势？',
-  '未来有哪些增长机会？',
-];
-const legacyTopics = ['公司主要业务', '主要业务板块', '竞争优势', '增长机会'];
-export function BusinessSummary({ summary }: { summary: Summary }) {
-  const legacy = !summary.groups.some((g) => g.topic === topics[0]);
+const topics = BUSINESS_MODEL_TOPICS;
+const legacyTopics = ['公司主要业务', '主要业务板块', '增长机会'];
+export function BusinessSummary({
+  summary,
+  promptVersion,
+}: {
+  summary: Summary;
+  promptVersion?: string;
+}) {
+  const threeQuestions =
+    summary.groups.length === topics.length &&
+    topics.every((topic, i) => summary.groups[i].topic === topic);
+  const legacy =
+    !threeQuestions ||
+    (promptVersion !== undefined &&
+      promptVersion !== BUSINESS_MODEL_PROMPT_VERSION);
   return (
     <Space orientation="vertical" size={20} className="full-width">
       {legacy && (
         <Typography.Text type="secondary">
-          正在展示旧版缓存，尚未生成新版商业模式介绍；使用「更新数据」可重新生成，可能产生
-          API 费用。
+          正在展示旧版缓存，已按三问题兼容展示，内容未重新生成；竞争优势栏目不在本Tab展示。用户主动「更新数据」后才生成新版，可能产生API费用。
         </Typography.Text>
       )}
       {topics.map((topic, index) => {
@@ -52,7 +62,14 @@ export function BusinessSummary({ summary }: { summary: Summary }) {
                       </Typography.Paragraph>
                     </>
                   ) : (
-                    <Typography.Paragraph>{finding.text}</Typography.Paragraph>
+                    <Typography.Paragraph>
+                      {index === 0 && finding.businessName && (
+                        <Typography.Text strong>
+                          {finding.businessName}：
+                        </Typography.Text>
+                      )}
+                      {finding.text}
+                    </Typography.Paragraph>
                   )}
                   <Typography.Text
                     type="secondary"

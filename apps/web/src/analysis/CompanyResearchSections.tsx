@@ -1,5 +1,12 @@
+import { useState } from 'react';
+import { DcfCalculator } from '../ValuationPage.js';
+import { EnterpriseQualityPanel } from '../EnterpriseQuality.js';
 import { RevenueBreakdown } from '../RevenueBreakdown.js';
-import { ResearchCard } from '../AiResearch.js';
+import {
+  ResearchCard,
+  useCachedResearch,
+  type CachedResearch,
+} from '../AiResearch.js';
 import {
   Alert,
   Button,
@@ -9,10 +16,12 @@ import {
   Typography,
   Space,
   Popconfirm,
+  Tabs,
 } from 'antd';
 import type { CompanyDetail, FinancialMode } from '@company-research/shared';
 import { FinancialAnalysis } from './FinancialAnalysis.js';
 import { InvestorRelationsLink } from '../InvestorRelationsLink.js';
+import { ManagementAnalysis } from './ManagementAnalysis.js';
 
 export function CompanyResearchSections({
   detail,
@@ -36,6 +45,12 @@ export function CompanyResearchSections({
   updating?: boolean;
   revision?: number;
 }) {
+  const [activeTab, setActiveTab] = useState('business');
+  const managementResearch = useCachedResearch(
+    detail.cik,
+    'management',
+    revision,
+  );
   return (
     <Space orientation="vertical" size={24} className="full-width">
       <Card
@@ -87,21 +102,6 @@ export function CompanyResearchSections({
             },
           ]}
         />
-        <div className="analysis-mode-controls">
-          <Segmented
-            aria-label="财务报告期间口径"
-            value={mode}
-            options={[
-              { label: 'Annual', value: 'annual' },
-              { label: 'Quarterly', value: 'quarterly' },
-            ]}
-            onChange={(value) => onModeChange(value as FinancialMode)}
-          />
-          <Typography.Text type="secondary">
-            {mode === 'annual' ? '最近 10 个完整财年' : '最近 10 个独立季度'} ·
-            以下四个财务模块同步切换
-          </Typography.Text>
-        </div>
         {detail.financialStatus === 'FETCHING' && (
           <Alert
             type="info"
@@ -110,17 +110,107 @@ export function CompanyResearchSections({
           />
         )}
       </Card>
-      <ResearchCard
-        cik={detail.cik}
-        kind="business"
-        revision={revision}
-        updating={updating}
+      <Tabs
+        activeKey={activeTab}
+        onChange={setActiveTab}
+        destroyOnHidden={false}
+        items={[
+          {
+            key: 'business',
+            label: '商业模式',
+            children: (
+              <ResearchCard
+                cik={detail.cik}
+                kind="business"
+                revision={revision}
+                updating={updating}
+              />
+            ),
+          },
+          {
+            key: 'quality',
+            label: '企业质量',
+            children: (
+              <CompanyQualityContent
+                managementResearch={managementResearch}
+                detail={detail}
+                mode={mode}
+                onModeChange={onModeChange}
+                revision={revision}
+                updating={updating}
+              />
+            ),
+          },
+          {
+            key: 'management',
+            label: '管理层',
+            children: (
+              <ManagementAnalysis
+                detail={detail}
+                research={managementResearch}
+                updating={updating}
+              />
+            ),
+          },
+          {
+            key: 'intrinsic',
+            label: '内在价值',
+            children: (
+              <Card className="valuation-card" title="内在价值">
+                <DcfCalculator ticker={detail.ticker} />
+              </Card>
+            ),
+          },
+        ]}
       />
-      <FinancialAnalysis detail={detail} mode={mode} />
+    </Space>
+  );
+}
+
+/** Period state remains in CompanyDetails; hidden tabs keep their child state. */
+export function CompanyQualityContent({
+  detail,
+  mode,
+  onModeChange,
+  revision = 0,
+  updating = false,
+  managementResearch,
+}: {
+  detail: CompanyDetail;
+  mode: FinancialMode;
+  onModeChange: (mode: FinancialMode) => void;
+  revision?: number;
+  updating?: boolean;
+  managementResearch?: CachedResearch;
+}) {
+  return (
+    <Space orientation="vertical" size={24} className="full-width">
+      <div className="analysis-mode-controls">
+        <Segmented
+          aria-label="财务报告期间口径"
+          value={mode}
+          options={[
+            { label: 'Annual', value: 'annual' },
+            { label: 'Quarterly', value: 'quarterly' },
+          ]}
+          onChange={(value) => onModeChange(value as FinancialMode)}
+        />
+        <Typography.Text type="secondary">
+          {mode === 'annual' ? '最近 10 个完整财年' : '最近 10 个独立季度'}
+        </Typography.Text>
+      </div>
+
+      <FinancialAnalysis
+        detail={detail}
+        mode={mode}
+        modules={['growth', 'profitability', 'cash-flow']}
+      />
       <RevenueBreakdown key={detail.cik} cik={detail.cik} revision={revision} />
+      <EnterpriseQualityPanel ticker={detail.ticker} />
       <ResearchCard
         cik={detail.cik}
         kind="management"
+        research={managementResearch}
         revision={revision}
         updating={updating}
       />
