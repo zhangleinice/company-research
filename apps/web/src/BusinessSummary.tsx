@@ -71,20 +71,6 @@ export function BusinessSummary({
                       {finding.text}
                     </Typography.Paragraph>
                   )}
-                  <Typography.Text
-                    type="secondary"
-                    title={finding.evidence.map((e) => e.quote).join('\n')}
-                  >
-                    〔
-                    {[
-                      ...new Set(
-                        finding.evidence.map(
-                          (e) => e.paragraphId.split(':')[0],
-                        ),
-                      ),
-                    ].join('、')}
-                    〕
-                  </Typography.Text>
                 </>
               );
               return index === 1 && finding.businessName ? (

@@ -1,4 +1,9 @@
 import {
+  extractDebtDisclosures,
+  type DebtDisclosure,
+  type DebtFiling,
+} from '../financials/debt-disclosure';
+import {
   BadGatewayException,
   Injectable,
   NotFoundException,
@@ -105,6 +110,88 @@ export class SecService {
     )
       throw new BadGatewayException('SEC returned invalid company facts');
     return data;
+  }
+
+  /** Bounded single-company disclosure fallback; never used by directory/list reads. */
+  async getDebtDisclosures(
+    cik: string,
+  ): Promise<{ disclosures: DebtDisclosure[]; diagnostics: string[] }> {
+    const expected = normalizeCik(cik);
+    const sub = await this.client.getJson(
+      `https://data.sec.gov/submissions/CIK${expected}.json`,
+    );
+    if (
+      !object(sub) ||
+      normalizeCik(sub.cik) !== expected ||
+      !object(sub.filings) ||
+      !object(sub.filings.recent)
+    )
+      throw new BadGatewayException('Invalid debt submissions identity');
+    const r = sub.filings.recent;
+    if (
+      !Array.isArray(r.form) ||
+      !Array.isArray(r.reportDate) ||
+      !Array.isArray(r.filingDate) ||
+      !Array.isArray(r.accessionNumber) ||
+      !Array.isArray(r.primaryDocument)
+    )
+      return {
+        disclosures: [],
+        diagnostics: ['Submissions lacks document metadata'],
+      };
+    const filings: DebtFiling[] = [];
+    let annual = 0,
+      quarter = 0;
+    for (let i = 0; i < r.form.length; i++) {
+      const form = r.form[i];
+      if (form === '10-K' ? annual >= 3 : form === '10-Q' ? quarter >= 1 : true)
+        continue;
+      const accn = r.accessionNumber[i],
+        name = r.primaryDocument[i],
+        report = r.reportDate[i],
+        filed = r.filingDate[i];
+      if (
+        typeof accn !== 'string' ||
+        !/^\d{10}-\d{2}-\d{6}$/.test(accn) ||
+        typeof name !== 'string' ||
+        !/^[\w.-]+\.html?$/i.test(name) ||
+        typeof report !== 'string' ||
+        !/^\d{4}-\d{2}-\d{2}$/.test(report) ||
+        typeof filed !== 'string' ||
+        !/^\d{4}-\d{2}-\d{2}$/.test(filed)
+      )
+        continue;
+      if (form === '10-K') annual++;
+      else quarter++;
+      filings.push({
+        cik: expected,
+        filingType: form === '10-K' ? '10-K' : '10-Q',
+        accessionNumber: accn,
+        reportDate: report,
+        filingDate: filed,
+        sourceUrl: `https://www.sec.gov/Archives/edgar/data/${Number(expected)}/${accn.replaceAll('-', '')}/${name}`,
+      });
+    }
+    const disclosures: DebtDisclosure[] = [],
+      diagnostics: string[] = [];
+    for (const filing of filings) {
+      try {
+        const parsed = extractDebtDisclosures(
+          await this.client.getText(filing.sourceUrl),
+          filing,
+        );
+        disclosures.push(...parsed);
+        if (!parsed.length)
+          diagnostics.push(
+            `${filing.accessionNumber}: unsupported or unreconciled statement layout`,
+          );
+      } catch {
+        diagnostics.push(
+          `${filing.accessionNumber}: disclosure acquisition/identity/parse failed`,
+        );
+      }
+    }
+    return { disclosures, diagnostics };
   }
 
   private async getTickers(): Promise<Map<string, CompanyListItem>> {

@@ -26,7 +26,7 @@ export function CashFlowCharts({
   mode: FinancialMode;
 }) {
   const [selected, setSelected] = useState<Selection>('all');
-  const title = 'OCF / CapEx / FCF 历史趋势（亿美元）';
+  const title = 'Cash Flow Trends · 现金流历史趋势（亿美元）';
   return (
     <section className="analysis-chart-panel">
       <Typography.Title level={5}>{title}</Typography.Title>
@@ -53,6 +53,7 @@ export function CashFlowCharts({
           moneyDivisor={1e8}
           moneyUnit="亿美元"
           series={cashFlowSeries(selected)}
+          retainEmptyPeriods
         />
       </Space>
     </section>

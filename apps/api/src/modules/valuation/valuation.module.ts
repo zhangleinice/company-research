@@ -1,4 +1,12 @@
 import {
+  quarterlyRoicHistory,
+  annualRoicHistory,
+} from '../financials/annual-roic';
+import {
+  hasDebtBalanceFacts,
+  type DebtDisclosure,
+} from '../financials/debt-disclosure';
+import {
   BadGatewayException,
   BadRequestException,
   Controller,
@@ -81,6 +89,10 @@ export class ValuationController {
     if (!/^[A-Z0-9][A-Z0-9.-]{0,19}$/i.test(ticker))
       throw new BadRequestException('无效公司代码');
     const company = await this.db.company.findFirst({
+      include: {
+        annualFinancials: { orderBy: { periodEnd: 'desc' }, take: 11 },
+        quarterlyFinancials: { orderBy: { periodEnd: 'desc' }, take: 11 },
+      },
       where: {
         OR: [
           { ticker: { equals: ticker, mode: 'insensitive' } },
@@ -98,10 +110,34 @@ export class ValuationController {
         ],
       },
     });
-    return cachedQuality(
-      ticker.toUpperCase(),
-      (stored?.data as unknown as ValuationBaseline) ?? null,
-    );
+    // An existing cache key can resolve an alias; ROIC amounts still come only
+    // from annual_financials, even when the independent TTM cache is absent.
+    const annualRows =
+      company?.annualFinancials ??
+      (stored?.cik && /^\d{10}$/.test(stored.cik)
+        ? await this.db.annualFinancial.findMany({
+            where: { companyCik: stored.cik },
+            orderBy: { periodEnd: 'desc' },
+            take: 11,
+          })
+        : []);
+    const quarterlyRows =
+      company?.quarterlyFinancials ??
+      (stored?.cik && /^\d{10}$/.test(stored.cik)
+        ? await this.db.quarterlyFinancial.findMany({
+            where: { companyCik: stored.cik },
+            orderBy: { periodEnd: 'desc' },
+            take: 11,
+          })
+        : []);
+    return {
+      ...cachedQuality(
+        ticker.toUpperCase(),
+        (stored?.data as unknown as ValuationBaseline) ?? null,
+      ),
+      annualRoic: annualRoicHistory(annualRows),
+      quarterlyRoic: quarterlyRoicHistory(quarterlyRows, annualRows),
+    };
   }
   @Post('refresh') refresh(@Param('ticker') ticker: string) {
     return this.load(ticker, true);
@@ -128,11 +164,21 @@ export class ValuationController {
           const sub = await this.client.getJson(
             `https://data.sec.gov/submissions/CIK${company.cik}.json`,
           );
+          let disclosures: DebtDisclosure[] = [];
+          if (hasDebtBalanceFacts(facts)) {
+            try {
+              disclosures = (await this.sec.getDebtDisclosures(company.cik))
+                .disclosures;
+            } catch {
+              /* A failed optional fallback never invents debt or discards existing SEC facts. */
+            }
+          }
           const data = valuationBaseline(
             facts as Parameters<typeof valuationBaseline>[0],
             sub as Parameters<typeof valuationBaseline>[1],
             ticker.toUpperCase(),
             company.cik,
+            disclosures,
           );
           await tx.valuationCache.upsert({
             where: { cik: company.cik },

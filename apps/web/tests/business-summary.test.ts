@@ -44,10 +44,10 @@ test('legacy cache renders three questions with a legacy marker, hiding competit
   assert.ok(!html.includes('风险专属内容'));
   assert.ok(!html.includes('业务依赖与风险'));
   assert.ok(html.includes('旧版缓存'));
-  assert.ok(html.includes('Item 1'));
+  assert.doesNotMatch(html, /Item 1|原文依据|Customers subscribe to services/);
   assert.ok(!html.includes('公司披露的事实'));
 });
-test('new commercial model renders actual dynamic businesses, citations and only necessary classification badges', () => {
+test('new commercial model renders actual dynamic businesses, hidden evidence and only necessary classification badges', () => {
   const groups = ['公司做什么？', '公司怎么赚钱？', '未来有哪些增长机会？'].map(
     (topic) => ({
       topic,
@@ -86,7 +86,7 @@ test('new commercial model renders actual dynamic businesses, citations and only
   assert.ok(!html.includes('旧版缓存'));
 });
 
-test('previous four-question business-model cache preserves supported content and citations while remaining explicitly legacy', () => {
+test('previous four-question business-model cache preserves supported content while hiding evidence and remaining explicitly legacy', () => {
   const groups = [
     '公司做什么？',
     '公司怎么赚钱？',
@@ -112,6 +112,6 @@ test('previous four-question business-model cache preserves supported content an
   assert.ok(html.includes('旧版缓存'));
   assert.ok(!html.includes('隐藏的旧优势分析'));
   assert.equal((html.match(/<section/g) || []).length, 3);
-  assert.ok(html.includes('Item 1'));
+  assert.doesNotMatch(html, /Item 1|原文依据|Customers subscribe to services/);
   assert.equal(JSON.stringify(groups), before);
 });

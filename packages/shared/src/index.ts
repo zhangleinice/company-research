@@ -124,6 +124,10 @@ export interface AllocationValue {
   sources: AllocationSource[];
 }
 export interface AnnualCapitalAllocation {
+  debtCashFlows?: {
+    debtIssuance: AllocationValue;
+    debtRepayments: AllocationValue;
+  };
   reinvestment?: {
     capex: AllocationValue;
     capexToOcf: AllocationValue;
@@ -140,6 +144,23 @@ export type FinancialPeriod = Record<FinancialMetric, number | null> & {
   capitalAllocation?: AnnualCapitalAllocation;
   /** Derived by the API from cached same-period inputs; not a separate database column. */
   capexToOcf?: number | null;
+  /** OCF / same-period net income * 100, percentage points. Nonpositive earnings or missing inputs => null.
+   * Read-time deterministic derivative; not a separate database column. */
+  cashConversionRatio?: number | null;
+  interestCoverage?: number | null;
+  interestCoverageDetails?: {
+    policyVersion: 'operating-income-interest-v1';
+    status:
+      | 'READY'
+      | 'MISSING_DATA'
+      | 'REVIEW_REQUIRED'
+      | 'INVALID_INPUT'
+      | 'NOT_APPLICABLE';
+    reason: string | null;
+    operatingIncome: number | null;
+    interestExpense: number | null;
+    sources: Record<string, unknown>[];
+  };
   /** Only present as reliable values when SEC combined-current-liquidity provenance reconciles. */
   cashAndShortTermSecurities?: number | null;
   netDebtAfterLiquidAssets?: number | null;
@@ -322,3 +343,7 @@ export const BUSINESS_MODEL_TOPICS = [
   '公司怎么赚钱？',
   '未来有哪些增长机会？',
 ] as const;
+
+export * from './balance-sheet-inputs.js';
+
+export * from './annual-roic.js';

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Card, Space, Table, Typography } from 'antd';
+import { Space, Table, Typography } from 'antd';
 import type { TableColumnsType } from 'antd';
 import type {
   RevenueBreakdownResponse,
@@ -21,11 +21,13 @@ export function formatRevenueMillions(value: string | null | undefined) {
 export function RevenueTables({ data }: { data: RevenueBreakdownResponse }) {
   if (!data.groups.length) return null;
   return (
-    <Card
-      className="analysis-module"
-      title="Revenue Breakdown · 收入明细"
+    <section
+      className="analysis-chart-panel"
       aria-label="Revenue Breakdown · 收入明细"
     >
+      <Typography.Title level={5}>
+        Revenue Breakdown · 收入明细
+      </Typography.Title>
       <Space orientation="vertical" size={20} className="full-width">
         {data.groups.map((group, index) => {
           const years = [
@@ -86,7 +88,7 @@ export function RevenueTables({ data }: { data: RevenueBreakdownResponse }) {
           );
         })}
       </Space>
-    </Card>
+    </section>
   );
 }
 export function RevenueBreakdown({

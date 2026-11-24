@@ -1,5 +1,10 @@
+import { FinancialRatioChart } from './FinancialRatioChart.js';
+import { CapitalReturnTrends, RoicMetricCard } from './RoicPresentation.js';
+import type { QualityResource } from '../EnterpriseQuality.js';
+import type { ReactNode } from 'react';
 import { ShareholderReturnsChart } from './ShareholderReturnsChart.js';
 import { FinancialHealthChart } from './FinancialHealthChart.js';
+import { CashFlowQualityChart } from './CashFlowQualityChart.js';
 import { CashFlowCharts } from './CashFlowCharts.js';
 import { ProfitabilityCharts } from './ProfitabilityCharts.js';
 import { GrowthChart } from '../GrowthChart.js';
@@ -38,9 +43,17 @@ const series = (
   label: string,
   color: string,
 ): TrendSeries => ({ key, label, color });
-function MetricTitle({ metric }: { metric: MetricDefinition }) {
+function MetricTitle({
+  metric,
+  row,
+}: {
+  metric: MetricDefinition;
+  row?: FinancialPeriod;
+}) {
   return (
-    <Tooltip title={metric.description}>
+    <Tooltip
+      title={`${metric.description}${metric.key === 'interestCoverage' && row?.interestCoverageDetails?.reason ? ` ${row.interestCoverageDetails.reason}` : ''}`}
+    >
       <span className="analysis-metric-title">
         {metric.label}
         <span className="metric-help" aria-label={`${metric.label} 指标说明`}>
@@ -55,25 +68,31 @@ function MetricCards({
   row,
   mode,
   columns = 4,
+  extra,
 }: {
   metrics: MetricDefinition[];
-  columns?: 3 | 4;
+  columns?: 3 | 4 | 5 | 6;
+  extra?: ReactNode;
   row: FinancialPeriod | undefined;
   mode: FinancialMode;
 }) {
+  const layout =
+    columns === 5
+      ? { xs: { flex: '100%' }, sm: { flex: '50%' }, xl: { flex: '20%' } }
+      : { xs: 24, sm: 12, xl: columns === 6 ? 4 : columns === 3 ? 8 : 6 };
   return (
     <Row gutter={[16, 16]}>
       {metrics.map((metric) => {
         const value = analysisValue(row, metric.key, mode);
         return (
-          <Col xs={24} sm={12} xl={columns === 3 ? 8 : 6} key={metric.key}>
+          <Col {...layout} key={metric.key}>
             <Card
               size="small"
               className="analysis-metric-card"
               data-metric={metric.key}
             >
               <Statistic
-                title={<MetricTitle metric={metric} />}
+                title={<MetricTitle metric={metric} row={row} />}
                 value={value ?? '—'}
                 formatter={() => formatAnalysisValue(value, metric.unit)}
               />
@@ -92,6 +111,7 @@ function MetricCards({
           </Col>
         );
       })}
+      {extra && <Col {...layout}>{extra}</Col>}
     </Row>
   );
 }
@@ -111,7 +131,7 @@ function Auxiliary({
       column={{ xs: 1, sm: 2, lg: 4 }}
       items={metrics.map((metric) => ({
         key: metric.key,
-        label: <MetricTitle metric={metric} />,
+        label: <MetricTitle metric={metric} row={row} />,
         children: (
           <span data-metric={metric.key}>
             {formatAnalysisValue(
@@ -166,10 +186,14 @@ export function FinancialAnalysis({
   detail,
   mode,
   modules,
+  growthDetails,
+  quality,
 }: {
   detail: Pick<CompanyDetail, 'annual' | 'quarterly'>;
   mode: FinancialMode;
   modules?: readonly (typeof ANALYSIS_MODULES)[number]['key'][];
+  growthDetails?: ReactNode;
+  quality?: QualityResource;
 }) {
   const rows = analysisPeriods(detail, mode),
     latest = rows[0];
@@ -260,6 +284,14 @@ export function FinancialAnalysis({
                     <MetricCards
                       row={latest}
                       mode={mode}
+                      columns={5}
+                      extra={
+                        <RoicMetricCard
+                          row={latest}
+                          mode={mode}
+                          resource={quality}
+                        />
+                      }
                       metrics={[
                         METRICS.grossMargin,
                         METRICS.operatingMargin,
@@ -267,54 +299,65 @@ export function FinancialAnalysis({
                         METRICS.roe,
                       ]}
                     />
-                    <ProfitabilityCharts rows={rows} mode={mode} />
+                    <Row gutter={[24, 24]}>
+                      <Col xs={24} xl={12}>
+                        <ProfitabilityCharts rows={rows} mode={mode} />
+                      </Col>
+                      <Col xs={24} xl={12}>
+                        <CapitalReturnTrends
+                          rows={rows}
+                          mode={mode}
+                          data={quality?.data}
+                        />
+                      </Col>
+                    </Row>
                   </>
                 )}
                 {module.key === 'cash-flow' && (
                   <>
-                    <section
-                      data-financial-region="cash-flow"
-                      aria-labelledby="cash-flow-region"
-                    >
-                      <Typography.Title level={5} id="cash-flow-region">
-                        Cash Flow · 现金流
-                      </Typography.Title>
-                      <MetricCards
-                        row={latest}
-                        mode={mode}
-                        columns={3}
-                        metrics={[
-                          METRICS.operatingCashFlow,
-                          METRICS.capex,
-                          METRICS.fcf,
-                        ]}
-                      />
-                    </section>
-                    <section
-                      data-financial-region="financial-health"
-                      aria-labelledby="health-region"
-                      className="analysis-chart-panel"
-                    >
-                      <Typography.Title level={5} id="health-region">
-                        Financial Health · 财务健康
-                      </Typography.Title>
-                      <MetricCards
-                        row={latest}
-                        mode={mode}
-                        metrics={[
-                          METRICS.cashAndShortTermSecurities,
-                          METRICS.totalDebt,
-                          METRICS.currentRatio,
-                          METRICS.debtToEquity,
-                        ]}
-                      />
-                    </section>
+                    <MetricCards
+                      row={latest}
+                      mode={mode}
+                      columns={5}
+                      metrics={[
+                        METRICS.operatingCashFlow,
+                        METRICS.capex,
+                        METRICS.fcf,
+                        METRICS.fcfMargin,
+                        METRICS.cashConversionRatio,
+                      ]}
+                    />
                     <Row gutter={[24, 24]}>
                       <Col xs={24} xl={12}>
                         <CashFlowCharts rows={rows} mode={mode} />
                       </Col>
                       <Col xs={24} xl={12}>
+                        <CashFlowQualityChart rows={rows} mode={mode} />
+                      </Col>
+                    </Row>
+                  </>
+                )}
+                {module.key === 'financial-health' && (
+                  <>
+                    <MetricCards
+                      row={latest}
+                      mode={mode}
+                      columns={6}
+                      metrics={[
+                        METRICS.cashAndShortTermSecurities,
+                        METRICS.totalDebt,
+                        METRICS.netDebt,
+                        METRICS.currentRatio,
+                        METRICS.debtToEquity,
+                        METRICS.interestCoverage,
+                      ]}
+                    />
+                    <Row gutter={[24, 24]}>
+                      <Col xs={24} xl={12}>
                         <FinancialHealthChart rows={rows} mode={mode} />
+                      </Col>
+                      <Col xs={24} xl={12}>
+                        <FinancialRatioChart rows={rows} mode={mode} />
                       </Col>
                     </Row>
                   </>
@@ -351,6 +394,7 @@ export function FinancialAnalysis({
                 )}
               </>
             )}
+            {module.key === 'growth' && growthDetails}
           </Card>
         </section>
       ))}

@@ -42,6 +42,7 @@ function fixture() {
     LiabilitiesCurrent: 102745,
     StockholdersEquity: 415265,
     CommercialPaper: 0,
+    OtherShortTermBorrowings: 0,
     LongTermDebtCurrent: 1996,
     LongTermDebtNoncurrent: 46547,
   }))
@@ -51,7 +52,7 @@ function fixture() {
 }
 
 describe('financial health period-end snapshots', () => {
-  it('reconciles Alphabet 2025 balance sheet and separates verified liquid assets', () => {
+  it('reconciles a synthetic complete debt snapshot and separates verified liquid assets', () => {
     const { read } = fixture();
     const row = normalizeFinancialHealth(read, '2025-12-31');
     expect(row).toMatchObject({

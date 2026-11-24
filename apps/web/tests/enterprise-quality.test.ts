@@ -1,12 +1,9 @@
 import { test, mock, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
-import { createElement } from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
 import type {
   EnterpriseQuality,
   ValuationFact,
 } from '@company-research/shared';
-import { QualityAnalysis } from '../src/EnterpriseQuality.js';
 import { fetchEnterpriseQuality } from '../src/api.js';
 afterEach(() => mock.restoreAll());
 const missing: ValuationFact = {
@@ -35,35 +32,6 @@ const data: EnterpriseQuality = {
   historicalTaxRate: null,
   capital: [],
 };
-test('quality keeps all five analyses and complete formulas visible with unknown inputs and results', () => {
-  const html = renderToStaticMarkup(createElement(QualityAnalysis, { data }));
-  for (const label of [
-    '股东盈余',
-    '投入资本回报率',
-    '维持性资本支出',
-    '竞争优势',
-    '管理层资本配置能力',
-    'Owner Earnings ≈',
-    'ROIC = NOPAT',
-    'NOPAT = EBIT',
-    '历史有效税率',
-    '123',
-    '未完整核准',
-  ])
-    assert.ok(html.includes(label), label);
-  assert.match(html, /123 \+ — − — − — = —/);
-  assert.ok(!html.includes('<input'));
-  assert.ok(!html.includes('ant-alert'));
-  assert.equal((html.match(/待研究/g) ?? []).length, 2);
-  assert.ok(!html.includes('NaN'));
-});
-test('historical ETR is labelled separately from the unapproved NOPAT rate and explicit zero remains zero', () => {
-  const html = renderToStaticMarkup(
-    createElement(QualityAnalysis, { data: { ...data, historicalTaxRate: 0 } }),
-  );
-  assert.ok(html.includes('0.00% · 已计算，非NOPAT适用税率'));
-  assert.ok(html.includes('200 × (1 − —) = —'));
-});
 test('quality requests only the cache endpoint and forwards cancellation', async () => {
   const controller = new AbortController();
   const f = mock.method(

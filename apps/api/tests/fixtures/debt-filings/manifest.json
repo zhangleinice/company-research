@@ -1,0 +1,122 @@
+[
+  {
+    "ticker": "GOOGL",
+    "cik": "0001652044",
+    "accessionNumber": "0001652044-26-000018",
+    "reportDate": "2025-12-31",
+    "filingDate": "2026-02-05",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm",
+    "sha256": "46964d4f5b7b3fc7019b50782e4888f5cd676f6771d1d5342fd6e69c27cee56d",
+    "file": "GOOGL-2025-12-31.html.gz"
+  },
+  {
+    "ticker": "GOOGL",
+    "cik": "0001652044",
+    "accessionNumber": "0001652044-25-000014",
+    "reportDate": "2024-12-31",
+    "filingDate": "2025-02-05",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204425000014/goog-20241231.htm",
+    "sha256": "1f30e9a9a5264f610bb55096c52d9730cdaba8bd5b7302149c679cf7c0bf7135",
+    "file": "GOOGL-2024-12-31.html.gz"
+  },
+  {
+    "ticker": "GOOGL",
+    "cik": "0001652044",
+    "accessionNumber": "0001652044-24-000022",
+    "reportDate": "2023-12-31",
+    "filingDate": "2024-01-31",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204424000022/goog-20231231.htm",
+    "sha256": "e159d7eb6c9f1614bb9a2998817de409eb5b059cd264be41505654fe89578e14",
+    "file": "GOOGL-2023-12-31.html.gz"
+  },
+  {
+    "ticker": "AAPL",
+    "cik": "0000320193",
+    "accessionNumber": "0000320193-26-000026",
+    "reportDate": "2026-09-26",
+    "filingDate": "2026-11-03",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm",
+    "sha256": "502cdd211c5335ef05b94f58e84bedb6cf5d58489c934feb92d77d194998cdbd",
+    "file": "AAPL-2026-09-26.html.gz"
+  },
+  {
+    "ticker": "AAPL",
+    "cik": "0000320193",
+    "accessionNumber": "0000320193-25-000079",
+    "reportDate": "2025-09-27",
+    "filingDate": "2025-10-31",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+    "sha256": "96d412db63c241eeae57639bf03e040d774ed991442733c9a140e89739abbe8d",
+    "file": "AAPL-2025-09-27.html.gz"
+  },
+  {
+    "ticker": "AAPL",
+    "cik": "0000320193",
+    "accessionNumber": "0000320193-24-000123",
+    "reportDate": "2024-09-28",
+    "filingDate": "2024-11-01",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+    "sha256": "40c460d3eed32c7394fe651374bb2a6c43f5082098d1a32d5e7516d50110b0bb",
+    "file": "AAPL-2024-09-28.html.gz"
+  },
+  {
+    "ticker": "MSFT",
+    "cik": "0000789019",
+    "accessionNumber": "0001193125-26-323660",
+    "reportDate": "2026-06-30",
+    "filingDate": "2026-07-29",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+    "sha256": "e4289989cfa36551f347a28312cb21ac4ca272816e03c90c11b0673862dc0a0d",
+    "file": "MSFT-2026-06-30.html.gz"
+  },
+  {
+    "ticker": "MSFT",
+    "cik": "0000789019",
+    "accessionNumber": "0000950170-25-100235",
+    "reportDate": "2025-06-30",
+    "filingDate": "2025-07-30",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+    "sha256": "bd12d1d000a291b2169e28cfc9e56dc38a7f3a8ef0ff78706c3df7fe042e5698",
+    "file": "MSFT-2025-06-30.html.gz"
+  },
+  {
+    "ticker": "MSFT",
+    "cik": "0000789019",
+    "accessionNumber": "0000950170-24-087843",
+    "reportDate": "2024-06-30",
+    "filingDate": "2024-07-30",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm",
+    "sha256": "321fd42528989d20b979a438c1fd185260e45e4c902a9089524aad1e6146f65d",
+    "file": "MSFT-2024-06-30.html.gz"
+  },
+  {
+    "ticker": "KO",
+    "cik": "0000021344",
+    "accessionNumber": "0001628280-26-010047",
+    "reportDate": "2025-12-31",
+    "filingDate": "2026-02-20",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm",
+    "sha256": "1dbc1ffa597da6159ac0b0d2ab72599bf258bc94e6fd0620d10fe5ed12d978eb",
+    "file": "KO-2025-12-31.html.gz"
+  },
+  {
+    "ticker": "KO",
+    "cik": "0000021344",
+    "accessionNumber": "0000021344-25-000011",
+    "reportDate": "2024-12-31",
+    "filingDate": "2025-02-20",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134425000011/ko-20241231.htm",
+    "sha256": "d4fea1caa9e9e6a9c81bdb50306e2f7f485a0b3250cb3ba51c5a294ea94e822b",
+    "file": "KO-2024-12-31.html.gz"
+  },
+  {
+    "ticker": "KO",
+    "cik": "0000021344",
+    "accessionNumber": "0000021344-24-000009",
+    "reportDate": "2023-12-31",
+    "filingDate": "2024-02-20",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134424000009/ko-20231231.htm",
+    "sha256": "7f74d36d2294b0a36876d3c64eca7f38c2d9bc880764d2e8c02228e1eff352b9",
+    "file": "KO-2023-12-31.html.gz"
+  }
+]

@@ -302,56 +302,61 @@ it('new whole-Item generation rejects narrative artifacts once; semantic review 
   ).rejects.toThrow('MDA_NARRATIVE_LANGUAGE');
   expect(generateText).toHaveBeenCalledTimes(1);
 });
-it('passive reads preserve the actual v1 cache fallback with zero SEC/AI calls or cache writes', async () => {
-  const legacy = {
-    section: 'mda',
-    accessionNumber: 'cached',
-    fiscalYear: 2025,
-    sourceUrl: 'https://www.sec.gov/cached',
-    filingDate: '2026-02-05',
-    promptVersion: 'item7-management-v1',
-    summaryJson: content(),
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
-  const before = JSON.stringify(legacy);
-  const findFirst = jest.fn(async ({ where }) =>
-    where.section === 'mda' &&
-    where.promptVersion.in?.includes('item7-management-v1')
-      ? legacy
-      : null,
-  );
-  const blocked = {
-    generate: jest.fn(),
-    getJson: jest.fn(),
-    getText: jest.fn(),
-  };
-  const service = new AiResearchService(
-    {
-      aiSummary: { findFirst },
-      aiTask: { findUnique: jest.fn().mockResolvedValue(null) },
-    } as never,
-    {} as never,
-    blocked as never,
-    blocked as never,
-  );
-  const state = await service.state('0001652044', 'management');
-  expect(
-    (state.summary?.summaryJson as unknown as AiResearchSummary['summaryJson'])
-      .capitalAllocation,
-  ).toEqual(legacy.summaryJson.capitalAllocation);
-  expect(
-    (
-      state.summary?.summaryJson as unknown as AiResearchSummary['summaryJson']
-    ).itemSources?.find((s) => s.item === 'Item 7')?.promptVersion,
-  ).toBe('item7-management-v1');
-  expect(JSON.stringify(legacy)).toBe(before);
-  expect(blocked.generate).not.toHaveBeenCalled();
-  expect(blocked.getJson).not.toHaveBeenCalled();
-  expect(promptVersionFor('mda')).toBe('item7-management-v2');
-  expect(promptVersionFor('business')).toBe('business-model-v4');
-  expect(promptVersionFor('risks')).toBe('item1a-risks-v1');
-});
+it.each(['item7-management-v1', 'item7-management-v2'])(
+  'passive reads preserve %s with zero SEC/AI calls or cache writes',
+  async (version) => {
+    const legacy = {
+      section: 'mda',
+      accessionNumber: 'cached',
+      fiscalYear: 2025,
+      sourceUrl: 'https://www.sec.gov/cached',
+      filingDate: '2026-02-05',
+      promptVersion: version,
+      summaryJson: content(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    const before = JSON.stringify(legacy);
+    const findFirst = jest.fn(async ({ where }) =>
+      where.section === 'mda' && where.promptVersion.in?.includes(version)
+        ? legacy
+        : null,
+    );
+    const blocked = {
+      generate: jest.fn(),
+      getJson: jest.fn(),
+      getText: jest.fn(),
+    };
+    const service = new AiResearchService(
+      {
+        aiSummary: { findFirst },
+        aiTask: { findUnique: jest.fn().mockResolvedValue(null) },
+      } as never,
+      {} as never,
+      blocked as never,
+      blocked as never,
+    );
+    const state = await service.state('0001652044', 'management');
+    expect(
+      (
+        state.summary
+          ?.summaryJson as unknown as AiResearchSummary['summaryJson']
+      ).capitalAllocation,
+    ).toEqual(legacy.summaryJson.capitalAllocation);
+    expect(
+      (
+        state.summary
+          ?.summaryJson as unknown as AiResearchSummary['summaryJson']
+      ).itemSources?.find((s) => s.item === 'Item 7')?.promptVersion,
+    ).toBe(version);
+    expect(JSON.stringify(legacy)).toBe(before);
+    expect(blocked.generate).not.toHaveBeenCalled();
+    expect(blocked.getJson).not.toHaveBeenCalled();
+    expect(promptVersionFor('mda')).toBe('item7-management-v3');
+    expect(promptVersionFor('business')).toBe('business-model-v4');
+    expect(promptVersionFor('risks')).toBe('item1a-risks-v1');
+  },
+);
 it('v1 Item7 cache counts as existing initialization data and never causes an automatic paid regeneration', async () => {
   const service = new CompanyUpdateService(
     {

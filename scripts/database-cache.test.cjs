@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-require-imports -- Node CommonJS integration test. */
+/* global require, process, URL */
 // Explicit integration test. Uses a new isolated schema and never resets the application's schema.
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
@@ -172,4 +174,58 @@ test('PostgreSQL cache: list/search, favorites, first detail, persistence, alias
   );
   assert.equal((await reopened.getCompany('KO')).financialStatus, 'READY');
   assert.equal(await prisma.company.count(), 3);
+  await t.test(
+    'annual and quarterly ROIC survive PostgreSQL JSON/date round trip without a valuation cache',
+    async () => {
+      const { replay } = require('./audit-annual-roic.cjs');
+      const { ValuationController } = apiRequire(
+        './dist/modules/valuation/valuation.module',
+      );
+      const sample = replay({ extended: true }).find(
+        (x) => x.ticker === 'MSFT',
+      );
+      const cik = sample.rows[0].sources.annualRoicInputs.cik;
+      await prisma.company.create({
+        data: { cik, ticker: 'MSFT', name: 'Isolated ROIC regression fixture' },
+      });
+      await prisma.annualFinancial.createMany({
+        data: sample.rows.map((r) => ({
+          companyCik: cik,
+          fiscalYear: r.fiscalYear,
+          fiscalQuarter: null,
+          periodStart: new Date(r.periodStart),
+          periodEnd: new Date(r.periodEnd),
+          currency: r.currency,
+          sources: r.sources,
+        })),
+      });
+      await prisma.quarterlyFinancial.createMany({
+        data: sample.quarterlyRows.map((r) => ({
+          companyCik: cik,
+          fiscalYear: r.fiscalYear,
+          fiscalQuarter: r.fiscalQuarter,
+          periodStart: new Date(r.periodStart),
+          periodEnd: new Date(r.periodEnd),
+          currency: r.currency,
+          sources: r.sources,
+        })),
+      });
+      const controller = new ValuationController({}, {}, prisma);
+      const result = await controller.quality('MSFT');
+      assert.deepEqual(result.annualRoic, sample.history);
+      assert.deepEqual(result.quarterlyRoic, sample.quarterlyHistory);
+      assert.equal(result.annualRoic.results.length, 10);
+      assert.equal(result.quarterlyRoic.results.length, 10);
+      assert.equal(
+        result.quarterlyRoic.results.filter((r) => r.status === 'READY').length,
+        1,
+      );
+      assert.equal(
+        result.annualRoic.results.filter((r) => r.status === 'READY').length,
+        3,
+      );
+      assert.equal(await prisma.valuationCache.count(), 0);
+      assert.equal(factsCalls, 4);
+    },
+  );
 });

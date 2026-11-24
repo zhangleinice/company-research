@@ -1,0 +1,93 @@
+{
+  "purpose": "Prior investigation reference only; never used by production extraction or normalization. Amounts in USD millions, not authoritative inputs.",
+  "companies": {
+    "GOOGL": {
+      "2022-12-31": {
+        "plain": 12857,
+        "financing": 14999,
+        "lease": 2142
+      },
+      "2023-12-31": {
+        "plain": 12870,
+        "financing": 14616,
+        "lease": 1666
+      },
+      "2024-12-31": {
+        "plain": 14182,
+        "financing": 15859,
+        "lease": 1677
+      },
+      "2025-12-31": {
+        "plain": 48543,
+        "financing": 51043,
+        "lease": 2500
+      }
+    },
+    "AAPL": {
+      "2023-09-30": {
+        "plain": 111088,
+        "financing": 112112,
+        "lease": 1024
+      },
+      "2024-09-28": {
+        "plain": 106629,
+        "financing": 107525,
+        "lease": 896
+      },
+      "2025-09-27": {
+        "plain": 98657,
+        "financing": 99887,
+        "lease": 1230
+      },
+      "2026-09-26": {
+        "plain": 80111,
+        "financing": 81567,
+        "lease": 1456
+      }
+    },
+    "MSFT": {
+      "2023-06-30": {
+        "plain": 47237,
+        "financing": 64304,
+        "lease": 17067
+      },
+      "2024-06-30": {
+        "plain": 51630,
+        "financing": 78775,
+        "lease": 27145
+      },
+      "2025-06-30": {
+        "plain": 43151,
+        "financing": 89323,
+        "lease": 46172
+      },
+      "2026-06-30": {
+        "plain": 40294,
+        "financing": 106888,
+        "lease": 66594
+      }
+    },
+    "KO": {
+      "2022-12-31": {
+        "plain": 39149,
+        "financing": null,
+        "lease": null
+      },
+      "2023-12-31": {
+        "plain": 42064,
+        "financing": null,
+        "lease": null
+      },
+      "2024-12-31": {
+        "plain": null,
+        "financing": null,
+        "lease": null
+      },
+      "2025-12-31": {
+        "plain": null,
+        "financing": null,
+        "lease": null
+      }
+    }
+  }
+}

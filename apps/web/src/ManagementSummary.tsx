@@ -73,20 +73,6 @@ export function ManagementSummary({ summary }: { summary: Summary }) {
                 )}
                 {finding.text}
                 {finding.impact && ` 可能影响：${finding.impact}`}{' '}
-                <Typography.Text
-                  type="secondary"
-                  title={finding.evidence
-                    .map((e) => `${e.paragraphId}: ${e.quote}`)
-                    .join('\n')}
-                >
-                  〔
-                  {[
-                    ...new Set(
-                      finding.evidence.map((e) => e.paragraphId.split(':')[0]),
-                    ),
-                  ].join('、')}
-                  〕
-                </Typography.Text>
               </Typography.Paragraph>
             ))}
           </section>

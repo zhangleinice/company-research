@@ -271,7 +271,10 @@ export function ManagementAnalysis({
         </Card>
       </section>
       <section data-analysis-module="reinvestment">
-        <Card className="analysis-module" title="Business Investment · 业务投资">
+        <Card
+          className="analysis-module"
+          title="Business Investment · 业务投资"
+        >
           <Space orientation="vertical" size={24} className="full-width">
             <Typography.Text type="secondary">{period}</Typography.Text>
             <AllocationCards
@@ -381,9 +384,29 @@ export function ManagementAnalysis({
                 },
               ]}
             />
-            <Typography.Text type="secondary">
-              债务发行与偿还现金流指标尚未接入，后续核实SEC数据后补充。
-            </Typography.Text>
+            <AllocationCards
+              items={[
+                {
+                  key: 'debtIssuance',
+                  label: 'Proceeds from Issuance of Debt · 债务发行现金流入',
+                  unit: 'money',
+                  description:
+                    '同一完整财年的债务发行现金流入（百万美元），仅采用SEC长短期债务汇总标签，不累加分项。',
+                  ...(latest?.capitalAllocation?.debtCashFlows?.debtIssuance ??
+                    unknown('缺少年度债务现金流缓存，请仅刷新SEC财务数据')),
+                },
+                {
+                  key: 'debtRepayments',
+                  label: 'Repayments of Debt · 债务偿还现金流出',
+                  unit: 'money',
+                  description:
+                    '同一完整财年的债务偿还现金流出（百万美元），不以债务余额变化或融资租赁付款替代。',
+                  ...(latest?.capitalAllocation?.debtCashFlows
+                    ?.debtRepayments ??
+                    unknown('缺少年度债务现金流缓存，请仅刷新SEC财务数据')),
+                },
+              ]}
+            />
           </Space>
         </Card>
       </section>

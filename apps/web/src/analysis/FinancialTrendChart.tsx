@@ -12,7 +12,7 @@ import {
 } from './financial-analysis.js';
 
 export interface TrendSeries {
-  key: FinancialMetric;
+  key: FinancialMetric | 'roic' | 'cashConversionRatio' | 'interestCoverage';
   label: string;
   color: string;
 }
@@ -26,6 +26,8 @@ export function FinancialTrendChart({
   moneyDivisor = 1000000,
   moneyUnit = '百万美元',
   periodKind = 'duration',
+  roicValues,
+  retainEmptyPeriods = false,
 }: {
   rows: FinancialPeriod[];
   mode: FinancialMode;
@@ -35,14 +37,27 @@ export function FinancialTrendChart({
   moneyDivisor?: number;
   moneyUnit?: string;
   periodKind?: 'duration' | 'instant';
+  roicValues?: ReadonlyMap<string, number | null>;
+  retainEmptyPeriods?: boolean;
 }) {
   const id = useId();
   const points = [...rows].sort((a, b) =>
     a.periodEnd.localeCompare(b.periodEnd),
   );
+  const valueFor = (
+    row: FinancialPeriod | undefined,
+    key: TrendSeries['key'],
+  ) => {
+    if (!row) return null;
+    const value =
+      key === 'roic'
+        ? roicValues?.get(row.periodEnd)
+        : analysisValue(row, key, mode);
+    return typeof value === 'number' && Number.isFinite(value) ? value : null;
+  };
   const values = points.flatMap((row) =>
     series.flatMap((item) => {
-      const value = analysisValue(row, item.key, mode);
+      const value = valueFor(row, item.key);
       return value === null ? [] : [value];
     }),
   );
@@ -58,7 +73,7 @@ export function FinancialTrendChart({
     observer.observe(container.current);
     return () => observer.disconnect();
   }, [hasData]);
-  if (!values.length)
+  if (!values.length && !(retainEmptyPeriods && points.length))
     return (
       <Empty
         image={Empty.PRESENTED_IMAGE_SIMPLE}
@@ -83,6 +98,7 @@ export function FinancialTrendChart({
       ? String(row.fiscalYear ?? row.periodEnd.slice(0, 4))
       : `${row.fiscalYear ?? row.periodEnd.slice(0, 4)} Q${row.fiscalQuarter ?? '—'}`;
   const tick = (value: number) => {
+    if (unit === 'multiple') return `${value.toFixed(1)}x`;
     if (unit === 'percent') return `${value.toFixed(1)}%`;
     const displayed =
       value /
@@ -116,34 +132,48 @@ export function FinancialTrendChart({
               ? '百分数'
               : unit === 'shares'
                 ? '百万股'
-                : unit === 'ratio'
+                : unit === 'ratio' || unit === 'multiple'
                   ? '倍'
                   : '美元 / 股'}
           。缺失值不连线；悬停数据点查看
           {periodKind === 'instant' ? '期末日期' : '起止日期'}和数值。
         </desc>
-        {Array.from({ length: 5 }, (_, index) => min + (span * index) / 4).map(
-          (value, index) => (
-            <g key={index}>
+        {hasData &&
+          Array.from({ length: 5 }, (_, index) => min + (span * index) / 4).map(
+            (value, index) => (
+              <g key={index}>
+                <line
+                  x1="70"
+                  x2={width - 20}
+                  y1={y(value)}
+                  y2={y(value)}
+                  stroke="#e8edf4"
+                />
+                <text
+                  x="60"
+                  y={y(value) + 4}
+                  textAnchor="end"
+                  fontSize="11"
+                  fill="#8c8c8c"
+                >
+                  {tick(value)}
+                </text>
+              </g>
+            ),
+          )}
+        {retainEmptyPeriods &&
+          points.map((row, index) => (
+            <g key={row.periodEnd} data-period-end={row.periodEnd}>
+              <title>{`${label(row)} · ${row.periodStart} 至 ${row.periodEnd}`}</title>
               <line
-                x1="70"
-                x2={width - 20}
-                y1={y(value)}
-                y2={y(value)}
-                stroke="#e8edf4"
+                x1={x(index)}
+                x2={x(index)}
+                y1="194"
+                y2="199"
+                stroke="#8c8c8c"
               />
-              <text
-                x="60"
-                y={y(value) + 4}
-                textAnchor="end"
-                fontSize="11"
-                fill="#8c8c8c"
-              >
-                {tick(value)}
-              </text>
             </g>
-          ),
-        )}
+          ))}
         {points.map((row, index) =>
           index % Math.ceil(points.length / (width < 480 ? 4 : 6)) === 0 ||
           index === points.length - 1 ? (
@@ -162,8 +192,8 @@ export function FinancialTrendChart({
         {series.map((item) => (
           <g key={item.key}>
             {points.map((row, index) => {
-              const value = analysisValue(row, item.key, mode);
-              const previous = analysisValue(points[index - 1], item.key, mode);
+              const value = valueFor(row, item.key);
+              const previous = valueFor(points[index - 1], item.key);
               if (value === null) return null;
               return (
                 <g key={row.periodEnd}>
@@ -191,6 +221,12 @@ export function FinancialTrendChart({
           </g>
         ))}
       </svg>
+      {!hasData && (
+        <Empty
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+          description={`${title}：暂无可靠数据，保留完整报告期间`}
+        />
+      )}
     </div>
   );
 }

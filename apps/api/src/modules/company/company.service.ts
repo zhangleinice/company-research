@@ -1,6 +1,14 @@
+import { healthRatios } from '../financials/health-ratios';
+import {
+  hasDebtBalanceFacts,
+  type DebtDisclosure,
+} from '../financials/debt-disclosure';
 import { verifiedLiquidity } from '../financials/financial-health';
 import { annualCapitalAllocation } from '../financials/capital-allocation';
-import { capexToOperatingCashFlow } from '../financials/cash-flow-calculations';
+import {
+  cashFlowQualityMetrics,
+  capexToOperatingCashFlow,
+} from '../financials/cash-flow-calculations';
 import {
   BadGatewayException,
   BadRequestException,
@@ -35,7 +43,7 @@ const listRelations = {
   annualFinancials: { orderBy: { periodEnd: 'desc' as const }, take: 1 },
   quarterlyFinancials: { orderBy: { periodEnd: 'desc' as const }, take: 1 },
 };
-function period(row: StoredPeriod): FinancialPeriod {
+function period(row: StoredPeriod, baseline?: unknown): FinancialPeriod {
   return {
     ...Object.fromEntries(
       FINANCIAL_METRICS.map((key) => [
@@ -51,9 +59,28 @@ function period(row: StoredPeriod): FinancialPeriod {
       row.totalDebt === null ? null : Number(row.totalDebt),
       row.sources,
     ),
+    ...cashFlowQualityMetrics({
+      fcf: row.fcf === null ? null : Number(row.fcf),
+      revenue: row.revenue === null ? null : Number(row.revenue),
+      operatingCashFlow:
+        row.operatingCashFlow === null ? null : Number(row.operatingCashFlow),
+      netIncome: row.netIncome === null ? null : Number(row.netIncome),
+    }),
     capexToOcf: capexToOperatingCashFlow(
       row.capex === null ? null : Number(row.capex),
       row.operatingCashFlow === null ? null : Number(row.operatingCashFlow),
+    ),
+    ...healthRatios(
+      {
+        operatingIncome:
+          row.operatingIncome === null ? null : Number(row.operatingIncome),
+        totalDebt: row.totalDebt === null ? null : Number(row.totalDebt),
+        cash: row.cash === null ? null : Number(row.cash),
+        periodStart: row.periodStart.toISOString().slice(0, 10),
+        periodEnd: row.periodEnd.toISOString().slice(0, 10),
+        sources: row.sources,
+      },
+      baseline,
     ),
     fiscalYear: row.fiscalYear,
     fiscalQuarter: row.fiscalQuarter,
@@ -66,6 +93,7 @@ function item(
   base: CompanyListItem,
   stored: Stored | undefined,
   mode: FinancialMode,
+  baseline?: unknown,
 ): ResearchCompany {
   const data =
     mode === 'annual'
@@ -78,7 +106,7 @@ function item(
     isFavorite: stored?.isFavorite ?? false,
     financialStatus: stored?.financialStatus ?? 'NOT_FETCHED',
     lastFetchedAt: stored?.lastFetchedAt?.toISOString() ?? null,
-    financial: data ? period(data) : null,
+    financial: data ? period(data, baseline) : null,
   };
 }
 function writePeriod(cik: string, row: NormalizedPeriod) {
@@ -239,11 +267,16 @@ export class CompanyService {
     this.pending.set(company.cik, request);
     return request;
   }
-  private detail(stored: Stored): CompanyDetail {
+  private async detail(stored: Stored): Promise<CompanyDetail> {
+    const baseline = (
+      await this.prisma.valuationCache?.findUnique({
+        where: { cik: stored.cik },
+      })
+    )?.data;
     return {
-      ...item(stored, stored, 'annual'),
+      ...item(stored, stored, 'annual', baseline),
       annual: stored.annualFinancials.map((row) => {
-        const result = period(row);
+        const result = period(row, baseline);
         result.capitalAllocation = annualCapitalAllocation(
           result,
           row.sources,
@@ -251,7 +284,7 @@ export class CompanyService {
         );
         return result;
       }),
-      quarterly: stored.quarterlyFinancials.map(period),
+      quarterly: stored.quarterlyFinancials.map((row) => period(row, baseline)),
       lastError: stored.lastError,
     };
   }
@@ -289,13 +322,35 @@ export class CompanyService {
     }
     try {
       const facts = await this.sec.getCompanyFacts(company.cik);
-      const parsed = this.financials.normalize(facts);
+      let disclosures: DebtDisclosure[] = [],
+        diagnostics: string[] = [];
+      if (hasDebtBalanceFacts(facts)) {
+        try {
+          const evidence = await this.sec.getDebtDisclosures(company.cik);
+          disclosures = evidence.disclosures;
+          diagnostics = evidence.diagnostics;
+        } catch {
+          diagnostics = [
+            'SEC debt disclosure fallback unavailable; CompanyFacts retained',
+          ];
+        }
+      }
+      const basic = await this.sec.getCompany(company.ticker).catch(() => null);
+      const parsed = this.financials.normalize(
+        facts,
+        disclosures,
+        basic?.sic ?? null,
+      );
+      for (const row of [...parsed.annual, ...parsed.quarterly])
+        row.sources.debtDisclosureAcquisition = {
+          version: 'debt-disclosure-v1',
+          diagnostics,
+        };
       if (!parsed.annual.length && !parsed.quarterly.length)
         throw new BadGatewayException(
           'SEC has no supported annual or independent quarterly data for this company',
         );
       // Basic submissions enrich industry when available; failure never invents or blocks financial data.
-      const basic = await this.sec.getCompany(company.ticker).catch(() => null);
       await this.prisma.$transaction(
         async (tx) => {
           const owns = await tx.company.updateMany({

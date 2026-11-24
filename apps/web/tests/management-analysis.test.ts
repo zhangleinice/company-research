@@ -1,3 +1,7 @@
+import {
+  CapitalNotes,
+  considerationExplanation,
+} from '../src/analysis/CapitalAllocationResearch.js';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createElement } from 'react';
@@ -37,9 +41,13 @@ function metadata(): AnnualCapitalAllocation {
     buybackToFcf: { ...unknown, value: 160, reason: null },
   };
 }
-test('renders five ordered sections with eleven metrics, three charts and no debt-flow placeholder cards', () => {
+test('renders five ordered sections with thirteen metrics and three charts', () => {
   const row = period(2025);
   row.capitalAllocation = metadata();
+  row.capitalAllocation.debtCashFlows = {
+    debtIssuance: { value: 20e6, reason: null, sources: [] },
+    debtRepayments: { value: 0, reason: null, sources: [] },
+  };
   const html = renderToStaticMarkup(
     createElement(ManagementAnalysis, { detail: { annual: [row] } }),
   );
@@ -55,12 +63,18 @@ test('renders five ordered sections with eleven metrics, three charts and no deb
     positions,
     [...positions].sort((a, b) => a - b),
   );
-  assert.equal((html.match(/data-metric=/g) ?? []).length, 11);
+  assert.equal((html.match(/data-metric=/g) ?? []).length, 13);
   assert.equal((html.match(/<svg/g) ?? []).length, 3);
   assert.ok(html.includes('160.00%'));
+  const debtCards = html.slice(html.indexOf('data-metric="debtIssuance"'));
+  assert.ok(debtCards.includes('百万美元'));
+  assert.match(debtCards, /ant-statistic-content-value">20</);
+  assert.match(debtCards, /ant-statistic-content-value">0</);
+
   assert.ok(html.includes('非普通股专属口径'));
   assert.ok(html.includes('口径未核准'));
-  assert.ok(html.includes('债务发行与偿还现金流指标尚未接入'));
+  assert.ok(html.includes('债务发行现金流入'));
+  assert.ok(html.includes('债务偿还现金流出'));
   assert.ok(html.includes('未来投资计划'));
   assert.ok(html.includes('重要融资条款'));
   assert.ok(html.includes('Business Investment · 业务投资'));
@@ -244,7 +258,63 @@ test('renders unified capital information with dated pending acquisitions, expli
         research,
       }),
     );
+  const wiz = info.acquisitions.events[0];
+  wiz.transactionValue!.evidence = [
+    {
+      paragraphId: 'Item 7:p1',
+      quote:
+        'We agreed to acquire the target for $32.0 billion, subject to closing adjustments, in an all-cash transaction.',
+    },
+  ];
+  assert.match(considerationExplanation(wiz), /最终金额可能因交割调整/);
+  assert.doesNotMatch(considerationExplanation(wiz), /其他|部分|完整交易/);
+  assert.match(
+    considerationExplanation(info.acquisitions.events[1]),
+    /现金金额不等于完整交易对价/,
+  );
+  assert.match(
+    considerationExplanation({ ...wiz, transactionValue: null }),
+    /金额未明确/,
+  );
+  assert.match(
+    considerationExplanation({ ...wiz, considerationType: 'unknown' }),
+    /未明确/,
+  );
+  info.reinvestment.investmentAreas = Array.from({ length: 6 }, (_, i) => ({
+    text: `完整投资信息${i}：${i + 1}亿美元`,
+    kind: i === 5 ? 'plan' : 'fact',
+    evidence,
+  }));
+  const noteProps = {
+    research,
+    groups: [
+      {
+        key: 'investmentAreas',
+        title: '主要投资方向与项目',
+        notes: info.reinvestment.investmentAreas,
+      },
+    ],
+  };
+  const collapsed = renderToStaticMarkup(
+    createElement(CapitalNotes, noteProps),
+  );
+  assert.ok(collapsed.includes('完整投资信息2'));
+  assert.ok(!collapsed.includes('完整投资信息3'));
+  assert.ok(collapsed.includes('展开其余投资信息（3条）'));
+  const expanded = renderToStaticMarkup(
+    createElement(CapitalNotes, { ...noteProps, investmentDetailsOpen: true }),
+  );
+  for (const note of info.reinvestment.investmentAreas)
+    assert.ok(expanded.includes(note.text));
+  assert.ok(expanded.includes('管理层计划／预期'));
   const html = render();
+  assert.ok(html.includes('现金对价'));
+  assert.ok(!html.includes('仅现金部分，不代表交易总成本'));
+  assert.ok(html.includes('另行承担债务，现金金额不等于完整交易对价'));
+  assert.ok(html.includes('2025-12-31'));
+  assert.ok(html.includes('2026-02-05'));
+  assert.ok(html.includes(sourceUrl));
+  assert.doesNotMatch(html, /原文依据|ant-table-row-expand-icon/);
   assert.ok(html.includes('Wiz'));
   assert.ok(html.includes('Intersect'));
   assert.equal((html.match(/>待完成</g) ?? []).length, 2);
@@ -254,8 +324,9 @@ test('renders unified capital information with dated pending acquisitions, expli
   assert.ok(html.includes('不是实时状态'));
   assert.ok(html.includes('管理层计划／预期'));
   assert.ok(html.includes('授信额度'));
-  assert.ok(html.includes('债务发行与偿还现金流指标尚未接入'));
-  assert.ok(!html.includes('data-metric="debtIssuance"'));
+  assert.ok(html.includes('债务发行现金流入'));
+  assert.ok(html.includes('债务偿还现金流出'));
+  assert.ok(html.includes('data-metric="debtIssuance"'));
   info.acquisitions.events = [];
   assert.ok(render().includes('未提取到收购事件，不代表公司没有收购'));
   info.coverage = 'partial';

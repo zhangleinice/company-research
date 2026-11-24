@@ -1,5 +1,12 @@
+import { quarterlyRoicInputs } from './quarterly-roic-inputs';
+import { annualRoicInputs } from './annual-roic-inputs';
+import type { DebtDisclosure } from './debt-disclosure';
+import { debtCashFlowSources } from './debt-cash-flows';
 import { normalizeFinancialHealth } from './financial-health';
-import { capexToOperatingCashFlow } from './cash-flow-calculations';
+import {
+  cashFlowQualityMetrics,
+  capexToOperatingCashFlow,
+} from './cash-flow-calculations';
 import {
   FINANCIAL_METRICS,
   type FinancialMetric,
@@ -129,7 +136,11 @@ const growth = (current: number | null, prior: number | null) =>
     : null;
 
 /** Normalize periods using observation dates, not the fy/fp filing context on historical facts. */
-export function normalizeCompanyFacts(raw: unknown): {
+export function normalizeCompanyFacts(
+  raw: unknown,
+  disclosures: readonly DebtDisclosure[] = [],
+  sic: string | null = null,
+): {
   annual: NormalizedPeriod[];
   quarterly: NormalizedPeriod[];
 } {
@@ -227,6 +238,8 @@ export function normalizeCompanyFacts(raw: unknown): {
       currency: 'USD',
       sources: {},
     } as NormalizedPeriod;
+    if (!quarterly)
+      Object.assign(result.sources, debtCashFlowSources(taxonomy, result));
     for (const metric of Object.keys(FLOW_TAGS) as FinancialMetric[]) {
       const direct = pick(
         metric,
@@ -373,7 +386,12 @@ export function normalizeCompanyFacts(raw: unknown): {
         formula: 'operatingCashFlow-capex',
         inputs: [result.sources.operatingCashFlow, result.sources.capex],
       };
-    const health = normalizeFinancialHealth(readTag, anchor.end);
+    const health = normalizeFinancialHealth(
+      readTag,
+      anchor.end,
+      undefined,
+      disclosures,
+    );
     const { sources: healthSources, ...balances } = health;
     Object.assign(result, balances);
     Object.assign(result.sources, healthSources);
@@ -385,7 +403,7 @@ export function normalizeCompanyFacts(raw: unknown): {
       100,
     );
     result.netMargin = divide(result.netIncome, result.revenue, 100);
-    result.fcfMargin = divide(result.fcf, result.revenue, 100);
+    Object.assign(result, cashFlowQualityMetrics(result));
     if (!quarterly) {
       const income = pick(
         'netIncome',
@@ -856,6 +874,44 @@ export function normalizeCompanyFacts(raw: unknown): {
       }
     }
   }
+  for (const row of annual)
+    row.sources.annualRoicInputs = annualRoicInputs(raw, row, sic);
+  for (let i = 0; i < quarterly.length; i++) {
+    const period = quarterly[i];
+    period.sources.quarterlyRoicInputs = quarterlyRoicInputs(
+      raw,
+      { ...period, fiscalQuarter: period.fiscalQuarter! },
+      quarters[i].yearStart,
+      sic,
+    );
+  }
+  const attachOpeningCapital = (
+    period: NormalizedPeriod,
+    candidates: NormalizedPeriod[],
+  ) => {
+    const end = shift(period.periodStart, -1);
+    const previous = candidates.find((r) => r.periodEnd === end);
+    const identity =
+      period.sources.annualRoicInputs ?? period.sources.quarterlyRoicInputs;
+    // An opening balance does not require an income statement for that earlier period.
+    const inputs =
+      previous?.sources.balanceSheetInputs ??
+      normalizeFinancialHealth(readTag, end, undefined, disclosures).sources
+        .balanceSheetInputs;
+    period.sources.roicBeginningCapital = {
+      version: 'roic-capital-snapshot-v1',
+      cik: isObject(identity) ? identity.cik : null,
+      fiscalYear: previous?.fiscalYear ?? null,
+      fiscalQuarter: previous?.fiscalQuarter ?? null,
+      periodStart: previous?.periodStart ?? end,
+      periodEnd: end,
+      currency: period.currency,
+      sources: { balanceSheetInputs: inputs },
+    };
+  };
+  for (const period of annual) attachOpeningCapital(period, annual);
+  for (const period of quarterly)
+    attachOpeningCapital(period, [...quarterly, ...annual]);
   calculateGrowth(annual, false);
   calculateGrowth(quarterly, true);
   return {

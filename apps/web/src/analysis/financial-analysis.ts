@@ -8,9 +8,12 @@ import type {
 type DisplayMetric =
   | FinancialMetric
   | 'capexToOcf'
+  | 'cashConversionRatio'
+  | 'interestCoverage'
   | 'cashAndShortTermSecurities'
   | 'netDebtAfterLiquidAssets';
-export type MetricUnit = 'money' | 'percent' | 'perShare' | 'ratio' | 'shares';
+export type MetricUnit =
+  'money' | 'percent' | 'perShare' | 'ratio' | 'shares' | 'multiple';
 export interface MetricDefinition {
   key: DisplayMetric;
   label: string;
@@ -108,25 +111,25 @@ export const METRICS = {
   ),
   grossMargin: metric(
     'grossMargin',
-    'Gross Margin',
+    'Gross Margin · 毛利率',
     '毛利率 = 毛利润 ÷ 营业收入 × 100%；收入需大于零。',
     'percent',
   ),
   operatingMargin: metric(
     'operatingMargin',
-    'Operating Margin',
+    'Operating Margin · 营业利润率',
     '营业利润率 = 营业利润 ÷ 营业收入 × 100%。',
     'percent',
   ),
   netMargin: metric(
     'netMargin',
-    'Net Margin',
+    'Net Margin · 净利率',
     '净利率 = 净利润 ÷ 营业收入 × 100%。',
     'percent',
   ),
   roe: metric(
     'roe',
-    'ROE',
+    'ROE · 净资产收益率',
     '年度净利润相对于平均股东权益的回报率；按期初、期末权益的平均值计算。缺失、权益非正或季度口径未验证时显示 —。',
     'percent',
   ),
@@ -165,8 +168,14 @@ export const METRICS = {
   ),
   fcfMargin: metric(
     'fcfMargin',
-    'FCF Margin',
-    '自由现金流率 = FCF ÷ 营业收入 × 100%。',
+    'FCF Margin · 自由现金流利润率',
+    '衡量营业收入转化为自由现金流的能力。FCF Margin = 同期 FCF ÷ Revenue × 100%；收入须大于零，缺失不补零。允许负值和超过100%的结果，季度使用独立季度，不年化。',
+    'percent',
+  ),
+  cashConversionRatio: metric(
+    'cashConversionRatio',
+    'Cash Conversion Ratio · 利润现金转化率',
+    '衡量账面净利润转化为经营活动现金流的能力。Cash Conversion Ratio = 同期 OCF ÷ Net Income × 100%；净利润须大于零，缺失不补零。允许负现金流和超过100%的结果，季度使用独立季度，不年化。',
     'percent',
   ),
   stockRepurchases: metric(
@@ -196,7 +205,7 @@ export const METRICS = {
   ),
   netDebt: metric(
     'netDebt',
-    'Net Debt（仅扣现金）',
+    'Net Debt · 净债务',
     '总有息债务减去现金及现金等价物，未扣除短期投资或其他金融资产；可为负值。',
   ),
   cashAndShortTermSecurities: metric(
@@ -208,6 +217,12 @@ export const METRICS = {
     'netDebtAfterLiquidAssets',
     'Net Debt after Liquid Assets',
     '调整后净债务 = Total Debt −（Cash + 经核验的流动可交易证券）；只扣上述资产，不扣长期或不可交易投资，可为负值。',
+  ),
+  interestCoverage: metric(
+    'interestCoverage',
+    'Interest Coverage · 利息保障倍数',
+    '报表参考口径：Operating Income ÷ Interest Expense，营业利润作为EBIT代理；仅使用同期间可靠总利息费用，不用净利息或现金付息。利息须大于零；经营亏损可为负，金融企业不适用。',
+    'multiple',
   ),
   currentAssets: metric(
     'currentAssets',
@@ -240,11 +255,15 @@ export const ANALYSIS_MODULES = [
   },
   {
     key: 'profitability',
-    title: 'Profitability · 盈利能力',
+    title: 'Profitability & Capital Returns · 盈利与资本回报',
   },
   {
     key: 'cash-flow',
-    title: 'Cash Flow & Financial Health · 现金流与财务健康',
+    title: 'Cash Flow · 现金流',
+  },
+  {
+    key: 'financial-health',
+    title: 'Financial Health · 财务健康',
   },
   {
     key: 'shareholder-returns',
@@ -281,11 +300,13 @@ export function formatAnalysisValue(
   const number = value / (unit === 'money' || unit === 'shares' ? 1000000 : 1);
   const text = new Intl.NumberFormat('zh-CN', {
     maximumFractionDigits: 2,
-    minimumFractionDigits: unit === 'percent' ? 2 : 0,
+    minimumFractionDigits: unit === 'percent' || unit === 'multiple' ? 2 : 0,
   }).format(number);
   return unit === 'percent'
     ? `${text}%`
-    : unit === 'ratio'
-      ? `${text} 倍`
-      : text;
+    : unit === 'multiple'
+      ? `${text}x`
+      : unit === 'ratio'
+        ? `${text} 倍`
+        : text;
 }

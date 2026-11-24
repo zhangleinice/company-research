@@ -378,6 +378,42 @@ describe('company directory and on-demand cache boundaries', () => {
     ).toBe(true);
     expect(sec.getCompanyFacts).toHaveBeenCalledTimes(1);
   });
+  it('derives cash quality from existing same-period annual and quarterly cache rows without SEC requests or rounded ratio reuse', async () => {
+    const { service, sec, rows } = setup();
+    await service.getCompany('GOOG');
+    const stored = rows.get('0001652044')!;
+    const base = stored.annualFinancials[0];
+    Object.assign(base, {
+      fcf: 1,
+      revenue: 3,
+      operatingCashFlow: 4,
+      netIncome: 3,
+      fcfMargin: 33.33333333,
+    });
+    stored.quarterlyFinancials = [
+      {
+        ...base,
+        fiscalQuarter: 2,
+        periodStart: new Date('2025-04-01'),
+        periodEnd: new Date('2025-06-30'),
+        fcf: -2,
+        revenue: 10,
+        operatingCashFlow: -3,
+        netIncome: 2,
+      },
+    ];
+    const requests = sec.getCompanyFacts.mock.calls.length;
+    const result = await service.getCompany('GOOG');
+    expect(result.annual[0].fcfMargin).toBe((1 / 3) * 100);
+    expect(result.annual[0].cashConversionRatio).toBe((4 / 3) * 100);
+    expect(result.quarterly[0].fcfMargin).toBe(-20);
+    expect(result.quarterly[0].cashConversionRatio).toBe(-150);
+    Object.assign(base, { netIncome: 0, revenue: 0 });
+    const missing = await service.getCompany('GOOG');
+    expect(missing.annual[0].fcfMargin).toBeNull();
+    expect(missing.annual[0].cashConversionRatio).toBeNull();
+    expect(sec.getCompanyFacts).toHaveBeenCalledTimes(requests);
+  });
   it('validates pagination, mode and favorite payloads', async () => {
     const { service } = setup();
     await expect(service.getCompanies(0, 10)).rejects.toThrow(

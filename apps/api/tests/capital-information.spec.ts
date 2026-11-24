@@ -195,3 +195,32 @@ it('does not confuse zero ending debt with the absence of actual issuance and re
       .financingActivities[0].activityType,
   ).toBe('actualFinancing');
 });
+
+it('mock notes deduplicate identical facts while retaining different maturities, purposes and investment types', () => {
+  const ps = [
+    {
+      id: 'Item 7:mock',
+      text: 'We issued $2 billion notes due 2030 and $3 billion notes due 2040 for general corporate purposes. R&D expense was $1 billion and capital expenditures were $4 billion.',
+    },
+  ];
+  const evidence = [{ paragraphId: ps[0].id, quote: ps[0].text }];
+  const a = emptyCapitalInformation();
+  a.debtAndFinancing.financingTerms = [
+    { text: '20亿美元票据于2030年到期。', kind: 'fact', evidence },
+    { text: '30亿美元票据于2040年到期。', kind: 'fact', evidence },
+  ];
+  a.debtAndFinancing.financingPurposes = [
+    { text: '一般公司用途。', kind: 'fact', evidence },
+  ];
+  a.reinvestment.investmentAreas = [
+    { text: '研发费用10亿美元。', kind: 'fact', evidence },
+    { text: '资本支出40亿美元。', kind: 'fact', evidence },
+  ];
+  const before = JSON.stringify(a);
+  const merged = mergeCapitalInformation([a, structuredClone(a)], ps);
+  expect(merged.debtAndFinancing.financingTerms).toHaveLength(2);
+  expect(merged.debtAndFinancing.financingPurposes).toHaveLength(1);
+  expect(merged.reinvestment.investmentAreas).toHaveLength(2);
+  expect(merged.debtAndFinancing.financingRisks).toEqual([]);
+  expect(JSON.stringify(a)).toBe(before);
+});

@@ -9,7 +9,7 @@ export const ITEM_FOR: Record<ExtractionKind, Item> = {
 };
 export const ITEM_PROMPT_VERSIONS = {
   business: 'business-model-v4',
-  mda: 'item7-management-v2',
+  mda: 'item7-management-v3',
   risks: 'item1a-risks-v1',
 } as const;
 /** Estimates are diagnostics only, never used as a context-window guarantee. */

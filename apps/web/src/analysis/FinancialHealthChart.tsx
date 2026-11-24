@@ -27,7 +27,7 @@ export function FinancialHealthChart({
   mode: FinancialMode;
 }) {
   const [selected, setSelected] = useState<Selection>('all');
-  const title = '现金储备与有息债务历史趋势（亿美元）';
+  const title = 'Cash & Debt Trends · 现金储备与有息债务历史趋势（亿美元）';
   return (
     <section className="analysis-chart-panel">
       <Typography.Title level={5}>{title}</Typography.Title>

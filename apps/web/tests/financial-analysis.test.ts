@@ -162,7 +162,7 @@ test('shows missing CapEx/FCF explicitly, preserves true zero, and does not fill
   assert.equal(formatAnalysisValue(0, 'money'), '0');
   assert.equal(formatAnalysisValue(null, 'money'), '—');
   assert.equal(formatAnalysisValue(-2000000, 'money'), '-2');
-  assert.doesNotMatch(html, /data-metric="netDebt"/);
+  assert.match(html, /data-metric="netDebt"/);
 });
 test('empty history produces module-specific empty states without invalid SVG coordinates', () => {
   const html = renderToStaticMarkup(
@@ -264,14 +264,14 @@ test('cash flow chart selectors independently show the selected series without f
   }
 });
 
-test('cash flow auxiliary values remain available but are no longer displayed', () => {
+test('cash flow exposes FCF Margin while leaving other auxiliary values hidden', () => {
   const source = detail('GOOGL', '0001652044');
   source.annual[0].capexToOcf = 55.519;
   assert.equal(analysisValue(source.annual[0], 'capexToOcf', 'annual'), 55.519);
   const html = renderToStaticMarkup(
     createElement(FinancialAnalysis, { detail: source, mode: 'annual' }),
   );
-  for (const key of ['capexToOcf', 'fcfMargin', 'fcfGrowth'])
+  for (const key of ['capexToOcf', 'fcfGrowth'])
     assert.ok(!html.includes(`data-metric="${key}"`));
   assert.ok(!html.includes('利润与经营现金流对比'));
 });
@@ -311,7 +311,7 @@ test('health chart selects all three period-end balances and defaults to compari
       [key],
     );
 });
-test('health shows four core cards and only verified liquidity; removes auxiliary metrics', () => {
+test('health shows six core cards and only verified liquidity; removes auxiliary metrics', () => {
   const source = detail('GOOGL', '0001652044');
   source.annual[0].cashAndShortTermSecurities = 126843e6;
   source.annual[0].marketableSecurities = 96135e6;
@@ -320,11 +320,11 @@ test('health shows four core cards and only verified liquidity; removes auxiliar
     const html = renderToStaticMarkup(
       createElement(FinancialAnalysis, { detail: source, mode }),
     );
-    const start = html.indexOf('data-financial-region="financial-health"');
+    const start = html.indexOf('data-analysis-module="financial-health"');
     return html.slice(start, html.indexOf('</section>', start));
   };
   const html = render('annual');
-  assert.equal((html.match(/data-metric=/g) ?? []).length, 4);
+  assert.equal((html.match(/data-metric=/g) ?? []).length, 6);
   for (const key of [
     'cashAndShortTermSecurities',
     'totalDebt',
@@ -334,9 +334,8 @@ test('health shows four core cards and only verified liquidity; removes auxiliar
     assert.ok(html.includes(`data-metric="${key}"`));
   assert.ok(html.includes('126,843'));
   assert.ok(html.includes('Cash + Marketable Securities'));
-  assert.equal((html.match(/<svg/g) ?? []).length, 0);
+  assert.match(html, /现金储备与有息债务历史趋势/);
   for (const key of [
-    'netDebt',
     'cash',
     'marketableSecurities',
     'currentAssets',
@@ -436,7 +435,7 @@ test('GOOGL dividend analysis labels declared DPS separately from cash payments 
   assert.ok(!missing.includes('2023-01-01 至 2023-12-31 · Declared DPS:'));
 });
 
-test('four modules keep shareholder metrics and charts outside Cash Flow in both modes', () => {
+test('five modules keep shareholder metrics and charts outside Cash Flow in both modes', () => {
   for (const mode of ['annual', 'quarterly'] as const) {
     const html = renderToStaticMarkup(
       createElement(FinancialAnalysis, {
@@ -444,7 +443,7 @@ test('four modules keep shareholder metrics and charts outside Cash Flow in both
         mode,
       }),
     );
-    assert.equal((html.match(/data-analysis-module=/g) ?? []).length, 4);
+    assert.equal((html.match(/data-analysis-module=/g) ?? []).length, 5);
     const cash = html.slice(
       html.indexOf('data-analysis-module="cash-flow"'),
       html.indexOf('data-analysis-module="shareholder-returns"'),
@@ -483,42 +482,47 @@ test('four modules keep shareholder metrics and charts outside Cash Flow in both
   }
 });
 
-test('combined cash flow and health module contains seven ordered cards and exactly two filterable charts', () => {
+test('separate cash flow and health modules retain their ordered cards and independent charts in both modes', () => {
   for (const mode of ['annual', 'quarterly'] as const) {
-    const source = detail('GOOGL', '0001652044');
     const html = renderToStaticMarkup(
-      createElement(FinancialAnalysis, { detail: source, mode }),
+      createElement(FinancialAnalysis, {
+        detail: detail('GOOGL', '0001652044'),
+        mode,
+      }),
     );
-    const combined = html.slice(
+    const cash = html.slice(
       html.indexOf('data-analysis-module="cash-flow"'),
+      html.indexOf('data-analysis-module="financial-health"'),
+    );
+    const health = html.slice(
+      html.indexOf('data-analysis-module="financial-health"'),
       html.indexOf('data-analysis-module="shareholder-returns"'),
     );
-    assert.ok(combined.includes('Cash Flow &amp; Financial Health'));
-    assert.ok(!html.includes('data-analysis-module="financial-health"'));
-    assert.equal((combined.match(/data-metric=/g) ?? []).length, 7);
-    assert.equal((combined.match(/<svg/g) ?? []).length, 2);
-    assert.equal((combined.match(/role="radiogroup"/g) ?? []).length, 2);
+    assert.match(cash, /Cash Flow · 现金流/);
+    assert.match(health, /Financial Health · 财务健康/);
+    assert.doesNotMatch(html, /Cash Flow &amp; Financial Health/);
     const keys = [
       'operatingCashFlow',
       'capex',
       'fcf',
-      'cashAndShortTermSecurities',
-      'totalDebt',
-      'currentRatio',
-      'debtToEquity',
+      'fcfMargin',
+      'cashConversionRatio',
     ];
-    const positions = keys.map((key) =>
-      combined.indexOf(`data-metric="${key}"`),
-    );
+    assert.equal((cash.match(/data-metric=/g) ?? []).length, 5);
+    const positions = keys.map((k) => cash.indexOf(`data-metric="${k}"`));
     assert.ok(positions.every((x) => x >= 0));
     assert.deepEqual(
       positions,
       [...positions].sort((a, b) => a - b),
     );
-    assert.ok(
-      combined.indexOf('OCF / CapEx / FCF 历史趋势') <
-        combined.indexOf('现金储备与有息债务历史趋势'),
-    );
+    assert.match(cash, /Cash Flow Trends/);
+    assert.match(cash, /Cash Flow Quality Trends/);
+    assert.equal((cash.match(/role="radiogroup"/g) ?? []).length, 2);
+    assert.equal((health.match(/data-metric=/g) ?? []).length, 6);
+    assert.equal((health.match(/role="radiogroup"/g) ?? []).length, 2);
+    assert.match(health, /现金储备与有息债务历史趋势/);
+    assert.doesNotMatch(cash, /data-metric="totalDebt"|<table/);
+    assert.doesNotMatch(health, /data-metric="fcfMargin"/);
   }
 });
 
@@ -566,7 +570,7 @@ test('repurchase chart defaults to money and selects a single unit for each seri
   }
 });
 
-test('profitability contains four fixed core cards and one full-width margin chart in either mode', () => {
+test('profitability contains five core cards and separate margin and capital charts in either mode', () => {
   for (const mode of ['annual', 'quarterly'] as const) {
     const html = renderToStaticMarkup(
       createElement(FinancialAnalysis, {
@@ -578,15 +582,28 @@ test('profitability contains four fixed core cards and one full-width margin cha
       html.indexOf('data-analysis-module="profitability"'),
       html.indexOf('data-analysis-module="cash-flow"'),
     );
-    assert.equal((section.match(/data-metric=/g) ?? []).length, 4);
-    for (const key of ['grossMargin', 'operatingMargin', 'netMargin', 'roe'])
+    assert.equal((section.match(/data-metric=/g) ?? []).length, 5);
+    for (const key of [
+      'grossMargin',
+      'operatingMargin',
+      'netMargin',
+      'roe',
+      'roic',
+    ])
       assert.ok(section.includes(`data-metric="${key}"`));
     for (const key of ['grossProfit', 'operatingIncome', 'netIncome', 'roa'])
       assert.ok(!section.includes(`data-metric="${key}"`));
-    assert.equal((section.match(/<svg/g) ?? []).length, 1);
+    // This fixture has no margin values; its existing empty state stays intact.
+    assert.match(section, /data-chart="capital-returns"/);
     assert.equal((section.match(/role="radiogroup"/g) ?? []).length, 1);
     assert.ok(!section.includes('利润历史变化'));
-    assert.ok(!section.includes('ant-col-xl-12'));
+    assert.ok(section.includes('Capital Return Trends'));
+    assert.ok(section.includes('Profit Margin Trends'));
+    assert.ok(section.includes('盈利与资本回报'));
+    assert.ok(
+      section.indexOf('data-metric="roic"') >
+        section.indexOf('data-metric="roe"'),
+    );
     assert.ok(!section.includes('季度资本回报口径尚未验证'));
   }
 });
@@ -604,15 +621,17 @@ test('quality reuses Growth, Profitability and Cash Flow in order; shareholder r
     'data-analysis-module="growth"',
     'data-analysis-module="profitability"',
     'data-analysis-module="cash-flow"',
-    'Advanced Quality Metrics · 高级质量指标',
-    '读取企业质量缓存',
-    '管理层与风险',
+    'data-analysis-module="financial-health"',
   ];
   const positions = markers.map((x) => html.indexOf(x));
   assert.ok(positions.every((x) => x >= 0));
   assert.deepEqual(
     positions,
     [...positions].sort((a, b) => a - b),
+  );
+  assert.doesNotMatch(
+    html,
+    /Management &amp; Risks|管理层与风险|经营表现与变化原因|资金使用与重大决策|未来经营重点与趋势|重大风险/,
   );
   assert.ok(!html.includes('data-analysis-module="shareholder-returns"'));
   assert.ok(html.includes('财务报告期间口径'));
@@ -625,4 +644,31 @@ test('quality reuses Growth, Profitability and Cash Flow in order; shareholder r
   assert.ok(!management.includes('data-analysis-module="growth"'));
   assert.ok(management.includes('2025-01-01 至 2025-12-31'));
   assert.ok(!management.includes('2026-04-01 至 2026-06-30'));
+});
+
+test('enterprise quality excludes advanced metrics and placeholders in both modes while retaining all four completed modules and ROIC', () => {
+  for (const mode of ['annual', 'quarterly'] as const) {
+    const html = renderToStaticMarkup(
+      createElement(CompanyQualityContent, {
+        detail: detail('GOOGL', '0001652044'),
+        mode,
+        onModeChange() {},
+      }),
+    );
+    assert.equal((html.match(/data-analysis-module=/g) ?? []).length, 4);
+    for (const key of [
+      'growth',
+      'profitability',
+      'cash-flow',
+      'financial-health',
+    ])
+      assert.ok(html.includes(`data-analysis-module="${key}"`));
+    assert.match(html, /data-metric="roic"/);
+    assert.match(html, /Capital Return Trends/);
+    assert.match(html, /财务报告期间口径/);
+    assert.doesNotMatch(
+      html,
+      /advanced-quality|Advanced Quality Metrics|高级质量指标|Owner Earnings|Maintenance CapEx|Growth CapEx|经济商誉|管理层资本配置能力|quality-sources|TTM.*仅使用已有SEC缓存/,
+    );
+  }
 });

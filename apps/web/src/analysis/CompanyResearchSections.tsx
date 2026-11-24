@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import { DcfCalculator } from '../ValuationPage.js';
-import { EnterpriseQualityPanel } from '../EnterpriseQuality.js';
+import { useEnterpriseQuality } from '../EnterpriseQuality.js';
 import { RevenueBreakdown } from '../RevenueBreakdown.js';
-import {
-  ResearchCard,
-  useCachedResearch,
-  type CachedResearch,
-} from '../AiResearch.js';
+import { ResearchCard, useCachedResearch } from '../AiResearch.js';
 import {
   Alert,
   Button,
@@ -132,12 +128,10 @@ export function CompanyResearchSections({
             label: '企业质量',
             children: (
               <CompanyQualityContent
-                managementResearch={managementResearch}
                 detail={detail}
                 mode={mode}
                 onModeChange={onModeChange}
                 revision={revision}
-                updating={updating}
               />
             ),
           },
@@ -173,16 +167,13 @@ export function CompanyQualityContent({
   mode,
   onModeChange,
   revision = 0,
-  updating = false,
-  managementResearch,
 }: {
   detail: CompanyDetail;
   mode: FinancialMode;
   onModeChange: (mode: FinancialMode) => void;
   revision?: number;
-  updating?: boolean;
-  managementResearch?: CachedResearch;
 }) {
+  const quality = useEnterpriseQuality(detail.ticker, revision);
   return (
     <Space orientation="vertical" size={24} className="full-width">
       <div className="analysis-mode-controls">
@@ -203,16 +194,15 @@ export function CompanyQualityContent({
       <FinancialAnalysis
         detail={detail}
         mode={mode}
-        modules={['growth', 'profitability', 'cash-flow']}
-      />
-      <RevenueBreakdown key={detail.cik} cik={detail.cik} revision={revision} />
-      <EnterpriseQualityPanel ticker={detail.ticker} />
-      <ResearchCard
-        cik={detail.cik}
-        kind="management"
-        research={managementResearch}
-        revision={revision}
-        updating={updating}
+        quality={quality}
+        modules={['growth', 'profitability', 'cash-flow', 'financial-health']}
+        growthDetails={
+          <RevenueBreakdown
+            key={detail.cik}
+            cik={detail.cik}
+            revision={revision}
+          />
+        }
       />
     </Space>
   );

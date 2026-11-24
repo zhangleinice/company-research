@@ -58,7 +58,10 @@ export const LEGACY_BUSINESS_PROMPT_VERSIONS = [
   'sec-research-v1',
 ] as const;
 export const MANAGEMENT_PROMPT_VERSION = 'management-insights-v4';
-export const LEGACY_MDA_PROMPT_VERSIONS = ['item7-management-v1'] as const;
+export const LEGACY_MDA_PROMPT_VERSIONS = [
+  'item7-management-v2',
+  'item7-management-v1',
+] as const;
 export const LEGACY_MANAGEMENT_PROMPT_VERSIONS = [
   'management-insights-v3',
   PROMPT_VERSION,
@@ -533,6 +536,12 @@ export class SummaryModel {
 
 export const CAPITAL_INFORMATION_PROMPT = `同一个JSON额外返回capitalAllocation，不另开模型请求。groups按当前Item的栏目及限制保持不变。资本配置仅引用完整输入的Item 7，不得引用Item 1A或外部知识。
 capitalAllocation基本结构为：${JSON.stringify(emptyCapitalInformation())}。version固定1。coverage表示完整Item是否充分处理；无法处理时partial且coverageReason说明。空数组只表示本Item未找到披露，不代表公司没有此事项。不可省略明确事件以凑摘要条数，资本配置不受每组5条摘要限制。
+资本配置分析以重大事项对长期股东价值、资金使用和财务风险的意义为筛选依据；不设置必须填满的条目数，无重要披露返回空数组，不输出“未披露”“无相关信息”等填充条目。不添加投资回报、未来盈利或价值创造的自行判断。
+明确归属：内部业务投入归reinvestment；具有实质意义的企业收购、重大资产收购及明确收购协议归acquisitions；债务资金来源、偿付安排及融资风险归debtAndFinancing。投资性质须在中文text明确区分CapEx、R&D、租赁或其他投入，不合并为同一财务指标。
+reinvestment四栏：investmentAreas仅记录重大的服务器、数据中心、厂房设备等基础设施、新产品／技术／业务、研发及内部扩张项目，不重复收购交易；investmentPurposes仅记录原文明示的扩产、满足需求、效率成本或产品竞争力目的，不推断投资收益；investmentPlans仅记录明确的未来重大投入方向、金额或变化，未披露金额不得补造；investmentRisks仅记录直接关联重大投资的建设周期、回报不确定性、折旧／能源／基础设施成本或现金流压力，必须有原文依据，不把这些示例当作必填事实。普通合同、租赁和采购承诺不逐份罗列，仅金额重大、直接影响投资决策或形成重要未来义务时保留并说明财务性质。
+去重与精简：同一事件在同一分类仅保留一次完整核心事实；年度汇总与月份明细重叠时优先合并，保留重大金额、币种、利率、期限及必要条件，若不同批次条款、时间状态或对价范围不同则不得误合并。跨分类只写该分类新增的目的、条款或风险，不复述事件全貌。同一投资／收购不得换名重复列为内部项目。跨模块租赁仅在投资模块说明项目方向、用途和项目风险，在融资模块仅说明具有融资性质的租赁安排、重大偿付义务及财务风险，避免重复文字。中文清晰自然，避免机械翻译和过程解释。
+financingActivities优先记录重大债券发行、借款、其他融资、偿还和期末重大债务；重要未用授信和商业票据计划必须与实际融资分开。financingPurposes区分实际用途和未来可能用途，只能根据直接披露，不因投资或收购与融资出现在同一申报就建立资金关系。financingTerms只保留影响成本与偿债的票息／利率、到期时间、重要偿还安排、关键限制及担保；同批次可合并但保留重要差异，不重复活动栏的授信额度介绍。financingRisks聚焦偿债与流动性、到期与再融资、利息负担、重大担保、或有付款及资本结构相关重大财务承诺；排除无直接融资关联的普通税务、法律和经营风险，也不机械重复投资风险。
+排除股东分配明细：debtAndFinancing不列股票回购金额、股数、授权及剩余额度、股息支付金额、各类分红、未来季度分红计划或笼统股东回报政策。若融资所得用途或关键债务限制直接涉及分配，仅保留必要的融资关联，不重述Dividends或Share Repurchases的明细；没有直接证据则省略。与重大融资无关的经营细节同样省略。
 各文字数组元素为{text:简洁中文,kind:fact|plan|risk,evidence:[{paragraphId,quote}]}，quote规则同上。investmentPlans必须kind=plan，investmentRisks和financingRisks必须kind=risk。不得把预计投资写成已发生，不推算项目金额、维护性CapEx或投资回报。
 financingActivities额外必须有activityType：actualFinancing（实际融资/偿还）、creditFacility（授信额度）、commercialPaperProgram（商业票据计划额度）、debtBalance（期末余额）、plan或other。未使用授信不能写成实际借款，零期末余额不能推出全年没有融资。资金用途只按披露，一般公司用途不能绑定特定项目。期限和利率保留披露范围，不把平均期限或平均票息当成每笔条款。
 debtAndFinancing边界只包括实际债务融资、融资用途、重要融资条款、明确披露的融资风险。不要重复Dividends的金额与政策、Share Repurchases的回购金额及授权、Business Investment的详细CapEx项目、Acquisitions的交易事件。只有原文明示融资所得用于相关行为，或债务条款直接约束相关行为时，才简短保留有证据的直接关联；一般公司用途不能推断具体投向。该边界仅约束debtAndFinancing，不删除其他结构必要内容。

@@ -1,6 +1,9 @@
 import { generateText } from 'ai';
 import { ConfigService } from '@nestjs/config';
-import { SummaryModel } from '../src/modules/ai-research/summary-model';
+import {
+  CAPITAL_INFORMATION_PROMPT,
+  SummaryModel,
+} from '../src/modules/ai-research/summary-model';
 import { TOPICS } from '../src/modules/ai-research/summary-schema';
 import { emptyCapitalInformation } from '../src/modules/ai-research/capital-information';
 import type { AcquisitionEvent } from '@company-research/shared';
@@ -106,4 +109,20 @@ it('rejects quotations from other chunks even if they occur elsewhere in the com
       async () => {},
     ),
   ).rejects.toThrow('逐字匹配');
+});
+
+it('capital prompt assigns material disclosures without quotas, distribution details or invented purposes', () => {
+  for (const rule of [
+    '不设置必须填满的条目数',
+    'CapEx、R&D、租赁或其他投入',
+    '同一事件在同一分类仅保留一次完整核心事实',
+    '年度汇总与月份明细',
+    '不同批次条款、时间状态或对价范围不同则不得误合并',
+    'financingPurposes区分实际用途和未来可能用途',
+    '关键限制及担保',
+    '未来季度分红计划',
+    '未披露金额不得补造',
+    '重大资产收购',
+  ])
+    expect(CAPITAL_INFORMATION_PROMPT).toContain(rule);
 });

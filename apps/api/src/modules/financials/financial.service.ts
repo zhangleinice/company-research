@@ -1,9 +1,14 @@
+import type { DebtDisclosure } from './debt-disclosure';
 import { Injectable } from '@nestjs/common';
 import { normalizeCompanyFacts } from './normalize-company-facts';
 
 @Injectable()
 export class FinancialService {
-  normalize(raw: unknown) {
-    return normalizeCompanyFacts(raw);
+  normalize(
+    raw: unknown,
+    disclosures: readonly DebtDisclosure[] = [],
+    sic: string | null = null,
+  ) {
+    return normalizeCompanyFacts(raw, disclosures, sic);
   }
 }

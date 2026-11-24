@@ -25,7 +25,7 @@ function render(groups: AiResearchSummary['summaryJson']['groups']) {
     createElement(ManagementSummary, { summary: { groups } }),
   );
 }
-test('legacy five-section cache retains all prose and citations in four directions without mutation', () => {
+test('legacy five-section cache retains all prose with hidden evidence in four directions without mutation', () => {
   const groups = [
     '经营表现及原因',
     '资本开支',
@@ -44,8 +44,9 @@ test('legacy five-section cache retains all prose and citations in four directio
   assert.ok(
     html.indexOf('保留旧摘要内容1。') < html.indexOf('保留旧摘要内容2。'),
   );
-  assert.ok(
-    html.includes('Item 7:p1: Demand supported operating performance.'),
+  assert.doesNotMatch(
+    html,
+    /Item 7:p1|Demand supported operating performance|原文依据/,
   );
   assert.ok(!html.includes('公司披露的事实'));
   assert.deepEqual(groups, before);

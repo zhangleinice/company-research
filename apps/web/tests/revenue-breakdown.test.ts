@@ -1,3 +1,4 @@
+import { FinancialAnalysis } from '../src/analysis/FinancialAnalysis.js';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createElement } from 'react';
@@ -6,7 +7,11 @@ import {
   formatRevenueMillions,
   RevenueTables,
 } from '../src/RevenueBreakdown.js';
-import type { RevenueBreakdownResponse } from '@company-research/shared';
+import {
+  FINANCIAL_METRICS,
+  type FinancialPeriod,
+  type RevenueBreakdownResponse,
+} from '@company-research/shared';
 test('formats exact amounts without converting large USD integers to floating point', () => {
   assert.equal(
     formatRevenueMillions('9007199254740993123456'),
@@ -57,7 +62,11 @@ test('keeps original groups, totals, missing years, percent growth and SEC links
         rowIndex: 1,
         name: 'Official item',
         originalRow: 'Original row',
-        facts: [fact],
+        facts: [
+          { ...fact, fiscalYear: 2023, value: '64000000' },
+          { ...fact, fiscalYear: 2024, value: '80000000' },
+          fact,
+        ],
       },
       {
         rowIndex: 2,
@@ -80,4 +89,66 @@ test('keeps original groups, totals, missing years, percent growth and SEC links
   assert.ok(html.includes('#fact'));
   assert.ok(html.includes('Total revenues'));
   assert.ok(!html.includes('Original disclosure'));
+  assert.ok(!html.includes('ant-card'));
+  const before = JSON.stringify(data);
+  for (const mode of ['annual', 'quarterly'] as const) {
+    const row = {
+      ...Object.fromEntries(FINANCIAL_METRICS.map((key) => [key, null])),
+      fiscalYear: 2025,
+      fiscalQuarter: mode === 'annual' ? null : 4,
+      periodStart: mode === 'annual' ? '2025-01-01' : '2025-10-01',
+      periodEnd: '2025-12-31',
+      currency: 'USD',
+      revenue: 100000000,
+    } as FinancialPeriod;
+    const page = renderToStaticMarkup(
+      createElement(FinancialAnalysis, {
+        detail: { annual: [row], quarterly: [row] },
+        mode,
+        modules: ['growth', 'profitability', 'cash-flow'],
+        growthDetails: createElement(RevenueTables, { data }),
+      }),
+    );
+    const growth = page.slice(
+      page.indexOf('data-analysis-module="growth"'),
+      page.indexOf('data-analysis-module="profitability"'),
+    );
+    assert.ok(
+      growth.includes(html),
+      'the complete revenue component stays inside Growth',
+    );
+    assert.ok(
+      growth.indexOf('Revenue / EPS 同比趋势') < growth.indexOf('收入明细'),
+    );
+    for (const year of [2023, 2024, 2025])
+      assert.ok(growth.includes(String(year)));
+    for (const metric of [
+      'revenue',
+      'revenueGrowth',
+      'eps',
+      'epsGrowth',
+      'revenueCagr3y',
+      'revenueCagr5y',
+      'epsCagr3y',
+      'epsCagr5y',
+    ])
+      assert.ok(growth.includes(`data-metric="${metric}"`));
+    assert.equal(
+      (page.match(/aria-label="Revenue Breakdown · 收入明细"/g) ?? []).length,
+      1,
+    );
+  }
+  const noFinancials = renderToStaticMarkup(
+    createElement(FinancialAnalysis, {
+      detail: { annual: [], quarterly: [] },
+      mode: 'annual',
+      modules: ['growth'],
+      growthDetails: createElement(RevenueTables, { data }),
+    }),
+  );
+  assert.ok(
+    noFinancials.includes(html),
+    'revenue disclosure remains available when financial history is missing',
+  );
+  assert.equal(JSON.stringify(data), before);
 });

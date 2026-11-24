@@ -28,7 +28,7 @@ export function ProfitabilityCharts({
 }) {
   const [selected, setSelected] = useState<Selection>('all');
   const all = profitabilitySeries('all');
-  const title = '利润率历史趋势';
+  const title = 'Profit Margin Trends · 利润率趋势';
   return (
     <section className="analysis-chart-panel">
       <Typography.Title level={5}>{title}</Typography.Title>

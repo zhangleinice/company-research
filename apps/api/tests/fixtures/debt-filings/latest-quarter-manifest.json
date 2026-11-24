@@ -1,0 +1,46 @@
+[
+  {
+    "ticker": "GOOGL",
+    "cik": "0001652044",
+    "filingType": "10-Q",
+    "accessionNumber": "0001652044-26-000084",
+    "reportDate": "2026-09-30",
+    "filingDate": "2026-10-29",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/goog-20260930.htm",
+    "file": "0001652044-26-000084.html.gz",
+    "sha256": "09897610e1f81a2dd24cda019caa6ea50e217819714d39535d9276a025b1b738"
+  },
+  {
+    "ticker": "AAPL",
+    "cik": "0000320193",
+    "filingType": "10-Q",
+    "accessionNumber": "0000320193-26-000020",
+    "reportDate": "2026-06-27",
+    "filingDate": "2026-07-31",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm",
+    "file": "0000320193-26-000020.html.gz",
+    "sha256": "8d47f3355800ea0ba595afec4bffe95c6b3ce93fa18c77f29b6fb41e19ec7841"
+  },
+  {
+    "ticker": "MSFT",
+    "cik": "0000789019",
+    "filingType": "10-Q",
+    "accessionNumber": "0001193125-26-436133",
+    "reportDate": "2026-09-30",
+    "filingDate": "2026-10-28",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/msft-20260930.htm",
+    "file": "0001193125-26-436133.html.gz",
+    "sha256": "c148db88de1b4c5f16a5092c4e79d87b2eb087c695fcc1e88949cae665e731cc"
+  },
+  {
+    "ticker": "KO",
+    "cik": "0000021344",
+    "filingType": "10-Q",
+    "accessionNumber": "0001628280-26-067844",
+    "reportDate": "2026-10-02",
+    "filingDate": "2026-10-28",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002.htm",
+    "file": "0001628280-26-067844.html.gz",
+    "sha256": "d836e51f980a7602554f10e53d5076c025ada38c34a37dd315f406c995d4bf1d"
+  }
+]

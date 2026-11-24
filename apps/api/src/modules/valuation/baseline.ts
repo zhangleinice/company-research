@@ -1,3 +1,4 @@
+import type { DebtDisclosure } from '../financials/debt-disclosure';
 import { bridgeDisclosures } from './bridge-disclosures';
 import {
   historicalEffectiveTaxRate,
@@ -40,6 +41,7 @@ export function valuationBaseline(
   sub: Sub,
   ticker: string,
   cik: string,
+  disclosures: readonly DebtDisclosure[] = [],
 ): ValuationBaseline {
   if (
     String(raw.cik).padStart(10, '0') !== cik ||
@@ -64,7 +66,7 @@ export function valuationBaseline(
     );
   if (!dates.length) throw Error('没有可用10-K/10-Q申报');
   const latest = dates[0],
-    normalized = normalizeCompanyFacts(raw);
+    normalized = normalizeCompanyFacts(raw, disclosures);
   const annual = normalized.annual.find((a) => a.periodEnd <= latest.end),
     isAnnual = annual?.periodEnd === latest.end;
   const yearStart = annual
@@ -197,6 +199,12 @@ export function valuationBaseline(
       });
       return {
         periodEnd: end,
+        ...(row?.sources.balanceSheetInputs
+          ? {
+              verifiedInputs: row.sources
+                .balanceSheetInputs as import('@company-research/shared').BalanceSheetInputs,
+            }
+          : {}),
         equity: fact('equity'),
         debt: fact('totalDebt'),
         cash: fact('cash'),

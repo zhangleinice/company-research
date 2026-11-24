@@ -1,3 +1,4 @@
+import { DEBT_CASH_FLOW_TAGS } from './debt-cash-flows';
 import type {
   AllocationSource,
   AllocationValue,
@@ -28,12 +29,13 @@ export function annualCapitalAllocation(
     duration <= 400 &&
     row.currency === 'USD';
   function fact(
-    key: keyof FinancialPeriod,
+    key: string,
     tags: string[],
     unit = 'USD',
     instant = false,
+    storedValue: unknown = row[key as keyof FinancialPeriod],
   ): AllocationValue {
-    const value = row[key];
+    const value = storedValue;
     const source = sources[key];
     if (
       !annual ||
@@ -125,7 +127,31 @@ export function annualCapitalAllocation(
           sources: [...ocf.sources, ...capex.sources],
         }
       : missing('缺少同财年可靠FCF');
+  const debtCashFlows = Object.fromEntries(
+    Object.entries(DEBT_CASH_FLOW_TAGS).map(([key, tag]) => {
+      const s = sources[key];
+      const f = isObject(s) && Array.isArray(s.items) ? s.items[0] : undefined;
+      const value = fact(
+        key,
+        [`us-gaap:${tag}`],
+        'USD',
+        false,
+        isObject(f) ? f.val : null,
+      );
+      return [
+        key,
+        value.value !== null && value.value >= 0
+          ? value
+          : missing(
+              isObject(s) && typeof s.reason === 'string'
+                ? s.reason
+                : '缺少同财年USD债务现金流汇总缓存或来源无法核准；不以分项、净额或债务余额估算',
+            ),
+      ];
+    }),
+  ) as NonNullable<AnnualCapitalAllocation['debtCashFlows']>;
   return {
+    debtCashFlows,
     reinvestment: {
       capex:
         capex.value !== null && capex.value >= 0

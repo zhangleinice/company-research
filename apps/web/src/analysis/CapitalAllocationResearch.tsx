@@ -1,10 +1,5 @@
 import { Collapse, Empty, Space, Table, Tag, Typography } from 'antd';
-import type {
-  AcquisitionEvent,
-  CapitalAllocationInformation,
-  CapitalNote,
-  SecEvidence,
-} from '@company-research/shared';
+import type { AcquisitionEvent, CapitalNote } from '@company-research/shared';
 import type { CachedResearch } from '../AiResearch.js';
 
 export function capitalInformation(research?: CachedResearch) {
@@ -19,48 +14,6 @@ export function capitalInformation(research?: CachedResearch) {
     source.accessionNumber === summary?.accessionNumber &&
     source.sourceUrl === summary?.sourceUrl;
   return { summary, info: valid ? info : undefined };
-}
-function Evidence({
-  evidence,
-  info,
-}: {
-  evidence: SecEvidence[];
-  info: CapitalAllocationInformation;
-}) {
-  return (
-    <Collapse
-      ghost
-      size="small"
-      items={[
-        {
-          key: 'sources',
-          label: '〔Item 7〕原文依据',
-          children: (
-            <Space orientation="vertical" size={8}>
-              {evidence.map((e, i) => (
-                <Typography.Paragraph key={i}>
-                  <Typography.Text type="secondary">
-                    {e.paragraphId}
-                  </Typography.Text>
-                  <br />
-                  {e.quote}
-                </Typography.Paragraph>
-              ))}
-              {info.source && (
-                <Typography.Link
-                  href={info.source.sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  SEC原始年报
-                </Typography.Link>
-              )}
-            </Space>
-          ),
-        },
-      ]}
-    />
-  );
 }
 export function CapitalSource({
   research,
@@ -129,10 +82,21 @@ const activities = {
   plan: '融资计划',
   other: '其他披露',
 };
+function renderNote(n: CapitalNote, i: number) {
+  return (
+    <Typography.Paragraph key={i}>
+      <Tag>{kinds[n.kind]}</Tag>
+      {n.activityType && <Tag>{activities[n.activityType]}</Tag>}
+      {n.text}
+    </Typography.Paragraph>
+  );
+}
 export function CapitalNotes({
   groups,
   research,
+  investmentDetailsOpen = false,
 }: {
+  investmentDetailsOpen?: boolean;
   groups: { title: string; key: string; notes: CapitalNote[] }[];
   research?: CachedResearch;
 }) {
@@ -144,21 +108,26 @@ export function CapitalNotes({
           <Typography.Title level={5}>{g.title}</Typography.Title>
           {!info || !g.notes.length ? (
             <Typography.Text type="secondary">
-              {info
-                ? '当前输入Item 7未提取到相关披露，不代表不存在该事项。'
-                : '—'}
+              {info ? '本期 Item 7 暂无可展示的重要披露。' : '—'}
             </Typography.Text>
           ) : (
-            g.notes.map((n, i) => (
-              <div key={i}>
-                <Typography.Paragraph>
-                  <Tag>{kinds[n.kind]}</Tag>
-                  {n.activityType && <Tag>{activities[n.activityType]}</Tag>}
-                  {n.text}
-                </Typography.Paragraph>
-                <Evidence evidence={n.evidence} info={info} />
-              </div>
-            ))
+            <>
+              {g.notes
+                .slice(0, g.key === 'investmentAreas' ? 3 : undefined)
+                .map(renderNote)}
+              {g.key === 'investmentAreas' && g.notes.length > 3 && (
+                <Collapse
+                  defaultActiveKey={investmentDetailsOpen ? ['more'] : []}
+                  items={[
+                    {
+                      key: 'more',
+                      label: `展开其余投资信息（${g.notes.length - 3}条）`,
+                      children: g.notes.slice(3).map(renderNote),
+                    },
+                  ]}
+                />
+              )}
+            </>
           )}
         </section>
       ))}
@@ -187,6 +156,31 @@ const considerations = {
   other: '其他披露方式',
   unknown: '未知',
 };
+export function considerationExplanation(e: AcquisitionEvent): string {
+  const value = e.transactionValue;
+  if (e.considerationType === 'cashPlusDebt' || value?.scope === 'cashPlusDebt')
+    return '；另行承担债务，现金金额不等于完整交易对价';
+  if (!value) return '；金额未明确披露';
+  if (value.scope === 'unknown' || e.considerationType === 'unknown')
+    return '；对价范围或支付方式未明确';
+  if (e.considerationType === 'cash') {
+    // Conditions are read only from the saved transaction-value evidence, never inferred from the target.
+    const adjustment = [
+      value.rawText,
+      ...value.evidence.map((x) => x.quote),
+    ].some((text) =>
+      /\b(?:subject to (?:customary )?(?:closing|purchase price) adjustments?|(?:closing|purchase price) adjustments?)\b|交割调整/iu.test(
+        text,
+      ),
+    );
+    return adjustment
+      ? '；现金对价，最终金额可能因交割调整而变化'
+      : '；现金对价';
+  }
+
+  if (value.scope === 'cash') return '；所列金额为现金部分';
+  return '';
+}
 export function AcquisitionList({ research }: { research?: CachedResearch }) {
   const { info } = capitalInformation(research);
   if (!info) return null;
@@ -218,9 +212,7 @@ export function AcquisitionList({ research }: { research?: CachedResearch }) {
               </div>
               <Typography.Text type="secondary">
                 原文提取，待核对 · {considerations[e.considerationType]}
-                {e.transactionValue?.scope === 'cashPlusDebt'
-                  ? '；包含另行承担债务，不能视为现金部分即全部对价'
-                  : ''}
+                {considerationExplanation(e)}
               </Typography.Text>
             </>
           ),
@@ -252,19 +244,6 @@ export function AcquisitionList({ research }: { research?: CachedResearch }) {
         },
         { title: '披露状态', render: (_, e) => statuses[e.transactionStatus] },
       ]}
-      expandable={{
-        expandedRowRender: (e) => (
-          <Evidence
-            info={info}
-            evidence={[
-              ...e.evidence,
-              ...(e.transactionDate?.evidence ?? []),
-              ...(e.transactionValue?.evidence ?? []),
-              ...(e.acquisitionPurpose?.evidence ?? []),
-            ]}
-          />
-        ),
-      }}
     />
   );
 }

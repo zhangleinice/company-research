@@ -7,6 +7,7 @@ export interface QualityCapitalSnapshot {
   debt: ValuationFact;
   cash: ValuationFact;
   securities: ValuationFact;
+  verifiedInputs?: import('./balance-sheet-inputs.js').BalanceSheetInputs;
 }
 export interface EnterpriseQuality {
   version: 1;
@@ -26,4 +27,6 @@ export interface EnterpriseQuality {
   pretaxIncome: ValuationFact;
   historicalTaxRate: number | null;
   capital: QualityCapitalSnapshot[];
+  quarterlyRoic?: import('./annual-roic.js').QuarterlyRoicHistory;
+  annualRoic?: import('./annual-roic.js').AnnualRoicHistory;
 }

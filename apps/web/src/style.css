@@ -366,29 +366,6 @@ body {
 .valuation-card > .ant-card-body {
   padding: 8px 24px 20px;
 }
-.quality-analysis .ant-divider {
-  margin: 16px 0;
-}
-.quality-analysis h5.ant-typography {
-  margin: 0 0 10px;
-}
-.quality-analysis .ant-descriptions-item {
-  padding-bottom: 8px;
-}
-.quality-analysis .ant-table-wrapper {
-  margin: 8px 0;
-}
-.quality-result {
-  margin: 6px 0;
-  font-weight: 600;
-}
-.quality-sources {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-  font-size: 12px;
-}
 @media (max-width: 600px) {
   .valuation-card > .ant-card-body {
     padding: 8px 14px 16px;

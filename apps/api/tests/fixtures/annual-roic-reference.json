@@ -1,0 +1,305 @@
+{
+  "description": "Prior investigation manual reference; test expectations only, never normalization input. Amounts in USD millions, ROIC percent.",
+  "companies": {
+    "GOOGL": {
+      "sic": "7370",
+      "industrySourceUrl": "https://data.sec.gov/submissions/CIK0001652044.json",
+      "manual": [
+        {
+          "year": "2023",
+          "operatingIncome": 84293.0,
+          "taxExpense": 11922.0,
+          "pretaxIncome": 85717.0,
+          "taxRate": 0.13908559562280529,
+          "NOPAT_proxy": 72569.05788816688,
+          "beginIC": 157381.0,
+          "endIC": 187079.0,
+          "averageIC": 172230.0,
+          "ROIC_proxy": 42.13496945257324,
+          "source": {
+            "start": "2023-01-01",
+            "end": "2023-12-31",
+            "val": 84293000000,
+            "accn": "0001652044-26-000018",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-05",
+            "frame": "CY2023"
+          }
+        },
+        {
+          "year": "2024",
+          "operatingIncome": 112390.0,
+          "taxExpense": 19697.0,
+          "pretaxIncome": 119815.0,
+          "taxRate": 0.16439510912657013,
+          "NOPAT_proxy": 93913.6336852648,
+          "beginIC": 187079.0,
+          "endIC": 245286.0,
+          "averageIC": 216182.5,
+          "ROIC_proxy": 43.44182978976781,
+          "source": {
+            "start": "2024-01-01",
+            "end": "2024-12-31",
+            "val": 112390000000,
+            "accn": "0001652044-26-000018",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-05",
+            "frame": "CY2024"
+          }
+        },
+        {
+          "year": "2025",
+          "operatingIncome": 129039.0,
+          "taxExpense": 26656.0,
+          "pretaxIncome": 158826.0,
+          "taxRate": 0.16783146336242177,
+          "NOPAT_proxy": 107382.19579917645,
+          "beginIC": 245286.0,
+          "endIC": 339465.0,
+          "averageIC": 292375.5,
+          "ROIC_proxy": 36.72749454012954,
+          "source": {
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 129039000000,
+            "accn": "0001652044-26-000018",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-05",
+            "frame": "CY2025"
+          }
+        }
+      ]
+    },
+    "AAPL": {
+      "sic": "3571",
+      "industrySourceUrl": "https://data.sec.gov/submissions/CIK0000320193.json",
+      "manual": [
+        {
+          "year": "2024",
+          "operatingIncome": 123216.0,
+          "taxExpense": 29749.0,
+          "pretaxIncome": 123485.0,
+          "taxRate": 0.24091185164189982,
+          "NOPAT_proxy": 93531.80528809168,
+          "beginIC": 112703.0,
+          "endIC": 99304.0,
+          "averageIC": 106003.5,
+          "ROIC_proxy": 88.23463875069379,
+          "source": {
+            "start": "2023-10-01",
+            "end": "2024-09-28",
+            "val": 123216000000,
+            "accn": "0000320193-26-000026",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-11-03",
+            "frame": "CY2024"
+          }
+        },
+        {
+          "year": "2025",
+          "operatingIncome": 133050.0,
+          "taxExpense": 20719.0,
+          "pretaxIncome": 132729.0,
+          "taxRate": 0.15610002335586043,
+          "NOPAT_proxy": 112280.89189250277,
+          "beginIC": 99304.0,
+          "endIC": 118923.0,
+          "averageIC": 109113.5,
+          "ROIC_proxy": 102.9028414380464,
+          "source": {
+            "start": "2024-09-29",
+            "end": "2025-09-27",
+            "val": 133050000000,
+            "accn": "0000320193-26-000026",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-11-03",
+            "frame": "CY2025"
+          }
+        },
+        {
+          "year": "2026",
+          "operatingIncome": 158063.0,
+          "taxExpense": 27062.0,
+          "pretaxIncome": 159237.0,
+          "taxRate": 0.169947939235228,
+          "NOPAT_proxy": 131200.51888066216,
+          "beginIC": 118923.0,
+          "endIC": 136938.0,
+          "averageIC": 127930.5,
+          "ROIC_proxy": 102.55609012757878,
+          "source": {
+            "start": "2025-09-28",
+            "end": "2026-09-26",
+            "val": 158063000000,
+            "accn": "0000320193-26-000026",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-11-03",
+            "frame": "CY2026"
+          }
+        }
+      ]
+    },
+    "MSFT": {
+      "sic": "7372",
+      "industrySourceUrl": "https://data.sec.gov/submissions/CIK0000789019.json",
+      "manual": [
+        {
+          "year": "2024",
+          "operatingIncome": 109433.0,
+          "taxExpense": 19651.0,
+          "pretaxIncome": 107787.0,
+          "taxRate": 0.18231326597827197,
+          "NOPAT_proxy": 89481.91236419976,
+          "beginIC": 159265.0,
+          "endIC": 271709.0,
+          "averageIC": 215487.0,
+          "ROIC_proxy": 41.52543418591365,
+          "source": {
+            "start": "2023-07-01",
+            "end": "2024-06-30",
+            "val": 109433000000,
+            "accn": "0001193125-26-323660",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-07-29",
+            "frame": "CY2024"
+          }
+        },
+        {
+          "year": "2025",
+          "operatingIncome": 128528.0,
+          "taxExpense": 21795.0,
+          "pretaxIncome": 123627.0,
+          "taxRate": 0.17629644009803683,
+          "NOPAT_proxy": 105868.97114707953,
+          "beginIC": 271709.0,
+          "endIC": 338237.0,
+          "averageIC": 304973.0,
+          "ROIC_proxy": 34.71421114232392,
+          "source": {
+            "start": "2024-07-01",
+            "end": "2025-06-30",
+            "val": 128528000000,
+            "accn": "0001193125-26-323660",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-07-29",
+            "frame": "CY2025"
+          }
+        },
+        {
+          "year": "2026",
+          "operatingIncome": 155237.0,
+          "taxExpense": 32185.0,
+          "pretaxIncome": 165934.0,
+          "taxRate": 0.19396265985271252,
+          "NOPAT_proxy": 125126.81857244446,
+          "beginIC": 338237.0,
+          "endIC": 472432.0,
+          "averageIC": 405334.5,
+          "ROIC_proxy": 30.870014413390535,
+          "source": {
+            "start": "2025-07-01",
+            "end": "2026-06-30",
+            "val": 155237000000,
+            "accn": "0001193125-26-323660",
+            "fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-07-29",
+            "frame": "CY2026"
+          }
+        }
+      ]
+    },
+    "KO": {
+      "sic": "2080",
+      "industrySourceUrl": "https://data.sec.gov/submissions/CIK0000021344.json",
+      "manual": [
+        {
+          "year": "2023",
+          "operatingIncome": 11311.0,
+          "taxExpense": 2249.0,
+          "pretaxIncome": 12952.0,
+          "taxRate": 0.17364113650401483,
+          "NOPAT_proxy": 9346.94510500309,
+          "beginIC": null,
+          "endIC": null,
+          "averageIC": null,
+          "ROIC_proxy": null,
+          "source": {
+            "start": "2023-01-01",
+            "end": "2023-12-31",
+            "val": 11311000000,
+            "accn": "0001628280-26-010047",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-20",
+            "frame": "CY2023"
+          }
+        },
+        {
+          "year": "2024",
+          "operatingIncome": 9992.0,
+          "taxExpense": 2437.0,
+          "pretaxIncome": 13086.0,
+          "taxRate": 0.1862295583065872,
+          "NOPAT_proxy": 8131.194253400581,
+          "beginIC": null,
+          "endIC": null,
+          "averageIC": null,
+          "ROIC_proxy": null,
+          "source": {
+            "start": "2024-01-01",
+            "end": "2024-12-31",
+            "val": 9992000000,
+            "accn": "0001628280-26-010047",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-20",
+            "frame": "CY2024"
+          }
+        },
+        {
+          "year": "2025",
+          "operatingIncome": 13762.0,
+          "taxExpense": 2861.0,
+          "pretaxIncome": 15998.0,
+          "taxRate": 0.1788348543567946,
+          "NOPAT_proxy": 11300.874734341793,
+          "beginIC": null,
+          "endIC": null,
+          "averageIC": null,
+          "ROIC_proxy": null,
+          "source": {
+            "start": "2025-01-01",
+            "end": "2025-12-31",
+            "val": 13762000000,
+            "accn": "0001628280-26-010047",
+            "fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-02-20",
+            "frame": "CY2025"
+          }
+        }
+      ]
+    }
+  }
+}

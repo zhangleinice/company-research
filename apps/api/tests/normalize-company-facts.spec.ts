@@ -61,6 +61,7 @@ function fixture() {
       observation(50, undefined, end),
     );
     add('DebtCurrent', 'USD', observation(4, undefined, end));
+    add('FinanceLeaseLiabilityCurrent', 'USD', observation(0, undefined, end));
     add('LongTermDebtNoncurrent', 'USD', observation(10, undefined, end));
   }
   for (const [quarter, end, quarterStart, revenue, cumulativeCash, capex] of [
