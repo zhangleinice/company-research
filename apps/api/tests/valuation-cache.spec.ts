@@ -46,6 +46,7 @@ it('valuation references read latest same-period financial cache without SEC or 
   };
   const client = { getJson: jest.fn() };
   const db = {
+    valuationCache: { findUnique: jest.fn().mockResolvedValue(null) },
     quarterlyFinancial: {
       findFirst: jest.fn().mockResolvedValue({
         periodEnd: new Date('2026-10-02'),
@@ -81,6 +82,7 @@ it('missing financial reference rows remain null, with no acquisition fallback',
     getCompanyFacts: jest.fn(),
   };
   const db = {
+    valuationCache: { findUnique: jest.fn().mockResolvedValue(null) },
     quarterlyFinancial: { findFirst: jest.fn().mockResolvedValue(null) },
     annualFinancial: { findFirst: jest.fn().mockResolvedValue(null) },
   };

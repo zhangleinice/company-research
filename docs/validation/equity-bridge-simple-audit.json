@@ -1,0 +1,220 @@
+{
+  "checkedAt": "2026-11-25T11:10:47.171Z",
+  "testOnly": true,
+  "persisted": false,
+  "companies": [
+    {
+      "ticker": "GOOGL",
+      "asOf": "2026-09-30",
+      "fingerprint": "f5abe01342820bd3e48704cf48f5ee44a2f0ce8d278f06059f80a0d2fa20662b",
+      "initial": {
+        "ev": 355248.6204391776,
+        "equity": 472500.6204391776,
+        "perShare": 38.43343260445564,
+        "shares": 12294,
+        "adjustments": {
+          "cash": 56334,
+          "shortInvestments": 208764,
+          "longInvestments": null,
+          "financingDebt": 129823,
+          "minority": null,
+          "preferred": 18023,
+          "otherClaims": null,
+          "shares": 12294
+        },
+        "omitted": [
+          "longInvestments",
+          "minority",
+          "otherClaims"
+        ],
+        "errors": []
+      },
+      "testOnlyAdditionalAssumptions": "none",
+      "conditional": {
+        "ev": 355248.6204391776,
+        "equity": 472500.6204391776,
+        "perShare": 38.43343260445564,
+        "shares": 12294,
+        "adjustments": {
+          "cash": 56334,
+          "shortInvestments": 208764,
+          "longInvestments": null,
+          "financingDebt": 129823,
+          "minority": null,
+          "preferred": 18023,
+          "otherClaims": null,
+          "shares": 12294
+        },
+        "omitted": [
+          "longInvestments",
+          "minority",
+          "otherClaims"
+        ],
+        "errors": []
+      }
+    },
+    {
+      "ticker": "AAPL",
+      "asOf": "2026-09-26",
+      "fingerprint": "ac52555cb9fb718f8d159e46b3bc1843266851cb3061c505c0041c9c5e24b538",
+      "initial": {
+        "ev": null,
+        "equity": null,
+        "perShare": null,
+        "shares": 14532.259,
+        "adjustments": {
+          "cash": 36305,
+          "shortInvestments": 20417,
+          "longInvestments": null,
+          "financingDebt": 81567,
+          "minority": null,
+          "preferred": null,
+          "otherClaims": null,
+          "shares": 14532.259
+        },
+        "omitted": [
+          "longInvestments",
+          "minority",
+          "preferred",
+          "otherClaims"
+        ],
+        "errors": [
+          "简单预测需要已核准的正历史FCFF，或明确确认且有依据的正研究性FCFF基准"
+        ]
+      },
+      "testOnlyAdditionalAssumptions": "manual FCFF 100000",
+      "conditional": {
+        "ev": 1601875.725701796,
+        "equity": 1577030.725701796,
+        "perShare": 108.51931043217685,
+        "shares": 14532.259,
+        "adjustments": {
+          "cash": 36305,
+          "shortInvestments": 20417,
+          "longInvestments": null,
+          "financingDebt": 81567,
+          "minority": null,
+          "preferred": null,
+          "otherClaims": null,
+          "shares": 14532.259
+        },
+        "omitted": [
+          "longInvestments",
+          "minority",
+          "preferred",
+          "otherClaims"
+        ],
+        "errors": []
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "asOf": "2026-09-30",
+      "fingerprint": "03100d39a8342cd483ed16498a26b387e315b33326b7da86819e769f72d044fe",
+      "initial": {
+        "ev": 1001223.1080241273,
+        "equity": 959278.1080241273,
+        "perShare": 129.1609139658176,
+        "shares": 7427,
+        "adjustments": {
+          "cash": 20281,
+          "shortInvestments": 44228,
+          "longInvestments": null,
+          "financingDebt": 106454,
+          "minority": null,
+          "preferred": null,
+          "otherClaims": null,
+          "shares": 7427
+        },
+        "omitted": [
+          "longInvestments",
+          "minority",
+          "preferred",
+          "otherClaims"
+        ],
+        "errors": []
+      },
+      "testOnlyAdditionalAssumptions": "none",
+      "conditional": {
+        "ev": 1001223.1080241273,
+        "equity": 959278.1080241273,
+        "perShare": 129.1609139658176,
+        "shares": 7427,
+        "adjustments": {
+          "cash": 20281,
+          "shortInvestments": 44228,
+          "longInvestments": null,
+          "financingDebt": 106454,
+          "minority": null,
+          "preferred": null,
+          "otherClaims": null,
+          "shares": 7427
+        },
+        "omitted": [
+          "longInvestments",
+          "minority",
+          "preferred",
+          "otherClaims"
+        ],
+        "errors": []
+      }
+    },
+    {
+      "ticker": "KO",
+      "asOf": "2026-10-02",
+      "fingerprint": "76615604c46713dc2e52fe91480f47f49e2350c213186423cb1dde0f930a3555",
+      "initial": {
+        "ev": 248129.10822305508,
+        "equity": null,
+        "perShare": null,
+        "shares": null,
+        "adjustments": {
+          "cash": 13454,
+          "shortInvestments": 231,
+          "longInvestments": null,
+          "financingDebt": null,
+          "minority": 2161,
+          "preferred": null,
+          "otherClaims": null,
+          "shares": null
+        },
+        "omitted": [
+          "longInvestments",
+          "preferred",
+          "otherClaims"
+        ],
+        "errors": [
+          "有息债务：暂不确定",
+          "估值用稀释股数：暂不确定",
+          "Total Financing Debt · 含融资租赁的融资债务：数据缺失",
+          "Applicable Shares · 估值使用股数：数据缺失",
+          "估值使用股数必须大于0"
+        ]
+      },
+      "testOnlyAdditionalAssumptions": "synthetic financing debt 50000; explicit quarter diluted shares proxy 4314",
+      "conditional": {
+        "ev": 248129.10822305508,
+        "equity": 209653.10822305508,
+        "perShare": 48.598309741088336,
+        "shares": 4314,
+        "adjustments": {
+          "cash": 13454,
+          "shortInvestments": 231,
+          "longInvestments": null,
+          "financingDebt": 50000,
+          "minority": 2161,
+          "preferred": null,
+          "otherClaims": null,
+          "shares": 4314
+        },
+        "omitted": [
+          "longInvestments",
+          "preferred",
+          "otherClaims"
+        ],
+        "errors": []
+      }
+    }
+  ],
+  "databaseUnchanged": true
+}

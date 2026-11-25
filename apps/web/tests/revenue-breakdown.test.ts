@@ -83,6 +83,8 @@ test('keeps original groups, totals, missing years, percent growth and SEC links
   };
   const html = renderToStaticMarkup(createElement(RevenueTables, { data }));
   assert.equal((html.match(/ant-table-wrapper/g) || []).length, 2);
+  assert.match(html, /aria-expanded="false"/);
+  assert.match(html, /aria-label="collapsed"/);
   assert.ok(html.includes('25.00%'));
   assert.ok(html.includes('百万美元'));
   assert.ok(html.includes('—'));

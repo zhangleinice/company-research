@@ -595,7 +595,7 @@ test('profitability contains five core cards and separate margin and capital cha
       assert.ok(!section.includes(`data-metric="${key}"`));
     // This fixture has no margin values; its existing empty state stays intact.
     assert.match(section, /data-chart="capital-returns"/);
-    assert.equal((section.match(/role="radiogroup"/g) ?? []).length, 1);
+    assert.equal((section.match(/role="radiogroup"/g) ?? []).length, 2);
     assert.ok(!section.includes('利润历史变化'));
     assert.ok(section.includes('Capital Return Trends'));
     assert.ok(section.includes('Profit Margin Trends'));

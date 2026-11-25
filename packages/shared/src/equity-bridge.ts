@@ -21,6 +21,7 @@ export const bridgeLabels = {
 } as const;
 export type BridgeKey = keyof typeof bridgeLabels;
 export interface EquityBridgeInput {
+  research?: import('./equity-bridge-research.js').EquityBridgeResearch;
   items: Record<BridgeKey, BridgeItem>;
   sharesBasis:
     'unknown' | 'currentCommon' | 'weightedDiluted' | 'valuationDiluted';
@@ -54,7 +55,7 @@ export function emptyEquityBridge(): EquityBridgeInput {
 }
 const finite = (value: unknown): value is number =>
   typeof value === 'number' && Number.isFinite(value);
-export function evaluateEquityBridge(input: EquityBridgeInput) {
+function evaluateLegacyEquityBridge(input: EquityBridgeInput) {
   const errors: string[] = [];
   const states = {} as Record<BridgeKey, 'VERIFIED' | 'ESTIMATED' | 'MISSING'>;
   for (const key of Object.keys(bridgeLabels) as BridgeKey[]) {
@@ -138,5 +139,32 @@ export function evaluateEquityBridge(input: EquityBridgeInput) {
       : null,
     dilutedShares: complete ? v('shares') : null,
     input,
+  };
+}
+
+import { prepareResearchBridge } from './equity-bridge-research.js';
+export function evaluateEquityBridge(input: EquityBridgeInput) {
+  const prepared = input.research
+    ? prepareResearchBridge(input.research, input)
+    : null;
+  const result = evaluateLegacyEquityBridge(prepared?.bridge ?? input);
+  const errors = [...new Set([...result.errors, ...(prepared?.errors ?? [])])];
+  return {
+    ...result,
+    input,
+    errors,
+    status: errors.length ? ('INSUFFICIENT' as const) : ('RESEARCH' as const),
+    nonOperatingAssets: errors.length ? null : result.nonOperatingAssets,
+    debt: errors.length ? null : result.debt,
+    otherClaims: errors.length ? null : result.otherClaims,
+    dilutedShares: errors.length ? null : result.dilutedShares,
+    research: prepared
+      ? {
+          values: prepared.values,
+          omitted: prepared.omitted,
+          states: prepared.states,
+          warnings: prepared.warnings,
+        }
+      : null,
   };
 }

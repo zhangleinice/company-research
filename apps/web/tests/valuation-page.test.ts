@@ -47,7 +47,7 @@ const params = () => ({
   researchReason: '',
   bridge: emptyEquityBridge(),
 });
-test('DCF tab retains forecast and equity detail tables, three default assumptions and no confirmation controls', () => {
+test('DCF retains its forecast table and defaults while showing the compact read-only equity bridge', () => {
   const html = renderToStaticMarkup(
     createElement(DcfCalculator, { ticker: 'GOOGL' }),
   );
@@ -85,13 +85,18 @@ test('DCF tab retains forecast and equity detail tables, three default assumptio
   assert.ok(html.includes('SEC财报金额'));
   assert.ok(html.includes('估值调整 / 结果'));
   assert.ok(!html.includes('class="dcf-result"'));
-  assert.ok(html.includes('修改FCFF基准'));
-  assert.ok(!html.includes('ant-alert'));
+  assert.ok(html.includes('FCFF基准'));
+  assert.ok(html.includes('税率'));
+  assert.ok(html.includes('增长率估值方法'));
+  assert.ok(html.includes('WACC行业选择'));
+  assert.ok(!html.includes('恢复参考值'));
   assert.ok(!html.includes('checkbox'));
   assert.ok(!html.includes('估值调整依据'));
   assert.ok(!html.includes('<pre'));
   assert.ok(!html.includes('value="0"'));
-  for (const n of [5, 10, 3]) assert.ok(html.includes(`value="${n}"`));
+  assert.ok(!html.includes('value="5"'));
+  assert.ok(!html.includes('value="10"'));
+  assert.ok(!html.includes('value="3"'));
 });
 test('reliable FCFF automatically produces all five rows and EV without interactive confirmation', () => {
   const r = calculateDcf(

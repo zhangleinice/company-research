@@ -1,4 +1,5 @@
 import { quarterlyRoicInputs } from './quarterly-roic-inputs';
+import { annualOwnerEarningsInputs } from './owner-earnings-inputs';
 import { annualRoicInputs } from './annual-roic-inputs';
 import type { DebtDisclosure } from './debt-disclosure';
 import { debtCashFlowSources } from './debt-cash-flows';
@@ -874,8 +875,14 @@ export function normalizeCompanyFacts(
       }
     }
   }
-  for (const row of annual)
+  for (const row of annual) {
     row.sources.annualRoicInputs = annualRoicInputs(raw, row, sic);
+    row.sources.ownerEarningsInputs = annualOwnerEarningsInputs(
+      raw,
+      String(raw.cik).padStart(10, '0'),
+      row,
+    );
+  }
   for (let i = 0; i < quarterly.length; i++) {
     const period = quarterly[i];
     period.sources.quarterlyRoicInputs = quarterlyRoicInputs(

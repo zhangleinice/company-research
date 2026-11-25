@@ -17,7 +17,10 @@ import type {
   CompanyListResponse,
 } from '@company-research/shared';
 
-type Profile = Omit<Company, 'ticker'> & { websites: CompanyWebsites };
+type Profile = Omit<Company, 'ticker'> & {
+  websites: CompanyWebsites;
+  incorporation: string | null;
+};
 const TICKER_TTL = 24 * 60 * 60 * 1000;
 const PROFILE_TTL = 60 * 60 * 1000;
 
@@ -226,6 +229,13 @@ export class SecService {
     return value;
   }
 
+  async getValuationProfile(
+    cik: string,
+  ): Promise<{ sic: string | null; incorporation: string | null }> {
+    const p = await this.getProfile(normalizeCik(cik));
+    return { sic: p.sic, incorporation: p.incorporation };
+  }
+
   private async getProfile(cik: string): Promise<Profile> {
     const cached = this.profiles.get(cik);
     if (cached && cached.expires > Date.now()) return cached.value;
@@ -250,6 +260,7 @@ export class SecService {
     const value: Profile = {
       cik,
       name: text(data.name),
+      incorporation: text(data.stateOfIncorporation),
       sic:
         typeof data.sic === 'number' && Number.isFinite(data.sic)
           ? String(data.sic)

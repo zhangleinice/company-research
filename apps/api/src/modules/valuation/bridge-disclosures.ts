@@ -52,7 +52,9 @@ export function bridgeDisclosures(
       items: [{ ...xs[0], concept: `us-gaap:${tag}`, unit: 'USD', url }],
     };
   };
-  const row = [...normalized.quarterly, ...normalized.annual].find(
+  // At a fiscal year end the disclosed annual weighted shares must not be
+  // hidden by a derived Q4 row whose independent weighted shares are unknown.
+  const row = [...normalized.annual, ...normalized.quarterly].find(
     (x) => x.periodEnd === filing.end,
   );
   const fromRow = (

@@ -347,3 +347,9 @@ export const BUSINESS_MODEL_TOPICS = [
 export * from './balance-sheet-inputs.js';
 
 export * from './annual-roic.js';
+export * from './owner-earnings.js';
+export * from './equity-bridge-research.js';
+
+export * from './equity-defaults.js';
+
+export * from './simple-valuation.js';

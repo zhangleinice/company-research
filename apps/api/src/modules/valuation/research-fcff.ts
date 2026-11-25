@@ -2,7 +2,10 @@ import type { ValuationBaseline } from '@company-research/shared';
 const finite = (v: unknown): v is number =>
   typeof v === 'number' && Number.isFinite(v);
 /** Conditional research policy, not approval of actual cash-interest or marginal tax shield. */
-export function withResearchFcff(b: ValuationBaseline): ValuationBaseline {
+export function withResearchFcff(
+  b: ValuationBaseline,
+  taxRate = 0.21,
+): ValuationBaseline {
   const missing = (reason: string): ValuationBaseline => ({
     ...b,
     fcffEstimate: {
@@ -14,6 +17,8 @@ export function withResearchFcff(b: ValuationBaseline): ValuationBaseline {
       version: 'ocf-expensed-interest-v1',
     },
   });
+  if (!finite(taxRate) || taxRate < 0 || taxRate > 1)
+    return missing('缺少有效研究税率');
   if (finite(b.fcff)) return b; // Never replace an approved baseline, including nonpositive values.
   if (!b.applicable)
     return missing('金融企业或行业资料不足，不自动套用普通FCFF模型。');
@@ -69,7 +74,6 @@ export function withResearchFcff(b: ValuationBaseline): ValuationBaseline {
     return missing(
       '已披露现金付息与费用存在差额或期间不同，需先调节，不自动按费用加回。',
     );
-  const taxRate = 0.21; // Demonstration shield only; IRS Publication 542 (not company ETR or a proven marginal shield).
   const value = b.fcf + b.interest.value * (1 - taxRate);
   if (!finite(value) || value <= 0)
     return missing('研究性FCFF基准非正，当前正现金流增长模型不适用。');
@@ -87,12 +91,13 @@ export function withResearchFcff(b: ValuationBaseline): ValuationBaseline {
       value,
       taxRate,
       version: 'ocf-expensed-interest-v1',
-      reason:
-        '研究性估计：以已费用化利息代理US-GAAP经营现金付息，21%为演示税盾假设。',
+      reason: `研究性估计：以已费用化利息代理US-GAAP经营现金付息，${taxRate * 100}%为税盾假设。`,
       assumptions: [
         '非资本化现金付息按US-GAAP列经营活动；已费用化利息作为现金付息代理，未核准应计/非现金差额。',
         `资本化利息${finite(capitalized) ? `TTM披露为${capitalized / 1e6}百万美元` : '金额尚不完整'}，不额外加回；没有将缺失资本化金额设为0。`,
-        '21%参考美国联邦公司税率，仅假设利息可按该税率即时抵扣，不是公司实际税率；未计州/海外税差异与扣除限制。',
+        taxRate === 0.21
+          ? '21%参考美国联邦公司税率，仅假设利息可按该税率即时抵扣，不是公司实际税率；未计州/海外税差异与扣除限制。'
+          : `${taxRate * 100}%为选择的研究税率，不保证是可即时利用的边际税盾。`,
         '未完成租赁、非经营项目及特殊融资的全面正常化；后续DCF仅为这些假设成立时的条件性研究估值。',
       ],
     },

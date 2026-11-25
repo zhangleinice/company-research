@@ -30,13 +30,15 @@
     "db:migrate": "npm run db:migrate --workspace=@company-research/api --",
     "db:migrate:dev": "npm run db:migrate:dev --workspace=@company-research/api --",
     "db:status": "npm run db:status --workspace=@company-research/api --",
-    "test:db": "npm run build:api && node --test scripts/database-cache.test.cjs"
+    "test:db": "npm run build:api && node --test scripts/database-cache.test.cjs",
+    "update:wacc": "node scripts/update-industry-wacc.cjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
     "eslint": "^9.0.0",
     "prettier": "^3.0.0",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.0.0"
+    "typescript-eslint": "^8.0.0",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   }
 }

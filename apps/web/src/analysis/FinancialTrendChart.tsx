@@ -12,7 +12,13 @@ import {
 } from './financial-analysis.js';
 
 export interface TrendSeries {
-  key: FinancialMetric | 'roic' | 'cashConversionRatio' | 'interestCoverage';
+  key:
+    | FinancialMetric
+    | 'roic'
+    | 'cashConversionRatio'
+    | 'interestCoverage'
+    | 'capexToRevenue'
+    | 'daToRevenue';
   label: string;
   color: string;
 }
@@ -28,6 +34,9 @@ export function FinancialTrendChart({
   periodKind = 'duration',
   roicValues,
   retainEmptyPeriods = false,
+  additionalValues,
+  includeFiscalYear = false,
+  moneyMaximumFractionDigits = 6,
 }: {
   rows: FinancialPeriod[];
   mode: FinancialMode;
@@ -39,6 +48,12 @@ export function FinancialTrendChart({
   periodKind?: 'duration' | 'instant';
   roicValues?: ReadonlyMap<string, number | null>;
   retainEmptyPeriods?: boolean;
+  additionalValues?: ReadonlyMap<
+    string,
+    { capexToRevenue: number | null; daToRevenue: number | null }
+  >;
+  includeFiscalYear?: boolean;
+  moneyMaximumFractionDigits?: number;
 }) {
   const id = useId();
   const points = [...rows].sort((a, b) =>
@@ -50,9 +65,11 @@ export function FinancialTrendChart({
   ) => {
     if (!row) return null;
     const value =
-      key === 'roic'
-        ? roicValues?.get(row.periodEnd)
-        : analysisValue(row, key, mode);
+      key === 'capexToRevenue' || key === 'daToRevenue'
+        ? additionalValues?.get(row.periodEnd)?.[key]
+        : key === 'roic'
+          ? roicValues?.get(row.periodEnd)
+          : analysisValue(row, key, mode);
     return typeof value === 'number' && Number.isFinite(value) ? value : null;
   };
   const values = points.flatMap((row) =>
@@ -213,7 +230,7 @@ export function FinancialTrendChart({
                       />
                     )}
                   <circle cx={x(index)} cy={y(value)} r="3.5" fill={item.color}>
-                    <title>{`${periodKind === 'instant' ? `截至 ${row.periodEnd}` : `${row.periodStart} 至 ${row.periodEnd}`} · ${item.label}: ${unit === 'money' ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 6 }).format(value / moneyDivisor) : formatAnalysisValue(value, unit)}${unit === 'money' ? ` ${moneyUnit}（${value.toLocaleString('en-US')} USD）` : unit === 'shares' ? ' 百万股' : ''}`}</title>
+                    <title>{`${includeFiscalYear ? `FY ${label(row)} · ` : ''}${periodKind === 'instant' ? `截至 ${row.periodEnd}` : `${row.periodStart} 至 ${row.periodEnd}`} · ${item.label}: ${unit === 'money' ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: moneyMaximumFractionDigits }).format(value / moneyDivisor) : formatAnalysisValue(value, unit)}${unit === 'money' ? ` ${moneyUnit}（${value.toLocaleString('en-US')} USD）` : unit === 'shares' ? ' 百万股' : ''}`}</title>
                   </circle>
                 </g>
               );

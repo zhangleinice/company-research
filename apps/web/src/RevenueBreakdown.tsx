@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Space, Table, Typography } from 'antd';
+import { Collapse, Space, Table, Typography } from 'antd';
 import type { TableColumnsType } from 'antd';
 import type {
   RevenueBreakdownResponse,
@@ -25,69 +25,87 @@ export function RevenueTables({ data }: { data: RevenueBreakdownResponse }) {
       className="analysis-chart-panel"
       aria-label="Revenue Breakdown · 收入明细"
     >
-      <Typography.Title level={5}>
-        Revenue Breakdown · 收入明细
-      </Typography.Title>
-      <Space orientation="vertical" size={20} className="full-width">
-        {data.groups.map((group, index) => {
-          const years = [
-            ...new Set(
-              group.rows.flatMap((row) => row.facts.map((f) => f.fiscalYear)),
-            ),
-          ].sort((a, b) => a - b);
-          type Row = RevenueGroup['rows'][number];
-          const columns: TableColumnsType<Row> = [
-            { title: '原始项目', dataIndex: 'name', key: 'name', width: 260 },
-            ...years.map((year) => ({
-              title: String(year),
-              key: String(year),
-              align: 'right' as const,
-              render: (_: unknown, row: Row) =>
-                formatRevenueMillions(
-                  row.facts.find((f) => f.fiscalYear === year)?.value,
-                ),
-            })),
-            {
-              title: `${years.at(-1)} YoY`,
-              key: 'yoy',
-              align: 'right',
-              render: (_, row) => {
-                const value = row.facts.find(
-                  (f) => f.fiscalYear === years.at(-1),
-                )?.yoy.value;
-                return value == null ? '—' : `${value.toFixed(2)}%`;
-              },
-            },
-          ];
-          return (
-            <section key={group.tableIndex}>
-              <Space wrap className="list-mode">
-                <Typography.Text strong>
-                  {data.fiscalYear} 财年 · 原始披露表 {index + 1}
-                </Typography.Text>
-                <Typography.Text type="secondary">
-                  金额：百万美元
-                </Typography.Text>
-                <Typography.Link
-                  href={group.rows[0]?.facts[0]?.factUrl || group.sourceUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  SEC 原始 10-K
-                </Typography.Link>
+      <Collapse
+        defaultActiveKey={[]}
+        items={[
+          {
+            key: 'revenue',
+            label: 'Revenue Breakdown · 收入明细',
+            forceRender: true,
+            children: (
+              <Space orientation="vertical" size={20} className="full-width">
+                {data.groups.map((group, index) => {
+                  const years = [
+                    ...new Set(
+                      group.rows.flatMap((row) =>
+                        row.facts.map((f) => f.fiscalYear),
+                      ),
+                    ),
+                  ].sort((a, b) => a - b);
+                  type Row = RevenueGroup['rows'][number];
+                  const columns: TableColumnsType<Row> = [
+                    {
+                      title: '原始项目',
+                      dataIndex: 'name',
+                      key: 'name',
+                      width: 260,
+                    },
+                    ...years.map((year) => ({
+                      title: String(year),
+                      key: String(year),
+                      align: 'right' as const,
+                      render: (_: unknown, row: Row) =>
+                        formatRevenueMillions(
+                          row.facts.find((f) => f.fiscalYear === year)?.value,
+                        ),
+                    })),
+                    {
+                      title: `${years.at(-1)} YoY`,
+                      key: 'yoy',
+                      align: 'right',
+                      render: (_, row) => {
+                        const value = row.facts.find(
+                          (f) => f.fiscalYear === years.at(-1),
+                        )?.yoy.value;
+                        return value == null ? '—' : `${value.toFixed(2)}%`;
+                      },
+                    },
+                  ];
+                  return (
+                    <section key={group.tableIndex}>
+                      <Space wrap className="list-mode">
+                        <Typography.Text strong>
+                          {data.fiscalYear} 财年 · 原始披露表 {index + 1}
+                        </Typography.Text>
+                        <Typography.Text type="secondary">
+                          金额：百万美元
+                        </Typography.Text>
+                        <Typography.Link
+                          href={
+                            group.rows[0]?.facts[0]?.factUrl || group.sourceUrl
+                          }
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          SEC 原始 10-K
+                        </Typography.Link>
+                      </Space>
+                      <Table<Row>
+                        size="small"
+                        rowKey="rowIndex"
+                        columns={columns}
+                        dataSource={group.rows}
+                        pagination={false}
+                        scroll={{ x: 700 }}
+                      />
+                    </section>
+                  );
+                })}
               </Space>
-              <Table<Row>
-                size="small"
-                rowKey="rowIndex"
-                columns={columns}
-                dataSource={group.rows}
-                pagination={false}
-                scroll={{ x: 700 }}
-              />
-            </section>
-          );
-        })}
-      </Space>
+            ),
+          },
+        ]}
+      />
     </section>
   );
 }

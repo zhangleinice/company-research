@@ -1,29 +1,31 @@
 import { EquityBridgeDetails } from './EquityBridgeDetails.js';
 import { EvComposition } from './EvComposition.js';
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
-import {
-  Button,
-  Col,
-  Divider,
-  Input,
-  InputNumber,
-  Row,
-  Table,
-  Tag,
-  Typography,
-} from 'antd';
+import { Button, Divider, Table, Tag, Typography } from 'antd';
 import {
   calculateDcf,
+  equityDefaultEstimates,
   type ValuationBaseline,
+  type SimpleValuationData,
   type ValuationReferences,
+  type EquityBridgeResearch,
 } from '@company-research/shared';
-import { fetchValuation, fetchValuationReferences } from './api.js';
+import { bridgeWithDefaults } from './equity-bridge-editor.js';
+import {
+  fetchValuation,
+  fetchValuationReferences,
+  fetchSimpleValuationInputs,
+} from './api.js';
+import { SimpleValuationControls } from './SimpleValuationControls.js';
+import {
+  emptySimpleSettings,
+  resolveSimpleSettings,
+  simpleCalculationBaseline,
+} from './simple-valuation-state.js';
+import industryData from './data/industry-wacc-us.json' with { type: 'json' };
 import {
   calculatorInput,
-  initialScenario,
   fcffBasis,
-  validateScenarioField,
-  type ScenarioKey,
   referenceBridge,
 } from './valuation-calculator.js';
 const money = (n: number | null | undefined) =>
@@ -52,37 +54,61 @@ function Equation({
   );
 }
 export function DcfCalculator({ ticker }: { ticker: string }) {
+  return <DcfCalculatorSession key={ticker} ticker={ticker} />;
+}
+function DcfCalculatorSession({ ticker }: { ticker: string }) {
   const [baseline, setBaseline] = useState<ValuationBaseline | null>(null);
   const [refs, setRefs] = useState<ValuationReferences | null>(null);
+  const [bridgeDraft, setBridgeDraft] = useState<{
+    ticker: string;
+    research: EquityBridgeResearch;
+  } | null>(null);
   const [error, setError] = useState(''),
     [refsError, setRefsError] = useState('');
   const [revision, setRevision] = useState(0);
-  const [committed, setCommitted] = useState({ ...initialScenario });
-  const [draft, setDraft] = useState<Record<ScenarioKey, number | null>>({
-    ...initialScenario,
-  });
-  const [fieldErrors, setFieldErrors] = useState<
-    Partial<Record<ScenarioKey, string>>
-  >({});
-  const { growth, wacc, terminalGrowth } = committed;
-  const [useResearch, setUseResearch] = useState(false);
-  const [researchValue, setResearchValue] = useState<number | null>(null);
-  const [researchReason, setResearchReason] = useState('');
+  const [simpleData, setSimpleData] = useState<SimpleValuationData | null>(
+    null,
+  );
+  const [simpleError, setSimpleError] = useState('');
+  const [settings, setSettings] = useState(emptySimpleSettings);
+  const resolved = useMemo(
+    () => resolveSimpleSettings(simpleData, settings, industryData),
+    [simpleData, settings],
+  );
+  const { growth, wacc, terminalGrowth } = resolved.parameters;
+  const useResearch = settings.basis === 'manual';
+  const researchValue = settings.manualFcff;
+  const researchReason = settings.manualReason;
+  const calculationBaseline = useMemo(
+    () =>
+      baseline ? simpleCalculationBaseline(baseline, settings, resolved) : null,
+    [baseline, settings, resolved],
+  );
   useEffect(() => {
     const c = new AbortController();
     setBaseline(null);
     setRefs(null);
+    setBridgeDraft(null);
     setError('');
     setRefsError('');
-    setUseResearch(false);
-    setResearchValue(null);
-    setResearchReason('');
-    setCommitted({ ...initialScenario });
-    setDraft({ ...initialScenario });
-    setFieldErrors({});
+    setSimpleData(null);
+    setSimpleError('');
+    setSettings(emptySimpleSettings());
     void fetchValuation(ticker, c.signal)
       .then((b) => {
-        if (!c.signal.aborted) setBaseline(b);
+        if (!c.signal.aborted) {
+          setBaseline(b);
+          void fetchSimpleValuationInputs(ticker, c.signal)
+            .then((data) => {
+              if (c.signal.aborted) return;
+              if (data.cik !== b.cik)
+                throw Error('估值参数数据的公司身份不一致');
+              setSimpleData(data);
+            })
+            .catch((e) => {
+              if (!c.signal.aborted) setSimpleError(e.message);
+            });
+        }
       })
       .catch((e) => {
         if (!c.signal.aborted) setError(e.message);
@@ -96,34 +122,60 @@ export function DcfCalculator({ ticker }: { ticker: string }) {
       });
     return () => c.abort();
   }, [ticker, revision]);
+  const bridgeDefaults = useMemo(
+    () =>
+      refs?.equityBridge
+        ? equityDefaultEstimates({ references: refs.equityBridge, baseline })
+        : null,
+    [refs, baseline],
+  );
   const bridge = useMemo(
     () =>
-      referenceBridge(
-        refs ?? {
-          periodEnd: null,
-          cash: null,
-          debt: null,
-          shares: null,
-          sharesBasis: 'unknown',
-          sources: {},
-        },
-        ticker,
-      ),
-    [refs, ticker],
+      refs?.equityBridge && bridgeDefaults
+        ? {
+            ...bridgeWithDefaults(
+              refs.equityBridge,
+              bridgeDraft,
+              ticker,
+              bridgeDefaults,
+            ),
+            unresolved:
+              baseline &&
+              (baseline.cik !== refs.equityBridge.cik ||
+                baseline.asOf !== refs.equityBridge.asOf)
+                ? '现金流基准与桥接参考的公司或报告期不一致，请先核对数据'
+                : '',
+          }
+        : referenceBridge(
+            refs ?? {
+              periodEnd: null,
+              cash: null,
+              debt: null,
+              shares: null,
+              sharesBasis: 'unknown',
+              sources: {},
+            },
+            ticker,
+          ),
+    [refs, ticker, baseline, bridgeDraft, bridgeDefaults],
   );
   const basis = useMemo(
     () =>
-      baseline
-        ? fcffBasis(baseline, { useResearch, researchValue, researchReason })
+      calculationBaseline
+        ? fcffBasis(calculationBaseline, {
+            useResearch,
+            researchValue,
+            researchReason,
+          })
         : null,
-    [baseline, useResearch, researchValue, researchReason],
+    [calculationBaseline, useResearch, researchValue, researchReason],
   );
   const result = useMemo(
     () =>
-      baseline
+      calculationBaseline
         ? calculateDcf(
-            calculatorInput(baseline, {
-              ...committed,
+            calculatorInput(calculationBaseline, {
+              ...resolved.parameters,
               researchValue,
               useResearch,
               researchReason,
@@ -131,72 +183,35 @@ export function DcfCalculator({ ticker }: { ticker: string }) {
             }),
           )
         : null,
-    [baseline, committed, researchValue, useResearch, researchReason, bridge],
+    [
+      calculationBaseline,
+      resolved.parameters,
+      researchValue,
+      useResearch,
+      researchReason,
+      bridge,
+    ],
   );
   const verifiedBase = basis?.kind === 'VERIFIED';
   const fcff0 = basis?.value ?? null;
-  const commitField = (key: ScenarioKey, raw: string) => {
-    const value = raw.trim() ? Number(raw.replaceAll(',', '')) : null;
-    const checked = validateScenarioField(committed, key, value);
-    let message = checked.error;
-    if (!message && baseline && fcff0 !== null && fcff0 > 0) {
-      const trial = calculateDcf(
-        calculatorInput(baseline, {
-          ...checked.next,
-          researchValue,
-          useResearch,
-          researchReason,
-          bridge,
-        }),
-      );
-      if (trial.ev === null) message = trial.errors[0] ?? '参数超出可计算范围';
-    }
-    setFieldErrors((e) => ({ ...e, [key]: message }));
-    if (!message) {
-      setDraft((d) => ({ ...d, [key]: value }));
-      if (committed[key] !== value) setCommitted(checked.next);
-    }
-  };
-  const parameter = (key: ScenarioKey, label: string) => (
-    <Col xs={24} sm={8} key={key}>
-      <Typography.Text className="dcf-parameter-label">{label}</Typography.Text>
-      <InputNumber
-        aria-label={label}
-        suffix="%"
-        style={{ width: '100%' }}
-        value={draft[key]}
-        changeOnBlur={false}
-        status={fieldErrors[key] ? 'error' : undefined}
-        onChange={(value) => {
-          setDraft((d) => ({ ...d, [key]: value }));
-          setFieldErrors((e) => ({ ...e, [key]: '' }));
-        }}
-        onBlur={(e) => commitField(key, e.target.value)}
-        onPressEnter={(e) => {
-          e.preventDefault();
-          // InputNumber handles Enter on its wrapper; the event target is the input.
-          commitField(key, (e.target as HTMLInputElement).value);
-        }}
-      />
-      {fieldErrors[key] && (
-        <Typography.Text type="danger" role="alert">
-          {fieldErrors[key]}；保留上次有效结果。
-        </Typography.Text>
-      )}
-    </Col>
-  );
+  const sourcePeriod = resolved.period;
+  const displayFcf =
+    sourcePeriod?.ocf.value != null && sourcePeriod.capex.value != null
+      ? sourcePeriod.ocf.value - sourcePeriod.capex.value
+      : null;
   const firstFive =
     result?.rows.length === 5
       ? result.rows.reduce((sum, r) => sum + r.pv, 0)
       : null;
   const sixth =
-    result?.rows[4] && terminalGrowth !== null
-      ? result.rows[4].fcff * (1 + terminalGrowth / 100)
+    result?.forecast[4] && terminalGrowth !== null
+      ? result.forecast[4].fcff * (1 + terminalGrowth / 100)
       : null;
   return (
     <div className="dcf-calculator">
       <Typography.Paragraph type="secondary" className="dcf-period">
-        TTM {baseline?.ocf.start ?? '—'} → {baseline?.asOf ?? '—'} ·
+        {settings.basis === 'annual' ? '完整财年' : 'TTM'}{' '}
+        {sourcePeriod?.start ?? '—'} → {sourcePeriod?.end ?? '—'} ·
         金额：百万美元 · 股数：百万股
       </Typography.Paragraph>
       <div className="dcf-key-metrics">
@@ -238,21 +253,31 @@ export function DcfCalculator({ ticker }: { ticker: string }) {
       <Divider />
       <section className="dcf-section">
         <Typography.Title level={5}>
-          历史自由现金流 <Tag color="blue">SEC · TTM</Tag>
+          历史自由现金流{' '}
+          <Tag color="blue">
+            SEC ·{' '}
+            {settings.basis === 'annual'
+              ? (sourcePeriod?.label ?? '年度')
+              : 'TTM'}
+          </Tag>
         </Typography.Title>
         <div className="dcf-history-formulas">
           <Equation formula="FCF = OCF − CapEx">
             ={' '}
             {money(
-              baseline?.ocf.value == null ? null : baseline.ocf.value / 1e6,
+              sourcePeriod?.ocf.value == null
+                ? null
+                : sourcePeriod.ocf.value / 1e6,
             )}{' '}
             −{' '}
             {money(
-              baseline?.capex.value == null ? null : baseline.capex.value / 1e6,
+              sourcePeriod?.capex.value == null
+                ? null
+                : sourcePeriod.capex.value / 1e6,
             )}{' '}
             ={' '}
             <strong>
-              {money(baseline?.fcf == null ? null : baseline.fcf / 1e6)}
+              {money(displayFcf === null ? null : displayFcf / 1e6)}
             </strong>
           </Equation>
           {fcff0 !== null && (
@@ -261,18 +286,18 @@ export function DcfCalculator({ ticker }: { ticker: string }) {
                 <>
                   {' '}
                   = {money(
-                    baseline?.fcf == null ? null : baseline.fcf / 1e6,
+                    displayFcf === null ? null : displayFcf / 1e6,
                   )} +{' '}
                   {money(
-                    baseline?.interest.value == null
+                    sourcePeriod?.interest.value == null
                       ? null
-                      : baseline.interest.value / 1e6,
+                      : sourcePeriod.interest.value / 1e6,
                   )}{' '}
                   × (1 −{' '}
                   {rate(
-                    baseline?.fcffEstimate?.taxRate == null
+                    resolved.tax.value === null
                       ? null
-                      : baseline.fcffEstimate.taxRate * 100,
+                      : resolved.tax.value * 100,
                   )}
                   ) ={' '}
                 </>
@@ -285,78 +310,21 @@ export function DcfCalculator({ ticker }: { ticker: string }) {
             </Equation>
           )}
         </div>
-        <Typography.Text type="secondary" className="dcf-note">
-          {fcff0 === null
-            ? basis?.reason || '缺少可靠FCFF基准，历史FCF不直接作为FCFF。'
-            : basis?.kind === 'AUTO_RESEARCH'
-              ? '税率为研究假设；费用近似经营现金付息，资本化利息不额外加回，相关调整未完全核准。'
-              : verifiedBase
-                ? '采用已核准历史FCFF基准。'
-                : '采用用户明确输入的条件性研究基准。'}
-        </Typography.Text>
       </section>
       <Divider />
       <section className="dcf-section">
-        <div className="dcf-section-heading">
-          <Typography.Title level={5}>估值假设</Typography.Title>
-          <Button
-            size="small"
-            type="link"
-            onClick={() => {
-              setDraft({ ...initialScenario });
-              setCommitted({ ...initialScenario });
-              setFieldErrors({});
-            }}
-          >
-            恢复默认
-          </Button>
-        </div>
-        <Row gutter={[16, 10]} className="dcf-parameters">
-          {parameter('growth', '未来5年FCFF增长率')}
-          {parameter('wacc', 'WACC折现率')}
-          {parameter('terminalGrowth', '永续增长率')}
-        </Row>
-        <Typography.Paragraph type="secondary" className="dcf-note">
-          研究情景假设 · 失焦或Enter更新 · 终值假设稳定增长与持续再投资
-        </Typography.Paragraph>
-        <details className="dcf-details">
-          <summary>修改FCFF基准</summary>
-          {(baseline?.fcff != null ||
-            baseline?.fcffEstimate?.status === 'RESEARCH') && (
-            <Button
-              type="link"
-              size="small"
-              onClick={() => setUseResearch((v) => !v)}
-            >
-              {useResearch ? '恢复自动基准' : '使用手动调整'}
-            </Button>
-          )}
-          {(!verifiedBase || useResearch) && (
-            <div className="dcf-research-inputs">
-              <InputNumber
-                aria-label="研究性FCFF基准"
-                value={researchValue}
-                onChange={(v) => {
-                  setUseResearch(true);
-                  setResearchValue(v);
-                }}
-                placeholder="百万美元"
-              />
-              <Input
-                aria-label="FCFF估算依据"
-                value={researchReason}
-                onChange={(e) => {
-                  setUseResearch(true);
-                  setResearchReason(e.target.value);
-                }}
-                placeholder="调整依据与来源（填写后计算条件情景）"
-              />
-            </div>
-          )}
-          <Typography.Text type="secondary">
-            仅采用有依据的研究性估计，不默认用FCF替代。
+        <SimpleValuationControls
+          data={simpleData}
+          settings={settings}
+          resolved={resolved}
+          industries={industryData}
+          onChange={setSettings}
+        />
+        {simpleError && (
+          <Typography.Text type="warning" className="dcf-note">
+            估值参数参考暂不可用：{simpleError}
           </Typography.Text>
-        </details>
+        )}
       </section>
       <Divider />
       <section className="dcf-section">
@@ -384,7 +352,7 @@ export function DcfCalculator({ ticker }: { ticker: string }) {
           dataSource={[
             ...Array.from({ length: 5 }, (_, i) => ({
               year: `第${i + 1}年`,
-              fcff: result?.rows[i]?.fcff ?? null,
+              fcff: result?.forecast[i]?.fcff ?? null,
               pv: result?.rows[i]?.pv ?? null,
             })),
             {
@@ -464,6 +432,9 @@ export function DcfCalculator({ ticker }: { ticker: string }) {
         references={refs}
         result={result}
         error={refsError}
+        bridge={bridge}
+        defaults={bridgeDefaults}
+        onChange={(research) => setBridgeDraft({ ticker, research })}
       />
     </div>
   );

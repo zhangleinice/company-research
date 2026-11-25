@@ -1,7 +1,18 @@
 import type { ApiErrorResponse } from '@company-research/shared';
 
-async function requestJson<T>(url: string, signal?: AbortSignal): Promise<T> {
-  const response = await fetch(url, signal ? { signal } : undefined);
+async function requestJson<T>(
+  url: string,
+  signal?: AbortSignal,
+  init?: RequestInit,
+): Promise<T> {
+  const response = await fetch(
+    url,
+    init
+      ? { ...init, ...(signal ? { signal } : {}) }
+      : signal
+        ? { signal }
+        : undefined,
+  );
   let body: unknown;
   try {
     body = await response.json();
@@ -156,6 +167,56 @@ export function fetchCompanyWebsites(
 export function fetchEnterpriseQuality(ticker: string, signal?: AbortSignal) {
   return requestJson<import('@company-research/shared').EnterpriseQuality>(
     `/api/companies/${encodeURIComponent(ticker)}/valuation/quality`,
+    signal,
+  );
+}
+
+/** Owner Earnings is cache-only; saving assumptions never refreshes SEC data. */
+export function fetchOwnerEarnings(identifier: string, signal?: AbortSignal) {
+  return requestJson<import('@company-research/shared').OwnerEarningsResponse>(
+    `/api/companies/${encodeURIComponent(identifier)}/owner-earnings`,
+    signal,
+  );
+}
+export function saveOwnerEarnings(
+  identifier: string,
+  draft: import('@company-research/shared').OwnerEarningsDraft,
+  signal?: AbortSignal,
+) {
+  return requestJson<import('@company-research/shared').OwnerEarningsResponse>(
+    `/api/companies/${encodeURIComponent(identifier)}/owner-earnings`,
+    signal,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(draft),
+    },
+  );
+}
+
+/** Read-only calculation on existing cached annual inputs; no persistence. */
+export function previewOwnerEarnings(
+  identifier: string,
+  draft: import('@company-research/shared').OwnerEarningsDraft,
+  signal?: AbortSignal,
+) {
+  return requestJson<import('@company-research/shared').OwnerEarningsPreview>(
+    `/api/companies/${encodeURIComponent(identifier)}/owner-earnings/preview`,
+    signal,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(draft),
+    },
+  );
+}
+
+export function fetchSimpleValuationInputs(
+  ticker: string,
+  signal?: AbortSignal,
+): Promise<import('@company-research/shared').SimpleValuationData> {
+  return requestJson(
+    `/api/companies/${encodeURIComponent(ticker)}/valuation/simple-inputs`,
     signal,
   );
 }

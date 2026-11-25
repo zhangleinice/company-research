@@ -1,7 +1,11 @@
-import { Card, Statistic, Tag, Tooltip, Typography } from 'antd';
+import { useState } from 'react';
+import { Card, Segmented, Statistic, Tag, Tooltip, Typography } from 'antd';
 import type { FinancialMode, FinancialPeriod } from '@company-research/shared';
 import type { QualityResource } from '../EnterpriseQuality.js';
-import { FinancialTrendChart } from './FinancialTrendChart.js';
+import {
+  FinancialTrendChart,
+  type TrendSeries,
+} from './FinancialTrendChart.js';
 import { formatAnalysisValue } from './financial-analysis.js';
 import {
   matchRoic,
@@ -78,6 +82,16 @@ export function RoicMetricCard({
     </Card>
   );
 }
+type CapitalSelection = 'all' | 'roe' | 'roic';
+export function capitalReturnSeries(selected: CapitalSelection): TrendSeries[] {
+  const items: TrendSeries[] = [
+    { key: 'roe', label: 'ROE', color: '#1677ff' },
+    { key: 'roic', label: 'ROIC', color: '#389e6f' },
+  ];
+  return selected === 'all'
+    ? items
+    : items.filter((item) => item.key === selected);
+}
 export function CapitalReturnTrends({
   rows,
   mode,
@@ -87,6 +101,7 @@ export function CapitalReturnTrends({
   mode: FinancialMode;
   data?: QualityResource['data'];
 }) {
+  const [selected, setSelected] = useState<CapitalSelection>('all');
   const history = roicHistory(data, mode);
   const values = new Map(
     rows.map((row) => [
@@ -103,15 +118,26 @@ export function CapitalReturnTrends({
         {mode === 'quarterly' ? ' · 单季度、非年化、非 TTM' : ''} ·
         缺失期间不连线
       </Typography.Paragraph>
+      <div className="health-chart-filter">
+        <Segmented
+          aria-label={title}
+          value={selected}
+          options={[
+            { label: '全部对比', value: 'all' },
+            ...capitalReturnSeries('all').map((item) => ({
+              label: item.label,
+              value: item.key,
+            })),
+          ]}
+          onChange={(value) => setSelected(value as CapitalSelection)}
+        />
+      </div>
       <FinancialTrendChart
         title={title}
         rows={rows}
         mode={mode}
         unit="percent"
-        series={[
-          { key: 'roe', label: 'ROE', color: '#1677ff' },
-          { key: 'roic', label: 'ROIC', color: '#389e6f' },
-        ]}
+        series={capitalReturnSeries(selected)}
         roicValues={values}
         retainEmptyPeriods
       />

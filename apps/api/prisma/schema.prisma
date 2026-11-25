@@ -36,6 +36,7 @@ model Company {
   aiTasks AiTask[]
   annualFinancials AnnualFinancial[]
   quarterlyFinancials QuarterlyFinancial[]
+  ownerEarningsEstimates OwnerEarningsEstimate[]
   @@index([isFavorite])
   @@map("companies")
 }
@@ -257,4 +258,17 @@ model ValuationCache {
  cik String @id @db.VarChar(10)
  data Json
  @@map("valuation_cache")
+}
+
+// Personal research assumptions are independent of replaceable SEC caches.
+model OwnerEarningsEstimate {
+ id String @id @default(cuid())
+ companyCik String @db.VarChar(10)
+ company Company @relation(fields: [companyCik], references: [cik], onDelete: Restrict, onUpdate: Cascade)
+ periodEnd DateTime @db.Date
+ data Json
+ createdAt DateTime @default(now())
+ updatedAt DateTime @updatedAt
+ @@unique([companyCik, periodEnd])
+ @@map("owner_earnings_estimates")
 }

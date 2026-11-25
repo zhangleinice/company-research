@@ -5,6 +5,7 @@ import {
   type ValuationBaseline,
   type ValuationReferences,
 } from '@company-research/shared';
+/** Legacy explicit scenario for compatibility; runtime defaults come from simple-valuation policies. */
 export const initialScenario = { growth: 5, wacc: 10, terminalGrowth: 3 };
 export function referenceBridge(
   refs: ValuationReferences,

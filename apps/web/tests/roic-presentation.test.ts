@@ -15,6 +15,7 @@ import {
 } from '@company-research/shared';
 import { FinancialAnalysis } from '../src/analysis/FinancialAnalysis.js';
 import {
+  capitalReturnSeries,
   CapitalReturnTrends,
   RoicMetricCard,
 } from '../src/analysis/RoicPresentation.js';
@@ -384,4 +385,18 @@ test('profitability keeps only five cards and both trends, with no ROIC history,
       );
     }
   }
+});
+
+test('capital returns can select ROE or ROIC alone while retaining their original colors', () => {
+  const all = capitalReturnSeries('all');
+  assert.deepEqual(
+    all.map((x) => x.key),
+    ['roe', 'roic'],
+  );
+  assert.deepEqual(capitalReturnSeries('roe'), [all[0]]);
+  assert.deepEqual(capitalReturnSeries('roic'), [all[1]]);
+  assert.deepEqual(
+    all.map((x) => x.color),
+    ['#1677ff', '#389e6f'],
+  );
 });

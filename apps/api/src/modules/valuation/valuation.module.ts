@@ -23,6 +23,8 @@ import { PrismaService } from '../prisma/prisma.service';
 import { valuationBaseline } from './baseline';
 import { cachedQuality } from './enterprise-quality';
 import { withResearchFcff } from './research-fcff';
+import { simpleValuationInputs } from './simple-inputs';
+import { equityBridgeReferences } from './equity-bridge-references';
 import type { ValuationBaseline } from '@company-research/shared';
 import type { Prisma } from '@prisma/client';
 @Controller('companies/:ticker/valuation')
@@ -35,13 +37,39 @@ export class ValuationController {
   @Get() baseline(@Param('ticker') ticker: string) {
     return this.load(ticker, false);
   }
+  @Get('simple-inputs') async simpleInputs(@Param('ticker') ticker: string) {
+    if (!/^[A-Z0-9][A-Z0-9.-]{0,19}$/i.test(ticker))
+      throw new BadRequestException('无效公司代码');
+    const company = await this.sec.resolveCompany(ticker.toUpperCase());
+    const [rows, cached] = await Promise.all([
+      this.db.annualFinancial.findMany({
+        where: { companyCik: company.cik },
+        orderBy: { periodEnd: 'desc' },
+        take: 11,
+      }),
+      this.db.valuationCache.findUnique({ where: { cik: company.cik } }),
+    ]);
+    let profile: { sic?: string | null; incorporation?: string | null } | null =
+      null;
+    try {
+      profile = await this.sec.getValuationProfile(company.cik);
+    } catch {
+      /* Missing metadata does not justify US tax or guessed SIC. */
+    }
+    return simpleValuationInputs(
+      company.cik,
+      (cached?.data as unknown as ValuationBaseline) ?? null,
+      rows,
+      profile,
+    );
+  }
   /** Existing financial rows only; this route never acquires SEC data. */
   @Get('references') async references(@Param('ticker') ticker: string) {
     if (!/^[A-Z0-9][A-Z0-9.-]{0,19}$/i.test(ticker))
       throw new BadRequestException('无效公司代码');
     const company = await this.sec.resolveCompany(ticker.toUpperCase());
     const where = { companyCik: company.cik };
-    const [quarter, annual] = await Promise.all([
+    const [quarter, annual, cached] = await Promise.all([
       this.db.quarterlyFinancial.findFirst({
         where,
         orderBy: { periodEnd: 'desc' },
@@ -50,9 +78,10 @@ export class ValuationController {
         where,
         orderBy: { periodEnd: 'desc' },
       }),
+      this.db.valuationCache.findUnique({ where: { cik: company.cik } }),
     ]);
     const row =
-      quarter && (!annual || quarter.periodEnd >= annual.periodEnd)
+      quarter && (!annual || quarter.periodEnd > annual.periodEnd)
         ? quarter
         : annual;
     const numeric = (v: unknown) =>
@@ -60,6 +89,12 @@ export class ValuationController {
     const diluted = numeric(row?.dilutedShares),
       common = numeric(row?.sharesOutstanding);
     return {
+      equityBridge: equityBridgeReferences(
+        company.cik,
+        annual,
+        quarter,
+        cached?.data ?? null,
+      ),
       periodEnd: row?.periodEnd.toISOString().slice(0, 10) ?? null,
       cash: numeric(row?.cash),
       debt: numeric(row?.totalDebt),

@@ -100,11 +100,18 @@ export function calculateDcf(input: DcfInput) {
     discount: number;
     pv: number;
   }> = [];
+  const forecast: Array<{
+    year: number;
+    revenue: number | null;
+    ebit: number | null;
+    fcff: number;
+  }> = [];
   const result = {
     status: 'INPUT_REQUIRED' as
       'INPUT_REQUIRED' | 'REVIEW_REQUIRED' | 'NOT_APPLICABLE' | 'COMPLETE',
     errors: [] as string[],
     rows,
+    forecast,
     wacc: null as number | null,
     terminalValue: null as number | null,
     terminalPV: null as number | null,
@@ -128,23 +135,6 @@ export function calculateDcf(input: DcfInput) {
     return result;
   }
   const wacc = input.wacc === null ? capitalWacc(input.capital) : input.wacc;
-  if (
-    !valid(wacc) ||
-    wacc <= 0 ||
-    wacc >= 1 ||
-    !valid(input.g) ||
-    input.g <= -1 ||
-    wacc <= input.g
-  ) {
-    result.errors.push('需有效 WACC（0–100%）且大于永续增长率（g须大于−100%）');
-    return result;
-  }
-  if (!input.stableGrowthConfirmed) {
-    result.status = 'REVIEW_REQUIRED';
-    result.errors.push('需确认预测期末已达到稳定增长条件');
-    return result;
-  }
-  result.wacc = wacc;
   if (input.mode !== 'simple' && input.mode !== 'detailed') {
     result.errors.push('预测模式无效');
     return result;
@@ -207,21 +197,43 @@ export function calculateDcf(input: DcfInput) {
         revenue * y.capex! -
         y.deltaNwc!;
     }
-    const discount = 1 / Math.pow(1 + wacc, i + 1),
-      pv = fcff! * discount;
-    if (!valid(fcff) || !valid(pv) || !valid(discount)) {
+    if (!valid(fcff)) {
       result.errors.push('预测超出可计算范围');
       return result;
     }
-    rows.push({
+    forecast.push({
       year: i + 1,
       revenue: input.mode === 'detailed' ? revenue : null,
       ebit,
       fcff,
-      discount,
-      pv,
     });
   }
+  // Forecasts remain available even when discounting/terminal assumptions are missing.
+  if (!valid(wacc) || wacc <= 0 || wacc >= 1) {
+    result.errors.push('需有效WACC（大于0且小于100%），暂不能折现及计算EV');
+    return result;
+  }
+  result.wacc = wacc;
+  for (const year of forecast) {
+    const discount = 1 / Math.pow(1 + wacc, year.year),
+      pv = year.fcff * discount;
+    if (!valid(pv) || !valid(discount)) {
+      result.errors.push('预测超出可计算范围');
+      return result;
+    }
+    rows.push({ ...year, discount, pv });
+  }
+
+  if (!valid(input.g) || input.g <= -1 || wacc <= input.g) {
+    result.errors.push('永续增长率须大于−100%且小于WACC');
+    return result;
+  }
+  if (!input.stableGrowthConfirmed) {
+    result.status = 'REVIEW_REQUIRED';
+    result.errors.push('需确认预测期末已达到稳定增长条件');
+    return result;
+  }
+
   if (fcff! <= 0) {
     result.status = 'NOT_APPLICABLE';
     result.errors.push('预测期末FCFF非正，永续模型不适用');
@@ -330,6 +342,7 @@ export interface ValuationBaseline {
 
 /** Read-only financial-cache references, not automatically suitable valuation amounts. */
 export interface ValuationReferences {
+  equityBridge?: import('./equity-bridge-research.js').EquityBridgeReferences;
   periodEnd: string | null;
   cash: number | null;
   debt: number | null;

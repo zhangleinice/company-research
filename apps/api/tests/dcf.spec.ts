@@ -165,3 +165,40 @@ it('rejects missing dilution and nonpositive equity even with a valid EV', () =>
   expect(calculateDcf(i).status).toBe('NOT_APPLICABLE');
   expect(calculateDcf(i).perShare).toBeNull();
 });
+
+it('preserves five forecast FCFFs without WACC or terminal assumptions, withholding all discounted results', () => {
+  const base = {
+    ...input(),
+    mode: 'simple' as const,
+    historicalFcff: 10,
+    historicalVerified: true,
+  };
+  const valid = calculateDcf(base);
+  for (const bad of [
+    { wacc: null },
+    { wacc: 0 },
+    { g: null },
+    { g: 0.1 },
+    { stableGrowthConfirmed: false },
+  ]) {
+    const r = calculateDcf({ ...base, ...bad });
+    expect(r.forecast.map((x) => x.fcff)).toEqual(
+      valid.rows.map((x) => x.fcff),
+    );
+    if ('wacc' in bad) expect(r.rows).toEqual([]);
+    else expect(r.rows.map((x) => x.pv)).toEqual(valid.rows.map((x) => x.pv));
+    expect(r.terminalValue).toBeNull();
+    expect(r.terminalPV).toBeNull();
+    expect(r.ev).toBeNull();
+  }
+  expect(calculateDcf({ ...base, historicalFcff: null }).forecast).toEqual([]);
+  expect(
+    calculateDcf({
+      ...base,
+      years: base.years.map((y) => ({ ...y, growth: null })),
+    }).forecast,
+  ).toEqual([]);
+  expect(valid.forecast.map((x) => x.fcff)).toEqual(
+    valid.rows.map((x) => x.fcff),
+  );
+});

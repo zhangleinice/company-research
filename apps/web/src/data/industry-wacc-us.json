@@ -1,0 +1,392 @@
+{
+  "nonFinancialMarket": {
+    "name": "Total Market (without financials)",
+    "wacc": 0.07722231810255238
+  },
+  "version": 1,
+  "region": "US",
+  "currency": "USD",
+  "date": "2026-01-05",
+  "source": "https://www.stern.nyu.edu/~adamodar/pc/datasets/wacc.xls",
+  "page": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/wacc.html",
+  "sha256": "d38b149c731bba6847d077ef67c9a4bfa0a54f947ba480b2f9ea89f5451d39a6",
+  "field": "Cost of Capital",
+  "industries": [
+    {
+      "name": "Advertising",
+      "wacc": 0.07806123736168302
+    },
+    {
+      "name": "Aerospace/Defense",
+      "wacc": 0.07601499077840683
+    },
+    {
+      "name": "Air Transport",
+      "wacc": 0.06724495139171459
+    },
+    {
+      "name": "Apparel",
+      "wacc": 0.07133569923061227
+    },
+    {
+      "name": "Auto & Truck",
+      "wacc": 0.0938009413632943
+    },
+    {
+      "name": "Auto Parts",
+      "wacc": 0.08178348625932404
+    },
+    {
+      "name": "Bank (Money Center)",
+      "wacc": 0.049849161250959236
+    },
+    {
+      "name": "Banks (Regional)",
+      "wacc": 0.04980706468584031
+    },
+    {
+      "name": "Beverage (Alcoholic)",
+      "wacc": 0.06483618264591316
+    },
+    {
+      "name": "Beverage (Soft)",
+      "wacc": 0.06325671579570011
+    },
+    {
+      "name": "Broadcasting",
+      "wacc": 0.05088211935972416
+    },
+    {
+      "name": "Brokerage & Investment Banking",
+      "wacc": 0.06081766824925591
+    },
+    {
+      "name": "Building Materials",
+      "wacc": 0.07853655745549157
+    },
+    {
+      "name": "Business & Consumer Services",
+      "wacc": 0.0723350904186299
+    },
+    {
+      "name": "Cable TV",
+      "wacc": 0.05198848097183416
+    },
+    {
+      "name": "Chemical (Basic)",
+      "wacc": 0.062238337279932075
+    },
+    {
+      "name": "Chemical (Diversified)",
+      "wacc": 0.05228720198169101
+    },
+    {
+      "name": "Chemical (Specialty)",
+      "wacc": 0.07245679943533023
+    },
+    {
+      "name": "Coal & Related Energy",
+      "wacc": 0.0840941403647961
+    },
+    {
+      "name": "Computer Services",
+      "wacc": 0.07832070198141003
+    },
+    {
+      "name": "Computers/Peripherals",
+      "wacc": 0.09707073132665844
+    },
+    {
+      "name": "Construction Supplies",
+      "wacc": 0.08289517926725504
+    },
+    {
+      "name": "Diversified",
+      "wacc": 0.07296118587169716
+    },
+    {
+      "name": "Drugs (Biotechnology)",
+      "wacc": 0.08494335246520258
+    },
+    {
+      "name": "Drugs (Pharmaceutical)",
+      "wacc": 0.07848751166460263
+    },
+    {
+      "name": "Education",
+      "wacc": 0.06753811810806143
+    },
+    {
+      "name": "Electrical Equipment",
+      "wacc": 0.08992520361989993
+    },
+    {
+      "name": "Electronics (Consumer & Office)",
+      "wacc": 0.07631357052138382
+    },
+    {
+      "name": "Electronics (General)",
+      "wacc": 0.07854831500880348
+    },
+    {
+      "name": "Engineering/Construction",
+      "wacc": 0.08685545161468271
+    },
+    {
+      "name": "Entertainment",
+      "wacc": 0.07127529087570077
+    },
+    {
+      "name": "Environmental & Waste Services",
+      "wacc": 0.07425419573500486
+    },
+    {
+      "name": "Farming/Agriculture",
+      "wacc": 0.07272847417372198
+    },
+    {
+      "name": "Financial Svcs. (Non-bank & Insurance)",
+      "wacc": 0.05002808150982288
+    },
+    {
+      "name": "Food Processing",
+      "wacc": 0.05789381991348973
+    },
+    {
+      "name": "Food Wholesalers",
+      "wacc": 0.06532155653709673
+    },
+    {
+      "name": "Furn/Home Furnishings",
+      "wacc": 0.06534852566141613
+    },
+    {
+      "name": "Green & Renewable Energy",
+      "wacc": 0.06041822528094039
+    },
+    {
+      "name": "Healthcare Products",
+      "wacc": 0.07544927539941833
+    },
+    {
+      "name": "Healthcare Support Services",
+      "wacc": 0.06826462981764432
+    },
+    {
+      "name": "Heathcare Information and Technology",
+      "wacc": 0.08223388617482975
+    },
+    {
+      "name": "Homebuilding",
+      "wacc": 0.07270658292621202
+    },
+    {
+      "name": "Hospitals/Healthcare Facilities",
+      "wacc": 0.06187135479202336
+    },
+    {
+      "name": "Hotel/Gaming",
+      "wacc": 0.07355342501803572
+    },
+    {
+      "name": "Household Products",
+      "wacc": 0.07031359655279625
+    },
+    {
+      "name": "Information Services",
+      "wacc": 0.06995815698857832
+    },
+    {
+      "name": "Insurance (General)",
+      "wacc": 0.06339397763978913
+    },
+    {
+      "name": "Insurance (Life)",
+      "wacc": 0.056021405832597446
+    },
+    {
+      "name": "Insurance (Prop/Cas.)",
+      "wacc": 0.057783745996990626
+    },
+    {
+      "name": "Investments & Asset Management",
+      "wacc": 0.06130173831332419
+    },
+    {
+      "name": "Machinery",
+      "wacc": 0.07699565637316959
+    },
+    {
+      "name": "Metals & Mining",
+      "wacc": 0.08197386647097057
+    },
+    {
+      "name": "Office Equipment & Services",
+      "wacc": 0.07919785997210449
+    },
+    {
+      "name": "Oil/Gas (Integrated)",
+      "wacc": 0.05073966589573278
+    },
+    {
+      "name": "Oil/Gas (Production and Exploration)",
+      "wacc": 0.06247619033696484
+    },
+    {
+      "name": "Oil/Gas Distribution",
+      "wacc": 0.057775581011015355
+    },
+    {
+      "name": "Oilfield Svcs/Equip.",
+      "wacc": 0.07043638484807473
+    },
+    {
+      "name": "Packaging & Container",
+      "wacc": 0.06745596737321397
+    },
+    {
+      "name": "Paper/Forest Products",
+      "wacc": 0.0692912835074329
+    },
+    {
+      "name": "Power",
+      "wacc": 0.050143407587657896
+    },
+    {
+      "name": "Precious Metals",
+      "wacc": 0.0746615642309349
+    },
+    {
+      "name": "Publishing & Newspapers",
+      "wacc": 0.059470957360467105
+    },
+    {
+      "name": "R.E.I.T.",
+      "wacc": 0.05317666020925715
+    },
+    {
+      "name": "Real Estate (Development)",
+      "wacc": 0.058234228427467324
+    },
+    {
+      "name": "Real Estate (General/Diversified)",
+      "wacc": 0.06250344665390667
+    },
+    {
+      "name": "Real Estate (Operations & Services)",
+      "wacc": 0.07408434049119778
+    },
+    {
+      "name": "Recreation",
+      "wacc": 0.0675772489837691
+    },
+    {
+      "name": "Reinsurance",
+      "wacc": 0.05635389895782815
+    },
+    {
+      "name": "Restaurant/Dining",
+      "wacc": 0.07157604548474453
+    },
+    {
+      "name": "Retail (Automotive)",
+      "wacc": 0.06775334495577662
+    },
+    {
+      "name": "Retail (Building Supply)",
+      "wacc": 0.09507487396524136
+    },
+    {
+      "name": "Retail (Distributors)",
+      "wacc": 0.07215667392072084
+    },
+    {
+      "name": "Retail (General)",
+      "wacc": 0.0726607085888313
+    },
+    {
+      "name": "Retail (Grocery and Food)",
+      "wacc": 0.07238731195941303
+    },
+    {
+      "name": "Retail (REITs)",
+      "wacc": 0.055748965465593825
+    },
+    {
+      "name": "Retail (Special Lines)",
+      "wacc": 0.0801006485684676
+    },
+    {
+      "name": "Rubber& Tires",
+      "wacc": 0.04479472762848332
+    },
+    {
+      "name": "Semiconductor",
+      "wacc": 0.10550619089928288
+    },
+    {
+      "name": "Semiconductor Equip",
+      "wacc": 0.09893581330056925
+    },
+    {
+      "name": "Shipbuilding & Marine",
+      "wacc": 0.06693565788096567
+    },
+    {
+      "name": "Shoe",
+      "wacc": 0.0800507842361955
+    },
+    {
+      "name": "Software (Entertainment)",
+      "wacc": 0.08444745892589496
+    },
+    {
+      "name": "Software (Internet)",
+      "wacc": 0.10658673852546652
+    },
+    {
+      "name": "Software (System & Application)",
+      "wacc": 0.09344048072400105
+    },
+    {
+      "name": "Steel",
+      "wacc": 0.07759414206880617
+    },
+    {
+      "name": "Telecom (Wireless)",
+      "wacc": 0.0547841167007108
+    },
+    {
+      "name": "Telecom. Equipment",
+      "wacc": 0.07721433392584677
+    },
+    {
+      "name": "Telecom. Services",
+      "wacc": 0.05389249919761376
+    },
+    {
+      "name": "Tobacco",
+      "wacc": 0.0693639802170545
+    },
+    {
+      "name": "Transportation",
+      "wacc": 0.06720784508008498
+    },
+    {
+      "name": "Transportation (Railroads)",
+      "wacc": 0.0726587934475234
+    },
+    {
+      "name": "Trucking",
+      "wacc": 0.07521676753085833
+    },
+    {
+      "name": "Utility (General)",
+      "wacc": 0.0435789877327735
+    },
+    {
+      "name": "Utility (Water)",
+      "wacc": 0.04929215662737624
+    }
+  ]
+}
