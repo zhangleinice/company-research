@@ -78,7 +78,11 @@ function references(): EquityBridgeReferences {
     ) as unknown as EquityBridgeReferences['facts'],
   };
 }
-function view(refs = references(), research = referenceBridgeResearch(refs)) {
+function view(
+  refs = references(),
+  research = referenceBridgeResearch(refs),
+  fcffNotice?: string,
+) {
   const data = {
     ticker: 'GOOGL',
     cik: refs.cik,
@@ -99,9 +103,21 @@ function view(refs = references(), research = referenceBridgeResearch(refs)) {
       references: reference,
       result: null,
       bridge: { ...emptyEquityBridge(), research },
+      fcffNotice,
     }),
   );
 }
+test('bridge displays the current FCFF method limitation without changing adjustment data', () => {
+  const refs = references();
+  const html = view(
+    refs,
+    referenceBridgeResearch(refs),
+    'EBIT法；ΔNWC部分估计；租赁和SBC仍需判断',
+  );
+  assert.ok(html.includes('EBIT法；ΔNWC部分估计；租赁和SBC仍需判断'));
+  assert.ok(!html.includes('当前FCFF尚未完成非经营性收益调整'));
+  assert.equal(refs.facts.cash.value, null);
+});
 test('compact four-column bridge shows numbers by default and seven edit/restore actions', () => {
   const html = view();
   assert.equal((html.match(/<th\b/g) ?? []).length, 4);
@@ -147,7 +163,7 @@ test('audited values, independent annual/quarter share periods, and finance-leas
     quarterDilutedShares: 12368,
     annualDilutedShares: 12450,
   }))
-    Object.assign(refs.facts[key as ResearchReferenceKey], {
+    Object.assign(refs.facts[key as ResearchReferenceKey]!, {
       value: value * 1e6,
       status: 'DISCLOSED',
     });
@@ -244,7 +260,7 @@ test('only approved financing debt initializes; judgment-dependent assets, claim
     minority: 2,
     preferred: 3,
   }))
-    Object.assign(refs.facts[key as ResearchReferenceKey], {
+    Object.assign(refs.facts[key as ResearchReferenceKey]!, {
       value: value * 1e6,
       status: 'VERIFIED',
     });
@@ -319,7 +335,7 @@ test('direct table inputs calculate with the existing strict bridge only when al
     financingDebt: 30,
     financeLeases: 5,
   }))
-    Object.assign(refs.facts[key as ResearchReferenceKey], {
+    Object.assign(refs.facts[key as ResearchReferenceKey]!, {
       value: value * 1e6,
       status: 'VERIFIED',
     });
@@ -385,7 +401,7 @@ test('compact source selection keeps valid facts and the latest diluted period w
     quarterDilutedShares: 120,
     taxClaims: 0,
   }))
-    Object.assign(refs.facts[key as ResearchReferenceKey], {
+    Object.assign(refs.facts[key as ResearchReferenceKey]!, {
       value: value * 1e6,
       status: 'DISCLOSED',
     });
@@ -395,7 +411,7 @@ test('compact source selection keeps valid facts and the latest diluted period w
   assert.deepEqual(visibleBridgeFacts(refs, 'preferred'), [
     'convertiblePreferred',
   ]);
-  assert.deepEqual(visibleBridgeFacts(refs, 'otherClaims'), ['taxClaims']);
+  assert.deepEqual(visibleBridgeFacts(refs, 'otherClaims'), []);
   assert.deepEqual(visibleBridgeFacts(refs, 'shares'), [
     'shares',
     'quarterDilutedShares',
@@ -498,5 +514,56 @@ test('equity bridge keeps the preliminary nonoperating-income limitation visible
   assert.match(
     view(),
     /当前FCFF尚未完成非经营性收益调整，估值可能存在重复计价，仅作为初步研究参考/,
+  );
+});
+
+test('claims reference column selects only included book balances and default completion enables the shared bridge', () => {
+  const refs = references();
+  const sourced = (n: number, concept: string) => ({
+    value: n * 1e6,
+    start: null,
+    end: refs.asOf,
+    concept,
+    status: 'DISCLOSED' as const,
+    reason: null,
+    items: [
+      {
+        concept,
+        end: refs.asOf,
+        val: n * 1e6,
+        unit: 'USD',
+        accn: '0001652044-26-000084',
+      },
+    ],
+  });
+  refs.facts.lossContingencies = sourced(
+    13807,
+    'us-gaap:LossContingencyAccrualCarryingValueCurrent',
+  );
+  refs.facts.noncurrentTaxClaims = sourced(
+    12219,
+    'us-gaap:AccruedIncomeTaxesNoncurrent',
+  );
+  refs.facts.taxClaims = sourced(12500, 'us-gaap:UnrecognizedTaxBenefits');
+  const defaults = equityDefaultEstimates({ references: refs, baseline: null });
+  assert.equal(defaults.otherClaims.value, 26026);
+  assert.deepEqual(visibleBridgeFacts(refs, 'otherClaims'), [
+    'lossContingencies',
+    'noncurrentTaxClaims',
+  ]);
+  const bridge = bridgeWithDefaults(refs, null, 'GOOGL', defaults);
+  assert.equal(bridge.research.items.otherClaims.value, 26026);
+  const claimRow = view(refs, bridge.research)
+    .split('其他重大索偿')[1]
+    .split('</tr>')[0];
+  assert.match(claimRow, /13,807/);
+  assert.match(claimRow, /12,219/);
+  assert.doesNotMatch(claimRow, /12,500/);
+  const edit = setTableBridgeAmount(bridge.research, 'otherClaims', 20000);
+  assert.equal(edit.items.otherClaims.value, 20000);
+  assert.equal(
+    restoreBridgeDefault(edit, 'otherClaims', defaults.otherClaims).items
+      .otherClaims.value,
+    26026,
   );
 });

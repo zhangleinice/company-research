@@ -37,6 +37,7 @@ export type ResearchReferenceKey =
   | 'convertiblePreferred'
   | 'lossContingencies'
   | 'taxClaims'
+  | 'noncurrentTaxClaims'
   | 'pensionClaims'
   | 'annualBasicShares'
   | 'annualDilutedShares'
@@ -45,13 +46,19 @@ export type ResearchReferenceKey =
 export interface ResearchReference extends ValuationFact {
   status: 'VERIFIED' | 'DISCLOSED' | 'MISSING';
   reason: string | null;
+  /** Disclosure-backed scope qualification, not an economic-value approval. */
+  claimNature?: 'special_tax' | 'pension_deficit';
 }
 export interface EquityBridgeReferences {
   version: 1;
   cik: string;
   asOf: string;
   fingerprint: string;
-  facts: Record<ResearchReferenceKey, ResearchReference>;
+  facts: Record<
+    Exclude<ResearchReferenceKey, 'noncurrentTaxClaims'>,
+    ResearchReference
+  > &
+    Partial<Record<'noncurrentTaxClaims', ResearchReference>>;
   financingDebtIncludesLeases: boolean | null;
   /** Existing version-2 combined debt disclosures, not an approved total. */
   debtComponents?: Record<string, ResearchReference>;
@@ -193,9 +200,12 @@ export function prepareResearchBridge(
         value = 0;
       const knownPositive =
         key === 'otherClaims'
-          ? [f.lossContingencies, f.taxClaims, f.pensionClaims].some(
-              (x) => finite(x.value) && x.value > 0,
-            )
+          ? [
+              f.lossContingencies,
+              f.taxClaims,
+              f.noncurrentTaxClaims,
+              f.pensionClaims,
+            ].some((x) => finite(x?.value) && x!.value! > 0)
           : key === 'financingDebt'
             ? [
                 f.financingDebt,

@@ -1,3 +1,5 @@
+import { extractDepreciationDisclosures } from '../financials/depreciation-disclosure';
+import type { DepreciationDisclosure } from '../financials/depreciation-amortization';
 import {
   extractDebtDisclosures,
   type DebtDisclosure,
@@ -115,10 +117,13 @@ export class SecService {
     return data;
   }
 
-  /** Bounded single-company disclosure fallback; never used by directory/list reads. */
-  async getDebtDisclosures(
-    cik: string,
-  ): Promise<{ disclosures: DebtDisclosure[]; diagnostics: string[] }> {
+  /** Bounded single-company filings for debt and D&A; never used by directory/list reads. */
+  async getDebtDisclosures(cik: string): Promise<{
+    disclosures: DebtDisclosure[];
+    diagnostics: string[];
+    depreciationDisclosures?: DepreciationDisclosure[];
+    depreciationDiagnostics?: string[];
+  }> {
     const expected = normalizeCik(cik);
     const sub = await this.client.getJson(
       `https://data.sec.gov/submissions/CIK${expected}.json`,
@@ -176,13 +181,22 @@ export class SecService {
       });
     }
     const disclosures: DebtDisclosure[] = [],
-      diagnostics: string[] = [];
+      diagnostics: string[] = [],
+      depreciationDisclosures: DepreciationDisclosure[] = [],
+      depreciationDiagnostics: string[] = [];
     for (const filing of filings) {
       try {
-        const parsed = extractDebtDisclosures(
-          await this.client.getText(filing.sourceUrl),
-          filing,
-        );
+        const html = await this.client.getText(filing.sourceUrl);
+        try {
+          depreciationDisclosures.push(
+            ...extractDepreciationDisclosures(html, filing),
+          );
+        } catch {
+          depreciationDiagnostics.push(
+            `${filing.accessionNumber}: D&A disclosure unsupported`,
+          );
+        }
+        const parsed = extractDebtDisclosures(html, filing);
         disclosures.push(...parsed);
         if (!parsed.length)
           diagnostics.push(
@@ -194,7 +208,12 @@ export class SecService {
         );
       }
     }
-    return { disclosures, diagnostics };
+    return {
+      disclosures,
+      diagnostics,
+      depreciationDisclosures,
+      depreciationDiagnostics,
+    };
   }
 
   private async getTickers(): Promise<Map<string, CompanyListItem>> {

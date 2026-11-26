@@ -468,3 +468,46 @@ body {
 .dcf-bridge-input input.ant-input-number-input {
   text-align: right;
 }
+
+.multiple-valuation-eps-row,
+.multiple-valuation-eps-value {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.multiple-valuation-eps-row {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.multiple-valuation-manual-eps {
+  width: 132px;
+}
+.multiple-valuation-eps-basis {
+  width: 148px;
+}
+.multiple-valuation-result {
+  margin: 16px 0;
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 6px;
+}
+.multiple-valuation-fair-pe,
+.multiple-valuation-fair-value {
+  font-size: 20px;
+  line-height: 1.4;
+}
+.multiple-valuation-fair-value {
+  font-weight: 600;
+}
+
+.margin-of-safety-table th,
+.margin-of-safety-table td {
+  padding: 8px 12px;
+  border: 1px solid #e8e8e8;
+  text-align: center;
+  font-weight: normal;
+  font-variant-numeric: tabular-nums;
+}
+.margin-of-safety-table th {
+  background: #fafafa;
+}

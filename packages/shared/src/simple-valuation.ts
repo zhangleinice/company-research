@@ -4,6 +4,18 @@ export const FEDERAL_TAX_SOURCE = 'https://www.irs.gov/instructions/i1120';
 export const INFLATION_SOURCE =
   'https://www.federalreserve.gov/faqs/economy_14400.htm';
 export interface SimpleFcffPeriod {
+  /** Additive cache-only inputs; older API responses legitimately omit this envelope. */
+  ebitInputs?: {
+    version: 1;
+    cik: string;
+    applicable: boolean | null;
+    operatingIncome: ValuationFact;
+    depreciationAmortization: ValuationFact;
+    workingCapital:
+      import('./operating-working-capital.js').OperatingWorkingCapital | null;
+    cacheIssues: string[];
+    limitations?: string[];
+  };
   start: string | null;
   end: string;
   label: string;
@@ -260,7 +272,7 @@ export interface IndustryWaccData {
   source: string;
   page: string;
   currency: string;
-  industries: { name: string; wacc: number }[];
+  industries: { name: string; wacc: number; costOfEquity?: number }[];
   nonFinancialMarket?: { name: string; wacc: number };
 }
 /** Research crosswalk, not an official Damodaran/SIC mapping. Ambiguous SICs deliberately omitted. */

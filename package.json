@@ -31,7 +31,8 @@
     "db:migrate:dev": "npm run db:migrate:dev --workspace=@company-research/api --",
     "db:status": "npm run db:status --workspace=@company-research/api --",
     "test:db": "npm run build:api && node --test scripts/database-cache.test.cjs",
-    "update:wacc": "node scripts/update-industry-wacc.cjs"
+    "update:wacc": "node scripts/update-industry-wacc.cjs",
+    "update:pe": "node scripts/update-industry-pe.cjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",

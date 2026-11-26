@@ -1,0 +1,388 @@
+{
+  "version": 1,
+  "region": "US",
+  "date": "2026-01-05",
+  "source": "https://www.stern.nyu.edu/~adamodar/pc/datasets/pedata.xls",
+  "page": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/pedata.html",
+  "field": "Aggregate Mkt Cap/ Trailing Net Income (only money making firms)",
+  "definition": "Aggregate equity market capitalization divided by aggregate trailing net income of profitable firms only; not the arithmetic average PE or forward PE.",
+  "sha256": "e9b839c046a8ff2786d81faedc603cd91d7c6d8b2bad9f895d821e2d6bd1e04f",
+  "industries": [
+    {
+      "name": "Advertising",
+      "pe": 25.51118334532642
+    },
+    {
+      "name": "Aerospace/Defense",
+      "pe": 35.26893480580791
+    },
+    {
+      "name": "Air Transport",
+      "pe": 12.871012104630436
+    },
+    {
+      "name": "Apparel",
+      "pe": 27.08893894027509
+    },
+    {
+      "name": "Auto & Truck",
+      "pe": 119.61563250717758
+    },
+    {
+      "name": "Auto Parts",
+      "pe": 20.23376583993345
+    },
+    {
+      "name": "Bank (Money Center)",
+      "pe": 14.169971702924542
+    },
+    {
+      "name": "Banks (Regional)",
+      "pe": 12.595547864671627
+    },
+    {
+      "name": "Beverage (Alcoholic)",
+      "pe": 16.570088718799976
+    },
+    {
+      "name": "Beverage (Soft)",
+      "pe": 26.253745601214924
+    },
+    {
+      "name": "Broadcasting",
+      "pe": 13.469782874708516
+    },
+    {
+      "name": "Brokerage & Investment Banking",
+      "pe": 19.80041343871481
+    },
+    {
+      "name": "Building Materials",
+      "pe": 17.117196635212427
+    },
+    {
+      "name": "Business & Consumer Services",
+      "pe": 24.147696309649877
+    },
+    {
+      "name": "Cable TV",
+      "pe": 5.059150686706401
+    },
+    {
+      "name": "Chemical (Basic)",
+      "pe": 18.404143899249245
+    },
+    {
+      "name": "Chemical (Diversified)",
+      "pe": null
+    },
+    {
+      "name": "Chemical (Specialty)",
+      "pe": 23.17957388758034
+    },
+    {
+      "name": "Coal & Related Energy",
+      "pe": 19.74592561638111
+    },
+    {
+      "name": "Computer Services",
+      "pe": 26.05590568363997
+    },
+    {
+      "name": "Computers/Peripherals",
+      "pe": 34.32804142393875
+    },
+    {
+      "name": "Construction Supplies",
+      "pe": 25.799507356114795
+    },
+    {
+      "name": "Diversified",
+      "pe": 16.80311963247858
+    },
+    {
+      "name": "Drugs (Biotechnology)",
+      "pe": 32.05284963653252
+    },
+    {
+      "name": "Drugs (Pharmaceutical)",
+      "pe": 24.947186344396485
+    },
+    {
+      "name": "Education",
+      "pe": 15.039090484458537
+    },
+    {
+      "name": "Electrical Equipment",
+      "pe": 47.24536559488373
+    },
+    {
+      "name": "Electronics (Consumer & Office)",
+      "pe": null
+    },
+    {
+      "name": "Electronics (General)",
+      "pe": 40.19722613317185
+    },
+    {
+      "name": "Engineering/Construction",
+      "pe": 24.832797901226215
+    },
+    {
+      "name": "Entertainment",
+      "pe": 32.4568551994246
+    },
+    {
+      "name": "Environmental & Waste Services",
+      "pe": 34.290349743441155
+    },
+    {
+      "name": "Farming/Agriculture",
+      "pe": 21.9825861635111
+    },
+    {
+      "name": "Financial Svcs. (Non-bank & Insurance)",
+      "pe": 22.080210153827434
+    },
+    {
+      "name": "Food Processing",
+      "pe": 16.502739038520367
+    },
+    {
+      "name": "Food Wholesalers",
+      "pe": 24.657043235704325
+    },
+    {
+      "name": "Furn/Home Furnishings",
+      "pe": 25.176966216760135
+    },
+    {
+      "name": "Green & Renewable Energy",
+      "pe": 25.950415241817296
+    },
+    {
+      "name": "Healthcare Products",
+      "pe": 30.34680531029458
+    },
+    {
+      "name": "Healthcare Support Services",
+      "pe": 21.06913909383527
+    },
+    {
+      "name": "Heathcare Information and Technology",
+      "pe": 37.27451805277639
+    },
+    {
+      "name": "Homebuilding",
+      "pe": 11.252412542002109
+    },
+    {
+      "name": "Hospitals/Healthcare Facilities",
+      "pe": 15.613407413033796
+    },
+    {
+      "name": "Hotel/Gaming",
+      "pe": 24.714568261843564
+    },
+    {
+      "name": "Household Products",
+      "pe": 19.655271835460486
+    },
+    {
+      "name": "Information Services",
+      "pe": 23.560979799367868
+    },
+    {
+      "name": "Insurance (General)",
+      "pe": 27.338810447753218
+    },
+    {
+      "name": "Insurance (Life)",
+      "pe": 11.81644731983821
+    },
+    {
+      "name": "Insurance (Prop/Cas.)",
+      "pe": 11.778436604130466
+    },
+    {
+      "name": "Investments & Asset Management",
+      "pe": 22.9875738174361
+    },
+    {
+      "name": "Machinery",
+      "pe": 26.6423820505974
+    },
+    {
+      "name": "Metals & Mining",
+      "pe": 29.447481367724556
+    },
+    {
+      "name": "Office Equipment & Services",
+      "pe": 18.181857790170792
+    },
+    {
+      "name": "Oil/Gas (Integrated)",
+      "pe": 19.02479110865909
+    },
+    {
+      "name": "Oil/Gas (Production and Exploration)",
+      "pe": 12.683828420752915
+    },
+    {
+      "name": "Oil/Gas Distribution",
+      "pe": 18.54858373261871
+    },
+    {
+      "name": "Oilfield Svcs/Equip.",
+      "pe": 19.407958618881725
+    },
+    {
+      "name": "Packaging & Container",
+      "pe": 13.937837796457062
+    },
+    {
+      "name": "Paper/Forest Products",
+      "pe": 14.49739873652917
+    },
+    {
+      "name": "Power",
+      "pe": 20.977682213443757
+    },
+    {
+      "name": "Precious Metals",
+      "pe": 18.551066806575726
+    },
+    {
+      "name": "Publishing & Newspapers",
+      "pe": 16.724780610927297
+    },
+    {
+      "name": "R.E.I.T.",
+      "pe": 28.101560397575465
+    },
+    {
+      "name": "Real Estate (Development)",
+      "pe": 13.383782589482987
+    },
+    {
+      "name": "Real Estate (General/Diversified)",
+      "pe": 19.374142661179697
+    },
+    {
+      "name": "Real Estate (Operations & Services)",
+      "pe": 43.8383511374889
+    },
+    {
+      "name": "Recreation",
+      "pe": 18.180042046693956
+    },
+    {
+      "name": "Reinsurance",
+      "pe": 15.421107266435987
+    },
+    {
+      "name": "Restaurant/Dining",
+      "pe": 32.79040785126188
+    },
+    {
+      "name": "Retail (Automotive)",
+      "pe": 24.01535093543431
+    },
+    {
+      "name": "Retail (Building Supply)",
+      "pe": 22.30575669883504
+    },
+    {
+      "name": "Retail (Distributors)",
+      "pe": 22.43174977999482
+    },
+    {
+      "name": "Retail (General)",
+      "pe": 33.48921536445488
+    },
+    {
+      "name": "Retail (Grocery and Food)",
+      "pe": 25.23196701299406
+    },
+    {
+      "name": "Retail (REITs)",
+      "pe": 31.097464966872128
+    },
+    {
+      "name": "Retail (Special Lines)",
+      "pe": 24.913962328286768
+    },
+    {
+      "name": "Rubber& Tires",
+      "pe": null
+    },
+    {
+      "name": "Semiconductor",
+      "pe": 48.81006575747112
+    },
+    {
+      "name": "Semiconductor Equip",
+      "pe": 34.17582553706748
+    },
+    {
+      "name": "Shipbuilding & Marine",
+      "pe": 13.672923322683708
+    },
+    {
+      "name": "Shoe",
+      "pe": 30.467134511329913
+    },
+    {
+      "name": "Software (Entertainment)",
+      "pe": 29.62126254902193
+    },
+    {
+      "name": "Software (Internet)",
+      "pe": 34.8240752482042
+    },
+    {
+      "name": "Software (System & Application)",
+      "pe": 37.517631212652624
+    },
+    {
+      "name": "Steel",
+      "pe": 24.06517502674947
+    },
+    {
+      "name": "Telecom (Wireless)",
+      "pe": 19.49163222099002
+    },
+    {
+      "name": "Telecom. Equipment",
+      "pe": 35.07695473251028
+    },
+    {
+      "name": "Telecom. Services",
+      "pe": 8.021309798716766
+    },
+    {
+      "name": "Tobacco",
+      "pe": 19.80949081307772
+    },
+    {
+      "name": "Transportation",
+      "pe": 13.345669889869011
+    },
+    {
+      "name": "Transportation (Railroads)",
+      "pe": 20.865058841746674
+    },
+    {
+      "name": "Trucking",
+      "pe": 32.66526689589088
+    },
+    {
+      "name": "Utility (General)",
+      "pe": 20.477225123253305
+    },
+    {
+      "name": "Utility (Water)",
+      "pe": 20.22003753607535
+    }
+  ]
+}

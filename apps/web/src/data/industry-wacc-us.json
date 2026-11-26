@@ -11,382 +11,477 @@
   "page": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/wacc.html",
   "sha256": "d38b149c731bba6847d077ef67c9a4bfa0a54f947ba480b2f9ea89f5451d39a6",
   "field": "Cost of Capital",
+  "equityField": "Cost of Equity",
   "industries": [
     {
       "name": "Advertising",
-      "wacc": 0.07806123736168302
+      "wacc": 0.07806123736168302,
+      "costOfEquity": 0.09348861074647324
     },
     {
       "name": "Aerospace/Defense",
-      "wacc": 0.07601499077840683
+      "wacc": 0.07601499077840683,
+      "costOfEquity": 0.08166892000937194
     },
     {
       "name": "Air Transport",
-      "wacc": 0.06724495139171459
+      "wacc": 0.06724495139171459,
+      "costOfEquity": 0.09237174347813931
     },
     {
       "name": "Apparel",
-      "wacc": 0.07133569923061227
+      "wacc": 0.07133569923061227,
+      "costOfEquity": 0.08124000110769025
     },
     {
       "name": "Auto & Truck",
-      "wacc": 0.0938009413632943
+      "wacc": 0.0938009413632943,
+      "costOfEquity": 0.10445960139563126
     },
     {
       "name": "Auto Parts",
-      "wacc": 0.08178348625932404
+      "wacc": 0.08178348625932404,
+      "costOfEquity": 0.09923930788768992
     },
     {
       "name": "Bank (Money Center)",
-      "wacc": 0.049849161250959236
+      "wacc": 0.049849161250959236,
+      "costOfEquity": 0.07344265971597498
     },
     {
       "name": "Banks (Regional)",
-      "wacc": 0.04980706468584031
+      "wacc": 0.04980706468584031,
+      "costOfEquity": 0.05727205438158492
     },
     {
       "name": "Beverage (Alcoholic)",
-      "wacc": 0.06483618264591316
+      "wacc": 0.06483618264591316,
+      "costOfEquity": 0.07573641299601214
     },
     {
       "name": "Beverage (Soft)",
-      "wacc": 0.06325671579570011
+      "wacc": 0.06325671579570011,
+      "costOfEquity": 0.06810950433285642
     },
     {
       "name": "Broadcasting",
-      "wacc": 0.05088211935972416
+      "wacc": 0.05088211935972416,
+      "costOfEquity": 0.06049554136249101
     },
     {
       "name": "Brokerage & Investment Banking",
-      "wacc": 0.06081766824925591
+      "wacc": 0.06081766824925591,
+      "costOfEquity": 0.09174698536873349
     },
     {
       "name": "Building Materials",
-      "wacc": 0.07853655745549157
+      "wacc": 0.07853655745549157,
+      "costOfEquity": 0.08907433493115322
     },
     {
       "name": "Business & Consumer Services",
-      "wacc": 0.0723350904186299
+      "wacc": 0.0723350904186299,
+      "costOfEquity": 0.07910384259518263
     },
     {
       "name": "Cable TV",
-      "wacc": 0.05198848097183416
+      "wacc": 0.05198848097183416,
+      "costOfEquity": 0.07253720060472808
     },
     {
       "name": "Chemical (Basic)",
-      "wacc": 0.062238337279932075
+      "wacc": 0.062238337279932075,
+      "costOfEquity": 0.08464622289441495
     },
     {
       "name": "Chemical (Diversified)",
-      "wacc": 0.05228720198169101
+      "wacc": 0.05228720198169101,
+      "costOfEquity": 0.07744134738902918
     },
     {
       "name": "Chemical (Specialty)",
-      "wacc": 0.07245679943533023
+      "wacc": 0.07245679943533023,
+      "costOfEquity": 0.08275231652727985
     },
     {
       "name": "Coal & Related Energy",
-      "wacc": 0.0840941403647961
+      "wacc": 0.0840941403647961,
+      "costOfEquity": 0.08726629634044347
     },
     {
       "name": "Computer Services",
-      "wacc": 0.07832070198141003
+      "wacc": 0.07832070198141003,
+      "costOfEquity": 0.08801837329491224
     },
     {
       "name": "Computers/Peripherals",
-      "wacc": 0.09707073132665844
+      "wacc": 0.09707073132665844,
+      "costOfEquity": 0.09972468270289851
     },
     {
       "name": "Construction Supplies",
-      "wacc": 0.08289517926725504
+      "wacc": 0.08289517926725504,
+      "costOfEquity": 0.0908058801355619
     },
     {
       "name": "Diversified",
-      "wacc": 0.07296118587169716
+      "wacc": 0.07296118587169716,
+      "costOfEquity": 0.07879060085452916
     },
     {
       "name": "Drugs (Biotechnology)",
-      "wacc": 0.08494335246520258
+      "wacc": 0.08494335246520258,
+      "costOfEquity": 0.09013282045167903
     },
     {
       "name": "Drugs (Pharmaceutical)",
-      "wacc": 0.07848751166460263
+      "wacc": 0.07848751166460263,
+      "costOfEquity": 0.08333435617353047
     },
     {
       "name": "Education",
-      "wacc": 0.06753811810806143
+      "wacc": 0.06753811810806143,
+      "costOfEquity": 0.07432838926321207
     },
     {
       "name": "Electrical Equipment",
-      "wacc": 0.08992520361989993
+      "wacc": 0.08992520361989993,
+      "costOfEquity": 0.09530012391549311
     },
     {
       "name": "Electronics (Consumer & Office)",
-      "wacc": 0.07631357052138382
+      "wacc": 0.07631357052138382,
+      "costOfEquity": 0.07812261962427852
     },
     {
       "name": "Electronics (General)",
-      "wacc": 0.07854831500880348
+      "wacc": 0.07854831500880348,
+      "costOfEquity": 0.08282788003362622
     },
     {
       "name": "Engineering/Construction",
-      "wacc": 0.08685545161468271
+      "wacc": 0.08685545161468271,
+      "costOfEquity": 0.09346476284662614
     },
     {
       "name": "Entertainment",
-      "wacc": 0.07127529087570077
+      "wacc": 0.07127529087570077,
+      "costOfEquity": 0.07630256582202988
     },
     {
       "name": "Environmental & Waste Services",
-      "wacc": 0.07425419573500486
+      "wacc": 0.07425419573500486,
+      "costOfEquity": 0.08166846590140403
     },
     {
       "name": "Farming/Agriculture",
-      "wacc": 0.07272847417372198
+      "wacc": 0.07272847417372198,
+      "costOfEquity": 0.08986114884617541
     },
     {
       "name": "Financial Svcs. (Non-bank & Insurance)",
-      "wacc": 0.05002808150982288
+      "wacc": 0.05002808150982288,
+      "costOfEquity": 0.0827492106264043
     },
     {
       "name": "Food Processing",
-      "wacc": 0.05789381991348973
+      "wacc": 0.05789381991348973,
+      "costOfEquity": 0.06659240548589598
     },
     {
       "name": "Food Wholesalers",
-      "wacc": 0.06532155653709673
+      "wacc": 0.06532155653709673,
+      "costOfEquity": 0.07815221708417647
     },
     {
       "name": "Furn/Home Furnishings",
-      "wacc": 0.06534852566141613
+      "wacc": 0.06534852566141613,
+      "costOfEquity": 0.07621286794047619
     },
     {
       "name": "Green & Renewable Energy",
-      "wacc": 0.06041822528094039
+      "wacc": 0.06041822528094039,
+      "costOfEquity": 0.07769229653426324
     },
     {
       "name": "Healthcare Products",
-      "wacc": 0.07544927539941833
+      "wacc": 0.07544927539941833,
+      "costOfEquity": 0.08002182662414405
     },
     {
       "name": "Healthcare Support Services",
-      "wacc": 0.06826462981764432
+      "wacc": 0.06826462981764432,
+      "costOfEquity": 0.07838914337536103
     },
     {
       "name": "Heathcare Information and Technology",
-      "wacc": 0.08223388617482975
+      "wacc": 0.08223388617482975,
+      "costOfEquity": 0.08893169190200721
     },
     {
       "name": "Homebuilding",
-      "wacc": 0.07270658292621202
+      "wacc": 0.07270658292621202,
+      "costOfEquity": 0.08011355447205985
     },
     {
       "name": "Hospitals/Healthcare Facilities",
-      "wacc": 0.06187135479202336
+      "wacc": 0.06187135479202336,
+      "costOfEquity": 0.07516565358056321
     },
     {
       "name": "Hotel/Gaming",
-      "wacc": 0.07355342501803572
+      "wacc": 0.07355342501803572,
+      "costOfEquity": 0.0876843935465109
     },
     {
       "name": "Household Products",
-      "wacc": 0.07031359655279625
+      "wacc": 0.07031359655279625,
+      "costOfEquity": 0.07587200580090572
     },
     {
       "name": "Information Services",
-      "wacc": 0.06995815698857832
+      "wacc": 0.06995815698857832,
+      "costOfEquity": 0.08055730262743459
     },
     {
       "name": "Insurance (General)",
-      "wacc": 0.06339397763978913
+      "wacc": 0.06339397763978913,
+      "costOfEquity": 0.06947008688394016
     },
     {
       "name": "Insurance (Life)",
-      "wacc": 0.056021405832597446
+      "wacc": 0.056021405832597446,
+      "costOfEquity": 0.068244391926304
     },
     {
       "name": "Insurance (Prop/Cas.)",
-      "wacc": 0.057783745996990626
+      "wacc": 0.057783745996990626,
+      "costOfEquity": 0.06109130667474916
     },
     {
       "name": "Investments & Asset Management",
-      "wacc": 0.06130173831332419
+      "wacc": 0.06130173831332419,
+      "costOfEquity": 0.06891734610648118
     },
     {
       "name": "Machinery",
-      "wacc": 0.07699565637316959
+      "wacc": 0.07699565637316959,
+      "costOfEquity": 0.08247748724958495
     },
     {
       "name": "Metals & Mining",
-      "wacc": 0.08197386647097057
+      "wacc": 0.08197386647097057,
+      "costOfEquity": 0.08601920383989574
     },
     {
       "name": "Office Equipment & Services",
-      "wacc": 0.07919785997210449
+      "wacc": 0.07919785997210449,
+      "costOfEquity": 0.09901312672252996
     },
     {
       "name": "Oil/Gas (Integrated)",
-      "wacc": 0.05073966589573278
+      "wacc": 0.05073966589573278,
+      "costOfEquity": 0.05285243629212231
     },
     {
       "name": "Oil/Gas (Production and Exploration)",
-      "wacc": 0.06247619033696484
+      "wacc": 0.06247619033696484,
+      "costOfEquity": 0.07167470561395174
     },
     {
       "name": "Oil/Gas Distribution",
-      "wacc": 0.057775581011015355
+      "wacc": 0.057775581011015355,
+      "costOfEquity": 0.06934732134646625
     },
     {
       "name": "Oilfield Svcs/Equip.",
-      "wacc": 0.07043638484807473
+      "wacc": 0.07043638484807473,
+      "costOfEquity": 0.08192538747463221
     },
     {
       "name": "Packaging & Container",
-      "wacc": 0.06745596737321397
+      "wacc": 0.06745596737321397,
+      "costOfEquity": 0.0850780679669291
     },
     {
       "name": "Paper/Forest Products",
-      "wacc": 0.0692912835074329
+      "wacc": 0.0692912835074329,
+      "costOfEquity": 0.08222583802123369
     },
     {
       "name": "Power",
-      "wacc": 0.050143407587657896
+      "wacc": 0.050143407587657896,
+      "costOfEquity": 0.061016497140739194
     },
     {
       "name": "Precious Metals",
-      "wacc": 0.0746615642309349
+      "wacc": 0.0746615642309349,
+      "costOfEquity": 0.07681060504482207
     },
     {
       "name": "Publishing & Newspapers",
-      "wacc": 0.059470957360467105
+      "wacc": 0.059470957360467105,
+      "costOfEquity": 0.06461012007642873
     },
     {
       "name": "R.E.I.T.",
-      "wacc": 0.05317666020925715
+      "wacc": 0.05317666020925715,
+      "costOfEquity": 0.06812421147550282
     },
     {
       "name": "Real Estate (Development)",
-      "wacc": 0.058234228427467324
+      "wacc": 0.058234228427467324,
+      "costOfEquity": 0.07712304634724795
     },
     {
       "name": "Real Estate (General/Diversified)",
-      "wacc": 0.06250344665390667
+      "wacc": 0.06250344665390667,
+      "costOfEquity": 0.07562539687177999
     },
     {
       "name": "Real Estate (Operations & Services)",
-      "wacc": 0.07408434049119778
+      "wacc": 0.07408434049119778,
+      "costOfEquity": 0.08256118433708262
     },
     {
       "name": "Recreation",
-      "wacc": 0.0675772489837691
+      "wacc": 0.0675772489837691,
+      "costOfEquity": 0.08514688243003364
     },
     {
       "name": "Reinsurance",
-      "wacc": 0.05635389895782815
+      "wacc": 0.05635389895782815,
+      "costOfEquity": 0.06542742157884035
     },
     {
       "name": "Restaurant/Dining",
-      "wacc": 0.07157604548474453
+      "wacc": 0.07157604548474453,
+      "costOfEquity": 0.08071429423920252
     },
     {
       "name": "Retail (Automotive)",
-      "wacc": 0.06775334495577662
+      "wacc": 0.06775334495577662,
+      "costOfEquity": 0.08124627772747516
     },
     {
       "name": "Retail (Building Supply)",
-      "wacc": 0.09507487396524136
+      "wacc": 0.09507487396524136,
+      "costOfEquity": 0.10797480075770113
     },
     {
       "name": "Retail (Distributors)",
-      "wacc": 0.07215667392072084
+      "wacc": 0.07215667392072084,
+      "costOfEquity": 0.08180014812994255
     },
     {
       "name": "Retail (General)",
-      "wacc": 0.0726607085888313
+      "wacc": 0.0726607085888313,
+      "costOfEquity": 0.07541372806577135
     },
     {
       "name": "Retail (Grocery and Food)",
-      "wacc": 0.07238731195941303
+      "wacc": 0.07238731195941303,
+      "costOfEquity": 0.08937634923439286
     },
     {
       "name": "Retail (REITs)",
-      "wacc": 0.055748965465593825
+      "wacc": 0.055748965465593825,
+      "costOfEquity": 0.0671849603698187
     },
     {
       "name": "Retail (Special Lines)",
-      "wacc": 0.0801006485684676
+      "wacc": 0.0801006485684676,
+      "costOfEquity": 0.088087225741044
     },
     {
       "name": "Rubber& Tires",
-      "wacc": 0.04479472762848332
+      "wacc": 0.04479472762848332,
+      "costOfEquity": 0.06311258502064361
     },
     {
       "name": "Semiconductor",
-      "wacc": 0.10550619089928288
+      "wacc": 0.10550619089928288,
+      "costOfEquity": 0.10721169336958483
     },
     {
       "name": "Semiconductor Equip",
-      "wacc": 0.09893581330056925
+      "wacc": 0.09893581330056925,
+      "costOfEquity": 0.10181616474337873
     },
     {
       "name": "Shipbuilding & Marine",
-      "wacc": 0.06693565788096567
+      "wacc": 0.06693565788096567,
+      "costOfEquity": 0.07308079119645694
     },
     {
       "name": "Shoe",
-      "wacc": 0.0800507842361955
+      "wacc": 0.0800507842361955,
+      "costOfEquity": 0.08487239742261231
     },
     {
       "name": "Software (Entertainment)",
-      "wacc": 0.08444745892589496
+      "wacc": 0.08444745892589496,
+      "costOfEquity": 0.08536268166458016
     },
     {
       "name": "Software (Internet)",
-      "wacc": 0.10658673852546652
+      "wacc": 0.10658673852546652,
+      "costOfEquity": 0.11481495478100626
     },
     {
       "name": "Software (System & Application)",
-      "wacc": 0.09344048072400105
+      "wacc": 0.09344048072400105,
+      "costOfEquity": 0.09643850874228661
     },
     {
       "name": "Steel",
-      "wacc": 0.07759414206880617
+      "wacc": 0.07759414206880617,
+      "costOfEquity": 0.08690294263520874
     },
     {
       "name": "Telecom (Wireless)",
-      "wacc": 0.0547841167007108
+      "wacc": 0.0547841167007108,
+      "costOfEquity": 0.06350083320541502
     },
     {
       "name": "Telecom. Equipment",
-      "wacc": 0.07721433392584677
+      "wacc": 0.07721433392584677,
+      "costOfEquity": 0.08067559306229313
     },
     {
       "name": "Telecom. Services",
-      "wacc": 0.05389249919761376
+      "wacc": 0.05389249919761376,
+      "costOfEquity": 0.06754091877360549
     },
     {
       "name": "Tobacco",
-      "wacc": 0.0693639802170545
+      "wacc": 0.0693639802170545,
+      "costOfEquity": 0.07492643025468793
     },
     {
       "name": "Transportation",
-      "wacc": 0.06720784508008498
+      "wacc": 0.06720784508008498,
+      "costOfEquity": 0.07785251793489256
     },
     {
       "name": "Transportation (Railroads)",
-      "wacc": 0.0726587934475234
+      "wacc": 0.0726587934475234,
+      "costOfEquity": 0.08299150038379065
     },
     {
       "name": "Trucking",
-      "wacc": 0.07521676753085833
+      "wacc": 0.07521676753085833,
+      "costOfEquity": 0.08460616221342496
     },
     {
       "name": "Utility (General)",
-      "wacc": 0.0435789877327735
+      "wacc": 0.0435789877327735,
+      "costOfEquity": 0.05017879778389073
     },
     {
       "name": "Utility (Water)",
-      "wacc": 0.04929215662737624
+      "wacc": 0.04929215662737624,
+      "costOfEquity": 0.057905652649935975
     }
   ]
 }

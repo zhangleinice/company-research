@@ -1,4 +1,6 @@
 import { EquityBridgeDetails } from './EquityBridgeDetails.js';
+import { MarginOfSafety } from './MarginOfSafety.js';
+import { valuationNumber, valuationPercent } from './valuation-format.js';
 import { EvComposition } from './EvComposition.js';
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { Button, Divider, Table, Tag, Typography } from 'antd';
@@ -28,17 +30,8 @@ import {
   fcffBasis,
   referenceBridge,
 } from './valuation-calculator.js';
-const money = (n: number | null | undefined) =>
-  n == null || !Number.isFinite(n)
-    ? '—'
-    : n.toLocaleString('zh-CN', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      });
-const rate = (n: number | null) =>
-  n === null || !Number.isFinite(n)
-    ? '—'
-    : `${n.toLocaleString('zh-CN', { maximumFractionDigits: 2 })}%`;
+const money = valuationNumber;
+const rate = valuationPercent;
 function Equation({
   formula,
   children,
@@ -101,8 +94,8 @@ function DcfCalculatorSession({ ticker }: { ticker: string }) {
           void fetchSimpleValuationInputs(ticker, c.signal)
             .then((data) => {
               if (c.signal.aborted) return;
-              if (data.cik !== b.cik)
-                throw Error('估值参数数据的公司身份不一致');
+              if (data.cik !== b.cik || data.ttm.end !== b.asOf)
+                throw Error('估值参数数据的公司身份或报告期不一致');
               setSimpleData(data);
             })
             .catch((e) => {
@@ -210,7 +203,11 @@ function DcfCalculatorSession({ ticker }: { ticker: string }) {
   return (
     <div className="dcf-calculator">
       <Typography.Paragraph type="secondary" className="dcf-period">
-        {settings.basis === 'annual' ? '完整财年' : 'TTM'}{' '}
+        {settings.basis === 'manual'
+          ? '手动FCFF · 财务参考期'
+          : settings.basis === 'annual'
+            ? '完整财年'
+            : 'TTM'}{' '}
         {sourcePeriod?.start ?? '—'} → {sourcePeriod?.end ?? '—'} ·
         金额：百万美元 · 股数：百万股
       </Typography.Paragraph>
@@ -253,61 +250,73 @@ function DcfCalculatorSession({ ticker }: { ticker: string }) {
       <Divider />
       <section className="dcf-section">
         <Typography.Title level={5}>
-          历史自由现金流{' '}
+          {settings.basis === 'manual'
+            ? '手动FCFF基准'
+            : resolved.calculationMethod === 'ebit'
+              ? '税后经营利润法 · FCFF组成'
+              : '历史自由现金流'}{' '}
           <Tag color="blue">
-            SEC ·{' '}
-            {settings.basis === 'annual'
-              ? (sourcePeriod?.label ?? '年度')
-              : 'TTM'}
+            {settings.basis === 'manual'
+              ? '研究假设'
+              : `财报参考 · ${settings.basis === 'annual' ? (sourcePeriod?.label ?? '年度') : 'TTM'}`}
           </Tag>
         </Typography.Title>
         <div className="dcf-history-formulas">
-          <Equation formula="FCF = OCF − CapEx">
-            ={' '}
-            {money(
-              sourcePeriod?.ocf.value == null
-                ? null
-                : sourcePeriod.ocf.value / 1e6,
-            )}{' '}
-            −{' '}
-            {money(
-              sourcePeriod?.capex.value == null
-                ? null
-                : sourcePeriod.capex.value / 1e6,
-            )}{' '}
-            ={' '}
-            <strong>
-              {money(displayFcf === null ? null : displayFcf / 1e6)}
-            </strong>
-          </Equation>
-          {fcff0 !== null && (
-            <Equation formula="FCFF₀ ≈ FCF + Interest × (1 − T)">
-              {basis?.kind === 'AUTO_RESEARCH' ? (
-                <>
-                  {' '}
-                  = {money(
-                    displayFcf === null ? null : displayFcf / 1e6,
-                  )} +{' '}
-                  {money(
-                    sourcePeriod?.interest.value == null
-                      ? null
-                      : sourcePeriod.interest.value / 1e6,
-                  )}{' '}
-                  × (1 −{' '}
-                  {rate(
-                    resolved.tax.value === null
-                      ? null
-                      : resolved.tax.value * 100,
-                  )}
-                  ) ={' '}
-                </>
-              ) : verifiedBase ? (
-                '已核准FCFF₀ = '
-              ) : (
-                '用户研究性FCFF₀ = '
-              )}
+          {settings.basis === 'manual' ? (
+            <Equation formula="FCFF₀ = 用户正常化现金流假设">
               <strong>{money(fcff0)}</strong>
             </Equation>
+          ) : resolved.calculationMethod === 'ebit' ? (
+            <>
+              <Equation formula="NOPAT = Operating Income × (1 − Tax Rate)">
+                = {money(resolved.ebit.components.ebit)} × (1 −{' '}
+                {rate(
+                  resolved.tax.value === null ? null : resolved.tax.value * 100,
+                )}
+                ) = <strong>{money(resolved.ebit.components.nopat)}</strong>
+              </Equation>
+              <Equation formula="FCFF₀ = NOPAT + D&A − CapEx − ΔNWC">
+                = {money(resolved.ebit.components.nopat)} +{' '}
+                {money(resolved.ebit.components.da)} −{' '}
+                {money(resolved.ebit.components.capex)} − (
+                {money(resolved.ebit.components.deltaNwc)}) ={' '}
+                <strong>{money(resolved.fcff.value)}</strong>
+              </Equation>
+            </>
+          ) : (
+            <>
+              <Equation formula="FCF = OCF − CapEx">
+                ={' '}
+                {money(
+                  sourcePeriod?.ocf.value == null
+                    ? null
+                    : sourcePeriod.ocf.value / 1e6,
+                )}{' '}
+                −{' '}
+                {money(
+                  sourcePeriod?.capex.value == null
+                    ? null
+                    : sourcePeriod.capex.value / 1e6,
+                )}{' '}
+                ={' '}
+                <strong>
+                  {money(displayFcf === null ? null : displayFcf / 1e6)}
+                </strong>
+              </Equation>
+              <Equation formula="FCFF₀ ≈ FCF + Interest × (1 − T)">
+                = {money(displayFcf === null ? null : displayFcf / 1e6)} +{' '}
+                {money(
+                  sourcePeriod?.interest.value == null
+                    ? null
+                    : sourcePeriod.interest.value / 1e6,
+                )}{' '}
+                × (1 −{' '}
+                {rate(
+                  resolved.tax.value === null ? null : resolved.tax.value * 100,
+                )}
+                ) = <strong>{money(resolved.fcff.value)}</strong>
+              </Equation>
+            </>
           )}
         </div>
       </section>
@@ -428,6 +437,7 @@ function DcfCalculatorSession({ ticker }: { ticker: string }) {
       </section>
       <Divider />
       <EquityBridgeDetails
+        fcffNotice={resolved.bridgeNotice}
         baseline={baseline}
         references={refs}
         result={result}
@@ -435,6 +445,10 @@ function DcfCalculatorSession({ ticker }: { ticker: string }) {
         bridge={bridge}
         defaults={bridgeDefaults}
         onChange={(research) => setBridgeDraft({ ticker, research })}
+      />
+      <MarginOfSafety
+        model="DCF"
+        fairValue={result?.perShare ?? null}
       />
     </div>
   );

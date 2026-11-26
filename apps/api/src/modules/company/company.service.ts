@@ -1,3 +1,4 @@
+import type { DepreciationDisclosure } from '../financials/depreciation-amortization';
 import { healthRatios } from '../financials/health-ratios';
 import {
   hasDebtBalanceFacts,
@@ -323,11 +324,13 @@ export class CompanyService {
     try {
       const facts = await this.sec.getCompanyFacts(company.cik);
       let disclosures: DebtDisclosure[] = [],
-        diagnostics: string[] = [];
+        diagnostics: string[] = [],
+        depreciationDisclosures: DepreciationDisclosure[] = [];
       if (hasDebtBalanceFacts(facts)) {
         try {
           const evidence = await this.sec.getDebtDisclosures(company.cik);
           disclosures = evidence.disclosures;
+          depreciationDisclosures = evidence.depreciationDisclosures ?? [];
           diagnostics = evidence.diagnostics;
         } catch {
           diagnostics = [
@@ -340,6 +343,7 @@ export class CompanyService {
         facts,
         disclosures,
         basic?.sic ?? null,
+        depreciationDisclosures,
       );
       for (const row of [...parsed.annual, ...parsed.quarterly])
         row.sources.debtDisclosureAcquisition = {

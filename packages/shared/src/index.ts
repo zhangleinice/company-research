@@ -353,3 +353,11 @@ export * from './equity-bridge-research.js';
 export * from './equity-defaults.js';
 
 export * from './simple-valuation.js';
+
+export * from './operating-working-capital.js';
+
+export * from './ebit-fcff.js';
+
+export * from './multiple-valuation.js';
+
+export * from './margin-of-safety.js';

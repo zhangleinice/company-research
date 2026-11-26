@@ -43,7 +43,18 @@ export function bridgeDisclosures(
         /^10-[KQ](\/A)?$/.test(f.form) &&
         Number.isFinite(f.val),
     );
-    if (!xs.length || xs.some((f) => f.val !== xs[0].val)) return missing();
+    if (!xs.length) return missing();
+    if (xs.some((f) => f.val !== xs[0].val))
+      return {
+        ...missing(),
+        items: xs.map((f) => ({
+          ...f,
+          concept: `us-gaap:${tag}`,
+          unit: 'USD',
+          url,
+          scopeConflict: true,
+        })),
+      };
     return {
       value: xs[0].val,
       start: null,
@@ -114,6 +125,7 @@ export function bridgeDisclosures(
         'LossContingencyAccrualCarryingValueCurrent',
       ),
       unrecognizedTaxBenefits: exact('UnrecognizedTaxBenefits'),
+      noncurrentIncomeTaxes: exact('AccruedIncomeTaxesNoncurrent'),
     },
   };
 }

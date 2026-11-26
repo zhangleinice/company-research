@@ -175,14 +175,14 @@ test('claims only sum qualifying incremental payments; unknown liabilities and d
     scopeComplete: true,
     claims: [
       {
-        fact: fact(3, 'Litigation'),
+        fact: sourced(3, 'Litigation'),
         identity: 'litigation',
         incrementalCashPayment: true,
         excludedFromFcff: true,
         distinctFromOtherAdjustments: true,
       },
       {
-        fact: fact(2, 'PensionDeficit'),
+        fact: sourced(2, 'PensionDeficit'),
         identity: 'pension',
         incrementalCashPayment: true,
         excludedFromFcff: true,
@@ -271,7 +271,7 @@ test('unknown claims remain missing and true disclosed zero is preserved', () =>
     'us-gaap:LossContingencyAccrualCarryingValueCurrent',
   );
   c.references.facts.taxClaims = sourced(12, 'us-gaap:UnrecognizedTaxBenefits');
-  expect(defaultOtherClaims(c).value).toBeNull();
+  expect(defaultOtherClaims(c).value).toBe(13);
   c.references.facts.shortInvestments = sourced(
     0,
     'us-gaap:MarketableSecuritiesCurrent',
@@ -293,4 +293,105 @@ test('audited scope cannot transfer to conflicting totals or a new reporting per
   f.end = c.references.asOf;
   f.items[0].end = c.references.asOf;
   expect(defaultMinority(c).value).toBeNull();
+});
+
+test('adjusted book subtotal includes approved special taxes once, omits gross UTBs and preserves unknown pension', () => {
+  const c = context();
+  c.references.facts.lossContingencies = sourced(
+    13807,
+    'us-gaap:LossContingencyAccrualCarryingValueCurrent',
+  );
+  c.references.facts.noncurrentTaxClaims = sourced(
+    12219,
+    'us-gaap:AccruedIncomeTaxesNoncurrent',
+  );
+  c.references.facts.taxClaims = sourced(
+    12500,
+    'us-gaap:UnrecognizedTaxBenefits',
+  );
+  const before = JSON.stringify(c.references);
+  const d = defaultOtherClaims(c);
+  expect(d.value).toBe(26026);
+  expect(d.sources).toEqual([
+    c.references.facts.lossContingencies,
+    c.references.facts.noncurrentTaxClaims,
+  ]);
+  expect(d.calculation).toContain('13807');
+  expect(d.calculation).toContain('12219');
+  expect(
+    d.excludedSources!.some((x) => x.fact === c.references.facts.taxClaims),
+  ).toBe(true);
+  expect(
+    d.excludedSources!.some((x) => x.fact === c.references.facts.pensionClaims),
+  ).toBe(true);
+  expect(d.warnings.join()).toContain('并非完整核准');
+  expect(JSON.stringify(c.references)).toBe(before);
+});
+test('other-claim default guards cross-filings and scope conflicts while allowing qualified pension and true zero', () => {
+  const c = context();
+  c.references.facts.lossContingencies = sourced(
+    10,
+    'us-gaap:LossContingencyAccrualCarryingValueCurrent',
+  );
+  c.references.facts.noncurrentTaxClaims = {
+    ...sourced(20, 'us-gaap:AccruedIncomeTaxesNoncurrent', 'other-filing'),
+    claimNature: 'special_tax',
+  };
+  expect(defaultOtherClaims(c).value).toBeNull();
+  c.references.facts.noncurrentTaxClaims = {
+    ...sourced(20, 'us-gaap:AccruedIncomeTaxesNoncurrent'),
+    claimNature: 'special_tax',
+  };
+  c.references.facts.pensionClaims = {
+    ...sourced(3, 'VerifiedPensionDeficit'),
+    claimNature: 'pension_deficit',
+  };
+  expect(defaultOtherClaims(c).value).toBe(33);
+  c.eligibility!.otherClaims = { distinctFromOtherAdjustments: false };
+  expect(defaultOtherClaims(c).value).toBeNull();
+  delete c.eligibility!.otherClaims;
+  delete c.references.facts.noncurrentTaxClaims;
+  c.references.facts.pensionClaims = fact(null);
+  c.references.facts.lossContingencies = sourced(
+    0,
+    'us-gaap:LossContingencyAccrualCarryingValueCurrent',
+  );
+  expect(defaultOtherClaims(c).value).toBe(0);
+  c.references.facts.lossContingencies = fact(null);
+  expect(defaultOtherClaims(c).value).toBeNull();
+});
+test('unqualified noncurrent taxes and old caches never silently become zero', () => {
+  const c = context();
+  c.references.facts.noncurrentTaxClaims = sourced(
+    20,
+    'us-gaap:AccruedIncomeTaxesNoncurrent',
+    'unreviewed-filing',
+  );
+  expect(defaultOtherClaims(c).value).toBeNull();
+  c.references.facts.lossContingencies = sourced(
+    5,
+    'us-gaap:LossContingencyAccrualCarryingValueCurrent',
+  );
+  expect(defaultOtherClaims(c).value).toBe(5);
+  delete c.references.facts.noncurrentTaxClaims;
+  expect(defaultOtherClaims(c).value).toBe(5);
+  expect(
+    defaultOtherClaims(c).excludedSources!.some((x) =>
+      x.reason.includes('旧缓存'),
+    ),
+  ).toBe(true);
+});
+
+test('known conflicting disclosed claim amounts block the subtotal even with other valid balances', () => {
+  const c = context();
+  c.references.facts.lossContingencies = sourced(
+    10,
+    'us-gaap:LossContingencyAccrualCarryingValueCurrent',
+  );
+  c.references.facts.noncurrentTaxClaims = {
+    ...fact(null),
+    items: [{ scopeConflict: true }],
+  };
+  expect(defaultOtherClaims(c).value).toBeNull();
+  expect(defaultOtherClaims(c).reason).toContain('冲突');
 });

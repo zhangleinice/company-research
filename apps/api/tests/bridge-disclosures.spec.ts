@@ -85,3 +85,22 @@ it('rejects conflicting, different-accession, stale, duration or non-USD balance
       .value,
   ).toBeNull();
 });
+
+it('extracts noncurrent accrued taxes at the exact filing date separately from gross UTBs', () => {
+  const raw = facts([]);
+  Object.assign(raw.facts['us-gaap'], {
+    AccruedIncomeTaxesNoncurrent: {
+      units: {
+        USD: [observation(12219e6), observation(99, { accn: 'other' })],
+      },
+    },
+    UnrecognizedTaxBenefits: { units: { USD: [observation(12500e6)] } },
+  });
+  const b = bridgeDisclosures(raw, '0000000001', filing, periods);
+  expect(b.items.noncurrentIncomeTaxes?.value).toBe(12219e6);
+  expect(b.items.noncurrentIncomeTaxes?.concept).toBe(
+    'us-gaap:AccruedIncomeTaxesNoncurrent',
+  );
+  expect(b.items.unrecognizedTaxBenefits.value).toBe(12500e6);
+  expect(b.items.noncurrentIncomeTaxes?.items[0].accn).toBe(filing.accn);
+});

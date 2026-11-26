@@ -10,6 +10,12 @@ export interface QualityCapitalSnapshot {
   verifiedInputs?: import('./balance-sheet-inputs.js').BalanceSheetInputs;
 }
 export interface EnterpriseQuality {
+  operatingWorkingCapital?: {
+    annual:
+      import('./operating-working-capital.js').OperatingWorkingCapital | null;
+    ttm:
+      import('./operating-working-capital.js').OperatingWorkingCapital | null;
+  };
   version: 1;
   ticker: string;
   cik: string | null;

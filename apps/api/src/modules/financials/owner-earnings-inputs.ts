@@ -1,4 +1,8 @@
 import {
+  depreciationAmortization as completeDepreciation,
+  ownerDepreciationFact,
+} from './depreciation-amortization';
+import {
   OWNER_EARNINGS_INPUT_VERSION,
   type OwnerEarningsFact,
   type OwnerEarningsInputs,
@@ -71,6 +75,7 @@ export function annualOwnerEarningsInputs(
     operatingCashFlow: number | null;
     sources: Record<string, unknown>;
   },
+  depreciationAmortization?: OwnerEarningsFact,
 ): OwnerEarningsInputs {
   const { periodStart: start, periodEnd: end } = period;
   const source = period.sources.operatingCashFlow;
@@ -129,7 +134,17 @@ export function annualOwnerEarningsInputs(
     version: OWNER_EARNINGS_INPUT_VERSION,
     periodStart: start,
     periodEnd: end,
-    depreciationAmortization: read('DepreciationDepletionAndAmortization'),
+    depreciationAmortization:
+      depreciationAmortization ??
+      ownerDepreciationFact(
+        completeDepreciation(raw, cik, {
+          value: ocf.value,
+          start,
+          end,
+          concept: 'us-gaap:NetCashProvidedByUsedInOperatingActivities',
+          items: ocf.sources.map((s) => ({ ...s })),
+        }),
+      ),
     sbc: read('ShareBasedCompensation'),
   };
 }

@@ -12,9 +12,11 @@ function parseWacc(bytes) {
   });
   const header = rows.findIndex((row) => row[0] === 'Industry Name');
   const index = rows[header]?.indexOf('Cost of Capital');
+  const equityIndex = rows[header]?.indexOf('Cost of Equity');
   if (
     header < 0 ||
     index < 0 ||
+    equityIndex < 0 ||
     !rows.slice(0, header).some((row) => row.includes('US companies'))
   )
     throw Error('Unexpected US industry sheet/header');
@@ -40,7 +42,15 @@ function parseWacc(bytes) {
         row[index] >= 1
       )
         throw Error('Invalid Cost of Capital');
-      return { name: row[0].trim(), wacc: row[index] };
+      const costOfEquity = row[equityIndex];
+      if (
+        typeof costOfEquity !== 'number' ||
+        !Number.isFinite(costOfEquity) ||
+        costOfEquity <= 0 ||
+        costOfEquity >= 1
+      )
+        throw Error('Invalid Cost of Equity');
+      return { name: row[0].trim(), wacc: row[index], costOfEquity };
     });
   if (
     industries.length < 50 ||
@@ -72,6 +82,7 @@ function parseWacc(bytes) {
     page: 'https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/wacc.html',
     sha256: createHash('sha256').update(bytes).digest('hex'),
     field: 'Cost of Capital',
+    equityField: 'Cost of Equity',
     industries,
   };
 }

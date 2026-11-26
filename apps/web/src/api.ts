@@ -220,3 +220,13 @@ export function fetchSimpleValuationInputs(
     signal,
   );
 }
+
+export function fetchMultipleInputs(
+  ticker: string,
+  signal?: AbortSignal,
+): Promise<import('@company-research/shared').MultipleInputs> {
+  return requestJson(
+    `/api/companies/${encodeURIComponent(ticker)}/valuation/multiple-inputs`,
+    signal,
+  );
+}

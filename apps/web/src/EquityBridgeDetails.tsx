@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { valuationNumber } from './valuation-format.js';
 import { Table, Tooltip, Typography, Space, InputNumber, Button } from 'antd';
 import {
   evaluateEquityBridge,
@@ -43,6 +44,7 @@ const labels: Partial<Record<ResearchReferenceKey, string>> = {
   convertiblePreferred: '可转换优先股账面参考',
   lossContingencies: '诉讼／或有损失应计',
   taxClaims: '未确认税收利益',
+  noncurrentTaxClaims: '非流动应计所得税负债',
   pensionClaims: '养老金缺口',
   shares: '最近可得时点普通股',
   annualBasicShares: '完整财年平均基本股数',
@@ -151,11 +153,13 @@ export function EquityBridgeDetails({
   bridge,
   onChange,
   defaults,
+  fcffNotice,
 }: {
   baseline: ValuationBaseline | null;
   references: ValuationReferences | null;
   result: Result | null;
   error?: string;
+  fcffNotice?: string;
   bridge?: EquityBridgeInput;
   onChange?: (research: EquityBridgeResearch) => void;
   defaults?: Record<EquityDefaultKey, EquityDefaultEstimate> | null;
@@ -241,7 +245,7 @@ export function EquityBridgeDetails({
     pending('preferred', '优先股', ['preferred', 'convertiblePreferred']),
     pending('otherClaims', '其他重大索偿', [
       'lossContingencies',
-      'taxClaims',
+      'noncurrentTaxClaims',
       'pensionClaims',
     ]),
     {
@@ -374,7 +378,20 @@ export function EquityBridgeDetails({
                           <span>默认计算：{d?.calculation}</span>
                           {d?.reason && <span>{d.reason}</span>}
                           {d?.warnings.map((w) => (
-                            <span key={w}>{w}</span>
+                            <span key={w}>
+                              {w === PRELIMINARY_FCFF_NOTICE
+                                ? (fcffNotice ?? w)
+                                : w}
+                            </span>
+                          ))}
+                          {d?.excludedSources?.map(({ fact: f, reason }, i) => (
+                            <span key={`excluded-${i}`}>
+                              未纳入：{f.concept ?? '候选事项'} ·{' '}
+                              {bridgeMoney(
+                                f.value === null ? null : f.value / 1e6,
+                              )}{' '}
+                              百万美元；{reason}
+                            </span>
                           ))}
                           {d?.sources.map((f, i) => (
                             <span key={i}>
@@ -445,7 +462,7 @@ export function EquityBridgeDetails({
                   />
                 );
               }
-              return `${bridgeMoney(n)}${n === null || !row.unit ? '' : ` ${row.unit}`}`;
+              return `${row.key === 'perShare' ? valuationNumber(n) : bridgeMoney(n)}${n === null || !row.unit ? '' : ` ${row.unit}`}`;
             },
           },
           {
@@ -487,7 +504,7 @@ export function EquityBridgeDetails({
         ]}
       />
       <Typography.Text type="secondary" className="dcf-note">
-        {PRELIMINARY_FCFF_NOTICE}
+        {fcffNotice ?? PRELIMINARY_FCFF_NOTICE}
       </Typography.Text>
       {result?.perShare == null && (
         <Typography.Text type="secondary" className="dcf-note">

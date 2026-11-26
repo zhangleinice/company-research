@@ -52,16 +52,16 @@ test('DCF retains its forecast table and defaults while showing the compact read
     createElement(DcfCalculator, { ticker: 'GOOGL' }),
   );
   for (const text of [
-    '自由现金流',
+    '税后经营利润法',
     '估值假设',
     '现金流折现',
     '每股内在价值',
-    'FCF = OCF',
+    'NOPAT = Operating Income',
     'FCFF(t) = FCFF₀',
   ])
     assert.ok(html.includes(text), text);
   assert.equal((html.match(/class="ant-card(?:\s|")/g) ?? []).length, 0);
-  assert.equal((html.match(/<table/g) ?? []).length, 2);
+  assert.equal((html.match(/<table/g) ?? []).length, 3);
   assert.ok(!html.includes('数据来源'));
   assert.ok(html.includes('data-dcf-metric="fcff"'));
   assert.ok(html.includes('data-dcf-metric="ev"'));

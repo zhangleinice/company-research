@@ -1,6 +1,12 @@
 import {
   approximateSimpleFcff,
+  estimateEbitFcff,
+  fcffBridgeNotice,
+  type EbitOverrides,
+  type EbitComponent,
+  type FcffCalculationMethod,
   SIMPLE_DEFAULT_POLICY,
+  EBIT_FCFF_POLICY,
   defaultTaxRate,
   defaultTerminalGrowth,
   historicalGrowth,
@@ -15,6 +21,9 @@ import {
 } from '@company-research/shared';
 export interface SimpleSettings {
   basis: FcffMethod;
+  /** Undefined uses availability-based defaults; an explicit choice stays selected. */
+  calculationMethod?: FcffCalculationMethod;
+  ebitOverrides?: Partial<Record<'annual' | 'ttm', EbitOverrides>>;
   taxMethod?: TaxMethod;
   taxManual: number | null;
   growthMethod: GrowthMethod;
@@ -27,6 +36,7 @@ export interface SimpleSettings {
 }
 export const emptySimpleSettings = (): SimpleSettings => ({
   basis: 'ttm',
+  ebitOverrides: {},
   taxManual: null,
   growthMethod: 'fcf',
   overrides: {},
@@ -43,7 +53,22 @@ export function resolveSimpleSettings(
   const tax = defaultTaxRate(data, taxMethod, s.taxManual);
   const period =
     s.basis === 'annual' ? (data?.latestAnnual ?? null) : (data?.ttm ?? null);
-  const automaticFcff = approximateSimpleFcff(period, tax.value);
+  const ebit = estimateEbitFcff(
+    period,
+    tax.value,
+    s.ebitOverrides?.[s.basis === 'annual' ? 'annual' : 'ttm'] ?? {},
+  );
+  const ocf = approximateSimpleFcff(period, tax.value);
+  const usable = (x: SimpleEstimate) =>
+    x.value !== null && Number.isFinite(x.value) && x.value > 0;
+  const defaultMethod = usable(ebit) ? 'ebit' : usable(ocf) ? 'ocf' : 'ebit';
+  const defaultMethodReason = usable(ebit)
+    ? `EBIT法具备有效计算条件，优先采用${ebit.nwcBasis === 'PARTIAL' ? '；ΔNWC为部分估计，存在遗漏风险' : ''}。`
+    : usable(ocf)
+      ? `EBIT法暂不可用于估值：${ebit.reason ?? '无有效正FCFF'}；OCF法可用，默认采用OCF法。`
+      : '两种方法均暂无有效正FCFF基准，保留缺失或不可估值状态，可手动填写研究假设。';
+  const calculationMethod = s.calculationMethod ?? defaultMethod;
+  const automaticFcff = calculationMethod === 'ebit' ? ebit : ocf;
   const fcff: SimpleEstimate =
     s.basis === 'manual'
       ? {
@@ -74,6 +99,17 @@ export function resolveSimpleSettings(
         ? null
         : v * 100;
   return {
+    calculationMethod,
+    methodSelectionReason:
+      s.calculationMethod === undefined
+        ? defaultMethodReason
+        : '当前为用户主动选择，输入或期间变化不会自动切换方法；恢复默认后重新按可用性选择。',
+    ebit,
+    bridgeNotice: fcffBridgeNotice(
+      calculationMethod,
+      s.basis === 'manual',
+      ebit.nwcBasis === 'PARTIAL',
+    ),
     taxMethod,
     tax,
     period,
@@ -101,7 +137,10 @@ export function simpleCalculationBaseline(
       status: resolved.fcff.value === null ? 'MISSING' : 'RESEARCH',
       value: resolved.fcff.value === null ? null : resolved.fcff.value * 1e6,
       taxRate: resolved.tax.value,
-      version: SIMPLE_DEFAULT_POLICY,
+      version:
+        settings.basis !== 'manual' && resolved.calculationMethod === 'ebit'
+          ? EBIT_FCFF_POLICY
+          : SIMPLE_DEFAULT_POLICY,
       reason: `${settings.basis === 'annual' ? (resolved.period?.label ?? '完整财年') : settings.basis === 'manual' ? '手动' : 'TTM'}；${resolved.fcff.formula}；${resolved.fcff.reason ?? '条件性近似基准'}`,
       assumptions: resolved.fcff.warnings,
     },
@@ -121,4 +160,28 @@ export function resetSimpleOverride(
   const overrides = { ...s.overrides };
   delete overrides[key];
   return { ...s, overrides };
+}
+
+export function setEbitOverride(
+  s: SimpleSettings,
+  key: EbitComponent,
+  value: number | null,
+): SimpleSettings {
+  const basis = s.basis === 'annual' ? 'annual' : 'ttm';
+  return {
+    ...s,
+    ebitOverrides: {
+      ...s.ebitOverrides,
+      [basis]: { ...s.ebitOverrides?.[basis], [key]: value },
+    },
+  };
+}
+export function resetEbitOverride(
+  s: SimpleSettings,
+  key: EbitComponent,
+): SimpleSettings {
+  const basis = s.basis === 'annual' ? 'annual' : 'ttm',
+    fields = { ...s.ebitOverrides?.[basis] };
+  delete fields[key];
+  return { ...s, ebitOverrides: { ...s.ebitOverrides, [basis]: fields } };
 }

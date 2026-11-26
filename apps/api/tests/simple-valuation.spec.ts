@@ -223,6 +223,30 @@ test('annual inputs use actual full periods and reported annual interest, not TT
     incorporation: 'CA',
   });
   expect(d.latestAnnual?.start).toBe('2025-01-01');
+  expect(d.latestAnnual?.ebitInputs?.workingCapital).toBeNull();
+  expect(d.latestAnnual?.ebitInputs?.depreciationAmortization.value).toBeNull();
+  expect(d.latestAnnual?.ebitInputs?.cacheIssues.join()).toContain('旧缓存');
+  const da = fact(
+    20,
+    '2025-01-01',
+    '2025-12-31',
+    'us-gaap:DepreciationDepletionAndAmortization',
+  );
+  (r.sources as Record<string, unknown>).depreciationAmortization = {
+    policyVersion: 'depreciation-amortization-v1',
+    value: 20,
+    approximate: true,
+    sources: da.items.map((x) => ({ ...x, coefficient: 1 })),
+    reason: '附注近似',
+  };
+  const enhanced = simpleValuationInputs(b.cik, b, [r], null);
+  expect(
+    enhanced.latestAnnual?.ebitInputs?.depreciationAmortization.value,
+  ).toBe(20);
+  expect(
+    enhanced.latestAnnual?.ebitInputs?.depreciationAmortization.approximate,
+  ).toBe(true);
+
   expect(d.annual[0].year).toBe(2025);
   expect(approximateSimpleFcff(d.latestAnnual, 0.21).value).toBe(157.9 / 1e6);
   expect(defaultTaxRate(d, 'federal', null).value).toBe(0.21);

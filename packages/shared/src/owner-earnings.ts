@@ -2,6 +2,9 @@ export const OWNER_EARNINGS_POLICY = 'owner-earnings-ocf-v1';
 export const OWNER_EARNINGS_INPUT_VERSION = 1;
 
 export interface OwnerEarningsSource {
+  approximate?: boolean;
+  decimals?: number | 'INF';
+  coefficient?: number;
   concept: string;
   unit: 'USD';
   start: string;
@@ -13,6 +16,9 @@ export interface OwnerEarningsSource {
   url: string;
 }
 export interface OwnerEarningsFact {
+  approximate?: boolean;
+  calculation?: string;
+  policyVersion?: string;
   value: number | null;
   reason: string | null;
   sources: OwnerEarningsSource[];

@@ -27,7 +27,8 @@ test('official local snapshot contains only industry Cost of Capital and provena
     snapshot.industries.length,
   );
   for (const row of snapshot.industries) {
-    assert.deepEqual(Object.keys(row).sort(), ['name', 'wacc']);
+    assert.deepEqual(Object.keys(row).sort(), ['costOfEquity', 'name', 'wacc']);
+    assert.ok(row.costOfEquity > 0 && row.costOfEquity < 1);
     assert.ok(row.wacc > 0 && row.wacc < 1);
   }
 });

@@ -47,7 +47,7 @@ export const ownerMoney = (n: number | null | undefined) =>
 const percent = (n: number | null | undefined) =>
   n == null || !Number.isFinite(n)
     ? '—'
-    : `${n.toLocaleString('zh-CN', { maximumFractionDigits: 2 })}%`;
+    : `${n.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%`;
 export function ownerDraft(
   data: OwnerEarningsResponse,
 ): OwnerEarningsDraft | null {

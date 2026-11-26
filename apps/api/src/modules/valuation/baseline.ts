@@ -1,3 +1,8 @@
+import { estimateOperatingWorkingCapital } from '../financials/operating-working-capital';
+import {
+  depreciationAmortization,
+  type DepreciationDisclosure,
+} from '../financials/depreciation-amortization';
 import type { DebtDisclosure } from '../financials/debt-disclosure';
 import { bridgeDisclosures } from './bridge-disclosures';
 import {
@@ -42,6 +47,7 @@ export function valuationBaseline(
   ticker: string,
   cik: string,
   disclosures: readonly DebtDisclosure[] = [],
+  depreciationDisclosures: readonly DepreciationDisclosure[] = [],
 ): ValuationBaseline {
   if (
     String(raw.cik).padStart(10, '0') !== cik ||
@@ -66,7 +72,12 @@ export function valuationBaseline(
     );
   if (!dates.length) throw Error('没有可用10-K/10-Q申报');
   const latest = dates[0],
-    normalized = normalizeCompanyFacts(raw, disclosures);
+    normalized = normalizeCompanyFacts(
+      raw,
+      disclosures,
+      null,
+      depreciationDisclosures,
+    );
   const annual = normalized.annual.find((a) => a.periodEnd <= latest.end),
     isAnnual = annual?.periodEnd === latest.end;
   const yearStart = annual
@@ -214,6 +225,13 @@ export function valuationBaseline(
   return withResearchFcff({
     bridgeDisclosures: bridgeDisclosures(raw, cik, latest, normalized),
     quality: {
+      operatingWorkingCapital: {
+        annual:
+          (annual?.sources.operatingWorkingCapital as
+            | import('@company-research/shared').OperatingWorkingCapital
+            | undefined) ?? null,
+        ttm: estimateOperatingWorkingCapital(raw, cik, ocf, revenue, 'TTM'),
+      },
       version: 1,
       ticker,
       cik,
@@ -224,10 +242,12 @@ export function valuationBaseline(
       commonNetIncome: metric([
         'NetIncomeLossAvailableToCommonStockholdersBasic',
       ]),
-      depreciationAmortization: metric([
-        'DepreciationDepletionAndAmortization',
-        'DepreciationAndAmortization',
-      ]),
+      depreciationAmortization: depreciationAmortization(
+        raw,
+        cik,
+        ocf,
+        depreciationDisclosures,
+      ),
       depreciation: metric(['Depreciation']),
       amortization: metric(['AmortizationOfIntangibleAssets']),
       ebit,

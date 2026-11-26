@@ -86,3 +86,45 @@ it('requires version 2 coherent approved financing debt, retains zero, and never
     equityBridgeReferences('0000000001', null, row, null).facts.cash.value,
   ).toBeNull();
 });
+
+it('reads the additive accrued-tax reference and tolerates caches created before its extraction', () => {
+  const row = { periodEnd: new Date('2026-09-30'), sources: {} };
+  const fact = {
+    value: 12219e6,
+    start: null,
+    end: '2026-09-30',
+    concept: 'us-gaap:AccruedIncomeTaxesNoncurrent',
+    items: [{ accn: 'filing' }],
+  };
+  const cache = {
+    bridgeDisclosures: {
+      cik: '0000000001',
+      asOf: '2026-09-30',
+      items: { noncurrentIncomeTaxes: fact },
+    },
+  };
+  expect(
+    equityBridgeReferences('0000000001', null, row, cache).facts
+      .noncurrentTaxClaims?.value,
+  ).toBe(12219e6);
+  delete (
+    cache.bridgeDisclosures.items as Partial<
+      typeof cache.bridgeDisclosures.items
+    >
+  ).noncurrentIncomeTaxes;
+  expect(
+    equityBridgeReferences('0000000001', null, row, cache).facts
+      .noncurrentTaxClaims?.value,
+  ).toBeNull();
+  Object.assign(cache.bridgeDisclosures.items, {
+    noncurrentIncomeTaxes: {
+      ...fact,
+      value: null,
+      items: [{ scopeConflict: true }],
+    },
+  });
+  expect(
+    equityBridgeReferences('0000000001', null, row, cache).facts
+      .noncurrentTaxClaims?.items[0].scopeConflict,
+  ).toBe(true);
+});

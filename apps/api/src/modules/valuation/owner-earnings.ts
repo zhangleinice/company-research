@@ -1,3 +1,7 @@
+import {
+  DA_POLICY,
+  storedAnnualDepreciation,
+} from '../financials/depreciation-amortization';
 import { createHash } from 'node:crypto';
 import { z } from 'zod';
 import {
@@ -146,6 +150,17 @@ export function ownerEarningsHistory(
               ? item.reason
               : '年度输入缺失',
           );
+        if (
+          key === 'depreciationAmortization' &&
+          item.policyVersion === DA_POLICY
+        ) {
+          const ocfSource = operatingCashFlow.sources[0];
+          return (
+            (ocfSource &&
+              storedAnnualDepreciation(item, start, end, ocfSource)) ??
+            missingOwnerFact('D&A分项、年度范围或持久化计算依据未通过核准')
+          );
+        }
         const f = ownerReportedFact(
           item.sources,
           number(item.value),

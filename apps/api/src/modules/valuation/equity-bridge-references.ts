@@ -109,7 +109,14 @@ export function equityBridgeReferences(
       f.end === asOf &&
       f.start === null
       ? { ...f, status: 'DISCLOSED', reason: null }
-      : missing();
+      : {
+          ...missing(
+            f?.items.some((item) => item.scopeConflict === true)
+              ? '同申报披露金额存在冲突，不能自动采用'
+              : undefined,
+          ),
+          items: f?.items ?? [],
+        };
   };
   const facts: EquityBridgeReferences['facts'] = {
     cash: approved('cash'),
@@ -127,6 +134,7 @@ export function equityBridgeReferences(
     operatingLeases: disclosure('operatingLeases'),
     lossContingencies: disclosure('lossContingenciesCurrent'),
     taxClaims: disclosure('unrecognizedTaxBenefits'),
+    noncurrentTaxClaims: disclosure('noncurrentIncomeTaxes'),
     pensionClaims: missing(
       '现有缓存未提供核准的养老金缺口；不能据此认定不存在',
     ),

@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { DcfCalculator } from '../ValuationPage.js';
-import { OwnerEarnings } from '../OwnerEarnings.js';
+import { IntrinsicValuation } from '../IntrinsicValuation.js';
 import { useEnterpriseQuality } from '../EnterpriseQuality.js';
 import { RevenueBreakdown } from '../RevenueBreakdown.js';
 import { ResearchCard, useCachedResearch } from '../AiResearch.js';
@@ -151,16 +150,12 @@ export function CompanyResearchSections({
             key: 'intrinsic',
             label: '内在价值',
             children: (
-              <Space orientation="vertical" size={24} className="full-width">
-                <OwnerEarnings
-                  key={detail.cik}
-                  identifier={detail.cik}
-                  revision={revision}
-                />
-                <Card className="valuation-card" title="内在价值">
-                  <DcfCalculator ticker={detail.ticker} />
-                </Card>
-              </Space>
+              <IntrinsicValuation
+                key={detail.cik}
+                cik={detail.cik}
+                ticker={detail.ticker}
+                revision={revision}
+              />
             ),
           },
         ]}

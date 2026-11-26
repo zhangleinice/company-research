@@ -67,7 +67,7 @@ function sample(): EquityBridgeResearch {
     shares: 10,
     annualDilutedShares: 11,
   }))
-    refs.facts[key as ResearchReferenceKey].value = value * 1e6;
+    refs.facts[key as ResearchReferenceKey]!.value = value * 1e6;
   const r = emptyBridgeResearch(refs);
   for (const item of Object.values(r.items))
     Object.assign(item, {

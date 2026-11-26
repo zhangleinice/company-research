@@ -1,3 +1,4 @@
+import type { DepreciationDisclosure } from '../financials/depreciation-amortization';
 import {
   quarterlyRoicHistory,
   annualRoicHistory,
@@ -24,6 +25,7 @@ import { valuationBaseline } from './baseline';
 import { cachedQuality } from './enterprise-quality';
 import { withResearchFcff } from './research-fcff';
 import { simpleValuationInputs } from './simple-inputs';
+import { multipleInputs } from './multiple-inputs';
 import { equityBridgeReferences } from './equity-bridge-references';
 import type { ValuationBaseline } from '@company-research/shared';
 import type { Prisma } from '@prisma/client';
@@ -61,6 +63,35 @@ export class ValuationController {
       (cached?.data as unknown as ValuationBaseline) ?? null,
       rows,
       profile,
+    );
+  }
+  /** Read-only existing SEC caches; no CompanyFacts acquisition or cache write. */
+  @Get('multiple-inputs') async multipleInputs(
+    @Param('ticker') ticker: string,
+  ) {
+    const context = await this.simpleInputs(ticker);
+    const where = { companyCik: context.cik };
+    const [annual, quarterly] = await Promise.all([
+      this.db.annualFinancial.findMany({
+        where,
+        orderBy: { periodEnd: 'desc' },
+        take: 10,
+      }),
+      this.db.quarterlyFinancial.findMany({
+        where,
+        orderBy: { periodEnd: 'desc' },
+        take: 10,
+      }),
+    ]);
+    const end = [annual[0]?.periodEnd, quarterly[0]?.periodEnd]
+      .filter((x): x is Date => Boolean(x))
+      .sort((a, b) => b.getTime() - a.getTime())[0];
+    return multipleInputs(
+      context.cik,
+      context.sic,
+      annual,
+      quarterly,
+      end?.toISOString().slice(0, 10) ?? '',
     );
   }
   /** Existing financial rows only; this route never acquires SEC data. */
@@ -200,10 +231,12 @@ export class ValuationController {
             `https://data.sec.gov/submissions/CIK${company.cik}.json`,
           );
           let disclosures: DebtDisclosure[] = [];
+          let depreciationDisclosures: DepreciationDisclosure[] = [];
           if (hasDebtBalanceFacts(facts)) {
             try {
-              disclosures = (await this.sec.getDebtDisclosures(company.cik))
-                .disclosures;
+              const evidence = await this.sec.getDebtDisclosures(company.cik);
+              disclosures = evidence.disclosures;
+              depreciationDisclosures = evidence.depreciationDisclosures ?? [];
             } catch {
               /* A failed optional fallback never invents debt or discards existing SEC facts. */
             }
@@ -214,6 +247,7 @@ export class ValuationController {
             ticker.toUpperCase(),
             company.cik,
             disclosures,
+            depreciationDisclosures,
           );
           await tx.valuationCache.upsert({
             where: { cik: company.cik },

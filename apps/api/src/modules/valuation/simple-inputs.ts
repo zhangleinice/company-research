@@ -1,4 +1,8 @@
 import {
+  DA_POLICY,
+  storedAnnualDepreciation,
+} from '../financials/depreciation-amortization';
+import {
   usIncorporation,
   type SimpleValuationData,
   type SimpleFcffPeriod,
@@ -109,6 +113,10 @@ export function simpleValuationInputs(
   const period = (
     base: ValuationBaseline | null,
     label: string,
+    extra?: {
+      da: ValuationFact;
+      nwc: import('@company-research/shared').OperatingWorkingCapital | null;
+    },
   ): SimpleFcffPeriod => {
     const m = missing(base?.asOf ?? end);
     // At 0% tax this is the largest possible FCFF for nonnegative interest.
@@ -117,7 +125,35 @@ export function simpleValuationInputs(
     const validation = base
       ? withResearchFcff({ ...base, fcff: null }, 0).fcffEstimate
       : null;
+    const da = extra?.da ?? base?.quality?.depreciationAmortization ?? m;
+    const nwc = extra
+      ? extra.nwc
+      : (base?.quality?.operatingWorkingCapital?.ttm ?? null);
     return {
+      ebitInputs: {
+        version: 1,
+        cik,
+        applicable: base?.applicable ?? null,
+        operatingIncome: base?.ebit ?? m,
+        depreciationAmortization: da,
+        workingCapital: nwc,
+        cacheIssues: [
+          ...(!nwc
+            ? [
+                '旧缓存尚未包含新版ΔNWC数据；请按现有流程刷新财务数据或手动输入。',
+              ]
+            : []),
+          ...(da.value === null && da.policyVersion !== DA_POLICY
+            ? ['旧缓存缺少新版完整D&A输入。']
+            : []),
+        ],
+        limitations:
+          label === 'TTM'
+            ? []
+            : [
+                '年度现金流基准可能滞后最新股权桥接报告日，未另外补偿间隔期现金流。',
+              ],
+      },
       label,
       start: base?.ocf.start ?? null,
       end: base?.asOf ?? end,
@@ -177,6 +213,75 @@ export function simpleValuationInputs(
           } as ValuationFact)
         : missing(finish);
     };
+    const source = s(a);
+    const owner = isObject(source.ownerEarningsInputs)
+      ? source.ownerEarningsInputs
+      : null;
+    const daStored =
+      source.depreciationAmortization ?? owner?.depreciationAmortization;
+    const ocfSource = ownerReportedFact(
+      ocf.items,
+      ocf.value,
+      cik,
+      start,
+      finish,
+    ).sources[0];
+    let da = missing(finish);
+    if (isObject(daStored) && ocfSource) {
+      if (daStored.policyVersion === DA_POLICY) {
+        const validated = storedAnnualDepreciation(
+          daStored,
+          start,
+          finish,
+          ocfSource,
+        );
+        da = {
+          value: validated?.value ?? null,
+          start,
+          end: finish,
+          concept: 'calculated:CompleteDepreciationAndAmortization',
+          items: validated?.sources.map((x) => ({ ...x })) ?? [],
+          policyVersion: DA_POLICY,
+          approximate: validated?.approximate,
+          reason:
+            validated?.reason ??
+            (typeof daStored.reason === 'string'
+              ? daStored.reason
+              : '年度D&A来源未通过校验'),
+        };
+      } else {
+        const old = ownerReportedFact(
+          daStored.sources,
+          numeric(daStored.value),
+          cik,
+          start,
+          finish,
+        );
+        if (
+          old.sources[0]?.accn === ocfSource.accn &&
+          [
+            'us-gaap:DepreciationDepletionAndAmortization',
+            'us-gaap:DepreciationAndAmortization',
+          ].includes(old.sources[0]?.concept)
+        )
+          da = {
+            value: old.value,
+            start,
+            end: finish,
+            concept: old.sources[0].concept,
+            items: old.sources.map((x) => ({ ...x })),
+          };
+      }
+    }
+    const n = source.operatingWorkingCapital;
+    const nwc =
+      isObject(n) &&
+      n.policyVersion === 'cashflow-operating-nwc-v1' &&
+      n.cik === cik &&
+      n.periodStart === start &&
+      n.periodEnd === finish
+        ? (n as unknown as import('@company-research/shared').OperatingWorkingCapital)
+        : null;
     const base: ValuationBaseline = {
       ...b,
       asOf: finish,
@@ -207,7 +312,10 @@ export function simpleValuationInputs(
           }
         : undefined,
     };
-    latestAnnual = period(base, `FY${a.fiscalYear ?? finish.slice(0, 4)}`);
+    latestAnnual = period(base, `FY${a.fiscalYear ?? finish.slice(0, 4)}`, {
+      da,
+      nwc,
+    });
     latestAnnual.warnings.push(
       '年度基准可能滞后最新期；未对间隔期间另外补偿现金流或折现。',
     );

@@ -44,7 +44,7 @@ it('does not infer missing capex as zero or substitute prior period; verifies id
   ).toThrow();
 });
 
-it('quality reuses exact TTM endpoints, keeps parent/common income distinct, and does not sum D&A components', () => {
+it('quality reuses exact TTM endpoints and only sums the disjoint full-scope D&A components', () => {
   const f = structuredClone(fixtures.GOOGL);
   const template =
     f.raw.facts['us-gaap'].NetCashProvidedByUsedInOperatingActivities;
@@ -70,7 +70,11 @@ it('quality reuses exact TTM endpoints, keeps parent/common income distinct, and
   expect(b.quality?.commonNetIncome.value).toBeCloseTo(b.ocf.value! * 0.9);
   expect(b.quality?.depreciation.value).toBeCloseTo(b.ocf.value! * 0.1);
   expect(b.quality?.amortization.value).toBeCloseTo(b.ocf.value! * 0.05);
-  expect(b.quality?.depreciationAmortization.value).toBeNull();
+  expect(b.quality?.depreciationAmortization.value).toBeCloseTo(
+    b.ocf.value! * 0.15,
+  );
+  expect(b.quality?.depreciationAmortization.approximate).toBe(true);
+  expect(b.quality?.depreciationAmortization.items).toHaveLength(6);
   expect(b.quality?.historicalTaxRate).toBeCloseTo(0.2);
   expect(b.quality?.netIncome.items).toEqual(
     b.ocf.items.map((x) => ({ ...x, concept: 'us-gaap:NetIncomeLoss' })),

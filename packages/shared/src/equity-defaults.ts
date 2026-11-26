@@ -5,7 +5,8 @@ import type {
   ResearchBridgeKey,
 } from './equity-bridge-research.js';
 
-export const EQUITY_DEFAULTS_POLICY = 'equity-defaults-v2';
+export const OPERATING_CASH_REVENUE_RATIO = 0.02;
+export const EQUITY_DEFAULTS_POLICY = 'equity-defaults-v3';
 export const PRELIMINARY_FCFF_NOTICE =
   '当前FCFF尚未完成非经营性收益调整，估值可能存在重复计价，仅作为初步研究参考。';
 export type EquityDefaultKey = Exclude<ResearchBridgeKey, 'financingDebt'>;
@@ -41,6 +42,7 @@ export interface EquityDefaultEstimate {
   reason: string | null;
   warnings: string[];
   sources: ResearchReference[];
+  excludedSources?: Array<{ fact: ResearchReference; reason: string }>;
 }
 const finite = (v: unknown): v is number =>
   typeof v === 'number' && Number.isFinite(v);
@@ -168,7 +170,7 @@ export function defaultExcessCash(
       'Max(0, Cash − TTM Revenue × 2%)',
       '缺少适用企业、同期核准现金或完整TTM营收；金融企业不自动套用',
     );
-  const required = revenue.value * 0.02,
+  const required = revenue.value * OPERATING_CASH_REVENUE_RATIO,
     value = Math.max(0, cash.value! - required) / 1e6;
   return estimate(
     method,
@@ -395,53 +397,171 @@ export function defaultPreferred(c: EquityDefaultContext) {
     '优先股：公允价值优先、账面价值近似；索偿扣减法',
   );
 }
+/** Book-value subtotal of identified claims; never certifies all contingencies. */
 export function defaultOtherClaims(
   c: EquityDefaultContext,
 ): EquityDefaultEstimate {
-  const method = '符合条件的已确认负债账面价值汇总法',
+  const method = 'Adjusted Book Value Method · 调整后账面价值法',
     f = c.references.facts,
-    sources = [f.lossContingencies, f.taxClaims, f.pensionClaims],
     e = c.eligibility?.otherClaims;
-  const zero = absent(c, 'otherClaims', sources, method);
-  if (zero) return zero;
-  if (
-    !e?.scopeComplete ||
-    !e.claims?.length ||
-    e.claims.some(
+  const candidates = [
+    f.lossContingencies,
+    f.noncurrentTaxClaims,
+    f.taxClaims,
+    f.pensionClaims,
+  ].filter((x): x is ResearchReference => x !== undefined);
+  const zero = absent(c, 'otherClaims', candidates, method);
+  // Every participating instant must identify the same consolidated USD filing.
+  const accession = (fact: ResearchReference | undefined): string | null => {
+    if (!usable(fact) || fact.start !== null || fact.end !== c.references.asOf)
+      return null;
+    const rows = fact.items.filter(
       (x) =>
-        !usable(x.fact) ||
-        x.fact.end !== c.references.asOf ||
-        !x.incrementalCashPayment ||
-        !x.excludedFromFcff ||
-        !x.distinctFromOtherAdjustments ||
-        !x.identity,
-    ) ||
-    new Set(e.claims.map((x) => x.identity)).size !== e.claims.length ||
-    new Set(
-      e.claims.map((x) =>
-        JSON.stringify([
-          x.fact.concept,
-          x.fact.end,
-          x.fact.value,
-          x.fact.items,
-        ]),
-      ),
-    ).size !== e.claims.length
-  )
-    return estimate(
-      method,
-      sources,
-      null,
-      '合计已确认、需额外现金支付且未计入FCFF或其他调整的负债',
-      '诉讼/税务披露金额不等于额外现金索偿；养老金缺口及索偿覆盖不完整，不能机械相加或按0处理',
+        x.concept === fact.concept &&
+        x.end === fact.end &&
+        x.val === fact.value &&
+        x.unit === 'USD' &&
+        typeof x.accn === 'string',
     );
-  const amounts = e.claims.map((x) => x.fact.value! / 1e6);
-  return estimate(
-    method,
-    e.claims.map((x) => x.fact),
-    amounts.reduce((a, b) => a + b, 0),
-    `${amounts.join(' + ')} = ${amounts.reduce((a, b) => a + b, 0)}`,
+    const ids = new Set(rows.map((x) => String(x.accn)));
+    return ids.size === 1 ? [...ids][0] : null;
+  };
+  const scopeTax = (fact: ResearchReference | undefined) =>
+    fact?.claimNature === 'special_tax' ||
+    // Completed MD&A audit: non-current accrued taxes primarily concern UTBs.
+    // Qualification is filing-specific; financial values always come from SEC facts.
+    (fact?.end === '2026-09-30' && accession(fact) === '0001652044-26-000084');
+  const included: ResearchReference[] = [];
+  const excluded: Array<{ fact: ResearchReference; reason: string }> = [];
+  const omit = (fact: ResearchReference | undefined, reason: string) => {
+    if (fact) excluded.push({ fact, reason });
+  };
+  const conflict = (reason: string) => ({
+    ...estimate(method, [], null, '已识别且符合条件的同申报负债小计', reason),
+    excludedSources: candidates.map((fact) => ({ fact, reason })),
+  });
+  if (
+    candidates.some((fact) =>
+      fact.items.some((item) => item.scopeConflict === true),
+    )
+  )
+    return conflict('已知索偿披露金额存在冲突，须先解决口径冲突');
+  if (
+    e?.distinctFromOtherAdjustments === false ||
+    e?.excludedFromFcff === false
+  )
+    return conflict('已知索偿与其他调整或预测现金流重复，须先解决口径冲突');
+  if (zero) return zero;
+  if (e?.claims) {
+    // Explicit qualified inputs remain supported, with all existing collision guards.
+    if (
+      e.claims.some(
+        (x) =>
+          !x.incrementalCashPayment ||
+          !x.excludedFromFcff ||
+          !x.distinctFromOtherAdjustments ||
+          !x.identity ||
+          !usable(x.fact),
+      )
+    )
+      return conflict('存在未符合扣除条件或与现金流重复的索偿');
+    if (
+      new Set(e.claims.map((x) => x.identity)).size !== e.claims.length ||
+      new Set(
+        e.claims.map((x) =>
+          JSON.stringify([
+            x.fact.concept,
+            x.fact.value,
+            x.fact.end,
+            x.fact.items,
+          ]),
+        ),
+      ).size !== e.claims.length
+    )
+      return conflict('索偿身份或来源重复，不能重复汇总');
+    // Gross UTBs and accrued tax balances represent overlapping tax positions.
+    if (
+      e.claims.some((x) =>
+        x.fact.concept?.startsWith('us-gaap:UnrecognizedTaxBenefits'),
+      )
+    )
+      return conflict('未确认税收利益总额不是已确认应付金额，不能加入负债小计');
+    included.push(...e.claims.map((x) => x.fact));
+  } else {
+    if (
+      f.lossContingencies.concept ===
+        'us-gaap:LossContingencyAccrualCarryingValueCurrent' &&
+      accession(f.lossContingencies)
+    )
+      included.push(f.lossContingencies);
+    else
+      omit(f.lossContingencies, '缺少可靠同期已确认诉讼、罚款及和解负债余额');
+    if (
+      f.noncurrentTaxClaims?.concept ===
+        'us-gaap:AccruedIncomeTaxesNoncurrent' &&
+      accession(f.noncurrentTaxClaims) &&
+      scopeTax(f.noncurrentTaxClaims)
+    )
+      included.push(f.noncurrentTaxClaims);
+    else
+      omit(
+        f.noncurrentTaxClaims,
+        '非流动应计税负债缺失或特殊税务索偿性质尚未核准；旧缓存可能尚未提取该字段',
+      );
+    if (
+      f.pensionClaims.claimNature === 'pension_deficit' &&
+      accession(f.pensionClaims)
+    )
+      included.push(f.pensionClaims);
+    else omit(f.pensionClaims, '缺少可靠养老金缺口，不将缺失视为零');
+  }
+  omit(
+    f.taxClaims,
+    '未确认税收利益不是预计额外付款；不得与非流动应计税负债及其组成重复计入',
   );
+  if (!f.noncurrentTaxClaims)
+    omit(
+      {
+        ...f.taxClaims,
+        value: null,
+        concept: 'us-gaap:AccruedIncomeTaxesNoncurrent',
+        status: 'MISSING',
+        items: [],
+      },
+      '旧缓存未提取非流动应计所得税负债，未按零处理',
+    );
+  if (!included.length)
+    return {
+      ...estimate(
+        method,
+        [],
+        null,
+        '已识别负债小计',
+        '没有可汇总的可靠已确认索偿负债，不能以缺失补零',
+      ),
+      excludedSources: excluded,
+    };
+  const accessions = included.map(accession);
+  if (accessions.some((x) => x === null) || new Set(accessions).size !== 1)
+    return conflict('索偿报告日、单位或申报来源不一致，不能跨申报拼接汇总');
+  const amounts = included.map((x) => x.value! / 1e6),
+    value = amounts.reduce((a, b) => a + b, 0);
+  return {
+    ...estimate(
+      method,
+      included,
+      value,
+      `${included.map((x, i) => `${x.concept} ${amounts[i]}`).join(' + ')} = ${value}（百万美元）`,
+      null,
+      [
+        '已识别索偿小计，并非完整核准索偿总额；未量化或未纳入事项不视为零。',
+        '未量化诉讼、担保/衍生负债及其他尚未完成范围核准的事项未纳入，不代表不存在。',
+        '采用已确认未清偿负债账面值近似，假设尚未在未来现金流或其他调整中扣除；不是预计现金付款现值。',
+        PRELIMINARY_FCFF_NOTICE,
+      ],
+    ),
+    excludedSources: excluded,
+  };
 }
 export function defaultShares(c: EquityDefaultContext): EquityDefaultEstimate {
   const method = '最新时点实际普通股数法',

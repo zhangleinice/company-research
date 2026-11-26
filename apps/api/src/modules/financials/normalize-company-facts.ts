@@ -1,3 +1,9 @@
+import { estimateOperatingWorkingCapital } from './operating-working-capital';
+import {
+  depreciationAmortization,
+  ownerDepreciationFact,
+  type DepreciationDisclosure,
+} from './depreciation-amortization';
 import { quarterlyRoicInputs } from './quarterly-roic-inputs';
 import { annualOwnerEarningsInputs } from './owner-earnings-inputs';
 import { annualRoicInputs } from './annual-roic-inputs';
@@ -141,6 +147,7 @@ export function normalizeCompanyFacts(
   raw: unknown,
   disclosures: readonly DebtDisclosure[] = [],
   sic: string | null = null,
+  depreciationDisclosures: readonly DepreciationDisclosure[] = [],
 ): {
   annual: NormalizedPeriod[];
   quarterly: NormalizedPeriod[];
@@ -875,12 +882,52 @@ export function normalizeCompanyFacts(
       }
     }
   }
+  for (const row of [...annual, ...quarterly]) {
+    const source = row.sources.operatingCashFlow;
+    const da = depreciationAmortization(
+      raw,
+      String(raw.cik).padStart(10, '0'),
+      {
+        value: row.operatingCashFlow,
+        start: row.periodStart,
+        end: row.periodEnd,
+        concept: 'us-gaap:NetCashProvidedByUsedInOperatingActivities',
+        items:
+          isObject(source) && Array.isArray(source.items) ? source.items : [],
+      },
+      depreciationDisclosures,
+    );
+    row.sources.depreciationAmortization = ownerDepreciationFact(da);
+  }
   for (const row of annual) {
+    const fact = (
+      key: 'operatingCashFlow' | 'revenue',
+    ): import('@company-research/shared').ValuationFact => {
+      const source = row.sources[key];
+      const items =
+        isObject(source) && Array.isArray(source.items) ? source.items : [];
+      return {
+        value: row[key],
+        start: row.periodStart,
+        end: row.periodEnd,
+        concept: items.length === 1 ? String(items[0].concept) : null,
+        items,
+      };
+    };
+    row.sources.operatingWorkingCapital = estimateOperatingWorkingCapital(
+      raw,
+      String(raw.cik).padStart(10, '0'),
+      fact('operatingCashFlow'),
+      fact('revenue'),
+      'ANNUAL',
+    );
     row.sources.annualRoicInputs = annualRoicInputs(raw, row, sic);
     row.sources.ownerEarningsInputs = annualOwnerEarningsInputs(
       raw,
       String(raw.cik).padStart(10, '0'),
       row,
+      row.sources
+        .depreciationAmortization as import('@company-research/shared').OwnerEarningsFact,
     );
   }
   for (let i = 0; i < quarterly.length; i++) {

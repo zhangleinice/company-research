@@ -23,5 +23,8 @@ export interface BridgeDisclosures {
   version: 1;
   cik: string;
   asOf: string;
-  items: Record<BridgeDisclosureKey, ValuationFact>;
+  items: Record<BridgeDisclosureKey, ValuationFact> & {
+    /** Additive: older successful caches legitimately lack this field. */
+    noncurrentIncomeTaxes?: ValuationFact;
+  };
 }

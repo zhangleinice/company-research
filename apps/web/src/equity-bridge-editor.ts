@@ -1,5 +1,6 @@
 import {
   emptyBridgeResearch,
+  defaultOtherClaims,
   emptyEquityBridge,
   type EquityBridgeReferences,
   type EquityBridgeResearch,
@@ -160,7 +161,10 @@ export function visibleBridgeFacts(
   const valid = (key: ResearchReferenceKey) => {
     const f = refs.facts[key];
     return (
-      f.status !== 'MISSING' && f.value !== null && Number.isFinite(f.value)
+      f !== undefined &&
+      f.status !== 'MISSING' &&
+      f.value !== null &&
+      Number.isFinite(f.value)
     );
   };
   if (row === 'financingDebt')
@@ -186,10 +190,15 @@ export function visibleBridgeFacts(
       : valid('convertiblePreferred')
         ? ['convertiblePreferred']
         : [];
-  if (row === 'otherClaims')
+  if (row === 'otherClaims') {
+    const included = defaultOtherClaims({
+      references: refs,
+      baseline: null,
+    }).sources;
     return (
-      ['lossContingencies', 'taxClaims', 'pensionClaims'] as const
-    ).filter(valid);
+      ['lossContingencies', 'noncurrentTaxClaims', 'pensionClaims'] as const
+    ).filter((key) => valid(key) && included.includes(refs.facts[key]!));
+  }
   if (row === 'shares') {
     return [
       ...(valid('shares') ? ['shares' as const] : []),

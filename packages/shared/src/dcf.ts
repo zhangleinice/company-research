@@ -301,6 +301,11 @@ export function calculateDcf(input: DcfInput) {
   return result;
 }
 export interface ValuationFact {
+  /** Additive provenance for normalized D&A; no change to financial formulas. */
+  approximate?: boolean;
+  calculation?: string;
+  reason?: string | null;
+  policyVersion?: string;
   value: number | null;
   start: string | null;
   end: string;
