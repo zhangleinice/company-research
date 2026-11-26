@@ -15,6 +15,7 @@ import type {
   FinancialPeriod,
 } from '@company-research/shared';
 import { Chart } from './FinancialAnalysis.js';
+import { CapitalAllocationOverview } from './CapitalAllocationOverview.js';
 import { ShareholderReturnsChart } from './ShareholderReturnsChart.js';
 import type { CachedResearch } from '../AiResearch.js';
 import {
@@ -156,6 +157,7 @@ export function ManagementAnalysis({
   const { info } = capitalInformation(research);
   return (
     <Space orientation="vertical" size={24} className="full-width">
+      <CapitalAllocationOverview rows={rows} />
       <section data-analysis-module="dividends">
         <Card className="analysis-module" title="Dividends · 股息分红">
           <Typography.Paragraph className="analysis-period">

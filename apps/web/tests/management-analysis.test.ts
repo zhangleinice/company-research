@@ -41,7 +41,7 @@ function metadata(): AnnualCapitalAllocation {
     buybackToFcf: { ...unknown, value: 160, reason: null },
   };
 }
-test('renders five ordered sections with thirteen metrics and three charts', () => {
+test('renders the overview before five ordered sections with thirteen metrics and three charts', () => {
   const row = period(2025);
   row.capitalAllocation = metadata();
   row.capitalAllocation.debtCashFlows = {
@@ -64,7 +64,11 @@ test('renders five ordered sections with thirteen metrics and three charts', () 
     [...positions].sort((a, b) => a - b),
   );
   assert.equal((html.match(/data-metric=/g) ?? []).length, 13);
-  assert.equal((html.match(/<svg/g) ?? []).length, 3);
+  assert.equal((html.match(/<svg/g) ?? []).length, 3); // existing historical charts; overview no longer has a selector
+  assert.ok(
+    html.indexOf('data-analysis-module="capital-allocation-overview"') <
+      positions[0],
+  );
   assert.ok(html.includes('160.00%'));
   const debtCards = html.slice(html.indexOf('data-metric="debtIssuance"'));
   assert.ok(debtCards.includes('百万美元'));

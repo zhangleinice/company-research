@@ -124,6 +124,7 @@ export interface AllocationValue {
   sources: AllocationSource[];
 }
 export interface AnnualCapitalAllocation {
+  overview?: import('./capital-allocation-overview.js').CapitalAllocationOverview;
   debtCashFlows?: {
     debtIssuance: AllocationValue;
     debtRepayments: AllocationValue;
@@ -361,3 +362,7 @@ export * from './ebit-fcff.js';
 export * from './multiple-valuation.js';
 
 export * from './margin-of-safety.js';
+
+export * from './capital-allocation-overview.js';
+
+export * from './capital-sankey.js';

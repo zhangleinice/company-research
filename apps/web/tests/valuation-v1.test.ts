@@ -86,21 +86,21 @@ test('shared safety reference table includes row labels and four fixed ratios, r
   assert.ok(!html.includes('dcf-parameter-label'));
   assert.ok(html.includes('table-layout:fixed'));
 });
-test('intrinsic tabs default to DCF, use stable pane keys and keep visited modules mounted', () => {
-  const node = IntrinsicValuation({ cik: '0000000001', ticker: 'TEST' });
+test('intrinsic tabs contain only DCF and PE & PEG, default to DCF and keep visited modules mounted', () => {
+  const node = IntrinsicValuation({ ticker: 'TEST' });
   const props = node.props as TabsProps;
   assert.equal(node.type, Tabs);
   assert.equal(node.props.defaultActiveKey, 'dcf');
   assert.equal(node.props.destroyOnHidden, false);
   assert.deepEqual(
     props.items!.map((x) => x.key),
-    ['owner', 'dcf', 'multiples'],
+    ['dcf', 'multiples'],
   );
   assert.deepEqual(
     props.items!.map((x) => x.label),
-    ['Owner Earnings', 'DCF', 'PE & PEG'],
+    ['DCF', 'PE & PEG'],
   );
-  const multiples = props.items![2].children;
+  const multiples = props.items![1].children;
   assert.ok(isValidElement<{ title?: string; className?: string }>(multiples));
   assert.equal(multiples.type, Card);
   assert.equal(multiples.props.title, undefined);
@@ -108,7 +108,14 @@ test('intrinsic tabs default to DCF, use stable pane keys and keep visited modul
   const html = renderToStaticMarkup(node);
   assert.match(html, /aria-selected="true"[^>]*>[\s\S]*?DCF/);
   assert.ok(html.includes('现金流折现'));
-  assert.ok(!html.includes('Historical Financial Data')); // lazy initial pane: no Owner Earnings request until visited
+  for (const removed of [
+    'Owner Earnings',
+    'Historical Financial Data',
+    'Maintenance CapEx Estimation',
+    'Estimated Owner Earnings',
+  ]) {
+    assert.ok(!html.includes(removed));
+  }
 });
 test('display formatting rounds only presentation, including substituted PE/PEG/CAGR and justified PE parameters', () => {
   assert.equal(valuationNumber(0), '0.00');

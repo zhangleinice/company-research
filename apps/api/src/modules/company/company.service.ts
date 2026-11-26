@@ -7,6 +7,10 @@ import {
 import { verifiedLiquidity } from '../financials/financial-health';
 import { annualCapitalAllocation } from '../financials/capital-allocation';
 import {
+  capitalOverview,
+  readCapitalFlowCache,
+} from '../financials/capital-overview';
+import {
   cashFlowQualityMetrics,
   capexToOperatingCashFlow,
 } from '../financials/cash-flow-calculations';
@@ -269,6 +273,7 @@ export class CompanyService {
     return request;
   }
   private async detail(stored: Stored): Promise<CompanyDetail> {
+    const capitalCache = await readCapitalFlowCache(stored.cik);
     const baseline = (
       await this.prisma.valuationCache?.findUnique({
         where: { cik: stored.cik },
@@ -282,6 +287,12 @@ export class CompanyService {
           result,
           row.sources,
           row.companyCik,
+        );
+        result.capitalAllocation.overview = capitalOverview(
+          result,
+          result.capitalAllocation,
+          capitalCache,
+          row.sources,
         );
         return result;
       }),

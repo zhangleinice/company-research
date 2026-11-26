@@ -152,7 +152,6 @@ export function CompanyResearchSections({
             children: (
               <IntrinsicValuation
                 key={detail.cik}
-                cik={detail.cik}
                 ticker={detail.ticker}
                 revision={revision}
               />

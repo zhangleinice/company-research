@@ -1,13 +1,10 @@
 import { Card, Tabs } from 'antd';
-import { OwnerEarnings } from './OwnerEarnings.js';
 import { DcfCalculator } from './ValuationPage.js';
 import { MultipleValuation } from './MultipleValuation.js';
 export function IntrinsicValuation({
-  cik,
   ticker,
   revision = 0,
 }: {
-  cik: string;
   ticker: string;
   revision?: number;
 }) {
@@ -16,13 +13,6 @@ export function IntrinsicValuation({
       defaultActiveKey="dcf"
       destroyOnHidden={false}
       items={[
-        {
-          key: 'owner',
-          label: 'Owner Earnings',
-          children: (
-            <OwnerEarnings key={cik} identifier={cik} revision={revision} />
-          ),
-        },
         {
           key: 'dcf',
           label: 'DCF',
