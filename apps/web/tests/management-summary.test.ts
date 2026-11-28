@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import type { AiResearchSummary } from '@company-research/shared';
-import { ManagementSummary } from '../src/ManagementSummary.js';
+import { ManagementSummary } from '../src/pages/CompanyDetail/Management/components/ManagementSummary.js';
 const titles = [
   '经营表现与变化原因',
   '资金使用与重大决策',

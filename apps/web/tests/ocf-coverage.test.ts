@@ -6,9 +6,9 @@ import {
   capitalSankey,
   type CapitalAllocationOverview,
 } from '@company-research/shared';
-import { ocfCoverage } from '../src/analysis/ocf-coverage.js';
-import { OcfCoverageView } from '../src/analysis/OcfCoverageView.js';
-import { capitalNodeColor } from '../src/analysis/capital-sankey-options.js';
+import { ocfCoverage } from '../src/pages/CompanyDetail/Management/CapitalAllocation/utils/ocf-coverage.js';
+import { OcfCoverageView } from '../src/pages/CompanyDetail/Management/CapitalAllocation/components/OcfCoverageView.js';
+import { capitalNodeColor } from '../src/pages/CompanyDetail/Management/CapitalAllocation/utils/capital-sankey-options.js';
 
 function overview(): CapitalAllocationOverview {
   return {

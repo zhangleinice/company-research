@@ -2,7 +2,7 @@
 
 ## Project Structure
 
-This repository uses npm workspaces. `apps/api/` contains the NestJS backend, SEC integration, and Jest tests. `apps/web/` contains the React, TypeScript, and Vite client. `packages/shared/` holds framework-independent API contracts. Preserve the requirements and technical design in `docs/v1/`.
+This repository uses npm workspaces. `apps/api/` contains the NestJS backend, SEC integration, and Jest tests. `apps/web/` contains the React, TypeScript, and Vite client. `packages/shared/` holds framework-independent API contracts. Maintain the current product requirements and technical design in `docs/PRD.md` and `docs/TDD.md`.
 
 ## Architecture Boundaries
 
@@ -12,7 +12,7 @@ Use Prisma Migration for the companies, annual_financials, and quarterly_financi
 
 Keep SEC retrieval, normalization, and deterministic financial calculations in the backend. Do not download companyfacts.zip or batch-fetch all companies. Annual and independent quarterly periods must be distinct; never treat YTD cash flow as a quarter or subtract cumulative diluted EPS. Keep missing values null and retain provenance. AI, Agent, business-segment, 8-K, and market-wide financial ranking features are outside this phase.
 
-Shared contracts contain no NestJS, database access, or credentials. Check frontend callers and tests whenever API contracts change. Preserve the original V1 documents.
+Shared contracts contain no NestJS, database access, or credentials. Check frontend callers and tests whenever API contracts change. Keep the current PRD and TDD consistent with implemented behavior.
 
 ## Development Commands
 

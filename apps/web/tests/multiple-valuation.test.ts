@@ -6,12 +6,12 @@ import { type MultipleInputs } from '@company-research/shared';
 import {
   emptyMultipleSettings,
   resolveMultiples,
-} from '../src/multiple-valuation-state.js';
+} from '../src/pages/CompanyDetail/Valuation/MultipleValuation/utils/multiple-valuation-state.js';
 import {
   MultipleValuation,
   MultipleValuationResult,
   multipleInputFormatter,
-} from '../src/MultipleValuation.js';
+} from '../src/pages/CompanyDetail/Valuation/MultipleValuation/index.js';
 import pe from '../src/data/industry-pe-us.json' with { type: 'json' };
 import costs from '../src/data/industry-wacc-us.json' with { type: 'json' };
 const data = (): MultipleInputs => ({

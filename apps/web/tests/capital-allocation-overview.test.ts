@@ -9,7 +9,7 @@ import {
   type CapitalAllocationOverview as Overview,
   type CapitalOverviewItem,
 } from '@company-research/shared';
-import { CapitalAllocationOverview } from '../src/analysis/CapitalAllocationOverview.js';
+import { CapitalAllocationOverview } from '../src/pages/CompanyDetail/Management/CapitalAllocation/index.js';
 import {
   capitalNodeLabel,
   capitalFundsRatio,
@@ -17,7 +17,7 @@ import {
   capitalNodeOrder,
   capitalNodeColor,
   capitalSankeyHeight,
-} from '../src/analysis/capital-sankey-options.js';
+} from '../src/pages/CompanyDetail/Management/CapitalAllocation/utils/capital-sankey-options.js';
 function fixture(): Overview {
   const flow = (
     key: string,

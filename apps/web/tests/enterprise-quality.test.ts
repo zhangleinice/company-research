@@ -4,7 +4,7 @@ import type {
   EnterpriseQuality,
   ValuationFact,
 } from '@company-research/shared';
-import { fetchEnterpriseQuality } from '../src/api.js';
+import { fetchEnterpriseQuality } from '../src/services/api.js';
 afterEach(() => mock.restoreAll());
 const missing: ValuationFact = {
   value: null,

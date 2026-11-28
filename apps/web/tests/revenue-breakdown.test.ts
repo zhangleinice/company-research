@@ -1,4 +1,4 @@
-import { FinancialAnalysis } from '../src/analysis/FinancialAnalysis.js';
+import { FinancialAnalysis } from '../src/pages/CompanyDetail/EnterpriseQuality/components/FinancialAnalysis.js';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createElement } from 'react';
@@ -6,7 +6,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import {
   formatRevenueMillions,
   RevenueTables,
-} from '../src/RevenueBreakdown.js';
+} from '../src/pages/CompanyDetail/EnterpriseQuality/Growth/components/RevenueBreakdown.js';
 import {
   FINANCIAL_METRICS,
   type FinancialPeriod,

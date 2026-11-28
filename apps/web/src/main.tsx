@@ -5,7 +5,7 @@ import { ConfigProvider } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import { App } from './App';
 import 'antd/dist/reset.css';
-import './style.css';
+import './styles/global.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

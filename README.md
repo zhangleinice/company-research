@@ -4,15 +4,14 @@
 
 ## 核心功能
 
-- 公司目录、搜索、分页和收藏；按 CIK 关联，Ticker 别名共享财务记录和收藏状态。
-- 公司详情：Business、Growth、Profitability、Cash Flow & Financial Health、Shareholder Returns、Revenue Breakdown 和 Management & Risks。
-- 最近10个年度与10个独立季度的财务指标、历史趋势及 SEC 来源。
-- 估值页面默认展示企业质量分析：股东盈余、ROIC、维持性CapEx、竞争优势和资本配置能力。只读现有缓存，未核准输入与结果保留未知；DCF位于独立Tab。
-- 独立 DCF 公式计算页：TTM现金流、研究性FCFF基准、可编辑情景假设、折现及股权价值桥接；关键数据缺失时保留空值。
-- SEC提供有效IR网址时显示投资者关系官网入口。
-- 并购公告列表：FMP记录统一标记为“待核实”，不代表已确认的收购协议。
+- 公司目录、搜索、分页和收藏；按CIK关联，Ticker别名共享财务记录和收藏状态。
+- 公司详情：Business Model、Enterprise Quality、Management、Valuation四个业务Tab。
+- 企业质量：Growth、Profitability & Capital Returns、Cash Flow、Financial Health；年度／独立季度指标、趋势图及适用的ROIC。
+- 管理层：最新完整财年的资本配置图，以及股息、回购、业务投资、收购、债务融资详细分析。
+- 估值：DCF、PE & PEG两个Tab，保留参数调整、来源说明与固定安全边际参考；不接入股价／市值行情。
+- 并购候选列表：FMP记录标记为待核实，不代表已确认的收购协议。
 
-页面路由：`/companies`、`/favorites`、`/mergers`、`/companies/:ticker`、`/companies/:ticker/valuation`。首页重定向到公司列表。
+页面路由：`/companies`、`/favorites`、`/mergers`、`/companies/:ticker`。首页重定向到公司列表；旧`/companies/:ticker/valuation`路径兼容重定向。Owner Earnings和旧Management & Risks不属于当前正式前端功能，相关后台能力保留。
 
 ## 项目结构
 
@@ -20,9 +19,9 @@
 apps/api/           NestJS服务、SEC集成、Prisma Schema/迁移、后端测试
 apps/web/           React页面、图表、样式、前端测试
 packages/shared/    API契约及独立DCF/股权桥接计算引擎
-scripts/            数据库/代理测试、专项验证和研究脚本
-docs/v1/            原始需求与技术设计（保留）
-docs/validation/    有维护价值的验证报告与财务证据
+scripts/            分类维护、审计、修复与历史验证脚本（见 scripts/README.md）
+docs/PRD.md         当前产品需求与业务规则
+docs/TDD.md         当前技术架构、数据处理及维护约束
 artifacts/          可再生成的临时截图、浏览器记录等（Git忽略）
 ```
 
@@ -85,7 +84,7 @@ npm start
 - 列表、搜索和收藏只读取基础目录及数据库缓存，不获取Company Facts。首次进入详情按需获取单家公司财务数据，后续访问复用PostgreSQL缓存；取消收藏不删除财务记录。
 - 顶部更新操作沿用现有后台任务流程，可能包含AI摘要处理。财务专项验证脚本与付费AI操作应分别理解，不应为测试随意触发完整更新。
 - Company Facts用于财务指标；Submissions定位申报并提供公司资料。收入明细复用10-K Inline XBRL中的原始行式披露，保留表格、行序、名称及来源，不跨表加总。
-- Business及Management & Risks摘要使用独立AI任务与持久化缓存；财务数字由后端确定性解析和计算，不由AI生成。
+- Business及Management摘要使用独立AI任务与持久化缓存；Item 1A后台保留，但没有独立Risks前端。财务数字由确定性代码取得和计算，不由AI生成。
 - 期间流量与期末余额分开处理；适用流量可用可靠YTD端点差分得到单季度，EPS和加权平均股数不做简单累计相减。缺失值保持 `null`，保留原始概念、期间及申报来源。
 - DCF假设与SEC事实分开标识，不将OCF−CapEx直接当作已核准FCFF，不将未知资产、债务或索偿默认为零。
 - 不下载全市场Company Facts ZIP，不进行全市场财务预取。旧批量同步入口已停用，离线解析工具及测试夹具保留。
@@ -110,13 +109,12 @@ npm run test:db
 
 `npm run test:live` 显式启用真实SEC与数据库验收，可能获取并保存单家公司财务缓存，不属于默认单元测试。`scripts/` 中的其他专项脚本不一定由 `npm test` 覆盖；部分依赖历史本地缓存、支持数据库写入或付费AI选项，执行前阅读脚本说明。
 
-## 维护文档
+## 核心文档与维护
 
-- [原始需求](docs/v1/requirements.md)与[技术设计](docs/v1/technical-design.md)
-- [AI研究流程](docs/ai-research.md)、[业务摘要](docs/business-summary.md)、[管理层与风险摘要](docs/management-summary.md)
-- [收入明细](docs/revenue-breakdown.md)与[DCF设计及验证记录](docs/valuation-v1.md)
-- [季度财务审计](docs/validation/quarterly-financial-audit.md)与[最小修复记录](docs/validation/quarterly-financial-fix.md)
+- [产品需求（PRD）](docs/PRD.md)：功能、指标字典、估值政策及V1边界。
+- [技术设计（TDD）](docs/TDD.md)：数据逻辑图、代码组织、归一化、持久化、接口、并发和部署约束。
+- [维护脚本说明](scripts/README.md)：脚本用途、命令、输入依赖与联网／写入风险。
 
-历史验证文档记录当时实现与输入，当前页面行为以源码及测试为准。需要长期保留的验证证据放入 `docs/validation/`；临时截图、日志和浏览器输出放入被忽略的 `artifacts/`，避免误提交。
+`docs/`仅保留PRD和TDD，不再维护历史阶段设计与验收文档。仍被历史测试／交叉验证读取的机器证据保留在`apps/api/tests/fixtures/financial-evidence/`，不是正式页面默认数据；其他临时报告、截图和日志写入被忽略的`artifacts/`。
 
-企业质量缓存通过 `GET /api/companies/:ticker/valuation/quality` 只读返回；旧缓存缺字段时不自动请求SEC。常规估值基准采集复用现有TTM解析保存新增证据；已有原始SEC响应可先构建后运行 `DCF_CACHE_DIR=/path/to/cache node scripts/backfill-quality-cache.cjs` 查看计划，加 `--apply` 才在事务中回填。脚本仅处理四家已审计样本，备份写入被忽略的 `artifacts/`，已有DCF字段必须保持一致。
+企业质量`GET /api/companies/:ticker/valuation/quality`只读数据库；普通财务、独立估值和本地资本配置缓存并非统一自动刷新。旧缓存缺少字段时保留缺失。离线回填工具的范围、预览／写入选项及备份要求见脚本说明，不为检查而触发完整更新、生产重建或付费AI。

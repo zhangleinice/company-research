@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { BusinessSummary } from '../src/BusinessSummary.js';
+import { BusinessSummary } from '../src/pages/CompanyDetail/BusinessModel/components/BusinessSummary.js';
 import {
   BUSINESS_MODEL_PROMPT_VERSION,
   type AiResearchSummary,

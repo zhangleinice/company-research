@@ -9,9 +9,9 @@ import {
 import {
   FinancialRatioChart,
   financialRatioSeries,
-} from '../src/analysis/FinancialRatioChart.js';
-import { FinancialAnalysis } from '../src/analysis/FinancialAnalysis.js';
-import { formatAnalysisValue } from '../src/analysis/financial-analysis.js';
+} from '../src/pages/CompanyDetail/EnterpriseQuality/FinancialHealth/components/FinancialRatioChart.js';
+import { FinancialAnalysis } from '../src/pages/CompanyDetail/EnterpriseQuality/components/FinancialAnalysis.js';
+import { formatAnalysisValue } from '../src/pages/CompanyDetail/utils/financial-analysis.js';
 const row = (
   year: number,
   overrides: Partial<FinancialPeriod> = {},

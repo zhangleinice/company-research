@@ -8,21 +8,21 @@ import {
   type MultipleYear,
 } from '@company-research/shared';
 import { Card, Tabs, type TabsProps } from 'antd';
-import { MarginOfSafety } from '../src/MarginOfSafety.js';
-import { IntrinsicValuation } from '../src/IntrinsicValuation.js';
+import { MarginOfSafety } from '../src/pages/CompanyDetail/Valuation/components/MarginOfSafety.js';
+import { IntrinsicValuation } from '../src/pages/CompanyDetail/Valuation/index.js';
 import {
   emptyMultipleSettings,
   resetPeSettings,
   resetPegSettings,
-} from '../src/multiple-valuation-state.js';
-import { emptySimpleSettings } from '../src/simple-valuation-state.js';
+} from '../src/pages/CompanyDetail/Valuation/MultipleValuation/utils/multiple-valuation-state.js';
+import { emptySimpleSettings } from '../src/pages/CompanyDetail/Valuation/DCF/utils/simple-valuation-state.js';
 import {
   valuationNumber,
   valuationPercent,
   multipleValueFormula,
   justifiedPeFormula,
   epsCagrFormula,
-} from '../src/valuation-format.js';
+} from '../src/pages/CompanyDetail/Valuation/utils/valuation-format.js';
 test('target price accepts 0 to less than 100 percent, keeps precision, and rejects missing/nonpositive valuations', () => {
   assert.equal(targetBuyPrice(100, 30), 70);
   assert.equal(targetBuyPrice(100, 0), 100);

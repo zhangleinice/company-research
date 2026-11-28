@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { companyWebsite } from '@company-research/shared';
-import { InvestorRelationsLink } from '../src/InvestorRelationsLink.js';
+import { InvestorRelationsLink } from '../src/pages/CompanyDetail/components/InvestorRelationsLink.js';
 test('official SEC-provided absolute HTTP(S) links open in a new tab with opener/referrer protection', () => {
   const html = renderToStaticMarkup(
     createElement(InvestorRelationsLink, {

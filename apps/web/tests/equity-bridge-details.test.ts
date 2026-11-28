@@ -14,7 +14,7 @@ import {
   type ValuationBaseline,
   type ValuationReferences,
 } from '@company-research/shared';
-import { EquityBridgeDetails } from '../src/EquityBridgeDetails.js';
+import { EquityBridgeDetails } from '../src/pages/CompanyDetail/Valuation/DCF/components/EquityBridgeDetails.js';
 import {
   editableBridge,
   editBridgeItem,
@@ -25,12 +25,12 @@ import {
   bridgeWithDefaults,
   restoreBridgeDefault,
   usesDefaultEstimate,
-} from '../src/equity-bridge-editor.js';
-import { DcfCalculator } from '../src/ValuationPage.js';
+} from '../src/pages/CompanyDetail/Valuation/DCF/utils/equity-bridge-editor.js';
+import { DcfCalculator } from '../src/pages/CompanyDetail/Valuation/DCF/index.js';
 import {
   calculatorInput,
   initialScenario,
-} from '../src/valuation-calculator.js';
+} from '../src/pages/CompanyDetail/Valuation/DCF/utils/valuation-calculator.js';
 function references(): EquityBridgeReferences {
   const keys: ResearchReferenceKey[] = [
     'cash',

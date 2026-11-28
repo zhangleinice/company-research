@@ -25,14 +25,14 @@
     "typecheck": "npm run build:shared && npm run typecheck --workspaces --if-present",
     "lint": "eslint apps/api/src apps/api/tests apps/web/src apps/web/tests packages/shared/src",
     "format": "prettier --write \"apps/**/*.{ts,tsx,json,css,html}\" \"packages/**/*.{ts,json}\" *.json *.mjs",
-    "test:proxy": "npm run build:api && node --test scripts/proxy.test.mjs",
+    "test:proxy": "npm run build:api && node --test scripts/history/integration/proxy.test.mjs",
     "db:generate": "npm run db:generate --workspace=@company-research/api --",
     "db:migrate": "npm run db:migrate --workspace=@company-research/api --",
     "db:migrate:dev": "npm run db:migrate:dev --workspace=@company-research/api --",
     "db:status": "npm run db:status --workspace=@company-research/api --",
-    "test:db": "npm run build:api && node --test scripts/database-cache.test.cjs",
-    "update:wacc": "node scripts/update-industry-wacc.cjs",
-    "update:pe": "node scripts/update-industry-pe.cjs"
+    "test:db": "npm run build:api && node --test scripts/history/integration/database-cache.test.cjs",
+    "update:wacc": "node scripts/maintenance/update-industry-wacc.cjs",
+    "update:pe": "node scripts/maintenance/update-industry-pe.cjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",

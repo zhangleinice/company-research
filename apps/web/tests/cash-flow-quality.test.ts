@@ -11,16 +11,16 @@ import {
 import {
   CashFlowQualityChart,
   cashFlowQualitySeries,
-} from '../src/analysis/CashFlowQualityChart.js';
-import { FinancialHealthChart } from '../src/analysis/FinancialHealthChart.js';
-import { cashFlowSeries } from '../src/analysis/CashFlowCharts.js';
-import { FinancialTrendChart } from '../src/analysis/FinancialTrendChart.js';
-import { FinancialAnalysis } from '../src/analysis/FinancialAnalysis.js';
+} from '../src/pages/CompanyDetail/EnterpriseQuality/CashFlow/components/CashFlowQualityChart.js';
+import { FinancialHealthChart } from '../src/pages/CompanyDetail/EnterpriseQuality/FinancialHealth/components/FinancialHealthChart.js';
+import { cashFlowSeries } from '../src/pages/CompanyDetail/EnterpriseQuality/CashFlow/components/CashFlowCharts.js';
+import { FinancialTrendChart } from '../src/pages/CompanyDetail/components/financial/FinancialTrendChart.js';
+import { FinancialAnalysis } from '../src/pages/CompanyDetail/EnterpriseQuality/components/FinancialAnalysis.js';
 import {
   formatAnalysisValue,
   analysisValue,
   METRICS,
-} from '../src/analysis/financial-analysis.js';
+} from '../src/pages/CompanyDetail/utils/financial-analysis.js';
 const period = (
   year: number,
   values: Partial<FinancialPeriod> = {},

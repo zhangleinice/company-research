@@ -10,7 +10,7 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "pretest": "npm run build --workspace=@company-research/shared",
+    "pretest": "node scripts/clean-test-output.mjs && npm run build --workspace=@company-research/shared",
     "test": "tsc -p tsconfig.test.json && node --test .test-dist/tests/*.test.js"
   },
   "dependencies": {

@@ -1,7 +1,6 @@
-import {
-  CapitalNotes,
-  considerationExplanation,
-} from '../src/analysis/CapitalAllocationResearch.js';
+import { considerationExplanation } from '../src/pages/CompanyDetail/Management/Acquisitions/components/AcquisitionList.js';
+import { managementPeriods } from '../src/pages/CompanyDetail/Management/utils/management-periods.js';
+import { CapitalNotes } from '../src/pages/CompanyDetail/Management/components/CapitalAllocationResearch.js';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createElement } from 'react';
@@ -11,11 +10,8 @@ import {
   type FinancialPeriod,
   type AnnualCapitalAllocation,
 } from '@company-research/shared';
-import {
-  ManagementAnalysis,
-  managementPeriods,
-} from '../src/analysis/ManagementAnalysis.js';
-import { fetchCompanyDetail } from '../src/api.js';
+import { ManagementAnalysis } from '../src/pages/CompanyDetail/Management/index.js';
+import { fetchCompanyDetail } from '../src/services/api.js';
 function period(year: number): FinancialPeriod {
   return {
     ...Object.fromEntries(FINANCIAL_METRICS.map((key) => [key, null])),
@@ -236,25 +232,26 @@ test('renders unified capital information with dated pending acquisitions, expli
         financingRisks: [],
       },
     };
-  const research: import('../src/AiResearch.js').CachedResearch = {
-    error: '',
-    state: {
-      status: 'READY',
-      error: null,
-      summary: {
-        fiscalYear: 2025,
-        filingDate: '2026-02-05',
-        accessionNumber: source.accessionNumber,
-        section: 'management',
-        model: 'mock',
-        promptVersion: 'management-insights-v4',
-        sourceUrl,
-        createdAt: '2026-11-23',
-        updatedAt: '2026-11-23',
-        summaryJson: { groups: [], capitalAllocation: info },
+  const research: import('../src/pages/CompanyDetail/hooks/useCachedResearch.js').CachedResearch =
+    {
+      error: '',
+      state: {
+        status: 'READY',
+        error: null,
+        summary: {
+          fiscalYear: 2025,
+          filingDate: '2026-02-05',
+          accessionNumber: source.accessionNumber,
+          section: 'management',
+          model: 'mock',
+          promptVersion: 'management-insights-v4',
+          sourceUrl,
+          createdAt: '2026-11-23',
+          updatedAt: '2026-11-23',
+          summaryJson: { groups: [], capitalAllocation: info },
+        },
       },
-    },
-  };
+    };
   const render = () =>
     renderToStaticMarkup(
       createElement(ManagementAnalysis, {

@@ -2,12 +2,15 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { EvComposition, evComposition } from '../src/EvComposition.js';
+import {
+  EvComposition,
+  evComposition,
+} from '../src/pages/CompanyDetail/Valuation/DCF/components/EvComposition.js';
 import { calculateDcf } from '@company-research/shared';
 import {
   calculatorInput,
   initialScenario,
-} from '../src/valuation-calculator.js';
+} from '../src/pages/CompanyDetail/Valuation/DCF/utils/valuation-calculator.js';
 import {
   emptyEquityBridge,
   type ValuationBaseline,

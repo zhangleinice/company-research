@@ -10,8 +10,8 @@ import {
   listReturnPath,
   routePaths,
   legacyValuationPath,
-} from '../src/routes.js';
-import { CompanyListPage } from '../src/CompanyListPage.js';
+} from '../src/utils/routes.js';
+import { CompanyListPage } from '../src/components/CompanyList/index.js';
 const routes = Object.values(routePaths).map((path) => ({ path }));
 test('React Router retains the legacy valuation route alongside the unified detail route', () => {
   for (const [url, expected] of [

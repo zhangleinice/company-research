@@ -20,9 +20,9 @@ import {
   setEbitOverride,
   resetEbitOverride,
   type SimpleSettings,
-} from '../src/simple-valuation-state.js';
-import { calculatorInput } from '../src/valuation-calculator.js';
-import { SimpleValuationControls } from '../src/SimpleValuationControls.js';
+} from '../src/pages/CompanyDetail/Valuation/DCF/utils/simple-valuation-state.js';
+import { calculatorInput } from '../src/pages/CompanyDetail/Valuation/DCF/utils/valuation-calculator.js';
+import { SimpleValuationControls } from '../src/pages/CompanyDetail/Valuation/DCF/components/SimpleValuationControls.js';
 import industries from '../src/data/industry-wacc-us.json' with { type: 'json' };
 const f = (n: number, concept = 'us-gaap:Test') => ({
   value: n * 1e6,

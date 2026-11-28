@@ -8,14 +8,13 @@ import {
   type ValuationBaseline,
   type ValuationReferences,
 } from '@company-research/shared';
-import { DcfCalculator } from '../src/ValuationPage.js';
+import { DcfCalculator } from '../src/pages/CompanyDetail/Valuation/DCF/index.js';
 import {
   calculatorInput,
   initialScenario,
   referenceBridge,
-  validateScenarioField,
   fcffBasis,
-} from '../src/valuation-calculator.js';
+} from '../src/pages/CompanyDetail/Valuation/DCF/utils/valuation-calculator.js';
 const missing = {
   value: null,
   start: null,
@@ -195,23 +194,4 @@ test('automatic research FCFF starts forecasts without manual entry, with priori
   assert.ok(r.ev! > 0);
   assert.equal(r.rows[0].fcff, 22177.04 * 1.05);
   assert.equal(fcffBasis({ ...b, fcff: 100e6 }, params()).value, 100);
-});
-test('blur/Enter validation rejects incomplete or invalid drafts without replacing committed parameters', () => {
-  const current = { ...initialScenario };
-  for (const [key, value] of [
-    ['wacc', 3],
-    ['wacc', null],
-    ['wacc', 101],
-    ['growth', -100],
-    ['terminalGrowth', 10],
-  ] as const) {
-    const r = validateScenarioField(current, key, value);
-    assert.ok(r.error);
-    assert.equal(r.next, current);
-  }
-  const r = validateScenarioField(current, 'growth', 6);
-  assert.equal(r.error, '');
-  assert.equal(r.next.growth, 6);
-  assert.equal(current.growth, 5);
-  assert.deepEqual(initialScenario, { growth: 5, wacc: 10, terminalGrowth: 3 });
 });

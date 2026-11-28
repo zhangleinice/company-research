@@ -13,19 +13,19 @@ import {
   type QuarterlyRoicHistory,
   type RoicIssue,
 } from '@company-research/shared';
-import { FinancialAnalysis } from '../src/analysis/FinancialAnalysis.js';
+import { FinancialAnalysis } from '../src/pages/CompanyDetail/EnterpriseQuality/components/FinancialAnalysis.js';
 import {
   capitalReturnSeries,
   CapitalReturnTrends,
   RoicMetricCard,
-} from '../src/analysis/RoicPresentation.js';
+} from '../src/pages/CompanyDetail/EnterpriseQuality/Profitability/components/RoicPresentation.js';
 import {
   matchRoic,
   roicHistory,
   roicPercent,
   roicStatus,
-} from '../src/analysis/roic-presentation.js';
-import { fetchEnterpriseQuality } from '../src/api.js';
+} from '../src/pages/CompanyDetail/EnterpriseQuality/Profitability/utils/roic-presentation.js';
+import { fetchEnterpriseQuality } from '../src/services/api.js';
 const samples = JSON.parse(
   gunzipSync(
     readFileSync(

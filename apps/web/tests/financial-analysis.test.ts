@@ -1,3 +1,4 @@
+import { CompanyQualityContent } from '../src/pages/CompanyDetail/EnterpriseQuality/index.js';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createElement } from 'react';
@@ -7,19 +8,16 @@ import {
   type CompanyDetail,
   type FinancialPeriod,
 } from '@company-research/shared';
-import {
-  CompanyResearchSections,
-  CompanyQualityContent,
-} from '../src/analysis/CompanyResearchSections.js';
-import { FinancialAnalysis } from '../src/analysis/FinancialAnalysis.js';
-import { ManagementAnalysis } from '../src/analysis/ManagementAnalysis.js';
-import { FinancialTrendChart } from '../src/analysis/FinancialTrendChart.js';
+import { CompanyResearchSections } from '../src/pages/CompanyDetail/components/CompanyResearchSections.js';
+import { FinancialAnalysis } from '../src/pages/CompanyDetail/EnterpriseQuality/components/FinancialAnalysis.js';
+import { ManagementAnalysis } from '../src/pages/CompanyDetail/Management/index.js';
+import { FinancialTrendChart } from '../src/pages/CompanyDetail/components/financial/FinancialTrendChart.js';
 import {
   METRICS,
   analysisPeriods,
   analysisValue,
   formatAnalysisValue,
-} from '../src/analysis/financial-analysis.js';
+} from '../src/pages/CompanyDetail/utils/financial-analysis.js';
 
 function period(
   end: string,
@@ -197,7 +195,8 @@ test('trend chart orders dates, preserves null gaps, and renders data-point repo
 });
 
 test('Growth series selection changes only plotted metrics and defaults to comparison', async () => {
-  const { growthSeries } = await import('../src/GrowthChart.js');
+  const { growthSeries } =
+    await import('../src/pages/CompanyDetail/EnterpriseQuality/Growth/components/GrowthChart.js');
   assert.deepEqual(
     growthSeries('both').map((x) => x.key),
     ['revenueGrowth', 'epsGrowth'],
@@ -214,7 +213,7 @@ test('Growth series selection changes only plotted metrics and defaults to compa
 
 test('Profitability selectors preserve comparison default and independently select each metric', async () => {
   const { profitabilitySeries } =
-    await import('../src/analysis/ProfitabilityCharts.js');
+    await import('../src/pages/CompanyDetail/EnterpriseQuality/Profitability/components/ProfitabilityCharts.js');
   const all = profitabilitySeries('all');
   assert.deepEqual(
     all.map((x) => x.key),
@@ -228,7 +227,7 @@ test('Profitability selectors preserve comparison default and independently sele
 
 test('profitability margin chart preserves negative percentages, true years and null gaps', async () => {
   const { profitabilitySeries } =
-    await import('../src/analysis/ProfitabilityCharts.js');
+    await import('../src/pages/CompanyDetail/EnterpriseQuality/Profitability/components/ProfitabilityCharts.js');
   const html = renderToStaticMarkup(
     createElement(FinancialTrendChart, {
       rows: [
@@ -251,7 +250,8 @@ test('profitability margin chart preserves negative percentages, true years and 
 });
 
 test('cash flow chart selectors independently show the selected series without fetching', async () => {
-  const { cashFlowSeries } = await import('../src/analysis/CashFlowCharts.js');
+  const { cashFlowSeries } =
+    await import('../src/pages/CompanyDetail/EnterpriseQuality/CashFlow/components/CashFlowCharts.js');
   assert.deepEqual(
     cashFlowSeries('all').map((x) => x.key),
     ['operatingCashFlow', 'capex', 'fcf'],
@@ -300,7 +300,7 @@ test('cash flow charts show negative values, exact USD tooltips and null gaps', 
 
 test('health chart selects all three period-end balances and defaults to comparison', async () => {
   const { healthSeries } =
-    await import('../src/analysis/FinancialHealthChart.js');
+    await import('../src/pages/CompanyDetail/EnterpriseQuality/FinancialHealth/components/FinancialHealthChart.js');
   assert.deepEqual(
     healthSeries('all').map((x) => x.key),
     ['cash', 'marketableSecurities', 'totalDebt'],
@@ -353,7 +353,7 @@ test('health shows six core cards and only verified liquidity; removes auxiliary
 
 test('health chart uses separate balances, period-end tooltips and null gaps without zero filling', async () => {
   const { healthSeries } =
-    await import('../src/analysis/FinancialHealthChart.js');
+    await import('../src/pages/CompanyDetail/EnterpriseQuality/FinancialHealth/components/FinancialHealthChart.js');
   const rows = [
     period('2024-12-31', {
       cash: 10e8,
@@ -528,7 +528,7 @@ test('separate cash flow and health modules retain their ordered cards and indep
 
 test('repurchase chart defaults to money and selects a single unit for each series', async () => {
   const { ShareholderReturnsChart, repurchaseTrend } =
-    await import('../src/analysis/ShareholderReturnsChart.js');
+    await import('../src/pages/CompanyDetail/components/financial/ShareholderReturnsChart.js');
   const source = detail('GOOGL', '0001652044');
   source.annual[0].stockRepurchases = 45709000000;
   source.annual[0].dilutedShares = 12230000000;

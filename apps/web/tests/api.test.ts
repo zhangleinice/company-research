@@ -4,7 +4,7 @@ import {
   fetchResearchList,
   fetchCompanyDetail,
   setCompanyFavorite,
-} from '../src/api.js';
+} from '../src/services/api.js';
 
 afterEach(() => mock.restoreAll());
 test('loads ten directory rows with server-side search and mode, without detail requests', async () => {
@@ -106,7 +106,8 @@ test('propagates retryable SEC failures and invalid backend JSON', async () => {
 });
 
 test('AI reads are passive and unified updates use short POSTs', async () => {
-  const { fetchAiResearch, companyUpdate } = await import('../src/api.js');
+  const { fetchAiResearch, companyUpdate } =
+    await import('../src/services/api.js');
   const fetchMock = mock.method(
     globalThis,
     'fetch',
@@ -134,7 +135,7 @@ test('AI reads are passive and unified updates use short POSTs', async () => {
 });
 
 test('optional company links use a passive CIK-only GET and support cancellation', async () => {
-  const { fetchCompanyWebsites } = await import('../src/api.js');
+  const { fetchCompanyWebsites } = await import('../src/services/api.js');
   const controller = new AbortController();
   const fetchMock = mock.method(
     globalThis,

@@ -1,3 +1,7 @@
 These ZIP and ticker fixtures contain synthetic test data only. They are never used as application fallback data.
 
-`quarterly-eps-audit.json` contains a reduced set of actual SEC CompanyFacts observations from the 2026-11-12 quarterly audit (Alphabet, Apple and Nvidia). It retains the original EPS/revenue records from 2023 onward, including filing IDs, reporting dates and split-adjusted comparative values. Sources are the corresponding `https://data.sec.gov/api/xbrl/companyfacts/CIK##########.json` files recorded in `docs/validation/quarterly-financial-audit.md`. It is an offline regression fixture, never application fallback data.
+`quarterly-eps-audit.json` contains a reduced set of actual SEC CompanyFacts observations from the 2026-11-12 quarterly audit (Alphabet, Apple and Nvidia). It retains the original EPS/revenue records from 2023 onward, including filing IDs, reporting dates and split-adjusted comparative values. Sources are the corresponding `https://data.sec.gov/api/xbrl/companyfacts/CIK##########.json` observations retained in this fixture; see `docs/TDD.md` for current period-selection rules. It is an offline regression fixture, never application fallback data.
+
+## Financial evidence fixtures
+
+`financial-evidence/` retains four machine-readable historical inputs consumed by the offline DCF coverage tests and KO crosschecks. They were moved from the retired docs validation directory without changing their contents. They are regression evidence, not current financial coverage guarantees or production fallback values. Current policy and architecture are defined in [PRD](../../../../docs/PRD.md) and [TDD](../../../../docs/TDD.md).
